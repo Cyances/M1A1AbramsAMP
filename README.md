@@ -6,9 +6,10 @@ Gameplay/Install guide: https://www.youtube.com/watch?v=e_qNIyBb2SA
 
 If you get an error launching through Steam you will need to run the game executable directly.
 
-![Screenshot_6](https://github.com/thebeninator/M1A1Abrams/assets/89621837/354d28e0-fa3d-49b2-89f4-368860f66dc9)
-![Screenshot_7](https://github.com/thebeninator/M1A1Abrams/assets/89621837/1179f3f1-416f-4751-bd2b-4181dac90456)
-<sub>(ignore the very clearly oversized MRS lol)</sub>
+![Screenshot_1](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20SPW-60B.png)
+![Screenshot_2](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20SPW-60B%20XRay.png)
+![Screenshot_3](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A.png)
+![Screenshot_4](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A%20XRay.png)
 
 <p>
 Converts all M1IPs to M1A1s equipped with: 
