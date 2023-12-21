@@ -1,4 +1,6 @@
 # M1A1 Abrams AMP
+Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. Be sure to checkout both of those mods because they are great!
+
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
 
 If you get an error launching through Steam you will need to run the game executable directly.
