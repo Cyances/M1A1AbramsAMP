@@ -11,6 +11,8 @@ using GHPC.Player;
 using GHPC.Equipment.Optics;
 using System.Collections;
 using System.Threading.Tasks;
+using HarmonyLib;
+using M1A1Abrams;
 
 namespace M1A1Abrams
 {
@@ -23,7 +25,9 @@ namespace M1A1Abrams
         MelonPreferences_Entry<bool> m1e1;
         MelonPreferences_Entry<int> randomChanceNum;
         MelonPreferences_Entry<bool> randomChance;
-        MelonPreferences_Entry<bool> useSuperSabot; 
+        MelonPreferences_Entry<bool> useSuperSabot;
+        MelonPreferences_Entry<bool> useAMPShell;
+        MelonPreferences_Entry<int> ampFragments;
 
         GameObject[] vic_gos;
         GameObject gameManager;
@@ -37,38 +41,49 @@ namespace M1A1Abrams
         AmmoCodexScriptable ammo_codex_m829;
         AmmoType ammo_m829;
 
-        AmmoClipCodexScriptable clip_codex_m829a1;
-        AmmoType.AmmoClip clip_m829a1;
-        AmmoCodexScriptable ammo_codex_m829a1;
-        AmmoType ammo_m829a1;
+        AmmoClipCodexScriptable clip_codex_m829a4;
+        AmmoType.AmmoClip clip_m829a4;
+        AmmoCodexScriptable ammo_codex_m829a4;
+        AmmoType ammo_m829a4;
 
         AmmoClipCodexScriptable clip_codex_m830;
         AmmoType.AmmoClip clip_m830;
         AmmoCodexScriptable ammo_codex_m830;
         AmmoType ammo_m830;
 
+        AmmoClipCodexScriptable clip_codex_XM1147;
+        AmmoType.AmmoClip clip_XM1147;
+        AmmoCodexScriptable ammo_codex_XM1147;
+        static AmmoType ammo_xm1147;
+
         AmmoType ammo_m833;
         AmmoType ammo_m456;
 
         public override void OnInitializeMelon()
         {
-            cfg = MelonPreferences.CreateCategory("M1A1Config");
-            m829Count = cfg.CreateEntry<int>("M829", 22);
-            m829Count.Description = "How many rounds of M829 (APFSDS) or M830 (HEAT) each M1A1 should carry. Maximum of 40 rounds total. Bring in at least one M829 round.";
-            m830Count = cfg.CreateEntry<int>("M830", 18);
+            cfg = MelonPreferences.CreateCategory("M1A1AMPConfig");
+            m829Count = cfg.CreateEntry<int>("M829/A4", 20);
+            m829Count.Description = "How many rounds of M829/A4 (APFSDS) or M830/XM1147 (HEAT) each M1A1 should carry. Maximum of 44 rounds total. Bring in at least one M829 round.";
+            m830Count = cfg.CreateEntry<int>("M830/XM1147", 24);
 
-            useSuperSabot = cfg.CreateEntry<bool>("UseM829A1", false);
-            useSuperSabot.Description = "In case 600mm of RHA penetration is not working out for you...";
+            useSuperSabot = cfg.CreateEntry<bool>("UseM829A4", true);
+            useSuperSabot.Description = "In case 600mm of RHA penetration is not working out for you, then 1000mm for when you want to penetrate 2 T-72s in a row with a frontal shot :)";
+
+            useAMPShell = cfg.CreateEntry<bool>("UseXM1147", true);
+            useAMPShell.Description = "Replaces M830 HEAT with XM1147 AMP (point-detonate/airburst [timed fuze])";
+
+            ampFragments = cfg.CreateEntry<int>("AMP Fragments", 600);
+            ampFragments.Description = "How many fragments are generated when the AMP round explodes (in point-detonate/airburst mode). NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
 
             rotateAzimuth = cfg.CreateEntry<bool>("RotateAzimuth", false);
             rotateAzimuth.Description = "Horizontal stabilization of M1A1 sights when applying lead.";
 
-            m1e1 = cfg.CreateEntry<bool>("M1E1", false);
+            m1e1 = cfg.CreateEntry<bool>("M1E1", true);
             m1e1.Description = "Convert M1s to M1E1s (i.e: they get the 120mm gun).";
 
-            randomChance = cfg.CreateEntry<bool>("Random", false);
+            randomChance = cfg.CreateEntry<bool>("Random", true);
             randomChance.Description = "M1IPs/M1s will have a random chance of being converted to M1A1s/M1E1s.";
-            randomChanceNum = cfg.CreateEntry<int>("ConversionChance", 50);
+            randomChanceNum = cfg.CreateEntry<int>("ConversionChance", 100);
         }
 
         // the GAS reticles seem to be assigned to specific ammo types and I can't figure out how it's done
@@ -100,9 +115,10 @@ namespace M1A1Abrams
 
             vic_gos = GameObject.FindGameObjectsWithTag("Vehicle");
 
-            while (vic_gos.Length == 0) {
+            while (vic_gos.Length == 0)
+            {
                 vic_gos = GameObject.FindGameObjectsWithTag("Vehicle");
-                await Task.Delay(3000); 
+                await Task.Delay(3000);
             }
 
             if (gun_m256 == null)
@@ -152,30 +168,31 @@ namespace M1A1Abrams
                 clip_codex_m829.CompatibleWeaponSystems[0] = gun_m256;
                 clip_codex_m829.ClipType = clip_m829;
 
-                // m829a1
-                ammo_m829a1 = new AmmoType();
-                Util.ShallowCopy(ammo_m829a1, ammo_m833);
-                ammo_m829a1.Name = "M829A1 APFSDS-T";
-                ammo_m829a1.Caliber = 120;
-                ammo_m829a1.RhaPenetration = 700;
-                ammo_m829a1.MuzzleVelocity = 1575;
-                ammo_m829a1.Mass = 4.6f;
+                // m829a4
+                ammo_m829a4 = new AmmoType();
+                Util.ShallowCopy(ammo_m829a4, ammo_m833);
+                ammo_m829a4.Name = "M829A4 APFSDS-T";
+                ammo_m829a4.Caliber = 120;
+                ammo_m829a4.RhaPenetration = 1000;
+                ammo_m829a4.MuzzleVelocity = 1670;
+                ammo_m829a4.Mass = 4.6f;
+                ammo_m829a4.SpallMultiplier = 1.5f;
 
-                ammo_codex_m829a1 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
-                ammo_codex_m829a1.AmmoType = ammo_m829a1;
-                ammo_codex_m829a1.name = "ammo_m829a1";
+                ammo_codex_m829a4 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
+                ammo_codex_m829a4.AmmoType = ammo_m829a4;
+                ammo_codex_m829a4.name = "ammo_m829a4";
 
-                clip_m829a1 = new AmmoType.AmmoClip();
-                clip_m829a1.Capacity = 1;
-                clip_m829a1.Name = "M829A1 APFSDS-T";
-                clip_m829a1.MinimalPattern = new AmmoCodexScriptable[1];
-                clip_m829a1.MinimalPattern[0] = ammo_codex_m829a1;
+                clip_m829a4 = new AmmoType.AmmoClip();
+                clip_m829a4.Capacity = 1;
+                clip_m829a4.Name = "M829A4 APFSDS-T";
+                clip_m829a4.MinimalPattern = new AmmoCodexScriptable[1];
+                clip_m829a4.MinimalPattern[0] = ammo_codex_m829a4;
 
-                clip_codex_m829a1 = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
-                clip_codex_m829a1.name = "clip_m829a1";
-                clip_codex_m829a1.CompatibleWeaponSystems = new WeaponSystemCodexScriptable[1];
-                clip_codex_m829a1.CompatibleWeaponSystems[0] = gun_m256;
-                clip_codex_m829a1.ClipType = clip_m829a1;
+                clip_codex_m829a4 = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+                clip_codex_m829a4.name = "clip_m829a4";
+                clip_codex_m829a4.CompatibleWeaponSystems = new WeaponSystemCodexScriptable[1];
+                clip_codex_m829a4.CompatibleWeaponSystems[0] = gun_m256;
+                clip_codex_m829a4.ClipType = clip_m829a4;
 
                 // m830
                 ammo_m830 = new AmmoType();
@@ -204,6 +221,38 @@ namespace M1A1Abrams
                 clip_codex_m830.CompatibleWeaponSystems = new WeaponSystemCodexScriptable[1];
                 clip_codex_m830.CompatibleWeaponSystems[0] = gun_m256;
                 clip_codex_m830.ClipType = clip_m830;
+
+                // XM1147
+                ammo_xm1147 = new AmmoType();
+                Util.ShallowCopy(ammo_xm1147, ammo_m456);
+                ammo_xm1147.Name = "XM1147 AMP-T";
+                ammo_xm1147.Caliber = 120;
+                ammo_xm1147.RhaPenetration = 480;
+                ammo_xm1147.TntEquivalentKg = 3.324f;
+                ammo_xm1147.MaxSpallRha = 160f;
+                ammo_xm1147.MinSpallRha = 45f;
+                ammo_xm1147.MuzzleVelocity = 1140f;
+                ammo_xm1147.Mass = 13.5f;
+                ammo_xm1147.CertainRicochetAngle = 8.0f;
+                ammo_xm1147.ShatterOnRicochet = false;
+                ammo_xm1147.SpallMultiplier = 2f;
+                ammo_xm1147.DetonateSpallCount = ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
+
+                ammo_codex_XM1147 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
+                ammo_codex_XM1147.AmmoType = ammo_xm1147;
+                ammo_codex_XM1147.name = "ammo_xm1147";
+
+                clip_XM1147 = new AmmoType.AmmoClip();
+                clip_XM1147.Capacity = 1;
+                clip_XM1147.Name = "XM1147 AMP-T";
+                clip_XM1147.MinimalPattern = new AmmoCodexScriptable[1];
+                clip_XM1147.MinimalPattern[0] = ammo_codex_XM1147;
+
+                clip_codex_XM1147 = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+                clip_codex_XM1147.name = "clip_XM1147";
+                clip_codex_XM1147.CompatibleWeaponSystems = new WeaponSystemCodexScriptable[1];
+                clip_codex_XM1147.CompatibleWeaponSystems[0] = gun_m256;
+                clip_codex_XM1147.ClipType = clip_XM1147;
             }
 
             foreach (GameObject vic_go in vic_gos)
@@ -219,8 +268,9 @@ namespace M1A1Abrams
                     playerManager = gameManager.GetComponent<PlayerInput>();
 
                     GameObject ammo_m829_vis = null;
-                    GameObject ammo_m829a1_vis = null;
+                    GameObject ammo_m829a4_vis = null;
                     GameObject ammo_m830_vis = null;
+                    GameObject ammo_xm1147_vis = null;
 
                     // generate visual models 
                     if (ammo_m829_vis == null)
@@ -231,23 +281,30 @@ namespace M1A1Abrams
                         ammo_m829.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m829;
                         ammo_m829.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m829;
 
-                        ammo_m829a1_vis = GameObject.Instantiate(ammo_m833.VisualModel);
-                        ammo_m829a1_vis.name = "M829A1 visual";
-                        ammo_m829a1.VisualModel = ammo_m829a1_vis;
-                        ammo_m829a1.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m829a1;
-                        ammo_m829a1.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m829a1;
+                        ammo_m829a4_vis = GameObject.Instantiate(ammo_m833.VisualModel);
+                        ammo_m829a4_vis.name = "m829a4 visual";
+                        ammo_m829a4.VisualModel = ammo_m829a4_vis;
+                        ammo_m829a4.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m829a4;
+                        ammo_m829a4.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m829a4;
 
                         ammo_m830_vis = GameObject.Instantiate(ammo_m456.VisualModel);
                         ammo_m830_vis.name = "M830 visual";
                         ammo_m830.VisualModel = ammo_m830_vis;
                         ammo_m830.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830;
                         ammo_m830.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830;
+
+                        ammo_xm1147_vis = GameObject.Instantiate(ammo_m456.VisualModel);
+                        ammo_xm1147_vis.name = "XM1147 visual";
+                        ammo_xm1147.VisualModel = ammo_xm1147_vis;
+                        ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_xm1147;
+                        ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_XM1147;
                     }
 
                     int rand = 0;
                     if (randomChance.Value) rand = UnityEngine.Random.Range(1, 100);
-                    
-                    if (rand < randomChanceNum.Value) {
+
+                    if (rand < randomChanceNum.Value)
+                    {
                         // rename to m1a1
                         string name = (vic.FriendlyName == "M1IP") ? "M1A1" : "M1E1";
 
@@ -287,18 +344,19 @@ namespace M1A1Abrams
 
                         loadoutManager.TotalAmmoCounts = new int[] { m829Count.Value, m830Count.Value };
 
-                        AmmoClipCodexScriptable sabotClipCodex = (useSuperSabot.Value) ? clip_codex_m829a1 : clip_codex_m829;
+                        AmmoClipCodexScriptable sabotClipCodex = (useSuperSabot.Value) ? clip_codex_m829a4 : clip_codex_m829;
+                        AmmoClipCodexScriptable heatClipCodex = (useAMPShell.Value) ? clip_codex_XM1147 : clip_codex_m830;
 
-                        loadoutManager.LoadedAmmoTypes = new AmmoClipCodexScriptable[] { sabotClipCodex, clip_codex_m830 };
+                        loadoutManager.LoadedAmmoTypes = new AmmoClipCodexScriptable[] { sabotClipCodex, heatClipCodex };
 
                         FieldInfo totalAmmoCount = typeof(LoadoutManager).GetField("_totalAmmoCount", BindingFlags.NonPublic | BindingFlags.Instance);
-                        totalAmmoCount.SetValue(loadoutManager, 40);
+                        totalAmmoCount.SetValue(loadoutManager, 44);
 
                         for (int i = 0; i <= 2; i++)
                         {
                             GHPC.Weapons.AmmoRack rack = loadoutManager.RackLoadouts[i].Rack;
                             rack.ClipCapacity = i == 2 ? 4 : 18;
-                            rack.ClipTypes = new AmmoType.AmmoClip[] { sabotClipCodex.ClipType, clip_m830 };
+                            rack.ClipTypes = new AmmoType.AmmoClip[] { sabotClipCodex.ClipType, heatClipCodex.ClipType };
                             Util.EmptyRack(rack);
                         }
 
@@ -315,6 +373,29 @@ namespace M1A1Abrams
                         registerAllBallistics.Invoke(loadoutManager, new object[] { });
                     }
                 }
+            }
+        }
+
+        [HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "Start")]
+        public static class Airburst
+        {
+            private static void Postfix(GHPC.Weapons.LiveRound __instance)
+            {
+                if (__instance.Info.Name != "XM1147 AMP-T") return;
+
+                FieldInfo rangedFuseTimeField = typeof(GHPC.Weapons.LiveRound).GetField("_rangedFuseCountdown", BindingFlags.Instance | BindingFlags.NonPublic);
+                FieldInfo rangedFuseTimeActiveField = typeof(GHPC.Weapons.LiveRound).GetField("_rangedFuseActive", BindingFlags.Instance | BindingFlags.NonPublic);
+                FieldInfo ballisticsComputerField = typeof(FireControlSystem).GetField("_bc", BindingFlags.Instance | BindingFlags.NonPublic);
+
+                FireControlSystem FCS = __instance.Shooter.WeaponsManager.Weapons[0].FCS;
+                BallisticComputerRepository bc = ballisticsComputerField.GetValue(FCS) as BallisticComputerRepository;
+                float range = FCS.CurrentRange;
+                float fallOff = bc.GetFallOfShot(ammo_xm1147, range);
+                float extra_distance = range > 2000 ? 19f + 3.5f : 17f;
+
+                //funky math 
+                rangedFuseTimeField.SetValue(__instance, bc.GetFlightTime(ammo_xm1147, range + range / ammo_xm1147.MuzzleVelocity * 2 + (range + fallOff) / 2000f + extra_distance));
+                rangedFuseTimeActiveField.SetValue(__instance, true);
             }
         }
     }
