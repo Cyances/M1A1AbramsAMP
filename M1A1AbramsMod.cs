@@ -272,7 +272,7 @@ namespace M1A1Abrams
                 ammo_xm1147.Mass = 13.5f;
                 ammo_xm1147.CertainRicochetAngle = 8.0f;
                 ammo_xm1147.ShatterOnRicochet = false;
-                ammo_xm1147.SpallMultiplier = 2.00f;
+                ammo_xm1147.SpallMultiplier = 2f;
                 ammo_xm1147.DetonateSpallCount = ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
 
                 ammo_codex_XM1147 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
