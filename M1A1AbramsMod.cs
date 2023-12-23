@@ -106,7 +106,7 @@ namespace M1A1Abrams
             if (playerManager.CurrentPlayerWeapon.Name != "120mm gun M256") return;
 
             AmmoType currentAmmo = playerManager.CurrentPlayerWeapon.FCS.CurrentAmmoType;
-            int reticleId = (currentAmmo.Name == "M829 APFSDS-T" || currentAmmo.Name == "M829A1 APFSDS-T") ? 0 : 2;
+            int reticleId = (currentAmmo.Name == "M829 APFSDS-T" || currentAmmo.Name == "M829A4 APFSDS-T") ? 0 : 2;
 
             GameObject reticle = cam.transform.GetChild(reticleId).gameObject;
 
@@ -214,7 +214,7 @@ namespace M1A1Abrams
                 Util.ShallowCopy(ammo_m830, ammo_m456);
                 ammo_m830.Name = "M830 HEAT-MP-T";
                 ammo_m830.Caliber = 120;
-                ammo_m830.RhaPenetration = 480;
+                ammo_m830.RhaPenetration = 600;
                 ammo_m830.TntEquivalentKg = 1.814f;
                 ammo_m830.MuzzleVelocity = 1140f;
                 ammo_m830.Mass = 13.5f;
@@ -244,9 +244,9 @@ namespace M1A1Abrams
                 ammo_xm1147.Caliber = 120;
                 ammo_xm1147.RhaPenetration = 480;
                 ammo_xm1147.TntEquivalentKg = 3.324f;
-                ammo_xm1147.MaxSpallRha = 160f;
-                ammo_xm1147.MinSpallRha = 45f;
-                ammo_xm1147.MuzzleVelocity = 1140f;
+                ammo_xm1147.MaxSpallRha = 180f;
+                ammo_xm1147.MinSpallRha = 55f;
+                ammo_xm1147.MuzzleVelocity = 1400f;
                 ammo_xm1147.Mass = 13.5f;
                 ammo_xm1147.CertainRicochetAngle = 8.0f;
                 ammo_xm1147.ShatterOnRicochet = false;
