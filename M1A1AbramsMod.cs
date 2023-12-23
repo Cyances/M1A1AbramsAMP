@@ -13,6 +13,8 @@ using System.Collections;
 using System.Threading.Tasks;
 using HarmonyLib;
 using M1A1Abrams;
+using GHPC.Equipment;
+using GHPC;
 
 namespace M1A1Abrams
 {
@@ -58,6 +60,11 @@ namespace M1A1Abrams
 
         AmmoType ammo_m833;
         AmmoType ammo_m456;
+
+        ArmorType armor_compositeskirt;
+
+        ArmorCodexScriptable armor_codex_superCompositeskirt;
+        ArmorType armor_superCompositeskirt;
 
         public override void OnInitializeMelon()
         {
@@ -133,6 +140,14 @@ namespace M1A1Abrams
                     if (s.AmmoType.Name == "M456 HEAT-FS-T")
                     {
                         ammo_m456 = s.AmmoType;
+                    }
+                }
+
+                foreach (ArmorCodexScriptable s in Resources.FindObjectsOfTypeAll(typeof(ArmorCodexScriptable)))
+                {
+                    if (s.ArmorType.Name == "composite skirt")
+                    {
+                        armor_compositeskirt = s.ArmorType;
                     }
                 }
 
@@ -253,6 +268,33 @@ namespace M1A1Abrams
                 clip_codex_XM1147.CompatibleWeaponSystems = new WeaponSystemCodexScriptable[1];
                 clip_codex_XM1147.CompatibleWeaponSystems[0] = gun_m256;
                 clip_codex_XM1147.ClipType = clip_XM1147;
+
+                armor_superCompositeskirt = new ArmorType();
+                Util.ShallowCopy(armor_superCompositeskirt, armor_compositeskirt);
+                armor_superCompositeskirt.RhaeMultiplierCe = 7.5f; //default 1.5
+                armor_superCompositeskirt.RhaeMultiplierKe = 4.0f; //default 0.8
+                armor_superCompositeskirt.Name = "super composite skirt";
+
+                armor_codex_superCompositeskirt = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_superCompositeskirt.name = "super composite skirt";
+                armor_codex_superCompositeskirt.ArmorType = armor_superCompositeskirt;
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                VariableArmor compositeskirtPlate = armour.GetComponent<VariableArmor>();
+
+                if (compositeskirtPlate == null) continue;
+                if (compositeskirtPlate.Unit == null) continue;
+                if (compositeskirtPlate.Unit.FriendlyName != "M1IP") continue;
+                if (compositeskirtPlate.Name != "composite side skirt") continue;
+
+                FieldInfo armorPlate = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                armorPlate.SetValue(compositeskirtPlate, armor_codex_superCompositeskirt);
+
+                MelonLogger.Msg(compositeskirtPlate.ArmorType);
             }
 
             foreach (GameObject vic_go in vic_gos)
