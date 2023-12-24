@@ -4,7 +4,7 @@
 <p>
 	<ul> 
 		<li>Increased M830 HEAT-MP-T penetration from 480 mm to 600 mm</li>
-		<li>Increase XM1147 muzzle velocity from 1140 m/s to 1400 m/s</li>
+		<li>Increase XM1147 AMP-T muzzle velocity from 1140 m/s to 1400 m/s</li>
 		<li>Up armored the M1A1 Abrams variant!</li>
 		<li>Composite skirts protect up to 515 mm against CE penetrators and 315 mm against KE penetrators</li>
 		<li>Front hull protects up to 1285 mm against CE penetrators and 815 mm against KE penetrators</li>
