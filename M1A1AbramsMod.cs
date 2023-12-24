@@ -81,6 +81,22 @@ namespace M1A1Abrams
         ArmorCodexScriptable armor_codex_turretsidesDUarmor;
         ArmorType armor_turretsidesDUarmor;
 
+        ArmorType armor_turretroofarmor;
+        ArmorCodexScriptable armor_codex_turretroofCompositearmor;
+        ArmorType armor_turretroofCompositearmor;
+
+        ArmorType armor_upperglacisarmor;
+        ArmorCodexScriptable armor_codex_upperglacisCompositearmor;
+        ArmorType armor_upperglaccisCompositearmor;
+
+        ArmorType armor_hullsidearmor;
+        ArmorCodexScriptable armor_codex_hullsideCompositearmor;
+        ArmorType armor_hullsideCompositearmor;
+
+        ArmorType armor_hullfloorarmor;
+        ArmorCodexScriptable armor_codex_hullfloorCompositearmor;
+        ArmorType armor_hullfloorCompositearmor;
+
         public override void OnInitializeMelon()
         {
             cfg = MelonPreferences.CreateCategory("M1A1AMPConfig");
@@ -183,6 +199,26 @@ namespace M1A1Abrams
                     if (s.ArmorType.Name == "special armor")
                     {
                         armor_turretsidesnera = s.ArmorType;
+                    }
+
+                    if (s.ArmorType.Name == "composite skirt")
+                    {
+                        armor_turretroofarmor = s.ArmorType;
+                    }
+
+                    if (s.ArmorType.Name == "composite skirt")
+                    {
+                        armor_upperglacisarmor = s.ArmorType;
+                    }
+
+                    if (s.ArmorType.Name == "composite skirt")
+                    {
+                        armor_hullsidearmor = s.ArmorType;
+                    }
+
+                    if (s.ArmorType.Name == "composite skirt")
+                    {
+                        armor_hullfloorarmor = s.ArmorType;
                     }
                 }
 
@@ -308,7 +344,7 @@ namespace M1A1Abrams
                 //Armor stuff//
                 armor_superCompositeskirt = new ArmorType();
                 Util.ShallowCopy(armor_superCompositeskirt, armor_compositeskirt);
-                armor_superCompositeskirt.RhaeMultiplierCe = 8.0f; //default 1.5
+                armor_superCompositeskirt.RhaeMultiplierCe = 8.35f; //default 1.5
                 armor_superCompositeskirt.RhaeMultiplierKe = 5.0f; //default 0.8
                 armor_superCompositeskirt.Name = "Abrams super special composite skirt";
 
@@ -359,6 +395,50 @@ namespace M1A1Abrams
                 armor_codex_turretsidesDUarmor.name = "Abrams DU armor turret sides";
                 armor_codex_turretsidesDUarmor.ArmorType = armor_turretsidesDUarmor;
                 armor_turretsidesDUarmor = new ArmorType();
+
+                armor_turretroofCompositearmor = new ArmorType();
+                Util.ShallowCopy(armor_turretroofCompositearmor, armor_turretroofarmor);
+                armor_turretroofCompositearmor.RhaeMultiplierCe = 2.0f; //default composite skirt 1.5
+                armor_turretroofCompositearmor.RhaeMultiplierKe = 2.3f; //default composite skirt 0.8
+                armor_turretroofCompositearmor.Name = "Abrams roof special composite";
+
+                armor_codex_turretroofCompositearmor = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_turretroofCompositearmor.name = "Abrams roof special composite";
+                armor_codex_turretroofCompositearmor.ArmorType = armor_turretroofCompositearmor;
+                armor_turretroofCompositearmor = new ArmorType();
+
+                armor_upperglaccisCompositearmor = new ArmorType();
+                Util.ShallowCopy(armor_upperglaccisCompositearmor, armor_upperglacisarmor);
+                armor_upperglaccisCompositearmor.RhaeMultiplierCe = 3.0f; //default composite skirt 1.5
+                armor_upperglaccisCompositearmor.RhaeMultiplierKe = 2.6f; //default composite skirt 0.8
+                armor_upperglaccisCompositearmor.Name = "Abrams upper glacis special composite";
+
+                armor_codex_upperglacisCompositearmor = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_upperglacisCompositearmor.name = "Abrams upper glacis special composite";
+                armor_codex_upperglacisCompositearmor.ArmorType = armor_upperglaccisCompositearmor;
+                armor_upperglaccisCompositearmor = new ArmorType();
+
+                armor_hullsideCompositearmor = new ArmorType();
+                Util.ShallowCopy(armor_hullsideCompositearmor, armor_hullsidearmor);
+                armor_hullsideCompositearmor.RhaeMultiplierCe = 13.35f; //default composite skirt 1.5
+                armor_hullsideCompositearmor.RhaeMultiplierKe = 12.9f; //default composite skirt 0.8
+                armor_hullsideCompositearmor.Name = "Abrams hull side special composite";
+
+                armor_codex_hullsideCompositearmor = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_hullsideCompositearmor.name = "Abrams hull side special composite";
+                armor_codex_hullsideCompositearmor.ArmorType = armor_hullsideCompositearmor;
+                armor_hullsideCompositearmor = new ArmorType();
+
+                armor_hullfloorCompositearmor = new ArmorType();
+                Util.ShallowCopy(armor_hullfloorCompositearmor, armor_hullfloorarmor);
+                armor_hullfloorCompositearmor.RhaeMultiplierCe = 13.35f; //default composite skirt 1.5
+                armor_hullfloorCompositearmor.RhaeMultiplierKe = 12.9f; //default composite skirt 0.8
+                armor_hullfloorCompositearmor.Name = "Abrams hull foor special composite";
+
+                armor_codex_hullfloorCompositearmor = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_hullfloorCompositearmor.name = "Abrams hull floor special composite";
+                armor_codex_hullfloorCompositearmor.ArmorType = armor_hullfloorCompositearmor;
+                armor_hullfloorCompositearmor = new ArmorType();
             }
 
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
@@ -442,6 +522,70 @@ namespace M1A1Abrams
                 MelonLogger.Msg(turretsidesDUarray.ArmorType);
             }
 
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                VariableArmor turretroofCompositearray = armour.GetComponent<VariableArmor>();
+                if (turretroofCompositearray == null) continue;
+                if (turretroofCompositearray.Unit == null) continue;
+                if (turretroofCompositearray.Unit.FriendlyName != "M1IP") continue;
+                if (turretroofCompositearray.Name != "turret roof") continue;
+
+                FieldInfo armorcheeksDU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                armorcheeksDU.SetValue(turretroofCompositearray, armor_codex_turretroofCompositearmor);
+
+                MelonLogger.Msg(turretroofCompositearray.ArmorType);
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                VariableArmor upperglacisCompositearray = armour.GetComponent<VariableArmor>();
+                if (upperglacisCompositearray == null) continue;
+                if (upperglacisCompositearray.Unit == null) continue;
+                if (upperglacisCompositearray.Unit.FriendlyName != "M1IP") continue;
+                if (upperglacisCompositearray.Name != "upper glacis") continue;
+
+                FieldInfo armorcheeksDU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                armorcheeksDU.SetValue(upperglacisCompositearray, armor_codex_upperglacisCompositearmor);
+
+                MelonLogger.Msg(upperglacisCompositearray.ArmorType);
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                VariableArmor hullsideCompositearray = armour.GetComponent<VariableArmor>();
+                if (hullsideCompositearray == null) continue;
+                if (hullsideCompositearray.Unit == null) continue;
+                if (hullsideCompositearray.Unit.FriendlyName != "M1IP") continue;
+                if (hullsideCompositearray.Name != "hull side") continue;
+
+                FieldInfo armorcheeksDU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                armorcheeksDU.SetValue(hullsideCompositearray, armor_codex_hullsideCompositearmor);
+
+                MelonLogger.Msg(hullsideCompositearray.ArmorType);
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                VariableArmor hullfloorCompositearray = armour.GetComponent<VariableArmor>();
+                if (hullfloorCompositearray == null) continue;
+                if (hullfloorCompositearray.Unit == null) continue;
+                if (hullfloorCompositearray.Unit.FriendlyName != "M1IP") continue;
+                if (hullfloorCompositearray.Name != "hull floor") continue;
+
+                FieldInfo armorcheeksDU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                armorcheeksDU.SetValue(hullfloorCompositearray, armor_codex_hullfloorCompositearmor);
+
+                MelonLogger.Msg(hullfloorCompositearray.ArmorType);
+            }
+
             foreach (GameObject vic_go in vic_gos)
             {
                 Vehicle vic = vic_go.GetComponent<Vehicle>();
@@ -469,7 +613,7 @@ namespace M1A1Abrams
                         ammo_m829.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m829;
 
                         ammo_m829a4_vis = GameObject.Instantiate(ammo_m833.VisualModel);
-                        ammo_m829a4_vis.name = "m829a4 visual";
+                        ammo_m829a4_vis.name = "M829A4 visual";
                         ammo_m829a4.VisualModel = ammo_m829a4_vis;
                         ammo_m829a4.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m829a4;
                         ammo_m829a4.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m829a4;
@@ -493,7 +637,7 @@ namespace M1A1Abrams
                     if (rand < randomChanceNum.Value)
                     {
                         // rename to m1a1
-                        string name = (vic.FriendlyName == "M1IP") ? "M1A1" : "M1E1";
+                        string name = (vic.FriendlyName == "M1IP") ? "M1A1 (Heavy Ultra)" : "M1E1";
 
                         FieldInfo friendlyName = typeof(GHPC.Unit).GetField("_friendlyName", BindingFlags.NonPublic | BindingFlags.Instance);
                         friendlyName.SetValue(vic, name);
