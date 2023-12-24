@@ -62,9 +62,24 @@ namespace M1A1Abrams
         AmmoType ammo_m456;
 
         ArmorType armor_compositeskirt;
-
         ArmorCodexScriptable armor_codex_superCompositeskirt;
         ArmorType armor_superCompositeskirt;
+
+        ArmorType armor_cheeksnera;
+        ArmorCodexScriptable armor_codex_cheeksDUarmor;
+        ArmorType armor_cheeksDUarmor;
+
+        ArmorType armor_fronthullnera;
+        ArmorCodexScriptable armor_codex_fronthullDUarmor;
+        ArmorType armor_fronthullDUarmor;
+
+        ArmorType armor_mantletnera;
+        ArmorCodexScriptable armor_codex_mantletlDUarmor;
+        ArmorType armor_mantletDUarmor;
+
+        ArmorType armor_turretsidesnera;
+        ArmorCodexScriptable armor_codex_turretsidesDUarmor;
+        ArmorType armor_turretsidesDUarmor;
 
         public override void OnInitializeMelon()
         {
@@ -149,6 +164,26 @@ namespace M1A1Abrams
                     {
                         armor_compositeskirt = s.ArmorType;
                     }
+
+                    if (s.ArmorType.Name == "special armor")
+                    {
+                        armor_cheeksnera = s.ArmorType;
+                    }
+
+                    if (s.ArmorType.Name == "special armor")
+                    {
+                        armor_fronthullnera = s.ArmorType;
+                    }
+
+                    if (s.ArmorType.Name == "special armor")
+                    {
+                        armor_mantletnera = s.ArmorType;
+                    }
+
+                    if (s.ArmorType.Name == "special armor")
+                    {
+                        armor_turretsidesnera = s.ArmorType;
+                    }
                 }
 
                 // m256
@@ -158,6 +193,7 @@ namespace M1A1Abrams
                 gun_m256.FriendlyName = "120mm Gun M256";
                 gun_m256.Type = WeaponSystemCodexScriptable.WeaponType.LargeCannon;
 
+                //Ammo stuff
                 // m829 
                 ammo_m829 = new AmmoType();
                 Util.ShallowCopy(ammo_m829, ammo_m833);
@@ -269,15 +305,60 @@ namespace M1A1Abrams
                 clip_codex_XM1147.CompatibleWeaponSystems[0] = gun_m256;
                 clip_codex_XM1147.ClipType = clip_XM1147;
 
+                //Armor stuff//
                 armor_superCompositeskirt = new ArmorType();
                 Util.ShallowCopy(armor_superCompositeskirt, armor_compositeskirt);
-                armor_superCompositeskirt.RhaeMultiplierCe = 7.5f; //default 1.5
-                armor_superCompositeskirt.RhaeMultiplierKe = 4.0f; //default 0.8
-                armor_superCompositeskirt.Name = "super composite skirt";
+                armor_superCompositeskirt.RhaeMultiplierCe = 8.0f; //default 1.5
+                armor_superCompositeskirt.RhaeMultiplierKe = 5.0f; //default 0.8
+                armor_superCompositeskirt.Name = "Abrams super special composite skirt";
 
                 armor_codex_superCompositeskirt = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
-                armor_codex_superCompositeskirt.name = "super composite skirt";
+                armor_codex_superCompositeskirt.name = "Abrams super special composite skirt";
                 armor_codex_superCompositeskirt.ArmorType = armor_superCompositeskirt;
+
+                armor_cheeksDUarmor = new ArmorType();
+                Util.ShallowCopy(armor_cheeksDUarmor, armor_cheeksnera);
+                armor_cheeksDUarmor.RhaeMultiplierCe = 2.2f; //default 1.3
+                armor_cheeksDUarmor.RhaeMultiplierKe = 1.2f; //default 0.55
+                armor_cheeksDUarmor.Name = "Abrams DU armor turret cheeks";
+
+                armor_codex_cheeksDUarmor = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_cheeksDUarmor.name = "Abrams DU armor turret cheeks";
+                armor_codex_cheeksDUarmor.ArmorType = armor_cheeksDUarmor;
+                armor_cheeksDUarmor = new ArmorType();
+
+                armor_fronthullDUarmor = new ArmorType();
+                Util.ShallowCopy(armor_fronthullDUarmor, armor_fronthullnera);
+                armor_fronthullDUarmor.RhaeMultiplierCe = 2.2f; //default 1.3
+                armor_fronthullDUarmor.RhaeMultiplierKe = 1.4f; //default 0.45
+                armor_fronthullDUarmor.Name = "Abrams DU armor hull front";
+
+                armor_codex_fronthullDUarmor = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_fronthullDUarmor.name = "Abrams DU armor hull front";
+                armor_codex_fronthullDUarmor.ArmorType = armor_fronthullDUarmor;
+                armor_fronthullDUarmor = new ArmorType();
+
+                armor_mantletDUarmor = new ArmorType();
+                Util.ShallowCopy(armor_mantletDUarmor, armor_mantletnera);
+                armor_mantletDUarmor.RhaeMultiplierCe = 2.15f; //default 1.3
+                armor_mantletDUarmor.RhaeMultiplierKe = 1.5f; //default 1.4
+                armor_mantletDUarmor.Name = "Abrams DU armor mantlet";
+
+                armor_codex_mantletlDUarmor = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_mantletlDUarmor.name = "Abrams DU armor mantlet";
+                armor_codex_mantletlDUarmor.ArmorType = armor_mantletDUarmor;
+                armor_mantletDUarmor = new ArmorType();
+
+                armor_turretsidesDUarmor = new ArmorType();
+                Util.ShallowCopy(armor_turretsidesDUarmor, armor_turretsidesnera);
+                armor_turretsidesDUarmor.RhaeMultiplierCe = 4.4f; //default 1.3
+                armor_turretsidesDUarmor.RhaeMultiplierKe = 2.21f; //default 1.4
+                armor_turretsidesDUarmor.Name = "Abrams DU armor turret sides";
+
+                armor_codex_turretsidesDUarmor = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_turretsidesDUarmor.name = "Abrams DU armor turret sides";
+                armor_codex_turretsidesDUarmor.ArmorType = armor_turretsidesDUarmor;
+                armor_turretsidesDUarmor = new ArmorType();
             }
 
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
@@ -291,10 +372,74 @@ namespace M1A1Abrams
                 if (compositeskirtPlate.Unit.FriendlyName != "M1IP") continue;
                 if (compositeskirtPlate.Name != "composite side skirt") continue;
 
-                FieldInfo armorPlate = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                armorPlate.SetValue(compositeskirtPlate, armor_codex_superCompositeskirt);
+                FieldInfo armorskirtPlate = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                armorskirtPlate.SetValue(compositeskirtPlate, armor_codex_superCompositeskirt);
 
                 MelonLogger.Msg(compositeskirtPlate.ArmorType);
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                VariableArmor cheeksDUarray = armour.GetComponent<VariableArmor>();
+                if (cheeksDUarray == null) continue;
+                if (cheeksDUarray.Unit == null) continue;
+                if (cheeksDUarray.Unit.FriendlyName != "M1IP") continue;
+                if (cheeksDUarray.Name != "turret cheek special armor array") continue;
+
+                FieldInfo armorcheeksDU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                armorcheeksDU.SetValue(cheeksDUarray, armor_codex_cheeksDUarmor);
+
+                MelonLogger.Msg(cheeksDUarray.ArmorType);
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                VariableArmor hullDUarray = armour.GetComponent<VariableArmor>();
+                if (hullDUarray == null) continue;
+                if (hullDUarray.Unit == null) continue;
+                if (hullDUarray.Unit.FriendlyName != "M1IP") continue;
+                if (hullDUarray.Name != "hull front special armor array") continue;
+
+                FieldInfo armorcheeksDU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                armorcheeksDU.SetValue(hullDUarray, armor_codex_fronthullDUarmor);
+
+                MelonLogger.Msg(hullDUarray.ArmorType);
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                VariableArmor mantletDUarray = armour.GetComponent<VariableArmor>();
+                if (mantletDUarray == null) continue;
+                if (mantletDUarray.Unit == null) continue;
+                if (mantletDUarray.Unit.FriendlyName != "M1IP") continue;
+                if (mantletDUarray.Name != "gun mantlet special armor array") continue;
+
+                FieldInfo armorcheeksDU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                armorcheeksDU.SetValue(mantletDUarray, armor_codex_mantletlDUarmor);
+
+                MelonLogger.Msg(mantletDUarray.ArmorType);
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                VariableArmor turretsidesDUarray = armour.GetComponent<VariableArmor>();
+                if (turretsidesDUarray == null) continue;
+                if (turretsidesDUarray.Unit == null) continue;
+                if (turretsidesDUarray.Unit.FriendlyName != "M1IP") continue;
+                if (turretsidesDUarray.Name != "turret side special armor array") continue;
+
+                FieldInfo armorcheeksDU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                armorcheeksDU.SetValue(turretsidesDUarray, armor_codex_turretsidesDUarmor);
+
+                MelonLogger.Msg(turretsidesDUarray.ArmorType);
             }
 
             foreach (GameObject vic_go in vic_gos)
