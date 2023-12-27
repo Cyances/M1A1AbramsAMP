@@ -3,9 +3,9 @@
 # Branch release notes:
 <p>
 	<ul> 
-		<li>Gave uprarmoring to the M1E1</li>
+		<li>Up armored the M1E1 as well</li>
 		<li>Renamed the Abrams to appear as the hypothetical M1E1HU and M1A1HU (Heavy Ultra) variant</li>
-		<li>More up armoring for the Abrams!</li>
+		<li>MOAR ARMOR!</li>
 		<li>Composite skirts adjusted protection values: 605 mm vs CE (from 515 mm)</li>
 		<li>Turret roof new protection values: 175 mm vs CE and 140 mm vs KE</li>
 		<li>Upper glacis new protection values: 210 mm vs CE and 180 mm vs KE</li>
