@@ -1,18 +1,20 @@
-# M1A1 Abrams AMP v1.0.8.1
+# M1A1 Abrams AMP v1.0.8.2
 
 # Branch release notes:
 <p>
 	<ul> 
-		<li>Increased M830 HEAT-MP-T penetration from 480 mm to 600 mm</li>
-		<li>Increased XM1147 AMP-T muzzle velocity from 1140 m/s to 1400 m/s</li>
-		<li>Increased AMP-T fragment penetration (+10 to 20 mm)</li>
-		<li>Up armored the M1A1 Abrams variant!</li>
-		<li>Composite skirts protect up to 515 mm against CE penetrators and 315 mm against KE penetrators</li>
-		<li>Front hull protects up to 1285 mm against CE penetrators and 815 mm against KE penetrators</li>
-		<li>Gun mantlet protects up to 1085 mm against CE penetrators and 660 mm against KE penetrators</li>
-		<li>Turret cheeks protect up to 1585 mm against CE penetrators and 915 mm against KE penetrators</li>
-		<li>Turret sides protect up to 1025 mm against CE penetrators and 515 mm against KE penetrators</li>
-		<li>Protection values are arbritrary at the moment but this is a proof of concept on manipulating different armor values</li>
+		<li>Gave uprarmoring to the M1E1</li>
+		<li>Renamed the Abrams to appear as the hypothetical M1E1HU and M1A1HU (Heavy Ultra) variant</li>
+		<li>More up armoring for the Abrams!</li>
+		<li>Composite skirts adjusted protection values: 605 mm vs CE (from 515 mm)</li>
+		<li>Turret roof new protection values: 175 mm vs CE and 140 mm vs KE</li>
+		<li>Upper glacis new protection values: 210 mm vs CE and 180 mm vs KE</li>
+		<li>Commanader's hatch new protection values: 175 mm vs CE and 140 mm vs KE</li>
+		<li>Loader's hatch new protection values: 175 mm vs CE and 140 mm vs KE</li>
+		<li>Driver's hatch new protection values: 175 mm vs CE and 140 mm vs KE</li>
+		<li>Turret ring new protection values: 210 mm vs CE and 180 mm vs KE</li>
+		<li>Gun mantlet face new protection values: 210 mm vs CE and 180 mm vs KE</li>
+		<li>Reference armor testing done at <100m at 0 degrees (or the closest I could make)</li>
 	</ul>
 </p>
 
