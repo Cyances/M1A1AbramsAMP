@@ -43,11 +43,8 @@ Converts all M1IPs to M1A1s equipped with:
 # NOTE!
 <p>
 	<ul> 
-<<<<<<< Updated upstream
 		<li>Only include ATLAS' Abrams mod .dll file in the mods folder or this one. Do not place both .dll files at the same time.</li>
-=======
 		<li>Only include thebeninator's Abrams dll file in the mods folder or this one. Do not place both dlls at the same time.</li>
->>>>>>> Stashed changes
 		<li>When you already have the M1A1Abrams mod installed, either delete MelonPreferences.cfg in UserData folder or remove the lines pertaining to the [M1A1Config] to make it easier to understand the custom config.</li>
 	</ul>
 </p>
