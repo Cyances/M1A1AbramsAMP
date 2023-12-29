@@ -601,10 +601,10 @@ namespace M1A1Abrams
                 Util.ShallowCopy(armor_fronthullDUarmor_HC, armor_fronthullnera_HC);
                 armor_fronthullDUarmor_HC.RhaeMultiplierCe = 1.625f; //default 1.3
                 armor_fronthullDUarmor_HC.RhaeMultiplierKe = 0.625f; //default 0.45
-                armor_fronthullDUarmor_HC.Name = "Abrams HC DU armor HCll front";
+                armor_fronthullDUarmor_HC.Name = "Abrams HC DU armor hull front";
 
                 armor_codex_fronthullDUarmor_HC = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
-                armor_codex_fronthullDUarmor_HC.name = "Abrams HC DU armor HCll front";
+                armor_codex_fronthullDUarmor_HC.name = "Abrams HC DU armor hull front";
                 armor_codex_fronthullDUarmor_HC.ArmorType = armor_fronthullDUarmor_HC;
                 armor_fronthullDUarmor_HC = new ArmorType();
 
@@ -1109,7 +1109,7 @@ namespace M1A1Abrams
                 MelonLogger.Msg(gunmantletfaceCompositearray_HU.ArmorType);
             }
             ////Assign modified armor to M1E1HU////
-            ///
+
             ////Assign modified armor to M1A1HC////
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
