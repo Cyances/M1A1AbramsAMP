@@ -3,7 +3,7 @@
 # Branch release notes:
 <p>
 	<ul> 
-		<li>WIP. More armor changes.</li>
+		<li>WIP. Refer to prerelease.</li>
 	</ul>
 </p>
 
