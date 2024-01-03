@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP
+# M1A1 Abrams AMP v2.0 (Page WIP)
 Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. Be sure to checkout both of those mods because they are great!
 
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
@@ -10,11 +10,11 @@ If you get an error launching through Steam you will need to run the game execut
 ![Screenshot_3](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A.png)
 ![Screenshot_4](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A%20XRay.png)
 
+# AMP 2.0 Revamp:
 <p>
-Converts all M1IPs to M1A1s equipped with: 
 	<ul>
 	<li>120mm M256 Gun (44 rounds max) </li>
-	<li>M829 APFSDS-T or M829A4 APFSD-T (20 rounds)</li>
+	<li>More APFSDS-T rounds: M829, M829A1, M829A2, M829A3, M829A4</li>
     	<li>M830 HEAT-MP-T or XM1147 AMP-T (24 rounds, has shoulder fuze)</li>
  	</ul>
 </p>
@@ -44,7 +44,6 @@ Converts all M1IPs to M1A1s equipped with:
 <p>
 	<ul> 
 		<li>Only include ATLAS' Abrams mod .dll file in the mods folder or this one. Do not place both .dll files at the same time.</li>
-		<li>Only include thebeninator's Abrams dll file in the mods folder or this one. Do not place both dlls at the same time.</li>
-		<li>When you already have the M1A1Abrams mod installed, either delete MelonPreferences.cfg in UserData folder or remove the lines pertaining to the [M1A1Config] to make it easier to understand the custom config.</li>
+		<li>When you already have ATLAS' Abrams mod installed or have older version of the Abramss AMP mod, either delete MelonPreferences.cfg in UserData folder or remove the lines pertaining to the [M1A1Config]/[M1A1AMPConfig] to make it easier to understand the custom config. Launch the game first then close it to update the contents of MelonPreferences.cfg</li>
 	</ul>
 </p>
