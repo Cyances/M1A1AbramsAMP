@@ -24,7 +24,7 @@ namespace M1A1Abrams
         MelonPreferences_Entry<int> m829Count;
         MelonPreferences_Entry<int> m830Count;
         MelonPreferences_Entry<bool> rotateAzimuth;
-        MelonPreferences_Entry<bool> m1e1;
+        MelonPreferences_Entry<bool> m1e1Convert;
         MelonPreferences_Entry<int> randomChanceNum;
         MelonPreferences_Entry<bool> randomChance;
         MelonPreferences_Entry<bool> useSuperSabot;
@@ -178,18 +178,18 @@ namespace M1A1Abrams
             rotateAzimuth = cfg.CreateEntry<bool>("RotateAzimuth", false);
             rotateAzimuth.Description = "Horizontal stabilization of M1A1 sights when applying lead.";
 
-            m1e1 = cfg.CreateEntry<bool>("M1E1", true);
-            m1e1.Description = "Convert M1s to M1E1s (i.e: they get the 120mm gun).";
+            m1e1Convert = cfg.CreateEntry<bool>("M1E1", true);
+            m1e1Convert.Description = "Convert M1s to M1E1s (i.e: they get the 120mm gun).";
 
             randomChance = cfg.CreateEntry<bool>("Random", true);
             randomChance.Description = "M1IPs/M1s will have a random chance of being converted to M1A1s/M1E1s.";
             randomChanceNum = cfg.CreateEntry<int>("ConversionChance", 100);
 
-            m1a1Armor = cfg.CreateEntry<string>("M1A1/IP Armor", "HU");
-            m1a1Armor.Description = "Armor used by M1A1/IP: 'HA', 'HC', 'HU' or blank for base M1IP armor";
+            m1a1Armor = cfg.CreateEntry<string>("M1A1 Armor", "HU");
+            m1a1Armor.Description = "Armor used by M1A1: 'HA', 'HC', 'HU' or blank for base M1IP armor";
 
-            m1e1Armor = cfg.CreateEntry<string>("M1/E1 Armor", "HU");
-            m1e1Armor.Description = "Armor used by M1/E1: 'HA', 'HC', 'HU' or blank for base M1 armor";
+            m1e1Armor = cfg.CreateEntry<string>("M1E1 Armor", "HU");
+            m1e1Armor.Description = "Armor used by M1E1: 'HA', 'HC', 'HU' or blank for base M1 armor";
         }
 
         // the GAS reticles seem to be assigned to specific ammo types and I can't figure out how it's done
@@ -573,7 +573,7 @@ namespace M1A1Abrams
                 armor_codex_gunmantletfaceCompositearmor_HU.name = "Abrams HU gun mantlet face special composite";
                 armor_codex_gunmantletfaceCompositearmor_HU.ArmorType = armor_gunmantletfaceCompositearmor_HU;
                 armor_gunmantletfaceCompositearmor_HU = new ArmorType();
-                ////HU armor modifiers////
+                ////End////
 
                 ////HC armor modifiers (12.5% increase)////
                 armor_superCompositeskirt_HC = new ArmorType();
@@ -629,7 +629,7 @@ namespace M1A1Abrams
                 armor_codex_turretsidesDUarmor_HC.name = "Abrams HC DU armor turret sides";
                 armor_codex_turretsidesDUarmor_HC.ArmorType = armor_turretsidesDUarmor_HC;
                 armor_turretsidesDUarmor_HC = new ArmorType();
-                ////HC armor modifiers////
+                ////End////
 
                 ////HA armor modifiers (25% increase)////
                 armor_superCompositeskirt_HA = new ArmorType();
@@ -685,7 +685,7 @@ namespace M1A1Abrams
                 armor_codex_turretsidesDUarmor_HA.name = "Abrams HA DU armor turret sides";
                 armor_codex_turretsidesDUarmor_HA.ArmorType = armor_turretsidesDUarmor_HA;
                 armor_turretsidesDUarmor_HA = new ArmorType();
-                ////HA armor modifiers////
+                ////End////
             }
 
             ////Assign modified armor to M1A1HU////
@@ -913,7 +913,7 @@ namespace M1A1Abrams
 
                 MelonLogger.Msg(gunmantletfaceCompositearray_HU.ArmorType);
             }
-            ////Assign modified armor to M1A1HU////
+            ////End////
 
             ////Assign modified armor to M1E1HU////
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
@@ -924,7 +924,7 @@ namespace M1A1Abrams
 
                 if (compositeskirtPlate_HU == null) continue;
                 if (compositeskirtPlate_HU.Unit == null) continue;
-                if (compositeskirtPlate_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (compositeskirtPlate_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (compositeskirtPlate_HU.Name != "composite side skirt") continue;
 
                 FieldInfo armorskirtComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -940,7 +940,7 @@ namespace M1A1Abrams
                 VariableArmor cheeksDUarray_HU = armour.GetComponent<VariableArmor>();
                 if (cheeksDUarray_HU == null) continue;
                 if (cheeksDUarray_HU.Unit == null) continue;
-                if (cheeksDUarray_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (cheeksDUarray_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (cheeksDUarray_HU.Name != "turret cheek special armor array") continue;
 
                 FieldInfo armorcheeksDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -956,7 +956,7 @@ namespace M1A1Abrams
                 VariableArmor hullfrontDUarray_HU = armour.GetComponent<VariableArmor>();
                 if (hullfrontDUarray_HU == null) continue;
                 if (hullfrontDUarray_HU.Unit == null) continue;
-                if (hullfrontDUarray_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (hullfrontDUarray_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (hullfrontDUarray_HU.Name != "hull front special armor array") continue;
 
                 FieldInfo armorhullfrontDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -972,7 +972,7 @@ namespace M1A1Abrams
                 VariableArmor mantletDUarray_HU = armour.GetComponent<VariableArmor>();
                 if (mantletDUarray_HU == null) continue;
                 if (mantletDUarray_HU.Unit == null) continue;
-                if (mantletDUarray_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (mantletDUarray_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (mantletDUarray_HU.Name != "gun mantlet special armor array") continue;
 
                 FieldInfo armormantletDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -988,7 +988,7 @@ namespace M1A1Abrams
                 VariableArmor turretsidesDUarray_HU = armour.GetComponent<VariableArmor>();
                 if (turretsidesDUarray_HU == null) continue;
                 if (turretsidesDUarray_HU.Unit == null) continue;
-                if (turretsidesDUarray_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (turretsidesDUarray_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (turretsidesDUarray_HU.Name != "turret side special armor array") continue;
 
                 FieldInfo armorturretsidesDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1004,7 +1004,7 @@ namespace M1A1Abrams
                 VariableArmor turretroofCompositearray_HU = armour.GetComponent<VariableArmor>();
                 if (turretroofCompositearray_HU == null) continue;
                 if (turretroofCompositearray_HU.Unit == null) continue;
-                if (turretroofCompositearray_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (turretroofCompositearray_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (turretroofCompositearray_HU.Name != "turret roof") continue;
 
                 FieldInfo armorturretroofComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1020,7 +1020,7 @@ namespace M1A1Abrams
                 VariableArmor upperglacisCompositearray_HU = armour.GetComponent<VariableArmor>();
                 if (upperglacisCompositearray_HU == null) continue;
                 if (upperglacisCompositearray_HU.Unit == null) continue;
-                if (upperglacisCompositearray_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (upperglacisCompositearray_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (upperglacisCompositearray_HU.Name != "upper glacis") continue;
 
                 FieldInfo armorupperglacisComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1036,7 +1036,7 @@ namespace M1A1Abrams
                 VariableArmor commandershatchCompositearray_HU = armour.GetComponent<VariableArmor>();
                 if (commandershatchCompositearray_HU == null) continue;
                 if (commandershatchCompositearray_HU.Unit == null) continue;
-                if (commandershatchCompositearray_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (commandershatchCompositearray_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (commandershatchCompositearray_HU.Name != "commander's hatch") continue;
 
                 FieldInfo armorcommandershatchComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1052,7 +1052,7 @@ namespace M1A1Abrams
                 VariableArmor loadershatchCompositearray_HU = armour.GetComponent<VariableArmor>();
                 if (loadershatchCompositearray_HU == null) continue;
                 if (loadershatchCompositearray_HU.Unit == null) continue;
-                if (loadershatchCompositearray_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (loadershatchCompositearray_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (loadershatchCompositearray_HU.Name != "loader's hatch") continue;
 
                 FieldInfo armorloadershatchComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1068,7 +1068,7 @@ namespace M1A1Abrams
                 VariableArmor drivershatchCompositearray_HU = armour.GetComponent<VariableArmor>();
                 if (drivershatchCompositearray_HU == null) continue;
                 if (drivershatchCompositearray_HU.Unit == null) continue;
-                if (drivershatchCompositearray_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (drivershatchCompositearray_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (drivershatchCompositearray_HU.Name != "driver's hatch") continue;
 
                 FieldInfo armordrivershatchDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1084,7 +1084,7 @@ namespace M1A1Abrams
                 VariableArmor turretringCompositearray_HU = armour.GetComponent<VariableArmor>();
                 if (turretringCompositearray_HU == null) continue;
                 if (turretringCompositearray_HU.Unit == null) continue;
-                if (turretringCompositearray_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (turretringCompositearray_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (turretringCompositearray_HU.Name != "turret ring") continue;
 
                 FieldInfo armorturretringComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1100,7 +1100,7 @@ namespace M1A1Abrams
                 VariableArmor gunmantletfaceCompositearray_HU = armour.GetComponent<VariableArmor>();
                 if (gunmantletfaceCompositearray_HU == null) continue;
                 if (gunmantletfaceCompositearray_HU.Unit == null) continue;
-                if (gunmantletfaceCompositearray_HU.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HU") continue;
+                if (gunmantletfaceCompositearray_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (gunmantletfaceCompositearray_HU.Name != "gun mantlet face") continue;
 
                 FieldInfo armorturretringComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1108,7 +1108,7 @@ namespace M1A1Abrams
 
                 MelonLogger.Msg(gunmantletfaceCompositearray_HU.ArmorType);
             }
-            ////Assign modified armor to M1E1HU////
+            ////End////
 
             ////Assign modified armor to M1A1HC////
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
@@ -1191,7 +1191,7 @@ namespace M1A1Abrams
 
                 MelonLogger.Msg(turretsidesDUarray_HC.ArmorType);
             }
-            ////Assign modified armor to M1A1HC////
+            ////End////
 
             ////Assign modified armor to M1E1HC////
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
@@ -1202,7 +1202,7 @@ namespace M1A1Abrams
 
                 if (compositeskirtPlate_HC == null) continue;
                 if (compositeskirtPlate_HC.Unit == null) continue;
-                if (compositeskirtPlate_HC.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HC") continue;
+                if (compositeskirtPlate_HC.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HC")) continue;
                 if (compositeskirtPlate_HC.Name != "composite side skirt") continue;
 
                 FieldInfo armorskirtComposite_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1218,7 +1218,7 @@ namespace M1A1Abrams
                 VariableArmor cheeksDUarray_HC = armour.GetComponent<VariableArmor>();
                 if (cheeksDUarray_HC == null) continue;
                 if (cheeksDUarray_HC.Unit == null) continue;
-                if (cheeksDUarray_HC.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HC") continue;
+                if (cheeksDUarray_HC.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HC")) continue;
                 if (cheeksDUarray_HC.Name != "turret cheek special armor array") continue;
 
                 FieldInfo armorcheeksDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1234,7 +1234,7 @@ namespace M1A1Abrams
                 VariableArmor hullfrontDUarray_HC = armour.GetComponent<VariableArmor>();
                 if (hullfrontDUarray_HC == null) continue;
                 if (hullfrontDUarray_HC.Unit == null) continue;
-                if (hullfrontDUarray_HC.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HC") continue;
+                if (hullfrontDUarray_HC.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HC")) continue;
                 if (hullfrontDUarray_HC.Name != "hull front special armor array") continue;
 
                 FieldInfo armorhullfrontDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1250,7 +1250,7 @@ namespace M1A1Abrams
                 VariableArmor mantletDUarray_HC = armour.GetComponent<VariableArmor>();
                 if (mantletDUarray_HC == null) continue;
                 if (mantletDUarray_HC.Unit == null) continue;
-                if (mantletDUarray_HC.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HC") continue;
+                if (mantletDUarray_HC.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HC")) continue;
                 if (mantletDUarray_HC.Name != "gun mantlet special armor array") continue;
 
                 FieldInfo armormantletDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1266,7 +1266,7 @@ namespace M1A1Abrams
                 VariableArmor turretsidesDUarray_HC = armour.GetComponent<VariableArmor>();
                 if (turretsidesDUarray_HC == null) continue;
                 if (turretsidesDUarray_HC.Unit == null) continue;
-                if (turretsidesDUarray_HC.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HC") continue;
+                if (turretsidesDUarray_HC.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HC")) continue;
                 if (turretsidesDUarray_HC.Name != "turret side special armor array") continue;
 
                 FieldInfo armorturretsidesDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1274,7 +1274,7 @@ namespace M1A1Abrams
 
                 MelonLogger.Msg(turretsidesDUarray_HC.ArmorType);
             }
-            ////Assign modified armor to M1E1HC////
+            ////End////
 
             ////Assign modified armor to M1A1HA////
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
@@ -1357,7 +1357,7 @@ namespace M1A1Abrams
 
                 MelonLogger.Msg(turretsidesDUarray_HA.ArmorType);
             }
-            ////Assign modified armor to M1A1HA////
+            ////End////
 
             ////Assign modified armor to M1E1HA////
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
@@ -1368,7 +1368,7 @@ namespace M1A1Abrams
 
                 if (compositeskirtPlate_HA == null) continue;
                 if (compositeskirtPlate_HA.Unit == null) continue;
-                if (compositeskirtPlate_HA.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HA") continue;
+                if (compositeskirtPlate_HA.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HA")) continue;
                 if (compositeskirtPlate_HA.Name != "composite side skirt") continue;
 
                 FieldInfo armorskirtComposite_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1384,7 +1384,7 @@ namespace M1A1Abrams
                 VariableArmor cheeksDUarray_HA = armour.GetComponent<VariableArmor>();
                 if (cheeksDUarray_HA == null) continue;
                 if (cheeksDUarray_HA.Unit == null) continue;
-                if (cheeksDUarray_HA.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HA") continue;
+                if (cheeksDUarray_HA.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HA")) continue;
                 if (cheeksDUarray_HA.Name != "turret cheek special armor array") continue;
 
                 FieldInfo armorcheeksDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1400,7 +1400,7 @@ namespace M1A1Abrams
                 VariableArmor hullfrontDUarray_HA = armour.GetComponent<VariableArmor>();
                 if (hullfrontDUarray_HA == null) continue;
                 if (hullfrontDUarray_HA.Unit == null) continue;
-                if (hullfrontDUarray_HA.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HA") continue;
+                if (hullfrontDUarray_HA.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HA")) continue;
                 if (hullfrontDUarray_HA.Name != "hull front special armor array") continue;
 
                 FieldInfo armorhullfrontDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1416,7 +1416,7 @@ namespace M1A1Abrams
                 VariableArmor mantletDUarray_HA = armour.GetComponent<VariableArmor>();
                 if (mantletDUarray_HA == null) continue;
                 if (mantletDUarray_HA.Unit == null) continue;
-                if (mantletDUarray_HA.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HA") continue;
+                if (mantletDUarray_HA.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HA")) continue;
                 if (mantletDUarray_HA.Name != "gun mantlet special armor array") continue;
 
                 FieldInfo armormantletDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1432,7 +1432,7 @@ namespace M1A1Abrams
                 VariableArmor turretsidesDUarray_HA = armour.GetComponent<VariableArmor>();
                 if (turretsidesDUarray_HA == null) continue;
                 if (turretsidesDUarray_HA.Unit == null) continue;
-                if (turretsidesDUarray_HA.Unit.FriendlyName != "M1" || m1e1Armor.Value != "HA") continue;
+                if (turretsidesDUarray_HA.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HA")) continue;
                 if (turretsidesDUarray_HA.Name != "turret side special armor array") continue;
 
                 FieldInfo armorturretsidesDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -1440,7 +1440,7 @@ namespace M1A1Abrams
 
                 MelonLogger.Msg(turretsidesDUarray_HA.ArmorType);
             }
-            ////Assign modified armor to M1E1HA////
+            ////End////
 
             foreach (GameObject vic_go in vic_gos)
             {
@@ -1448,7 +1448,7 @@ namespace M1A1Abrams
 
                 if (vic == null) continue;
 
-                if (vic.FriendlyName == "M1IP" || (m1e1.Value && vic.FriendlyName == "M1"))
+                if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
                 {
                     gameManager = GameObject.Find("_APP_GHPC_");
                     cameraManager = gameManager.GetComponent<CameraManager>();
@@ -1492,15 +1492,24 @@ namespace M1A1Abrams
 
                     if (rand < randomChanceNum.Value)
                     {
-                        // rename to m1a1
-                        string name = (vic.FriendlyName == "M1IP") ? "M1A1" : "M1E1";
+                        ////Rename Abrams////
+                        if (vic.FriendlyName == "M1IP")
+                        {
+                            string name = "M1A1";
+                            name += m1a1Armor.Value;
 
+                            FieldInfo friendlyName = typeof(GHPC.Unit).GetField("_friendlyName", BindingFlags.NonPublic | BindingFlags.Instance);
+                            friendlyName.SetValue(vic, name);
+                        }
 
-                        FieldInfo friendlyName = typeof(GHPC.Unit).GetField("_friendlyName", BindingFlags.NonPublic | BindingFlags.Instance);
-                        friendlyName.SetValue(vic, name);
+                        if (vic.FriendlyName == "M1")
+                        {
+                            string name = "M1E1";
+                            name += m1e1Armor.Value;
 
-                        FieldInfo uniqueName = typeof(GHPC.Unit).GetField("_uniqueName", BindingFlags.NonPublic | BindingFlags.Instance);
-                        uniqueName.SetValue(vic, name);
+                            FieldInfo friendlyName = typeof(GHPC.Unit).GetField("_friendlyName", BindingFlags.NonPublic | BindingFlags.Instance);
+                            friendlyName.SetValue(vic, name);
+                        }
 
                         // convert to m256 gun
                         WeaponsManager weaponsManager = vic.GetComponent<WeaponsManager>();
