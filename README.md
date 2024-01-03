@@ -1,9 +1,9 @@
-# M1A1 Abrams AMP v1.0.3.1
+# M1A1 Abrams AMP v1.3.pre1
 
 # Branch release notes:
 <p>
 	<ul> 
-		<li>WIP. Refer to prerelease.</li>
+		<li>Prerelease version</li>
 		<li>Added HA and HC variants of the Abrams for both M1A1 and M1E1, totaling to 4 variants (including vanilla and HU)</li>
 		<li>Configurable in MelonPreferences.cfg (run the game first then check the file)</li>
 		<li>Default variant is still HU for M1A1/E1</li>
