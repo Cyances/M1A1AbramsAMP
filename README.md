@@ -10,11 +10,11 @@ If you get an error launching through Steam you will need to run the game execut
 ![Screenshot_3](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A.png)
 ![Screenshot_4](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A%20XRay.png)
 
+# AMP 2.0 Revamp:
 <p>
-Converts all M1IPs to M1A1s equipped with: 
 	<ul>
 	<li>120mm M256 Gun (44 rounds max) </li>
-	<li>M829 APFSDS-T or M829A4 APFSD-T (20 rounds)</li>
+	<li>More APFSDS-T rounds: M829, M829A1, M829A2, M829A3, M829A4</li>
     	<li>M830 HEAT-MP-T or XM1147 AMP-T (24 rounds, has shoulder fuze)</li>
  	</ul>
 </p>
