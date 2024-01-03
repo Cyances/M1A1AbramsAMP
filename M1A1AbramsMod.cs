@@ -17,6 +17,7 @@ using GHPC.Equipment;
 using GHPC;
 using System.Xml.Linq;
 
+
 namespace M1A1Abrams
 {
     public class M1A1AbramsMod : MelonMod
@@ -37,6 +38,10 @@ namespace M1A1Abrams
         MelonPreferences_Entry<string> m1primaryAmmo;
         MelonPreferences_Entry<string> m1secondaryAmmo;
         MelonPreferences_Entry<string> m1tertiaryAmmo;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
         GameObject[] vic_gos;
         GameObject gameManager;
@@ -183,15 +188,26 @@ namespace M1A1Abrams
         public override void OnInitializeMelon()
         {
             cfg = MelonPreferences.CreateCategory("M1A1AMPConfig");
+<<<<<<< Updated upstream
             primaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Primary Round Count", 20);
             primaryammoCount.Description = "How many rounds per type each Abrams should carry. Maximum of 44 rounds total. Bring in at least one primary round.";
             secondaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Secondary Round Count", 10);
             tertiaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Tertiary Round Count", 14);
+=======
+>>>>>>> Stashed changes
 
             m1primaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Primary Round", "M829A4");
             m1primaryAmmo.Description = "Round types carried by M1A1 and M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A2' or 'XM1147'";
             m1secondaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Secondary Round", "M830A2");
             m1tertiaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Tertiary Round", "XM1147");
+<<<<<<< Updated upstream
+=======
+
+            primaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Primary Round Count", 20);
+            primaryammoCount.Description = "How many rounds per type each Abrams should carry. Maximum of 44 rounds total. Bring in at least one primary round.";
+            secondaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Secondary Round Count", 10);
+            tertiaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Tertiary Round Count", 14);
+>>>>>>> Stashed changes
 
             ampFragments = cfg.CreateEntry<int>("AMP Fragments", 600);
             ampFragments.Description = "How many fragments are generated when the AMP round explodes (in point-detonate/airburst mode). NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
@@ -200,7 +216,7 @@ namespace M1A1Abrams
             rotateAzimuth.Description = "Horizontal stabilization of M1A1 sights when applying lead.";
 
             m1e1Convert = cfg.CreateEntry<bool>("M1E1", true);
-            m1e1Convert.Description = "Convert M1s to M1E1s (i.e: they get the 120mm gun).";
+            m1e1Convert.Description = "Convert M1s to M1E1s (i.e: they get the 120mm gun and enables armor upgrades).";
 
             randomChance = cfg.CreateEntry<bool>("Random", true);
             randomChance.Description = "M1IPs/M1s will have a random chance of being converted to M1A1s/M1E1s.";
@@ -260,6 +276,10 @@ namespace M1A1Abrams
                     if (s.ArmorType.Name == "composite skirt") armor_turretroofarmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_upperglacisarmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "tracks") armor_trackarmor_HU = s.ArmorType;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
                     if (s.ArmorType.Name == "composite skirt") armor_commmandershatcharmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_loadershatcharmor_HU = s.ArmorType;
@@ -465,7 +485,11 @@ namespace M1A1Abrams
 
                 clip_m830a2 = new AmmoType.AmmoClip();
                 clip_m830a2.Capacity = 1;
+<<<<<<< Updated upstream
                 clip_m830a2.Name = "M830A2 HEAT-FS-T";
+=======
+                clip_m830a2.Name = "M830A2 IHEAT-MP-T";
+>>>>>>> Stashed changes
                 clip_m830a2.MinimalPattern = new AmmoCodexScriptable[1];
                 clip_m830a2.MinimalPattern[0] = ammo_codex_m830a2;
 
@@ -612,6 +636,31 @@ namespace M1A1Abrams
                 armor_codex_upperglacisCompositearmor_HU.ArmorType = armor_upperglacisCompositearmor_HU;
                 armor_upperglacisCompositearmor_HU = new ArmorType();
 
+<<<<<<< Updated upstream
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
                 armor_commmandershatchCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_commmandershatchCompositearmor_HU, armor_commmandershatcharmor_HU);
                 armor_commmandershatchCompositearmor_HU.RhaeMultiplierCe = 2.0f; //default composite skirt 1.5
@@ -906,9 +955,47 @@ namespace M1A1Abrams
                 MelonLogger.Msg(upperglacisCompositearray_HU.ArmorType);
             }
 
+<<<<<<< Updated upstream
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
                 if (armour == null) continue;
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
 
                 VariableArmor commandershatchCompositearray_HU = armour.GetComponent<VariableArmor>();
                 if (commandershatchCompositearray_HU == null) continue;
