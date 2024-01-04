@@ -60,8 +60,9 @@ If you get an error launching through Steam you will need to run the game execut
 	<ul> 
 		<li>Armor testing done in game which can result in inconsistency between the area shot at, and the angle and distance from it. However, I did my best to shoot at less than 100 meters and as close to 0 degrees for the perpendicular shot to the armor face.</li>
 		<li>The only exception is the turret cheek and hull front where I emulated a headon engagement.</li>
-		<li>HA and HC armor figures are just a flat 12.5% and 25% increase in protection becaue finding proper documentation is difficult (please don't violate ITAR). However, the values can be changed in the future if required. Although if you believe you found a seemingly decent (and **unclass**) source for the values, please let me know.</li>
-		<li>HU armor figures are based on Steal Beasts</li>
+		<li>HA and HC armor figures are just a flat 12.5% and 25% increase in protection becaue finding proper documentation is difficult (please don't violate ITAR). However, the values can be changed in the future if required. Although if you believe you found a seemingly decent (and unclass) source for the values, please let me know.</li>
+		<li>If the protection increase appears to be low, I'm basing the values relative to the available (REDFOR) vanilla and modded penetrators. Example would be HA's cheek array would barely hold against a vanilla 3BM32 (560mm which is highest REDFOR pen value) while the HC would completely protect against it.</li>
+		<li>HU armor figures are based on Steal Beasts Abrams and my own inputs.</li>
 	</ul>
 </p>
 
