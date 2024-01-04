@@ -14,10 +14,12 @@ If you get an error launching through Steam you will need to run the game execut
 <p>
 	<ul>
 	<li>120mm M256 Gun (44 rounds max)</li>
+	<li>M1IP automatically converted to M1A1</li>
 	<li>Tank upgrades based on real life developments (but guesstimated values) and hypothetical thinking</li>
     	<li>More Abrams armor variants: base armor, Heavy Armor (+12.5% protection), Heavy Common (+25% protection) and Heavy Ultra (custom)</li>
 	<li>More APFSDS-T rounds: M829, M829A1, M829A2, M829A3, M829A4</li>
     	<li>More HEAT-T rounds: M830, M830A2, XM1147</li>
+    	<li>XM1147 AMP-T multifuze round (airburst or point-detonate)</li>
  	</ul>
 </p>
 
