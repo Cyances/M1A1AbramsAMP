@@ -459,7 +459,7 @@ namespace M1A1AbramsAMP
                 ammo_m830a2.Caliber = 120;
                 ammo_m830a2.RhaPenetration = 1200;
                 ammo_m830a2.TntEquivalentKg = 2.721f;
-                ammo_m830a2.MuzzleVelocity = 1410f;
+                ammo_m830a2.MuzzleVelocity = 1240f;
                 ammo_m830a2.Mass = 13.5f;
                 ammo_m830a2.CertainRicochetAngle = 8.0f;
                 ammo_m830a2.ShatterOnRicochet = false;
