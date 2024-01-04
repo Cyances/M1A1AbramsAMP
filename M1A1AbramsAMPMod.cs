@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -12,15 +12,14 @@ using GHPC.Equipment.Optics;
 using System.Collections;
 using System.Threading.Tasks;
 using HarmonyLib;
-using M1A1Abrams;
 using GHPC.Equipment;
 using GHPC;
-using System.Xml.Linq;
+using M1A1AbramsAMP;
 
 
-namespace M1A1Abrams
+namespace M1A1AbramsAMP
 {
-    public class M1A1AbramsMod : MelonMod
+    public class M1A1AbramsAMPMod : MelonMod
     {
         MelonPreferences_Category cfg;
         MelonPreferences_Entry<int> primaryammoCount;
@@ -38,10 +37,7 @@ namespace M1A1Abrams
         MelonPreferences_Entry<string> m1primaryAmmo;
         MelonPreferences_Entry<string> m1secondaryAmmo;
         MelonPreferences_Entry<string> m1tertiaryAmmo;
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
         GameObject[] vic_gos;
         GameObject gameManager;
@@ -188,26 +184,16 @@ namespace M1A1Abrams
         public override void OnInitializeMelon()
         {
             cfg = MelonPreferences.CreateCategory("M1A1AMPConfig");
-<<<<<<< Updated upstream
-            primaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Primary Round Count", 20);
-            primaryammoCount.Description = "How many rounds per type each Abrams should carry. Maximum of 44 rounds total. Bring in at least one primary round.";
-            secondaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Secondary Round Count", 10);
-            tertiaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Tertiary Round Count", 14);
-=======
->>>>>>> Stashed changes
 
             m1primaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Primary Round", "M829A4");
             m1primaryAmmo.Description = "Round types carried by M1A1 and M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A2' or 'XM1147'";
             m1secondaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Secondary Round", "M830A2");
             m1tertiaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Tertiary Round", "XM1147");
-<<<<<<< Updated upstream
-=======
 
             primaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Primary Round Count", 20);
             primaryammoCount.Description = "How many rounds per type each Abrams should carry. Maximum of 44 rounds total. Bring in at least one primary round.";
             secondaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Secondary Round Count", 10);
             tertiaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Tertiary Round Count", 14);
->>>>>>> Stashed changes
 
             ampFragments = cfg.CreateEntry<int>("AMP Fragments", 600);
             ampFragments.Description = "How many fragments are generated when the AMP round explodes (in point-detonate/airburst mode). NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
@@ -221,6 +207,12 @@ namespace M1A1Abrams
             randomChance = cfg.CreateEntry<bool>("Random", true);
             randomChance.Description = "M1IPs/M1s will have a random chance of being converted to M1A1s/M1E1s.";
             randomChanceNum = cfg.CreateEntry<int>("ConversionChance", 100);
+
+            m1a1Armor = cfg.CreateEntry<string>("M1A1 Armor", "HU");
+            m1a1Armor.Description = "Armor used by M1A1: 'HA', 'HC', 'HU' or blank for base M1IP armor";
+
+            m1e1Armor = cfg.CreateEntry<string>("M1E1 Armor", "HU");
+            m1e1Armor.Description = "Armor used by M1E1: 'HA', 'HC', 'HU' or blank for base M1 armor";
         }
 
         // the GAS reticles seem to be assigned to specific ammo types and I can't figure out how it's done
@@ -236,7 +228,7 @@ namespace M1A1Abrams
             if (playerManager.CurrentPlayerWeapon.Name != "120mm gun M256") return;
 
             AmmoType currentAmmo = playerManager.CurrentPlayerWeapon.FCS.CurrentAmmoType;
-            int reticleId = (currentAmmo.Name == "M829 APFSDS-T" || currentAmmo.Name == "M829A1 APFSDS-T") ? 0 : 2;
+            int reticleId = (currentAmmo.Name == "M829 APFSDS-T" || currentAmmo.Name == "M829A4 APFSDS-T") ? 0 : 2;
 
             GameObject reticle = cam.transform.GetChild(reticleId).gameObject;
 
@@ -276,10 +268,7 @@ namespace M1A1Abrams
                     if (s.ArmorType.Name == "composite skirt") armor_turretroofarmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_upperglacisarmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "tracks") armor_trackarmor_HU = s.ArmorType;
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
                     if (s.ArmorType.Name == "composite skirt") armor_commmandershatcharmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_loadershatcharmor_HU = s.ArmorType;
@@ -340,7 +329,7 @@ namespace M1A1Abrams
                 ammo_m829a1.Name = "M829A1 APFSDS-T";
                 ammo_m829a1.Caliber = 120;
                 ammo_m829a1.RhaPenetration = 700f;
-                ammo_m829a1.MuzzleVelocity = 1670f;
+                ammo_m829a1.MuzzleVelocity = 1575f;
                 ammo_m829a1.Mass = 4.64f;
 
                 ammo_codex_m829a1 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
@@ -440,7 +429,7 @@ namespace M1A1Abrams
                 Util.ShallowCopy(ammo_m830, ammo_m456);
                 ammo_m830.Name = "M830 HEAT-MP-T";
                 ammo_m830.Caliber = 120;
-                ammo_m830.RhaPenetration = 480;
+                ammo_m830.RhaPenetration = 600;
                 ammo_m830.TntEquivalentKg = 1.814f;
                 ammo_m830.MuzzleVelocity = 1140f;
                 ammo_m830.Mass = 13.5f;
@@ -470,7 +459,7 @@ namespace M1A1Abrams
                 ammo_m830a2.Caliber = 120;
                 ammo_m830a2.RhaPenetration = 1200;
                 ammo_m830a2.TntEquivalentKg = 2.721f;
-                ammo_m830a2.MuzzleVelocity = 1410f;
+                ammo_m830a2.MuzzleVelocity = 1240f;
                 ammo_m830a2.Mass = 13.5f;
                 ammo_m830a2.CertainRicochetAngle = 8.0f;
                 ammo_m830a2.ShatterOnRicochet = false;
@@ -485,11 +474,7 @@ namespace M1A1Abrams
 
                 clip_m830a2 = new AmmoType.AmmoClip();
                 clip_m830a2.Capacity = 1;
-<<<<<<< Updated upstream
-                clip_m830a2.Name = "M830A2 HEAT-FS-T";
-=======
                 clip_m830a2.Name = "M830A2 IHEAT-MP-T";
->>>>>>> Stashed changes
                 clip_m830a2.MinimalPattern = new AmmoCodexScriptable[1];
                 clip_m830a2.MinimalPattern[0] = ammo_codex_m830a2;
 
@@ -636,8 +621,6 @@ namespace M1A1Abrams
                 armor_codex_upperglacisCompositearmor_HU.ArmorType = armor_upperglacisCompositearmor_HU;
                 armor_upperglacisCompositearmor_HU = new ArmorType();
 
-<<<<<<< Updated upstream
-=======
 
 
 
@@ -660,7 +643,6 @@ namespace M1A1Abrams
 
 
 
->>>>>>> Stashed changes
                 armor_commmandershatchCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_commmandershatchCompositearmor_HU, armor_commmandershatcharmor_HU);
                 armor_commmandershatchCompositearmor_HU.RhaeMultiplierCe = 2.0f; //default composite skirt 1.5
@@ -955,11 +937,6 @@ namespace M1A1Abrams
                 MelonLogger.Msg(upperglacisCompositearray_HU.ArmorType);
             }
 
-<<<<<<< Updated upstream
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-=======
 
 
 
@@ -995,7 +972,6 @@ namespace M1A1Abrams
 
 
 
->>>>>>> Stashed changes
 
                 VariableArmor commandershatchCompositearray_HU = armour.GetComponent<VariableArmor>();
                 if (commandershatchCompositearray_HU == null) continue;
@@ -1755,14 +1731,24 @@ namespace M1A1Abrams
 
                     if (rand < randomChanceNum.Value)
                     {
-                        // rename to m1a1
-                        string name = (vic.FriendlyName == "M1IP") ? "M1A1" : "M1E1";
+                        ////Rename Abrams////
+                        if (vic.FriendlyName == "M1IP")
+                        {
+                            string name = "M1A1";
+                            name += m1a1Armor.Value;
 
-                        FieldInfo friendlyName = typeof(GHPC.Unit).GetField("_friendlyName", BindingFlags.NonPublic | BindingFlags.Instance);
-                        friendlyName.SetValue(vic, name);
+                            FieldInfo friendlyName = typeof(GHPC.Unit).GetField("_friendlyName", BindingFlags.NonPublic | BindingFlags.Instance);
+                            friendlyName.SetValue(vic, name);
+                        }
 
-                        FieldInfo uniqueName = typeof(GHPC.Unit).GetField("_uniqueName", BindingFlags.NonPublic | BindingFlags.Instance);
-                        uniqueName.SetValue(vic, name);
+                        if (vic.FriendlyName == "M1")
+                        {
+                            string name = "M1E1";
+                            name += m1e1Armor.Value;
+
+                            FieldInfo friendlyName = typeof(GHPC.Unit).GetField("_friendlyName", BindingFlags.NonPublic | BindingFlags.Instance);
+                            friendlyName.SetValue(vic, name);
+                        }
 
                         // convert to m256 gun
                         WeaponsManager weaponsManager = vic.GetComponent<WeaponsManager>();

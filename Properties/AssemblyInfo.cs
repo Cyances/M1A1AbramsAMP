@@ -2,20 +2,20 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using MelonLoader;
-using M1A1Abrams;
+using M1A1AbramsAMP;
 
-[assembly: MelonInfo(typeof(M1A1AbramsMod), "M1A1 Abrams", "1.0.8", "ATLAS")]
+[assembly: MelonInfo(typeof(M1A1AbramsAMPMod), "M1A1 Abrams AMP", "2.0", "ATLAS and Cyance")]
 [assembly: MelonGame("Radian Simulations LLC", "GHPC")]
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("M1A1Abrams")]
+[assembly: AssemblyTitle("M1A1AbramsAMP")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("M1A1Abrams")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyProduct("M1A1AbramsAMP")]
+[assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
