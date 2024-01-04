@@ -21,10 +21,10 @@ If you get an error launching through Steam you will need to run the game execut
 </p>
 
 #Round list
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+| Name  | Penetration | Muzzle Velocity | Note |
+| ------------- | ------------- | ------------- | ------------- |
+| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
 
 # How to use the XM1147 AMP-T:
 <p>
