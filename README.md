@@ -20,11 +20,14 @@ If you get an error launching through Steam you will need to run the game execut
  	</ul>
 </p>
 
-#Round list
-| Name  | Penetration | Muzzle Velocity | Note |
+# Round list:
+| Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- |
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+| M829 APFSDS-T  | 600  | 1670  | - |
+| M829A1 APFSDS-T  | 700  | 1575  | - |
+| M829A2 APFSDS-T  | 800  | 1680  | - |
+| M829A3 APFSDS-T  | 900  | 1555  | - |
+| M829A4 APFSDS-T  | 1000  | 1700  | - |
 
 # How to use the XM1147 AMP-T:
 <p>
