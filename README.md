@@ -10,7 +10,7 @@ If you get an error launching through Steam you will need to run the game execut
 ![Screenshot_3](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A.png)
 ![Screenshot_4](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A%20XRay.png)
 
-# AMP 2.0 Revamp:
+## AMP 2.0 Revamp:
 <p>
 	<ul>
 	<li>120mm M256 Gun (44 rounds max) </li>
@@ -20,6 +20,16 @@ If you get an error launching through Steam you will need to run the game execut
  	</ul>
 </p>
 
+## Armor upgrade:
+### Heavy Armor (HA) - 12.5% increase in protection
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) 
+| ------------- | ------------- | ------------- | 
+| Hull front | 450  | 930  |
+| Turret cheek | 540 | 1170 | 
+| Turret side | 400 | 430 | 
+| Gun mantlet | 510 | 820 | 
+| Composite side skirt | 80 | 112 | 
+
 # Round list:
 | Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- |
@@ -27,27 +37,12 @@ If you get an error launching through Steam you will need to run the game execut
 | M829A1 APFSDS-T  | 700 | 1575 | - |
 | M829A2 APFSDS-T | 800 | 1680 | - |
 | M829A3 APFSDS-T | 900 | 1555 | - |
-| M829A4 APFSDS-T | 1000 | 1700 | +50% spalling chance  |
+| M829A4 APFSDS-T | 1000 | 1700 | +50% spalling chance |
 | M830 HEAT-MP-T | 600 | 1140 | - |
 | M830A2 IHEAT-MP-T | 1200 | 1240 | +100% spalling chance |
 | XM1147 AMP-T | 480 | 1410 | Airburst feature |
 
-
-# Armor upgrade:
-| Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
-| ------------- | ------------- | ------------- | ------------- |
-| M829 APFSDS-T | 600  | 1670  | - |
-| M829A1 APFSDS-T  | 700 | 1575 | - |
-| M829A2 APFSDS-T | 800 | 1680 | - |
-| M829A3 APFSDS-T | 900 | 1555 | - |
-| M829A4 APFSDS-T | 1000 | 1700 | +50% spalling chance  |
-| M830 HEAT-MP-T | 600 | 1140 | - |
-| M830A2 IHEAT-MP-T | 1200 | 1240 | +100% spalling chance |
-| XM1147 AMP-T | 480 | 1410 | Airburst feature |
-| Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
-| XM1147 AMP-T | 480 | 1410 | Airburst feature |
-
-# How to use the XM1147 AMP-T:
+## How to use the XM1147 AMP-T:
 <p>
 	<ul> 
 		<li>To use airburst mode, lase the target and aim slightly above it so that the shell will not impact the target. The airburst fuzing is not perfect since it might explode in front or behind the target instead of somewhere in the middle, so multiple shots might be required. Or to help compensate for the deviation, increase the fragment count but this can impact game performance.</li>
@@ -55,7 +50,7 @@ If you get an error launching through Steam you will need to run the game execut
 	</ul>
 </p>
 
-# Extra Features/Settings (in mod config):
+## Extra Features/Settings (in mod config):
 <p>
 	<ul> 
 		<li>Selectable round types for three slots (a mix of M829A4, M830A2 and XM1147 by default). You can even go with a pure APFSDS or HEAT loadout. <b>Be careful typing the round you want</b> because the mod will default to vanilla rounds (M833/M456A2) if there is a typo or if a field is left blank.</li>
@@ -68,7 +63,7 @@ If you get an error launching through Steam you will need to run the game execut
 	</ul>
 </p>
 
-# NOTE!
+## NOTE!
 <p>
 	<ul> 
 		<li>Only include ATLAS' Abrams mod .dll file in the mods folder or this one. Do not place both .dll files at the same time.</li>
