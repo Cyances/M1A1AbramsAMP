@@ -23,11 +23,14 @@ If you get an error launching through Steam you will need to run the game execut
 # Round list:
 | Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- |
-| M829 APFSDS-T  | 600  | 1670  | - |
-| M829A1 APFSDS-T  | 700  | 1575  | - |
-| M829A2 APFSDS-T  | 800  | 1680  | - |
-| M829A3 APFSDS-T  | 900  | 1555  | - |
-| M829A4 APFSDS-T  | 1000  | 1700  | - |
+| M829 APFSDS-T | 600  | 1670  | - |
+| M829A1 APFSDS-T  | 700 | 1575 | - |
+| M829A2 APFSDS-T | 800 | 1680 | - |
+| M829A3 APFSDS-T | 900 | 1555 | - |
+| M829A4 APFSDS-T | 1000 | 1700 | +50% spalling chance  |
+| M830 HEAT-MP-T | 600 | 1140 | - |
+| M830A2 HEAT-MP-T | 1200 | 1240 | +100% spalling chance |
+| XM1147 AMP-T | 480 | 1410 | Airburst feature |
 
 # How to use the XM1147 AMP-T:
 <p>
