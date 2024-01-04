@@ -16,9 +16,10 @@ If you get an error launching through Steam you will need to run the game execut
 	<li>120mm M256 Gun (44 rounds max)</li>
 	<li>M1IP automatically converted to M1A1</li>
 	<li>Tank upgrades based on real life developments (but guesstimated values) and hypothetical thinking</li>
-    	<li>More Abrams armor variants: base armor, Heavy Armor (+12.5% protection), Heavy Common (+25% protection) and Heavy Ultra (custom)</li>
+    	<li>Selectable Abrams armor variants: base armor, Heavy Armor (+12.5% protection), Heavy Common (+25% protection) and Heavy Ultra (custom)</li>
 	<li>More APFSDS-T rounds: M829, M829A1, M829A2, M829A3, M829A4</li>
     	<li>More HEAT-T rounds: M830, M830A2, XM1147</li>
+    	<li>Selectable rounds (up to three slots).</li>
     	<li>XM1147 AMP-T multifuze round (airburst or point-detonate)</li>
  	</ul>
 </p>
@@ -88,7 +89,7 @@ If you get an error launching through Steam you will need to run the game execut
 	</ul>
 </p>
 
-## Extra Features/Settings (in mod config):
+## Extra Features/Settings (in UserData/MelonPreferences.cfg):
 <p>
 	<ul> 
 		<li>Selectable round types for three slots (a mix of M829A4, M830A2 and XM1147 by default). You can even go with a pure APFSDS or HEAT loadout. <b>Be careful typing the round you want</b> because the mod will default to vanilla rounds (M833/M456A2) if there is a typo or if a field is left blank.</li>
@@ -97,7 +98,7 @@ If you get an error launching through Steam you will need to run the game execut
  		<li>Horizontal sight stabilization for M1A1/E1s when applying lead (disabled by default)</li>
 		<li>Convert non-IP M1s to M1E1s (enabled by default)</li>
 		<li>Randomize M1A1/E1 conversions (enabled by default) </li>
-		<li>Customize armor variant used by M1A1 and M1E1 (HU for both by default). M1 must be converted to M1E1 to allow armor conversions. </li>
+		<li>Customize armor variant used by M1A1 and M1E1 (HU for both by default). M1 must be converted to M1E1 to allow armor conversions. The mod will default to vanilla base armor when there is a typo or if a field is left blank.</li>
 	</ul>
 </p>
 
@@ -105,6 +106,6 @@ If you get an error launching through Steam you will need to run the game execut
 <p>
 	<ul> 
 		<li>Only include ATLAS' Abrams mod .dll file in the mods folder or this one. Do not place both .dll files at the same time.</li>
-		<li>If you already have ATLAS' Abrams mod or have an older version of the Abramss AMP mod installed, either delete MelonPreferences.cfg in UserData folder or remove the lines pertaining to the [M1A1Config]/[M1A1AMPConfig] to make it easier to understand the custom config. Launch the game first then close it to update the contents of MelonPreferences.cfg</li>
+		<li>If you already have ATLAS' Abrams mod or have an older version of the Abrams AMP mod installed, either delete MelonPreferences.cfg in UserData folder or remove the lines pertaining to the [M1A1Config]/[M1A1AMPConfig] to make it easier to understand the custom config. Launch the game first then close it to update the contents of MelonPreferences.cfg</li>
 	</ul>
 </p>
