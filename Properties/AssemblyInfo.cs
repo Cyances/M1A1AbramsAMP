@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using MelonLoader;
 using M1A1AbramsAMP;
 
-[assembly: MelonInfo(typeof(M1A1AbramsAMPMod), "M1A1 Abrams AMP", "2.0.", "ATLAS and Cyance")]
+[assembly: MelonInfo(typeof(M1A1AbramsAMPMod), "M1A1 Abrams AMP", "2.0", "ATLAS and Cyance")]
 [assembly: MelonGame("Radian Simulations LLC", "GHPC")]
 
 // General Information about an assembly is controlled through the following
