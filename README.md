@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.0 (Page WIP)
+# M1A1 Abrams AMP v2.0
 Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. Be sure to checkout both of those mods because they are great!
 
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
@@ -43,12 +43,12 @@ If you get an error launching through Steam you will need to run the game execut
 ### Heavy Ultra (HU) - Custom protection values
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) 
 | ------------- | ------------- | ------------- | 
-| Hull front | 510  | 930  |
-| Turret cheek | 540 | 1170 | 
-| Turret side | 430 | 480 | 
-| Composite side skirt | 90 | 125 | 
-| Gun mantlet | 565 | 915 | 
-| Gun mantlet face | 565 | 915 | 
+| Hull front | 810  | 1280  |
+| Turret cheek | 910 | 1580 | 
+| Turret side | 510 | 1020 | 
+| Composite side skirt | 310 | 600 |
+| Gun mantlet | 660 | 1020 | 
+| Gun mantlet face | 180 | 210 | 
 | Upper glacis | 180 | 210 | 
 | Turret ring | 180 | 210 | 
 | Turret roof | 140 | 175 | 
