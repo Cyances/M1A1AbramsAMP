@@ -21,15 +21,15 @@ If you get an error launching through Steam you will need to run the game execut
  	</ul>
 </p>
 
-## Armor upgrade:
+## Armor variants list:
 ### Heavy Armor (HA) - roughly 12.5% increase in protection
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) 
 | ------------- | ------------- | ------------- | 
 | Hull front | 450  | 930  |
 | Turret cheek | 540 | 1170 | 
 | Turret side | 400 | 430 | 
-| Gun mantlet | 510 | 820 | 
 | Composite side skirt | 80 | 112 | 
+| Gun mantlet | 510 | 820 | 
 
 ### Heavy Common (HC) - roughly 25% increase in protection
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) 
@@ -37,8 +37,8 @@ If you get an error launching through Steam you will need to run the game execut
 | Hull front | 510  | 1030  |
 | Turret cheek | 600 | 1300 | 
 | Turret side | 430 | 480 | 
-| Gun mantlet | 565 | 910 | 
 | Composite side skirt | 90 | 125 | 
+| Gun mantlet | 565 | 910 | 
 
 ### Heavy Ultra (HU) - Custom protection values
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) 
@@ -46,10 +46,17 @@ If you get an error launching through Steam you will need to run the game execut
 | Hull front | 510  | 930  |
 | Turret cheek | 540 | 1170 | 
 | Turret side | 430 | 480 | 
-| Gun mantlet | 565 | 915 | 
 | Composite side skirt | 90 | 125 | 
+| Gun mantlet | 565 | 915 | 
+| Gun mantlet face | 565 | 915 | 
+| Upper glacis | 180 | 210 | 
+| Turret ring | 180 | 210 | 
+| Turret roof | 140 | 175 | 
+| Commander's hatch | 140 | 175 | 
+| Loader's hatch | 140 | 175 | 
+| Driver's hatch | 140 | 175 | 
 
-## Round list:
+## Round types list:
 | Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- |
 | M829 APFSDS-T | 600  | 1670  | - |
