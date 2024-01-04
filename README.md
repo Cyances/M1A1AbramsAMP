@@ -32,11 +32,26 @@ If you get an error launching through Steam you will need to run the game execut
 | M830A2 IHEAT-MP-T | 1200 | 1240 | +100% spalling chance |
 | XM1147 AMP-T | 480 | 1410 | Airburst feature |
 
+
+# Armor upgrade:
+| Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
+| ------------- | ------------- | ------------- | ------------- |
+| M829 APFSDS-T | 600  | 1670  | - |
+| M829A1 APFSDS-T  | 700 | 1575 | - |
+| M829A2 APFSDS-T | 800 | 1680 | - |
+| M829A3 APFSDS-T | 900 | 1555 | - |
+| M829A4 APFSDS-T | 1000 | 1700 | +50% spalling chance  |
+| M830 HEAT-MP-T | 600 | 1140 | - |
+| M830A2 IHEAT-MP-T | 1200 | 1240 | +100% spalling chance |
+| XM1147 AMP-T | 480 | 1410 | Airburst feature |
+| Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
+| XM1147 AMP-T | 480 | 1410 | Airburst feature |
+
 # How to use the XM1147 AMP-T:
 <p>
 	<ul> 
-		<li>To use airburst mode, lase the target and aim slightly above ut so that the shell will not impact the target. The airburst fuzing is not perfect since it might explode in front or behind the target instead of somewhere in the middle, so multiple shots might be required. Or to help compensate for the deviation, increase the fragment count but this can impact game performance.</li>
-		<li>To use point-detonate mode, make sure the range setting is at least 10 meters more than the target to ensure it would not be in airburst mode. As long as the shell directly hits the target, it will be in will use the point-detonate fuze.</li>
+		<li>To use airburst mode, lase the target and aim slightly above it so that the shell will not impact the target. The airburst fuzing is not perfect since it might explode in front or behind the target instead of somewhere in the middle, so multiple shots might be required. Or to help compensate for the deviation, increase the fragment count but this can impact game performance.</li>
+		<li>To use point-detonate mode, make sure the range setting is at least 10 meters more than the target to ensure it would not be in airburst mode. As long as the shell directly hits the target, it will use the point-detonate fuze.</li>
 	</ul>
 </p>
 
