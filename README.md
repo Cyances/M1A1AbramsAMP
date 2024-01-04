@@ -29,7 +29,7 @@ If you get an error launching through Steam you will need to run the game execut
 | M829A3 APFSDS-T | 900 | 1555 | - |
 | M829A4 APFSDS-T | 1000 | 1700 | +50% spalling chance  |
 | M830 HEAT-MP-T | 600 | 1140 | - |
-| M830A2 HEAT-MP-T | 1200 | 1240 | +100% spalling chance |
+| M830A2 IHEAT-MP-T | 1200 | 1240 | +100% spalling chance |
 | XM1147 AMP-T | 480 | 1410 | Airburst feature |
 
 # How to use the XM1147 AMP-T:
