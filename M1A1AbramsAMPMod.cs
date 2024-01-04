@@ -429,7 +429,7 @@ namespace M1A1AbramsAMP
                 Util.ShallowCopy(ammo_m830, ammo_m456);
                 ammo_m830.Name = "M830 HEAT-MP-T";
                 ammo_m830.Caliber = 120;
-                ammo_m830.RhaPenetration = 480;
+                ammo_m830.RhaPenetration = 600;
                 ammo_m830.TntEquivalentKg = 1.814f;
                 ammo_m830.MuzzleVelocity = 1140f;
                 ammo_m830.Mass = 13.5f;
