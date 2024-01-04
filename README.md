@@ -68,7 +68,7 @@ If you get an error launching through Steam you will need to run the game execut
 ## Round types list:
 | Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- |
-| M829 APFSDS-T | 600  | 1670  | - |
+| M829 APFSDS-T | 600 | 1670  | - |
 | M829A1 APFSDS-T  | 700 | 1575 | - |
 | M829A2 APFSDS-T | 800 | 1680 | - |
 | M829A3 APFSDS-T | 900 | 1555 | - |
@@ -94,7 +94,7 @@ If you get an error launching through Steam you will need to run the game execut
  		<li>Horizontal sight stabilization for M1A1/E1s when applying lead (disabled by default)</li>
 		<li>Convert non-IP M1s to M1E1s (enabled by default)</li>
 		<li>Randomize M1A1/E1 conversions (enabled by default) </li>
-		<li>Customize armor variant used by M1A1 and M1E1 (HU for both by default) </li>
+		<li>Customize armor variant used by M1A1 and M1E1 (HU for both by default). M1 must be converted to M1E1 to allow armor conversions. </li>
 	</ul>
 </p>
 
