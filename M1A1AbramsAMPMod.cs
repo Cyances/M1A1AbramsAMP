@@ -12,14 +12,10 @@ using GHPC.Equipment.Optics;
 using System.Collections;
 using System.Threading.Tasks;
 using HarmonyLib;
-<<<<<<< Updated upstream:M1A1AbramsMod.cs
-using M1A1Abrams;
-=======
-using M1A1AbramsAMP;
 using GHPC.Equipment;
 using GHPC;
-using System.Xml.Linq;
->>>>>>> Stashed changes:M1A1AbramsAMPMod.cs
+using M1A1AbramsAMP;
+
 
 namespace M1A1AbramsAMP
 {
@@ -30,20 +26,18 @@ namespace M1A1AbramsAMP
         MelonPreferences_Entry<int> secondaryammoCount;
         MelonPreferences_Entry<int> tertiaryammoCount;
         MelonPreferences_Entry<bool> rotateAzimuth;
-        MelonPreferences_Entry<bool> m1e1;
+        MelonPreferences_Entry<bool> m1e1Convert;
         MelonPreferences_Entry<int> randomChanceNum;
         MelonPreferences_Entry<bool> randomChance;
         MelonPreferences_Entry<bool> useSuperSabot;
         MelonPreferences_Entry<bool> useAMPShell;
         MelonPreferences_Entry<int> ampFragments;
-<<<<<<< Updated upstream:M1A1AbramsMod.cs
-=======
         MelonPreferences_Entry<string> m1a1Armor;
         MelonPreferences_Entry<string> m1e1Armor;
         MelonPreferences_Entry<string> m1primaryAmmo;
         MelonPreferences_Entry<string> m1secondaryAmmo;
         MelonPreferences_Entry<string> m1tertiaryAmmo;
->>>>>>> Stashed changes:M1A1AbramsAMPMod.cs
+
 
         GameObject[] vic_gos;
         GameObject gameManager;
@@ -95,8 +89,6 @@ namespace M1A1AbramsAMP
         AmmoType ammo_m833;
         AmmoType ammo_m456;
 
-<<<<<<< Updated upstream:M1A1AbramsMod.cs
-=======
         ArmorType armor_compositeskirt_HU;
         ArmorCodexScriptable armor_codex_superCompositeskirt_HU;
         ArmorType armor_superCompositeskirt_HU;
@@ -189,19 +181,19 @@ namespace M1A1AbramsAMP
         ArmorCodexScriptable armor_codex_turretsidesDUarmor_HA;
         ArmorType armor_turretsidesDUarmor_HA;
 
->>>>>>> Stashed changes:M1A1AbramsAMPMod.cs
         public override void OnInitializeMelon()
         {
             cfg = MelonPreferences.CreateCategory("M1A1AMPConfig");
-            primaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Primary Round Count", 20);
-            primaryammoCount.Description = "How many rounds per type each Abrams should carry. Maximum of 44 rounds total. Bring in at least one primary round.";
-            secondaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Secondary Round Count", 10);
-            tertiaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Tertiary Round Count", 14);
 
             m1primaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Primary Round", "M829A4");
             m1primaryAmmo.Description = "Round types carried by M1A1 and M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A2' or 'XM1147'";
             m1secondaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Secondary Round", "M830A2");
             m1tertiaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Tertiary Round", "XM1147");
+
+            primaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Primary Round Count", 20);
+            primaryammoCount.Description = "How many rounds per type each Abrams should carry. Maximum of 44 rounds total. Bring in at least one primary round.";
+            secondaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Secondary Round Count", 10);
+            tertiaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Tertiary Round Count", 14);
 
             ampFragments = cfg.CreateEntry<int>("AMP Fragments", 600);
             ampFragments.Description = "How many fragments are generated when the AMP round explodes (in point-detonate/airburst mode). NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
@@ -209,12 +201,18 @@ namespace M1A1AbramsAMP
             rotateAzimuth = cfg.CreateEntry<bool>("RotateAzimuth", false);
             rotateAzimuth.Description = "Horizontal stabilization of M1A1 sights when applying lead.";
 
-            m1e1 = cfg.CreateEntry<bool>("M1E1", true);
-            m1e1.Description = "Convert M1s to M1E1s (i.e: they get the 120mm gun).";
+            m1e1Convert = cfg.CreateEntry<bool>("M1E1", true);
+            m1e1Convert.Description = "Convert M1s to M1E1s (i.e: they get the 120mm gun and enables armor upgrades).";
 
             randomChance = cfg.CreateEntry<bool>("Random", true);
             randomChance.Description = "M1IPs/M1s will have a random chance of being converted to M1A1s/M1E1s.";
             randomChanceNum = cfg.CreateEntry<int>("ConversionChance", 100);
+
+            m1a1Armor = cfg.CreateEntry<string>("M1A1 Armor", "HU");
+            m1a1Armor.Description = "Armor used by M1A1: 'HA', 'HC', 'HU' or blank for base M1IP armor";
+
+            m1e1Armor = cfg.CreateEntry<string>("M1E1 Armor", "HU");
+            m1e1Armor.Description = "Armor used by M1E1: 'HA', 'HC', 'HU' or blank for base M1 armor";
         }
 
         // the GAS reticles seem to be assigned to specific ammo types and I can't figure out how it's done
@@ -230,7 +228,7 @@ namespace M1A1AbramsAMP
             if (playerManager.CurrentPlayerWeapon.Name != "120mm gun M256") return;
 
             AmmoType currentAmmo = playerManager.CurrentPlayerWeapon.FCS.CurrentAmmoType;
-            int reticleId = (currentAmmo.Name == "M829 APFSDS-T" || currentAmmo.Name == "M829A1 APFSDS-T") ? 0 : 2;
+            int reticleId = (currentAmmo.Name == "M829 APFSDS-T" || currentAmmo.Name == "M829A4 APFSDS-T") ? 0 : 2;
 
             GameObject reticle = cam.transform.GetChild(reticleId).gameObject;
 
@@ -256,17 +254,6 @@ namespace M1A1AbramsAMP
             {
                 foreach (AmmoCodexScriptable s in Resources.FindObjectsOfTypeAll(typeof(AmmoCodexScriptable)))
                 {
-<<<<<<< Updated upstream:M1A1AbramsMod.cs
-                    if (s.AmmoType.Name == "M833 APFSDS-T")
-                    {
-                        ammo_m833 = s.AmmoType;
-                    }
-
-                    if (s.AmmoType.Name == "M456 HEAT-FS-T")
-                    {
-                        ammo_m456 = s.AmmoType;
-                    }
-=======
                     if (s.AmmoType.Name == "M833 APFSDS-T") ammo_m833 = s.AmmoType;
                     if (s.AmmoType.Name == "M456 HEAT-FS-T") ammo_m456 = s.AmmoType;
                 }
@@ -281,6 +268,7 @@ namespace M1A1AbramsAMP
                     if (s.ArmorType.Name == "composite skirt") armor_turretroofarmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_upperglacisarmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "tracks") armor_trackarmor_HU = s.ArmorType;
+
 
                     if (s.ArmorType.Name == "composite skirt") armor_commmandershatcharmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_loadershatcharmor_HU = s.ArmorType;
@@ -299,7 +287,6 @@ namespace M1A1AbramsAMP
                     if (s.ArmorType.Name == "special armor") armor_fronthullnera_HA = s.ArmorType;
                     if (s.ArmorType.Name == "special armor") armor_mantletnera_HA = s.ArmorType;
                     if (s.ArmorType.Name == "special armor") armor_turretsidesnera_HA = s.ArmorType;
->>>>>>> Stashed changes:M1A1AbramsAMPMod.cs
                 }
 
                 // m256
@@ -309,11 +296,8 @@ namespace M1A1AbramsAMP
                 gun_m256.FriendlyName = "120mm Gun M256";
                 gun_m256.Type = WeaponSystemCodexScriptable.WeaponType.LargeCannon;
 
-<<<<<<< Updated upstream:M1A1AbramsMod.cs
-=======
                 //Ammo stuff
 
->>>>>>> Stashed changes:M1A1AbramsAMPMod.cs
                 // m829 
                 ammo_m829 = new AmmoType();
                 Util.ShallowCopy(ammo_m829, ammo_m833);
@@ -345,7 +329,7 @@ namespace M1A1AbramsAMP
                 ammo_m829a1.Name = "M829A1 APFSDS-T";
                 ammo_m829a1.Caliber = 120;
                 ammo_m829a1.RhaPenetration = 700f;
-                ammo_m829a1.MuzzleVelocity = 1670f;
+                ammo_m829a1.MuzzleVelocity = 1575f;
                 ammo_m829a1.Mass = 4.64f;
 
                 ammo_codex_m829a1 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
@@ -490,7 +474,7 @@ namespace M1A1AbramsAMP
 
                 clip_m830a2 = new AmmoType.AmmoClip();
                 clip_m830a2.Capacity = 1;
-                clip_m830a2.Name = "M830A2 HEAT-FS-T";
+                clip_m830a2.Name = "M830A2 IHEAT-MP-T";
                 clip_m830a2.MinimalPattern = new AmmoCodexScriptable[1];
                 clip_m830a2.MinimalPattern[0] = ammo_codex_m830a2;
 
@@ -507,17 +491,10 @@ namespace M1A1AbramsAMP
                 ammo_xm1147.Caliber = 120;
                 ammo_xm1147.RhaPenetration = 480;
                 ammo_xm1147.TntEquivalentKg = 3.324f;
-<<<<<<< Updated upstream:M1A1AbramsMod.cs
-                ammo_xm1147.MaxSpallRha = 160f;
-                ammo_xm1147.MinSpallRha = 45f;
-                ammo_xm1147.MuzzleVelocity = 1140f;
-                ammo_xm1147.Mass = 13.5f;
-=======
                 ammo_xm1147.MaxSpallRha = 180f;
                 ammo_xm1147.MinSpallRha = 55f;
                 ammo_xm1147.MuzzleVelocity = 1410f;
                 ammo_xm1147.Mass = 11.4f;
->>>>>>> Stashed changes:M1A1AbramsAMPMod.cs
                 ammo_xm1147.CertainRicochetAngle = 8.0f;
                 ammo_xm1147.ShatterOnRicochet = false;
                 ammo_xm1147.SpallMultiplier = 2f;
@@ -538,10 +515,6 @@ namespace M1A1AbramsAMP
                 clip_codex_XM1147.CompatibleWeaponSystems = new WeaponSystemCodexScriptable[1];
                 clip_codex_XM1147.CompatibleWeaponSystems[0] = gun_m256;
                 clip_codex_XM1147.ClipType = clip_XM1147;
-<<<<<<< Updated upstream:M1A1AbramsMod.cs
-            }
-
-=======
 
                 //Armor stuff//
                 var abrams_armorvariant = new Dictionary<string, ArmorCodexScriptable>()
@@ -647,6 +620,28 @@ namespace M1A1AbramsAMP
                 armor_codex_upperglacisCompositearmor_HU.name = "Abrams HU upper glacis special composite";
                 armor_codex_upperglacisCompositearmor_HU.ArmorType = armor_upperglacisCompositearmor_HU;
                 armor_upperglacisCompositearmor_HU = new ArmorType();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 armor_commmandershatchCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_commmandershatchCompositearmor_HU, armor_commmandershatcharmor_HU);
@@ -942,9 +937,41 @@ namespace M1A1AbramsAMP
                 MelonLogger.Msg(upperglacisCompositearray_HU.ArmorType);
             }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
                 if (armour == null) continue;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 VariableArmor commandershatchCompositearray_HU = armour.GetComponent<VariableArmor>();
                 if (commandershatchCompositearray_HU == null) continue;
@@ -1626,14 +1653,13 @@ namespace M1A1AbramsAMP
                 ["XM1147"] = clip_codex_XM1147,
             };
 
->>>>>>> Stashed changes:M1A1AbramsAMPMod.cs
             foreach (GameObject vic_go in vic_gos)
             {
                 Vehicle vic = vic_go.GetComponent<Vehicle>();
 
                 if (vic == null) continue;
 
-                if (vic.FriendlyName == "M1IP" || (m1e1.Value && vic.FriendlyName == "M1"))
+                if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
                 {
                     gameManager = GameObject.Find("_APP_GHPC_");
                     cameraManager = gameManager.GetComponent<CameraManager>();
@@ -1705,14 +1731,24 @@ namespace M1A1AbramsAMP
 
                     if (rand < randomChanceNum.Value)
                     {
-                        // rename to m1a1
-                        string name = (vic.FriendlyName == "M1IP") ? "M1A1" : "M1E1";
+                        ////Rename Abrams////
+                        if (vic.FriendlyName == "M1IP")
+                        {
+                            string name = "M1A1";
+                            name += m1a1Armor.Value;
 
-                        FieldInfo friendlyName = typeof(GHPC.Unit).GetField("_friendlyName", BindingFlags.NonPublic | BindingFlags.Instance);
-                        friendlyName.SetValue(vic, name);
+                            FieldInfo friendlyName = typeof(GHPC.Unit).GetField("_friendlyName", BindingFlags.NonPublic | BindingFlags.Instance);
+                            friendlyName.SetValue(vic, name);
+                        }
 
-                        FieldInfo uniqueName = typeof(GHPC.Unit).GetField("_uniqueName", BindingFlags.NonPublic | BindingFlags.Instance);
-                        uniqueName.SetValue(vic, name);
+                        if (vic.FriendlyName == "M1")
+                        {
+                            string name = "M1E1";
+                            name += m1e1Armor.Value;
+
+                            FieldInfo friendlyName = typeof(GHPC.Unit).GetField("_friendlyName", BindingFlags.NonPublic | BindingFlags.Instance);
+                            friendlyName.SetValue(vic, name);
+                        }
 
                         // convert to m256 gun
                         WeaponsManager weaponsManager = vic.GetComponent<WeaponsManager>();
@@ -1746,15 +1782,10 @@ namespace M1A1AbramsAMP
 
                         loadoutManager.TotalAmmoCounts = new int[] { primaryammoCount.Value, secondaryammoCount.Value, tertiaryammoCount.Value };
 
-<<<<<<< Updated upstream:M1A1AbramsMod.cs
-                        AmmoClipCodexScriptable sabotClipCodex = (useSuperSabot.Value) ? clip_codex_m829a4 : clip_codex_m829;
-                        AmmoClipCodexScriptable heatClipCodex = (useAMPShell.Value) ? clip_codex_XM1147 : clip_codex_m830;
-=======
-                        
+
                         AmmoClipCodexScriptable primaryClipCodex = abrams_ammotype[m1primaryAmmo.Value];
                         AmmoClipCodexScriptable secondaryClipCodex = abrams_ammotype[m1secondaryAmmo.Value];
                         AmmoClipCodexScriptable TertiaryClipCodex = abrams_ammotype[m1tertiaryAmmo.Value];
->>>>>>> Stashed changes:M1A1AbramsAMPMod.cs
 
                         loadoutManager.LoadedAmmoTypes = new AmmoClipCodexScriptable[] { primaryClipCodex, secondaryClipCodex, TertiaryClipCodex };
 

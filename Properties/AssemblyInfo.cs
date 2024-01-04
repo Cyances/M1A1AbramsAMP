@@ -4,11 +4,7 @@ using System.Runtime.InteropServices;
 using MelonLoader;
 using M1A1AbramsAMP;
 
-<<<<<<< Updated upstream
-[assembly: MelonInfo(typeof(M1A1AbramsMod), "M1A1 Abrams", "1.0.8", "ATLAS")]
-=======
 [assembly: MelonInfo(typeof(M1A1AbramsAMPMod), "M1A1 Abrams AMP", "2.0.", "ATLAS and Cyance")]
->>>>>>> Stashed changes
 [assembly: MelonGame("Radian Simulations LLC", "GHPC")]
 
 // General Information about an assembly is controlled through the following
@@ -19,7 +15,7 @@ using M1A1AbramsAMP;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("M1A1AbramsAMP")]
-[assembly: AssemblyCopyright("Copyright ©  2023")]
+[assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
