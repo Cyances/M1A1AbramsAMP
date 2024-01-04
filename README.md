@@ -13,15 +13,16 @@ If you get an error launching through Steam you will need to run the game execut
 ## AMP 2.0 Revamp:
 <p>
 	<ul>
-	<li>120mm M256 Gun (44 rounds max) </li>
+	<li>120mm M256 Gun (44 rounds max)</li>
+	<li>Tank upgrades based on real life developments (but guesstimated values) and hypothetical thinking</li>
+    	<li>More Abrams armor variants: base armor, Heavy Armor (+12.5% protection), Heavy Common (+25% protection) and Heavy Ultra (custom)</li>
 	<li>More APFSDS-T rounds: M829, M829A1, M829A2, M829A3, M829A4</li>
     	<li>More HEAT-T rounds: M830, M830A2, XM1147</li>
-    	<li>More Abrams armor variants: base armor, Heavy Armor (+12.5% protection), Heavy Common (+25% protection) and Heavy Ultimate (custom values)</li>
  	</ul>
 </p>
 
 ## Armor upgrade:
-### Heavy Armor (HA) - 12.5% increase in protection
+### Heavy Armor (HA) - roughly 12.5% increase in protection
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) 
 | ------------- | ------------- | ------------- | 
 | Hull front | 450  | 930  |
@@ -30,7 +31,25 @@ If you get an error launching through Steam you will need to run the game execut
 | Gun mantlet | 510 | 820 | 
 | Composite side skirt | 80 | 112 | 
 
-# Round list:
+### Heavy Common (HC) - roughly 25% increase in protection
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) 
+| ------------- | ------------- | ------------- | 
+| Hull front | 510  | 1030  |
+| Turret cheek | 600 | 1300 | 
+| Turret side | 430 | 480 | 
+| Gun mantlet | 565 | 910 | 
+| Composite side skirt | 90 | 125 | 
+
+### Heavy Ultra (HU) - Custom protection values
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) 
+| ------------- | ------------- | ------------- | 
+| Hull front | 510  | 930  |
+| Turret cheek | 540 | 1170 | 
+| Turret side | 430 | 480 | 
+| Gun mantlet | 565 | 915 | 
+| Composite side skirt | 90 | 125 | 
+
+## Round list:
 | Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- |
 | M829 APFSDS-T | 600  | 1670  | - |
