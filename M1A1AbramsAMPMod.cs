@@ -1818,7 +1818,6 @@ namespace M1A1AbramsAMP
                         mainGunInfo.Name = "120mm gun M256";
                         mainGun.Impulse = 68000;
 
-                        mainGun.Feed.ReloadDuringMissileTracking = true;
                         //if(mainGun.CurrentAmmoType.Name == "LAHAT")
                         //{
                         //    mainGun.Impulse = 6800;
@@ -1834,6 +1833,8 @@ namespace M1A1AbramsAMP
                         muzzleFlashes.GetChild(1).transform.localScale = new Vector3(2f, 2f, 2f);
                         muzzleFlashes.GetChild(2).transform.localScale = new Vector3(2f, 2f, 2f);
                         muzzleFlashes.GetChild(4).transform.localScale = new Vector3(2f, 2f, 2f);
+
+                        mainGun.Feed.ReloadDuringMissileTracking = true;
 
                         // convert ammo
                         LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
