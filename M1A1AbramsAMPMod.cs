@@ -88,7 +88,6 @@ namespace M1A1AbramsAMP
         AmmoCodexScriptable ammo_codex_XM1147;
         static AmmoType ammo_xm1147;
 
-        ////GLATGM////
         AmmoClipCodexScriptable clip_codex_lahat;
         AmmoType.AmmoClip clip_lahat;
         AmmoCodexScriptable ammo_codex_lahat;
@@ -249,29 +248,29 @@ namespace M1A1AbramsAMP
             }
 
             ////GLATGM////
-            FireControlSystem FCS = playerManager.CurrentPlayerWeapon.FCS;
-            ParticleSystem[] particleSystem = playerManager.CurrentPlayerWeapon.Weapon.MuzzleEffects;
+            //FireControlSystem FCS = playerManager.CurrentPlayerWeapon.FCS;
+            //ParticleSystem[] particleSystem = playerManager.CurrentPlayerWeapon.Weapon.MuzzleEffects;
 
 
-            FieldInfo reticleCurrentRange = typeof(ReticleMesh).GetField("curReticleRange", BindingFlags.NonPublic | BindingFlags.Instance);
-            FieldInfo reticleTargetRange = typeof(ReticleMesh).GetField("targetReticleRange", BindingFlags.NonPublic | BindingFlags.Instance);
+            //FieldInfo reticleCurrentRange = typeof(ReticleMesh).GetField("curReticleRange", BindingFlags.NonPublic | BindingFlags.Instance);
+            //FieldInfo reticleTargetRange = typeof(ReticleMesh).GetField("targetReticleRange", BindingFlags.NonPublic | BindingFlags.Instance);
 
-            if (FCS.CurrentAmmoType.Name == "LAHAT")
-            {
-                particleSystem[0].transform.GetChild(0).transform.gameObject.SetActive(false);
-                particleSystem[0].transform.GetChild(1).transform.gameObject.SetActive(false);
-                particleSystem[0].transform.GetChild(3).transform.gameObject.SetActive(false);
+            //if (FCS.CurrentAmmoType.Name == "LAHAT")
+            //{
+            //    particleSystem[0].transform.GetChild(0).transform.gameObject.SetActive(false);
+            //    particleSystem[0].transform.GetChild(1).transform.gameObject.SetActive(false);
+            //    particleSystem[0].transform.GetChild(3).transform.gameObject.SetActive(false);
 
-                // set range to 0 and lock it 
-                reticleCurrentRange.SetValue(FCS.MainOptic.reticleMesh, 0);
-                reticleTargetRange.SetValue(FCS.MainOptic.reticleMesh, 0);
-            }
-            else
-            {
-                particleSystem[0].transform.GetChild(0).transform.gameObject.SetActive(true);
-                particleSystem[0].transform.GetChild(1).transform.gameObject.SetActive(true);
-                particleSystem[0].transform.GetChild(3).transform.gameObject.SetActive(true);
-            }
+            //    // set range to 0 and lock it 
+            //    reticleCurrentRange.SetValue(FCS.MainOptic.reticleMesh, 0);
+            //    reticleTargetRange.SetValue(FCS.MainOptic.reticleMesh, 0);
+            //}
+            //else
+            //{
+            //    particleSystem[0].transform.GetChild(0).transform.gameObject.SetActive(true);
+            //    particleSystem[0].transform.GetChild(1).transform.gameObject.SetActive(true);
+            //    particleSystem[0].transform.GetChild(3).transform.gameObject.SetActive(true);
+            //}
         }
 
         public override async void OnSceneWasInitialized(int buildIndex, string sceneName)
@@ -293,7 +292,7 @@ namespace M1A1AbramsAMP
                     if (s.AmmoType.Name == "M833 APFSDS-T") ammo_m833 = s.AmmoType;
                     if (s.AmmoType.Name == "M456 HEAT-FS-T") ammo_m456 = s.AmmoType;
                     ////GLATGM////
-                    if (s.AmmoType.Name == "9M111 Fagot") ammo_bgm71 = s.AmmoType;
+                    if (s.AmmoType.Name == "BGM-71C I-TOW") ammo_bgm71 = s.AmmoType;
                 }
 
                 foreach (ArmorCodexScriptable s in Resources.FindObjectsOfTypeAll(typeof(ArmorCodexScriptable)))
@@ -564,7 +563,7 @@ namespace M1A1AbramsAMP
                 ammo_lahat.Mass = 13f;
                 ammo_lahat.ArmingDistance = 50;
                 ammo_lahat.TntEquivalentKg = 4.5f;
-                ammo_lahat.TurnSpeed = 0.5f;
+                ammo_lahat.TurnSpeed = 1.5f;
                 ammo_lahat.MaxSpallRha = 12f;
                 ammo_lahat.MinSpallRha = 4f;
                 ammo_lahat.CertainRicochetAngle = 5.0f;
@@ -580,7 +579,7 @@ namespace M1A1AbramsAMP
                 ammo_codex_lahat.name = "ammo_lahat";
 
                 clip_lahat = new AmmoType.AmmoClip();
-                clip_lahat.Capacity = 1;
+                clip_lahat.Capacity = 20;
                 clip_lahat.Name = "LAHAT";
                 clip_lahat.MinimalPattern = new AmmoCodexScriptable[1];
                 clip_lahat.MinimalPattern[0] = ammo_codex_lahat;
@@ -1817,24 +1816,25 @@ namespace M1A1AbramsAMP
 
                         mainGunInfo.Name = "120mm gun M256";
                         mainGun.Impulse = 68000;
-
-                        //if(mainGun.CurrentAmmoType.Name == "LAHAT")
-                        //{
-                        //    mainGun.Impulse = 6800;
-                        //}    
                         FieldInfo codex = typeof(WeaponSystem).GetField("CodexEntry", BindingFlags.NonPublic | BindingFlags.Instance);
                         codex.SetValue(mainGun, gun_m256);
 
                         GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
                         gunTube.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
 
-                        ////GLATGM////
+                        //GLATGM muzzle flash and recoil reduction
                         Transform muzzleFlashes = mainGun.MuzzleEffects[1].transform;
                         muzzleFlashes.GetChild(1).transform.localScale = new Vector3(2f, 2f, 2f);
                         muzzleFlashes.GetChild(2).transform.localScale = new Vector3(2f, 2f, 2f);
                         muzzleFlashes.GetChild(4).transform.localScale = new Vector3(2f, 2f, 2f);
 
                         mainGun.Feed.ReloadDuringMissileTracking = true;
+
+
+                        //if(mainGun.CurrentAmmoType.Name == "LAHAT")
+                        //{
+                        //    mainGun.Impulse = 6800;
+                        //}    
 
                         // convert ammo
                         LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
@@ -1872,7 +1872,6 @@ namespace M1A1AbramsAMP
                         MethodInfo refreshBreech = typeof(AmmoFeed).GetMethod("Start", BindingFlags.Instance | BindingFlags.NonPublic); // silently load M829
                         refreshBreech.Invoke(mainGun.Feed, new object[] { });
 
-                        ////GLATGM////
                         // attach guidance computer
                         GameObject guidance_computer_obj = new GameObject("Abrams Guidance Computer");
                         guidance_computer_obj.transform.parent = vic.transform;
@@ -1881,11 +1880,21 @@ namespace M1A1AbramsAMP
                         guidance_computer_obj.AddComponent<Reparent>();
                         Reparent reparent = guidance_computer_obj.GetComponent<Reparent>();
                         //reparent.NewParent = vic_go.transform.Find("US Vehicles/M1IP/IPM1_rig/HULL/TURRET/").gameObject.transform;
-                        reparent.NewParent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/").gameObject.transform;
+                        //BluFor/ASection/M2 Bradley (1)/M2BRADLEY_rig/HULL/Turret/Mantlet/
+                        //BluFor/1stPl_BLU/M1IP/IPM1_rig/HULL/TURRET/Turret Scripts/
+                        //BluFor/1stPl_BLU/M1IP/IPM1_rig/HULL/TURRET/Turret Scripts/GPS/
+                        //M1 GUN FOLLOW/ARMORGUN/lp_gun.002/
+                        //US Vehicles/M1IP/M1IP_interior/TURRET/GUN/
+                        //US Vehicles/M1/M1IP_interior/TURRET/GUN/
+                        //US Vehicles/M1IP/IPM1_rig/HULL/TURRET/GUN/
+                        //US Vehicles/M1/IPM1_rig/HULL/TURRET/Turret Scripts/
+                        //US Vehicles/M1IP/IPM1_rig/HULL/TURRET/Turret Scripts/GPS/
+                        reparent.NewParent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/").gameObject.transform;
                         typeof(Reparent).GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(reparent, new object[] { });
 
                         MissileGuidanceUnit computer = guidance_computer_obj.GetComponent<MissileGuidanceUnit>();
-                        computer.AimElement = mainGunInfo.FCS.AimTransform;
+                        //computer.AimElement = mainGunInfo.FCS.AimTransform;
+                        computer.AimElement = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/laser/").gameObject.transform;
                         mainGun.GuidanceUnit = computer;
 
                         // update ballistics computer
