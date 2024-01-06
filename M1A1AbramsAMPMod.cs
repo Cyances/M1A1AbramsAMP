@@ -201,15 +201,15 @@ namespace M1A1AbramsAMP
 
             m1firstAmmo = cfg.CreateEntry<string>("M1A1/E1 1st Round Type", "M829A4");
             m1firstAmmo.Description = "Round types carried by M1A1 and M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'XM1147', 'LAHAT' or 'XM1111'";
-            m1secondAmmo = cfg.CreateEntry<string>("M1A1/E1 2nd Round Type", "M830A1");
-            m1thirdAmmo = cfg.CreateEntry<string>("M1A1/E1 3rd Round Type", "M830A2");
+            m1secondAmmo = cfg.CreateEntry<string>("M1A1/E1 2nd Round Type", "M830A2");
+            m1thirdAmmo = cfg.CreateEntry<string>("M1A1/E1 3rd Round Type", "XM1147");
             m1fourthAmmo = cfg.CreateEntry<string>("M1A1/E1 4th Round Type", "LAHAT");
 
             firstammoCount = cfg.CreateEntry<int>("M1A1/E1 1st Round Count", 20);
             firstammoCount.Description = "How many rounds per type each Abrams should carry. Maximum of 50 rounds total. Bring in at least one primary round.";
-            secondammoCount = cfg.CreateEntry<int>("M1A1/E1 2nd Round Count", 10);
-            thirdammoCount = cfg.CreateEntry<int>("M1A1/E1 3rd Round Count", 10);
-            fourthammoCount = cfg.CreateEntry<int>("M1A1/E1 4th Round Count", 10);
+            secondammoCount = cfg.CreateEntry<int>("M1A1/E1 2nd Round Count", 12);
+            thirdammoCount = cfg.CreateEntry<int>("M1A1/E1 3rd Round Count", 12);
+            fourthammoCount = cfg.CreateEntry<int>("M1A1/E1 4th Round Count", 6);
 
             ampFragments = cfg.CreateEntry<int>("AMP Fragments", 600);
             ampFragments.Description = "How many fragments are generated when the AMP round explodes (in point-detonate/airburst mode). NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
@@ -482,8 +482,8 @@ namespace M1A1AbramsAMP
                 ammo_m830a1.CertainRicochetAngle = 5.0f;
                 ammo_m830a1.ShatterOnRicochet = false;
                 ammo_m830a1.DetonateSpallCount = mpatFragments.Value; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
-                ammo_m830a1.SpallMultiplier = 1.25f;
-                ammo_m830a1.MaxSpallRha = 25f;
+                ammo_m830a1.SpallMultiplier = 0.5f;
+                ammo_m830a1.MaxSpallRha = 75f;
                 ammo_m830a1.MinSpallRha = 1f;
                 ammo_m830a1.ImpactFuseTime = 0.000357143f; //0.5 meters after impact
 
