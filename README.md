@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.0
+# M1A1 Abrams AMP v2.1
 Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. Be sure to checkout both of those mods because they are great!
 
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
@@ -10,15 +10,16 @@ If you get an error launching through Steam you will need to run the game execut
 ![Screenshot_3](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A.png)
 ![Screenshot_4](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A%20XRay.png)
 
-## AMP 2.0 Revamp:
+## AMP 2.1 Update:
 <p>
 	<ul>
-	<li>120mm M256 Gun (44 rounds max)</li>
+	<li>120mm M256 Gun (50 rounds max)</li>
 	<li>M1IP automatically converted to M1A1</li>
 	<li>Tank upgrades based on real life developments (but guesstimated values) and hypothetical thinking</li>
     	<li>Selectable Abrams armor variants: base armor, Heavy Armor (+12.5% protection), Heavy Common (+25% protection) and Heavy Ultra (custom)</li>
 	<li>More APFSDS-T rounds: M829, M829A1, M829A2, M829A3, M829A4</li>
-    	<li>More HEAT-T rounds: M830, M830A2, XM1147</li>
+    	<li>More HEAT-T rounds: M830, M830A1, M830A2, XM1147</li>
+    	<li>GLATGM: LAHAT</li>
     	<li>Selectable rounds (up to three slots).</li>
     	<li>XM1147 AMP-T multifuze round (airburst or point-detonate)</li>
  	</ul>
@@ -77,9 +78,11 @@ If you get an error launching through Steam you will need to run the game execut
 | M829A2 APFSDS-T | 800 | 1680 | - |
 | M829A3 APFSDS-T | 900 | 1555 | - |
 | M829A4 APFSDS-T | 1000 | 1700 | +50% spalling chance |
-| M830 HEAT-MP-T | 600 | 1140 | - |
-| M830A2 IHEAT-MP-T | 1200 | 1240 | +100% spalling chance |
-| XM1147 AMP-T | 480 | 1410 | Airburst feature |
+| M830 HEAT-FS-T | 600 | 1140 | - |
+| M830A1 HEAT-MP-T | 480 | 1400 | Point-detonate fuze only. 600 fragments (configurable count). |
+| M830A2 IHEAT-FS-T | 1200 | 1240 | +100% spalling chance |
+| XM1147 AMP-T | 480 | 1410 | Point-detonate and airburst fuze. 600 fragments (configurable count). |
+| LAHAT | 800 | 300 | Gun-launched ATGM with SALH |
 
 ## How to use the XM1147 AMP-T:
 <p>
