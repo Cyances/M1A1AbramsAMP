@@ -105,9 +105,9 @@ If you get an error launching through Steam you will need to run the game execut
 		<li>Convert non-IP M1s to M1E1s (enabled by default)</li>
 		<li>Randomize M1A1/E1 conversions (enabled by default) </li>
 		<li>Customize the armor variant used by M1A1 and M1E1 (HU for both by default). M1 must be converted to M1E1 to allow armor conversions. The mod will default to vanilla base armor when there is a typo or if a field is left blank.</li>
-		![Screenshot_5](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20MelonPreferences.PNG)
 	</ul>
 </p>
+![Screenshot_5](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20MelonPreferences.PNG)
 
 ## NOTE!
 <p>
