@@ -15,6 +15,8 @@ using HarmonyLib;
 using GHPC.Equipment;
 using GHPC;
 using M1A1AbramsAMP;
+using GHPC.Utility;
+using Reticle;
 
 
 namespace M1A1AbramsAMP
@@ -22,21 +24,22 @@ namespace M1A1AbramsAMP
     public class M1A1AbramsAMPMod : MelonMod
     {
         MelonPreferences_Category cfg;
-        MelonPreferences_Entry<int> primaryammoCount;
-        MelonPreferences_Entry<int> secondaryammoCount;
-        MelonPreferences_Entry<int> tertiaryammoCount;
+        MelonPreferences_Entry<int> firstammoCount;
+        MelonPreferences_Entry<int> secondammoCount;
+        MelonPreferences_Entry<int> thirdammoCount;
+        MelonPreferences_Entry<int> fourthammoCount;
         MelonPreferences_Entry<bool> rotateAzimuth;
         MelonPreferences_Entry<bool> m1e1Convert;
         MelonPreferences_Entry<int> randomChanceNum;
         MelonPreferences_Entry<bool> randomChance;
-        MelonPreferences_Entry<bool> useSuperSabot;
-        MelonPreferences_Entry<bool> useAMPShell;
         MelonPreferences_Entry<int> ampFragments;
+        MelonPreferences_Entry<int> mpatFragments;
         MelonPreferences_Entry<string> m1a1Armor;
         MelonPreferences_Entry<string> m1e1Armor;
-        MelonPreferences_Entry<string> m1primaryAmmo;
-        MelonPreferences_Entry<string> m1secondaryAmmo;
-        MelonPreferences_Entry<string> m1tertiaryAmmo;
+        MelonPreferences_Entry<string> m1firstAmmo;
+        MelonPreferences_Entry<string> m1secondAmmo;
+        MelonPreferences_Entry<string> m1thirdAmmo;
+        MelonPreferences_Entry<string> m1fourthAmmo;
 
 
         GameObject[] vic_gos;
@@ -76,6 +79,11 @@ namespace M1A1AbramsAMP
         AmmoCodexScriptable ammo_codex_m830;
         AmmoType ammo_m830;
 
+        AmmoClipCodexScriptable clip_codex_m830a1;
+        AmmoType.AmmoClip clip_m830a1;
+        AmmoCodexScriptable ammo_codex_m830a1;
+        AmmoType ammo_m830a1;
+
         AmmoClipCodexScriptable clip_codex_m830a2;
         AmmoType.AmmoClip clip_m830a2;
         AmmoCodexScriptable ammo_codex_m830a2;
@@ -86,8 +94,14 @@ namespace M1A1AbramsAMP
         AmmoCodexScriptable ammo_codex_XM1147;
         static AmmoType ammo_xm1147;
 
+        AmmoClipCodexScriptable clip_codex_lahat;
+        AmmoType.AmmoClip clip_lahat;
+        AmmoCodexScriptable ammo_codex_lahat;
+        AmmoType ammo_lahat;
+
         AmmoType ammo_m833;
         AmmoType ammo_m456;
+        AmmoType ammo_bgm71;
 
         ArmorType armor_compositeskirt_HU;
         ArmorCodexScriptable armor_codex_superCompositeskirt_HU;
@@ -185,18 +199,23 @@ namespace M1A1AbramsAMP
         {
             cfg = MelonPreferences.CreateCategory("M1A1AMPConfig");
 
-            m1primaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Primary Round", "M829A4");
-            m1primaryAmmo.Description = "Round types carried by M1A1 and M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A2' or 'XM1147'";
-            m1secondaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Secondary Round", "M830A2");
-            m1tertiaryAmmo = cfg.CreateEntry<string>("M1A1/E1 Tertiary Round", "XM1147");
+            m1firstAmmo = cfg.CreateEntry<string>("M1A1/E1 1st Round Type", "M829A4");
+            m1firstAmmo.Description = "Round types carried by M1A1 and M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'XM1147', 'LAHAT' or 'XM1111'";
+            m1secondAmmo = cfg.CreateEntry<string>("M1A1/E1 2nd Round Type", "M830A2");
+            m1thirdAmmo = cfg.CreateEntry<string>("M1A1/E1 3rd Round Type", "XM1147");
+            m1fourthAmmo = cfg.CreateEntry<string>("M1A1/E1 4th Round Type", "LAHAT");
 
-            primaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Primary Round Count", 20);
-            primaryammoCount.Description = "How many rounds per type each Abrams should carry. Maximum of 44 rounds total. Bring in at least one primary round.";
-            secondaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Secondary Round Count", 10);
-            tertiaryammoCount = cfg.CreateEntry<int>("M1A1/E1 Tertiary Round Count", 14);
+            firstammoCount = cfg.CreateEntry<int>("M1A1/E1 1st Round Count", 20);
+            firstammoCount.Description = "How many rounds per type each Abrams should carry. Maximum of 50 rounds total. Bring in at least one primary round.";
+            secondammoCount = cfg.CreateEntry<int>("M1A1/E1 2nd Round Count", 12);
+            thirdammoCount = cfg.CreateEntry<int>("M1A1/E1 3rd Round Count", 12);
+            fourthammoCount = cfg.CreateEntry<int>("M1A1/E1 4th Round Count", 6);
 
             ampFragments = cfg.CreateEntry<int>("AMP Fragments", 600);
             ampFragments.Description = "How many fragments are generated when the AMP round explodes (in point-detonate/airburst mode). NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
+
+            mpatFragments = cfg.CreateEntry<int>("MPAT Fragments", 600);
+            mpatFragments.Description = "How many fragments are generated when the MPAT round explodes (in point-detonate mode). NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
 
             rotateAzimuth = cfg.CreateEntry<bool>("RotateAzimuth", false);
             rotateAzimuth.Description = "Horizontal stabilization of M1A1 sights when applying lead.";
@@ -256,6 +275,7 @@ namespace M1A1AbramsAMP
                 {
                     if (s.AmmoType.Name == "M833 APFSDS-T") ammo_m833 = s.AmmoType;
                     if (s.AmmoType.Name == "M456 HEAT-FS-T") ammo_m456 = s.AmmoType;
+                    if (s.AmmoType.Name == "BGM-71C I-TOW") ammo_bgm71 = s.AmmoType;
                 }
 
                 foreach (ArmorCodexScriptable s in Resources.FindObjectsOfTypeAll(typeof(ArmorCodexScriptable)))
@@ -267,14 +287,12 @@ namespace M1A1AbramsAMP
                     if (s.ArmorType.Name == "special armor") armor_turretsidesnera_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_turretroofarmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_upperglacisarmor_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "tracks") armor_trackarmor_HU = s.ArmorType;
-
-
                     if (s.ArmorType.Name == "composite skirt") armor_commmandershatcharmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_loadershatcharmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_drivershatcharmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_turretringarmor_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_gunmantletfacearmor_HU = s.ArmorType;
+                    if (s.ArmorType.Name == "tracks") armor_trackarmor_HU = s.ArmorType;
 
                     if (s.ArmorType.Name == "composite skirt") armor_compositeskirt_HC = s.ArmorType;
                     if (s.ArmorType.Name == "special armor") armor_cheeksnera_HC = s.ArmorType;
@@ -427,7 +445,7 @@ namespace M1A1AbramsAMP
                 // m830
                 ammo_m830 = new AmmoType();
                 Util.ShallowCopy(ammo_m830, ammo_m456);
-                ammo_m830.Name = "M830 HEAT-MP-T";
+                ammo_m830.Name = "M830 HEAT-FS-T";
                 ammo_m830.Caliber = 120;
                 ammo_m830.RhaPenetration = 600;
                 ammo_m830.TntEquivalentKg = 1.814f;
@@ -452,10 +470,43 @@ namespace M1A1AbramsAMP
                 clip_codex_m830.CompatibleWeaponSystems[0] = gun_m256;
                 clip_codex_m830.ClipType = clip_m830;
 
+                // m830a1
+                ammo_m830a1 = new AmmoType();
+                Util.ShallowCopy(ammo_m830a1, ammo_m456);
+                ammo_m830a1.Name = "M830A1 HEAT-MP-T";
+                ammo_m830a1.Caliber = 120;
+                ammo_m830a1.RhaPenetration = 480;
+                ammo_m830a1.TntEquivalentKg = 2.721f;
+                ammo_m830a1.MuzzleVelocity = 1400f;
+                ammo_m830a1.Mass = 11.4f;
+                ammo_m830a1.CertainRicochetAngle = 5.0f;
+                ammo_m830a1.ShatterOnRicochet = false;
+                ammo_m830a1.DetonateSpallCount = mpatFragments.Value; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
+                ammo_m830a1.SpallMultiplier = 0.5f;
+                ammo_m830a1.MaxSpallRha = 75f;
+                ammo_m830a1.MinSpallRha = 1f;
+                //ammo_m830a1.ImpactFuseTime = 0.000357143f; //0.5 meters after impact
+
+                ammo_codex_m830a1 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
+                ammo_codex_m830a1.AmmoType = ammo_m830a1;
+                ammo_codex_m830a1.name = "ammo_m830a1";
+
+                clip_m830a1 = new AmmoType.AmmoClip();
+                clip_m830a1.Capacity = 1;
+                clip_m830a1.Name = "M830A1 HEAT-MP-T";
+                clip_m830a1.MinimalPattern = new AmmoCodexScriptable[1];
+                clip_m830a1.MinimalPattern[0] = ammo_codex_m830a1;
+
+                clip_codex_m830a1 = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+                clip_codex_m830a1.name = "clip_m830a1";
+                clip_codex_m830a1.CompatibleWeaponSystems = new WeaponSystemCodexScriptable[1];
+                clip_codex_m830a1.CompatibleWeaponSystems[0] = gun_m256;
+                clip_codex_m830a1.ClipType = clip_m830a1;
+
                 // m830a2
                 ammo_m830a2 = new AmmoType();
                 Util.ShallowCopy(ammo_m830a2, ammo_m456);
-                ammo_m830a2.Name = "M830A2 IHEAT-MP-T";
+                ammo_m830a2.Name = "M830A2 IHEAT-FS-T";
                 ammo_m830a2.Caliber = 120;
                 ammo_m830a2.RhaPenetration = 1200;
                 ammo_m830a2.TntEquivalentKg = 2.721f;
@@ -474,7 +525,7 @@ namespace M1A1AbramsAMP
 
                 clip_m830a2 = new AmmoType.AmmoClip();
                 clip_m830a2.Capacity = 1;
-                clip_m830a2.Name = "M830A2 IHEAT-MP-T";
+                clip_m830a2.Name = "M830A2 IHEAT-FS-T";
                 clip_m830a2.MinimalPattern = new AmmoCodexScriptable[1];
                 clip_m830a2.MinimalPattern[0] = ammo_codex_m830a2;
 
@@ -495,7 +546,7 @@ namespace M1A1AbramsAMP
                 ammo_xm1147.MinSpallRha = 55f;
                 ammo_xm1147.MuzzleVelocity = 1410f;
                 ammo_xm1147.Mass = 11.4f;
-                ammo_xm1147.CertainRicochetAngle = 8.0f;
+                ammo_xm1147.CertainRicochetAngle = 5.0f;
                 ammo_xm1147.ShatterOnRicochet = false;
                 ammo_xm1147.SpallMultiplier = 2f;
                 ammo_xm1147.DetonateSpallCount = ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
@@ -515,6 +566,42 @@ namespace M1A1AbramsAMP
                 clip_codex_XM1147.CompatibleWeaponSystems = new WeaponSystemCodexScriptable[1];
                 clip_codex_XM1147.CompatibleWeaponSystems[0] = gun_m256;
                 clip_codex_XM1147.ClipType = clip_XM1147;
+
+                // lahat
+                ammo_lahat = new AmmoType();
+                Util.ShallowCopy(ammo_lahat, ammo_bgm71);
+                ammo_lahat.Name = "LAHAT";
+                ammo_lahat.Guidance = AmmoType.GuidanceType.Laser;
+                ammo_lahat.Caliber = 120;
+                ammo_lahat.RhaPenetration = 800f;
+                ammo_lahat.MuzzleVelocity = 300f;
+                ammo_lahat.Mass = 13f;
+                ammo_lahat.ArmingDistance = 50;
+                ammo_lahat.TntEquivalentKg = 4.5f;
+                ammo_lahat.TurnSpeed = 1.5f;
+                ammo_lahat.MaxSpallRha = 12f;
+                ammo_lahat.MinSpallRha = 4f;
+                ammo_lahat.CertainRicochetAngle = 5.0f;
+                ammo_lahat.ShotVisual = ammo_bgm71.ShotVisual;
+                ammo_lahat.MaximumRange = 6000f;
+                ammo_lahat.RangedFuseTime = 20f;
+                ammo_lahat.UseTracer = true;
+                ammo_lahat.Tandem = true;
+                ammo_lahat.SpallMultiplier = 1.5f;
+
+                ammo_codex_lahat = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
+                ammo_codex_lahat.AmmoType = ammo_lahat;
+                ammo_codex_lahat.name = "ammo_lahat";
+
+                clip_lahat = new AmmoType.AmmoClip();
+                clip_lahat.Capacity = 1;
+                clip_lahat.Name = "LAHAT";
+                clip_lahat.MinimalPattern = new AmmoCodexScriptable[1];
+                clip_lahat.MinimalPattern[0] = ammo_codex_lahat;
+
+                clip_codex_lahat = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+                clip_codex_lahat.name = "clip_lahat";
+                clip_codex_lahat.ClipType = clip_lahat;
 
                 //Armor stuff//
                 var abrams_armorvariant = new Dictionary<string, ArmorCodexScriptable>()
@@ -620,28 +707,6 @@ namespace M1A1AbramsAMP
                 armor_codex_upperglacisCompositearmor_HU.name = "Abrams HU upper glacis special composite";
                 armor_codex_upperglacisCompositearmor_HU.ArmorType = armor_upperglacisCompositearmor_HU;
                 armor_upperglacisCompositearmor_HU = new ArmorType();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 armor_commmandershatchCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_commmandershatchCompositearmor_HU, armor_commmandershatcharmor_HU);
@@ -937,41 +1002,9 @@ namespace M1A1AbramsAMP
                 MelonLogger.Msg(upperglacisCompositearray_HU.ArmorType);
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
                 if (armour == null) continue;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 VariableArmor commandershatchCompositearray_HU = armour.GetComponent<VariableArmor>();
                 if (commandershatchCompositearray_HU == null) continue;
@@ -1080,6 +1113,29 @@ namespace M1A1AbramsAMP
 
                 MelonLogger.Msg(trackSpecialarmor_HU.ArmorType);
             }
+
+            ////test////
+            ///PrimaryHeatRha
+            ///PrimarySabotRha
+            ///SecondaryHeatRha
+            ///SecondarySabotRha
+            //foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            //{
+            //    if (armour == null) continue;
+
+            //    UniformArmor hullsideSpecialarmor_HU = armour.GetComponent<UniformArmor>();
+            //    if (hullsideSpecialarmor_HU == null) continue;
+            //    if (hullsideSpecialarmor_HU.Unit == null) continue;
+            //    if (hullsideSpecialarmor_HU.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+            //    if (hullsideSpecialarmor_HU.Name != "hull side") continue;
+
+            //    //FieldInfo hullsideSpecialHE_HU = typeof(UniformArmor).GetField("PrimaryHeatRha", BindingFlags.NonPublic | BindingFlags.Instance);
+            //    //hullsideSpecialHE_HU.SetValue(hullsideSpecialarmor_HU, 1000f);
+
+            //    PropertyInfo hullsideSpecialAP_HU = typeof(UniformArmor).GetProperty("PrimarySabotRha");
+            //    hullsideSpecialAP_HU.SetValue(hullsideSpecialarmor_HU, 1000f);
+            //}
+            ////test end////
             ////End////
 
             ////Assign modified armor to M1E1HU////
@@ -1649,8 +1705,10 @@ namespace M1A1AbramsAMP
                 ["M829A3"] = clip_codex_m829a3,
                 ["M829A4"] = clip_codex_m829a4,
                 ["M830"] = clip_codex_m830,
+                ["M830A1"] = clip_codex_m830a1,
                 ["M830A2"] = clip_codex_m830a2,
                 ["XM1147"] = clip_codex_XM1147,
+                ["LAHAT"] = clip_codex_lahat,
             };
 
             foreach (GameObject vic_go in vic_gos)
@@ -1671,8 +1729,10 @@ namespace M1A1AbramsAMP
                     GameObject ammo_m829a3_vis = null;
                     GameObject ammo_m829a4_vis = null;
                     GameObject ammo_m830_vis = null;
+                    GameObject ammo_m830a1_vis = null;
                     GameObject ammo_m830a2_vis = null;
                     GameObject ammo_xm1147_vis = null;
+                    GameObject ammo_lahat_vis = null;
 
                     // generate visual models 
                     if (ammo_m829_vis == null)
@@ -1713,6 +1773,12 @@ namespace M1A1AbramsAMP
                         ammo_m830.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830;
                         ammo_m830.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830;
 
+                        ammo_m830a1_vis = GameObject.Instantiate(ammo_m456.VisualModel);
+                        ammo_m830a1_vis.name = "M830a1 visual";
+                        ammo_m830a1.VisualModel = ammo_m830a1_vis;
+                        ammo_m830a1.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830a1;
+                        ammo_m830a1.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830a1;
+
                         ammo_m830a2_vis = GameObject.Instantiate(ammo_m456.VisualModel);
                         ammo_m830a2_vis.name = "M830A2 visual";
                         ammo_m830a2.VisualModel = ammo_m830a2_vis;
@@ -1724,6 +1790,12 @@ namespace M1A1AbramsAMP
                         ammo_xm1147.VisualModel = ammo_xm1147_vis;
                         ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_xm1147;
                         ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_XM1147;
+
+                        ammo_lahat_vis = GameObject.Instantiate(ammo_m456.VisualModel);
+                        ammo_lahat_vis.name = "LAHAT visual";
+                        ammo_lahat.VisualModel = ammo_lahat_vis;
+                        ammo_lahat.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_lahat;
+                        ammo_lahat.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_lahat;
                     }
 
                     int rand = 0;
@@ -1762,43 +1834,67 @@ namespace M1A1AbramsAMP
                             optic.slot.LinkedNightSight.PairedOptic.RotateAzimuth = true;
                         }
 
-                        Transform muzzleFlashes = mainGun.MuzzleEffects[1].transform;
-                        muzzleFlashes.GetChild(1).transform.localScale = new Vector3(2f, 2f, 2f);
-                        muzzleFlashes.GetChild(2).transform.localScale = new Vector3(2f, 2f, 2f);
-                        muzzleFlashes.GetChild(4).transform.localScale = new Vector3(2f, 2f, 2f);
+                        //Transform muzzleFlashes = mainGun.MuzzleEffects[1].transform;
+                        //muzzleFlashes.GetChild(1).transform.localScale = new Vector3(0f, 0f, 0f);
+                        //muzzleFlashes.GetChild(2).transform.localScale = new Vector3(0f, 0f, 0f);
+                        //muzzleFlashes.GetChild(4).transform.localScale = new Vector3(0f, 0f, 0f);
 
                         mainGunInfo.Name = "120mm gun M256";
-                        mainGun.Impulse = 68000;
+                        //mainGun.Impulse = 68000;
                         FieldInfo codex = typeof(WeaponSystem).GetField("CodexEntry", BindingFlags.NonPublic | BindingFlags.Instance);
                         codex.SetValue(mainGun, gun_m256);
 
                         GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
                         gunTube.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
 
-                        // convert ammo
+                        //GLATGM muzzle flash and recoil reduction
+                        mainGun.Feed.ReloadDuringMissileTracking = true;
+                        mainGun.FireWhileGuidingMissile = true;
 
+                        if (mainGun.CurrentAmmoType.Name == "LAHAT")
+                        {
+                            mainGun.Impulse = 100;
+
+                            Transform muzzleFlashes = mainGun.MuzzleEffects[1].transform;
+                            muzzleFlashes.GetChild(1).transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                            muzzleFlashes.GetChild(2).transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                            muzzleFlashes.GetChild(4).transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                        }    
+
+                        else
+                        {
+                                mainGun.Impulse = 100000;
+
+                                Transform muzzleFlashes = mainGun.MuzzleEffects[1].transform;
+                                muzzleFlashes.GetChild(1).transform.localScale = new Vector3(2f, 2f, 2f);
+                                muzzleFlashes.GetChild(2).transform.localScale = new Vector3(2f, 2f, 2f);
+                                muzzleFlashes.GetChild(4).transform.localScale = new Vector3(2f, 2f, 2f);
+                        }
+
+                        // convert ammo
                         LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
                         AmmoType.AmmoClip[] ammo_clip_types = new AmmoType.AmmoClip[] { };
 
-                        loadoutManager.TotalAmmoCounts = new int[] { primaryammoCount.Value, secondaryammoCount.Value, tertiaryammoCount.Value };
+                        loadoutManager.TotalAmmoCounts = new int[] { firstammoCount.Value, secondammoCount.Value, thirdammoCount.Value, fourthammoCount.Value };
 
 
-                        AmmoClipCodexScriptable primaryClipCodex = abrams_ammotype[m1primaryAmmo.Value];
-                        AmmoClipCodexScriptable secondaryClipCodex = abrams_ammotype[m1secondaryAmmo.Value];
-                        AmmoClipCodexScriptable TertiaryClipCodex = abrams_ammotype[m1tertiaryAmmo.Value];
+                        AmmoClipCodexScriptable firstClipCodex = abrams_ammotype[m1firstAmmo.Value];
+                        AmmoClipCodexScriptable secondClipCodex = abrams_ammotype[m1secondAmmo.Value];
+                        AmmoClipCodexScriptable thirdClipCodex = abrams_ammotype[m1thirdAmmo.Value];
+                        AmmoClipCodexScriptable fourthClipCodex = abrams_ammotype[m1fourthAmmo.Value];
 
-                        loadoutManager.LoadedAmmoTypes = new AmmoClipCodexScriptable[] { primaryClipCodex, secondaryClipCodex, TertiaryClipCodex };
+                        loadoutManager.LoadedAmmoTypes = new AmmoClipCodexScriptable[] { firstClipCodex, secondClipCodex, thirdClipCodex, fourthClipCodex };
 
                         FieldInfo totalAmmoTypes = typeof(LoadoutManager).GetField("_totalAmmoTypes", BindingFlags.NonPublic | BindingFlags.Instance);
-                        totalAmmoTypes.SetValue(loadoutManager, 3);
+                        totalAmmoTypes.SetValue(loadoutManager, 4);
 
                         FieldInfo totalAmmoCount = typeof(LoadoutManager).GetField("_totalAmmoCount", BindingFlags.NonPublic | BindingFlags.Instance);
-                        totalAmmoCount.SetValue(loadoutManager, 44);
+                        totalAmmoCount.SetValue(loadoutManager, 50);
 
                         for (int i = 0; i <= 2; i++)
                         {
                             GHPC.Weapons.AmmoRack rack = loadoutManager.RackLoadouts[i].Rack;
-                            rack.ClipCapacity = i == 2 ? 4 : 18;
+                            rack.ClipCapacity = i == 2 ? 4 : 21;
                             rack.ClipTypes = ammo_clip_types;
                             Util.EmptyRack(rack);
                         }
@@ -1810,6 +1906,31 @@ namespace M1A1AbramsAMP
 
                         MethodInfo refreshBreech = typeof(AmmoFeed).GetMethod("Start", BindingFlags.Instance | BindingFlags.NonPublic); // silently load M829
                         refreshBreech.Invoke(mainGun.Feed, new object[] { });
+
+                        // Attach guidance computer for lahat
+                        GameObject guidance_computer_obj = new GameObject("Abrams Guidance Computer");
+                        guidance_computer_obj.transform.parent = vic.transform;
+                        guidance_computer_obj.AddComponent<MissileGuidanceUnit>();
+
+                        guidance_computer_obj.AddComponent<Reparent>();
+                        Reparent reparent = guidance_computer_obj.GetComponent<Reparent>();
+                        //reparent.NewParent = vic_go.transform.Find("US Vehicles/M1IP/IPM1_rig/HULL/TURRET/").gameObject.transform;
+                        //BluFor/ASection/M2 Bradley (1)/M2BRADLEY_rig/HULL/Turret/Mantlet/
+                        //BluFor/1stPl_BLU/M1IP/IPM1_rig/HULL/TURRET/Turret Scripts/
+                        //BluFor/1stPl_BLU/M1IP/IPM1_rig/HULL/TURRET/Turret Scripts/GPS/
+                        //M1 GUN FOLLOW/ARMORGUN/lp_gun.002/
+                        //US Vehicles/M1IP/M1IP_interior/TURRET/GUN/
+                        //US Vehicles/M1/M1IP_interior/TURRET/GUN/
+                        //US Vehicles/M1IP/IPM1_rig/HULL/TURRET/GUN/
+                        //US Vehicles/M1/IPM1_rig/HULL/TURRET/Turret Scripts/
+                        //US Vehicles/M1IP/IPM1_rig/HULL/TURRET/Turret Scripts/GPS/
+                        reparent.NewParent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/").gameObject.transform;
+                        typeof(Reparent).GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(reparent, new object[] { });
+
+                        MissileGuidanceUnit computer = guidance_computer_obj.GetComponent<MissileGuidanceUnit>();
+                        //computer.AimElement = mainGunInfo.FCS.AimTransform;
+                        computer.AimElement = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/laser/").gameObject.transform;
+                        mainGun.GuidanceUnit = computer;
 
                         // update ballistics computer
                         MethodInfo registerAllBallistics = typeof(LoadoutManager).GetMethod("RegisterAllBallistics", BindingFlags.Instance | BindingFlags.NonPublic);
