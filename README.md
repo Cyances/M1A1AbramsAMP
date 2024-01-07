@@ -7,10 +7,6 @@
 		<li>Separated ammo management between M1A1 and M1E1</li>
 		<li>Added M830A1 HEAT-MP-T and LAHAT GLATGM</li>
 ## Round types list:
-| Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
-| ------------- | ------------- | ------------- | ------------- |
-| M830A1 HEAT-MP-T | 480 | 1400 | Point-detonate fuze only. 600 fragments (configurable count). |
-| LAHAT | 800 | 300 | Gun-launched ATGM with SALH guidance |
 		<li></li>
 		<li></li>
 		<li></li>
@@ -19,4 +15,9 @@
 	</ul>
 </p>
 
+
+| Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
+| ------------- | ------------- | ------------- | ------------- |
+| M830A1 HEAT-MP-T | 480 | 1400 | Point-detonate fuze only. 600 fragments (configurable count). |
+| LAHAT | 800 | 300 | Gun-launched ATGM with SALH guidance |
 
