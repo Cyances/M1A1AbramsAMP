@@ -485,7 +485,7 @@ namespace M1A1AbramsAMP
                 ammo_m830a1.SpallMultiplier = 0.5f;
                 ammo_m830a1.MaxSpallRha = 75f;
                 ammo_m830a1.MinSpallRha = 1f;
-                ammo_m830a1.ImpactFuseTime = 0.000357143f; //0.5 meters after impact
+                //ammo_m830a1.ImpactFuseTime = 0.000357143f; //0.5 meters after impact
 
                 ammo_codex_m830a1 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m830a1.AmmoType = ammo_m830a1;
@@ -1849,9 +1849,9 @@ namespace M1A1AbramsAMP
 
                         //GLATGM muzzle flash and recoil reduction
                         mainGun.Feed.ReloadDuringMissileTracking = true;
+                        mainGun.FireWhileGuidingMissile = true;
 
-
-                        if(mainGun.CurrentAmmoType.Name == "LAHAT")
+                        if (mainGun.CurrentAmmoType.Name == "LAHAT")
                         {
                             mainGun.Impulse = 100;
 
