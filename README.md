@@ -4,6 +4,7 @@
 <p>
 	<ul> 
 		<li>Increase round capacity to 50.</li>
+		<li>Added one more round type slot (4 in total)</li>
 		<li>Separated ammo management between M1A1 and M1E1</li>
 		<li>Added M830A1 HEAT-MP-T and LAHAT GLATGM</li>
 		<li>Default M1A1 loadout: 20x M829A4, 12x M830A2, 12x XM1147, 6x LAHAT</li>
