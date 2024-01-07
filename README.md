@@ -108,7 +108,7 @@ If you get an error launching through Steam you will need to run the game execut
 	</ul>
 </p>
 
-[Screenshot_5](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20MelonPreferences.PNG)
+![Screenshot_5](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20MelonPreferences.PNG)
 
 ## NOTE!
 <p>
