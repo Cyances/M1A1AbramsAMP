@@ -21,6 +21,17 @@ using HarmonyLib;
 
 namespace M1A1AMP
 {
+    public struct LockOnData
+    {
+        public LockOnData(Vehicle target, MissileGuidanceUnit unit)
+        {
+            Target = target;
+            Unit = unit;
+        }
+
+        public Vehicle Target { get; set; }
+        public MissileGuidanceUnit Unit { get; set; }
+    }
     public static class M1A1AbramsAMPMod
     {
 
@@ -102,6 +113,11 @@ namespace M1A1AMP
         static AmmoCodexScriptable ammo_codex_lahat;
         static AmmoType ammo_lahat;
 
+        static AmmoClipCodexScriptable clip_codex_xm1111ce;
+        static AmmoType.AmmoClip clip_xm1111ce;
+        static AmmoCodexScriptable ammo_codex_xm1111ce;
+        static AmmoType ammo_xm1111ce;
+
         static GameObject ammo_m829_vis = null;
         static GameObject ammo_m829a1_vis = null;
         static GameObject ammo_m829a2_vis = null;
@@ -112,6 +128,7 @@ namespace M1A1AMP
         static GameObject ammo_m830a2_vis = null;
         static GameObject ammo_xm1147_vis = null;
         static GameObject ammo_lahat_vis = null;
+        static GameObject ammo_xm1111ce_vis = null;
 
         static AmmoType ammo_m833;
         static AmmoType ammo_m456;
@@ -241,6 +258,11 @@ namespace M1A1AMP
         static ReticleSO reticleSO_lahat;
         static ReticleMesh.CachedReticle reticle_cached_lahat;
 
+        static ReticleSO reticleSO_xm1111ce;
+        static ReticleMesh.CachedReticle reticle_cached_xm1111ce;
+
+        //FF stuff
+        static Dictionary<int, LockOnData> locked_on_targets = new Dictionary<int, LockOnData>();
 
         public static void Config(MelonPreferences_Category cfg)
         {
@@ -306,6 +328,7 @@ namespace M1A1AMP
                 ["M830A2"] = clip_codex_m830a2,
                 ["XM1147"] = clip_codex_XM1147,
                 ["LAHAT"] = clip_codex_lahat,
+                ["MRMCE"] = clip_codex_xm1111ce,
             }; 
             
             foreach (GameObject vic_go in AbramsAMPMod.vic_gos)
@@ -337,9 +360,9 @@ namespace M1A1AMP
 
                         if (rotateAzimuth.Value)
                         {
-                            UsableOptic optic = Util.GetDayOptic(mainGun.FCS);
-                            optic.RotateAzimuth = true;
-                            optic.slot.LinkedNightSight.PairedOptic.RotateAzimuth = true;
+                            UsableOptic horizontalstab = Util.GetDayOptic(mainGun.FCS);
+                            horizontalstab.RotateAzimuth = true;
+                            horizontalstab.slot.LinkedNightSight.PairedOptic.RotateAzimuth = true;
                         }
 
                         ////GAS stuff////
@@ -539,6 +562,26 @@ namespace M1A1AMP
                                 as ReticleTree.Text;
 
                             reticle_text_lahat.text = "120-MM\nLAHAT\nMETERS";
+
+                            ////XM1111CE GAS
+                            reticleSO_xm1111ce = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_HEAT"].tree);
+                            reticleSO_xm1111ce.name = "120mm_gas_heat";
+
+                            Util.ShallowCopy(reticle_cached_xm1111ce, ReticleMesh.cachedReticles["M1_105_GAS_HEAT"]);
+                            reticle_cached_xm1111ce.tree = reticleSO_xm1111ce;
+
+                            ReticleTree.VerticalBallistic reticle_range_xm1111ce = (reticleSO_xm1111ce.planes[0]
+                                as ReticleTree.FocalPlane).elements[1]
+                                as ReticleTree.VerticalBallistic;
+                            reticle_range_xm1111ce.projectile = ammo_codex_xm1111ce;
+                            reticle_range_xm1111ce.UpdateBC();
+
+                            ReticleTree.Text reticle_text_xm1111ce = (((reticleSO_xm1111ce.planes[0]
+                                as ReticleTree.FocalPlane).elements[0])
+                                as ReticleTree.Angular).elements[0]
+                                as ReticleTree.Text;
+
+                            reticle_text_xm1111ce.text = "120-MM\nXM1111 MRM-CE\nMETERS";
                         }
 
                         ReticleMesh gas_m829 = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh").gameObject.GetComponent<ReticleMesh>();
@@ -600,6 +643,11 @@ namespace M1A1AMP
                         gas_lahat.reticle = reticle_cached_lahat;
                         gas_lahat.SMR = null;
                         gas_lahat.Load();
+
+                        ReticleMesh gas_xm1111ce = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh HEAT").gameObject.GetComponent<ReticleMesh>();
+                        gas_xm1111ce.reticleSO = reticleSO_xm1111ce;
+                        gas_xm1111ce.reticle = reticle_cached_xm1111ce;
+                        gas_xm1111ce.SMR = null;
                         ////End////
 
                         Transform muzzleFlashes = mainGun.MuzzleEffects[1].transform;
@@ -655,21 +703,6 @@ namespace M1A1AMP
                             Util.EmptyRack(rack);
                         }
 
-                        // convert ammo
-                        //AmmoClipCodexScriptable sabotClipCodex = clip_codex_m829a1;
-                        //LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
-                        //loadoutManager.TotalAmmoCounts = new int[] { 16, 24 };
-                        //loadoutManager.LoadedAmmoTypes = new AmmoClipCodexScriptable[] { clip_codex_m829a1, clip_codex_m830a1 };
-                        //loadoutManager._totalAmmoCount = 40;
-
-                        //for (int i = 0; i <= 2; i++)
-                        //{
-                        //    GHPC.Weapons.AmmoRack rack = loadoutManager.RackLoadouts[i].Rack;
-                        //    rack.ClipCapacity = i == 2 ? 4 : 18;
-                        //    rack.ClipTypes = new AmmoType.AmmoClip[] { clip_m830a1, clip_m830a1 };
-                        //    Util.EmptyRack(rack);
-                        //}
-
                         loadoutManager.SpawnCurrentLoadout();
                         mainGun.Feed.AmmoTypeInBreech = null;
                         mainGun.Feed.Start();
@@ -689,6 +722,40 @@ namespace M1A1AMP
                         //computer.AimElement = mainGunInfo.FCS.AimTransform;
                         computer.AimElement = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/laser/").gameObject.transform;
                         mainGun.GuidanceUnit = computer;
+
+                        //FF stuff
+
+
+                        FieldInfo fixParallaxField = typeof(FireControlSystem).GetField("_fixParallaxForVectorMode", BindingFlags.Instance | BindingFlags.NonPublic);
+                        fixParallaxField.SetValue(mainGun.FCS, true);
+
+                        UsableOptic optic = Util.GetDayOptic(mainGun.FCS);
+                        UsableOptic night_optic = optic.slot.LinkedNightSight.PairedOptic;
+                        optic.RotateAzimuth = true;
+                        optic.slot.LinkedNightSight.PairedOptic.RotateAzimuth = true;
+                        optic.transform.GetChild(2).transform.localPosition = new Vector3(2.8227f, 2.7418f, 0f);
+                        night_optic.transform.GetChild(2).transform.localPosition = new Vector3(2.8227f, 2.7418f, 0f);
+                        night_optic.transform.GetChild(1).GetChild(1).transform.localPosition = new Vector3(2.8227f, 2.7418f, 0f);
+
+                        var lock_text = GameObject.Instantiate(optic.transform.GetChild(3).GetChild(2).GetChild(1).gameObject);
+                        lock_text.AddComponent<Reparent>();
+                        lock_text.GetComponent<Reparent>().NewParent = optic.transform.GetChild(3).GetChild(2).GetChild(1).transform;
+                        typeof(Reparent).GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(lock_text.GetComponent<Reparent>(), new object[] { });
+
+                        lock_text.transform.localPosition = new Vector3(91.1828f, 0f, 0f);
+                        lock_text.transform.localScale = new Vector3(1f, 1f, 1f);
+                        lock_text.GetComponent<TMPro.TextMeshProUGUI>().text = "NO LOCK";
+                        lock_text.SetActive(true);
+
+                        var lock_text_flir = GameObject.Instantiate(night_optic.transform.GetChild(0).GetChild(2).GetChild(1).gameObject);
+                        lock_text_flir.AddComponent<Reparent>();
+                        lock_text_flir.GetComponent<Reparent>().NewParent = night_optic.transform.GetChild(0).GetChild(2).GetChild(1).transform;
+                        typeof(Reparent).GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(lock_text_flir.GetComponent<Reparent>(), new object[] { });
+
+                        lock_text_flir.transform.localPosition = new Vector3(91.1828f, 0f, 0f);
+                        lock_text_flir.transform.localScale = new Vector3(1f, 1f, 1f);
+                        lock_text_flir.GetComponent<TMPro.TextMeshProUGUI>().text = "NO LOCK";
+                        lock_text_flir.SetActive(true);
                     }
                 }
             }
@@ -1053,6 +1120,42 @@ namespace M1A1AMP
                 clip_codex_lahat.name = "clip_lahat";
                 clip_codex_lahat.ClipType = clip_lahat;
 
+                // xm1111ce
+                ammo_xm1111ce = new AmmoType();
+                Util.ShallowCopy(ammo_xm1111ce, ammo_m456);
+                ammo_xm1111ce.Name = "XM1111 MRM-CE";
+                ammo_xm1111ce.Guidance = AmmoType.GuidanceType.Laser;
+                ammo_xm1111ce.Caliber = 120;
+                ammo_xm1111ce.RhaPenetration = 450f;
+                ammo_xm1111ce.MuzzleVelocity = 1000f;
+                ammo_xm1111ce.Mass = 15f;
+                ammo_xm1111ce.ArmingDistance = 50;
+                ammo_xm1111ce.TntEquivalentKg = 1.5f;
+                ammo_xm1111ce.TurnSpeed = 0.675f;
+                ammo_xm1111ce.MaxSpallRha = 30f;
+                ammo_xm1111ce.MinSpallRha = 5f;
+                ammo_xm1111ce.CertainRicochetAngle = 5.0f;
+                ammo_xm1111ce.ShotVisual = ammo_m456.ShotVisual;
+                ammo_xm1111ce.MaximumRange = 8000f;
+                ammo_xm1111ce.RangedFuseTime = 8f;
+                ammo_xm1111ce.UseTracer = true;
+                ammo_xm1111ce.Tandem = true;
+                ammo_xm1111ce.SpallMultiplier = 1.5f;
+
+                ammo_codex_xm1111ce = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
+                ammo_codex_xm1111ce.AmmoType = ammo_xm1111ce;
+                ammo_codex_xm1111ce.name = "ammo_xm1111ce";
+
+                clip_xm1111ce = new AmmoType.AmmoClip();
+                clip_xm1111ce.Capacity = 1;
+                clip_xm1111ce.Name = "XM1111 MRM-CE";
+                clip_xm1111ce.MinimalPattern = new AmmoCodexScriptable[1];
+                clip_xm1111ce.MinimalPattern[0] = ammo_codex_xm1111ce;
+
+                clip_codex_xm1111ce = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+                clip_codex_xm1111ce.name = "clip_xm1111ce";
+                clip_codex_xm1111ce.ClipType = clip_xm1111ce;
+
                 //Armor stuff
                 //Abrams armor list//
                 var abrams_armorvariant = new Dictionary<string, ArmorCodexScriptable>()
@@ -1364,7 +1467,7 @@ namespace M1A1AMP
                 ammo_m829a3.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m829a3;
 
                 ammo_m829a4_vis = GameObject.Instantiate(ammo_m833.VisualModel);
-                ammo_m829a4_vis.name = "m829a4 visual";
+                ammo_m829a4_vis.name = "M829A4 visual";
                 ammo_m829a4.VisualModel = ammo_m829a4_vis;
                 ammo_m829a4.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m829a4;
                 ammo_m829a4.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m829a4;
@@ -1376,7 +1479,7 @@ namespace M1A1AMP
                 ammo_m830.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830;
 
                 ammo_m830a1_vis = GameObject.Instantiate(ammo_m456.VisualModel);
-                ammo_m830a1_vis.name = "M830a1 visual";
+                ammo_m830a1_vis.name = "M830A1 visual";
                 ammo_m830a1.VisualModel = ammo_m830a1_vis;
                 ammo_m830a1.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830a1;
                 ammo_m830a1.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830a1;
@@ -1398,6 +1501,12 @@ namespace M1A1AMP
                 ammo_lahat.VisualModel = ammo_lahat_vis;
                 ammo_lahat.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_lahat;
                 ammo_lahat.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_lahat;
+
+                ammo_xm1111ce_vis = GameObject.Instantiate(ammo_m456.VisualModel);
+                ammo_xm1111ce_vis.name = "XM1111CE visual";
+                ammo_xm1111ce.VisualModel = ammo_xm1111ce_vis;
+                ammo_xm1111ce.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_xm1111ce;
+                ammo_xm1111ce.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_xm1111ce;
             }
 
             ////Assign modified armor to M1A1HU////
@@ -2233,6 +2342,171 @@ namespace M1A1AMP
                 //funky math 
                 rangedFuseTimeField.SetValue(__instance, bc.GetFlightTime(ammo_xm1147, range + range / ammo_xm1147.MuzzleVelocity * 2 + (range + fallOff) / 2000f + extra_distance));
                 rangedFuseTimeActiveField.SetValue(__instance, true);
+            }
+        }
+
+        //FF stuff
+        public static void UpdateLockText(FireControlSystem fcs, string text)
+        {
+            GameObject lock_text_optic;
+            GameObject lock_text_optic_night;
+
+
+            if (fcs.MainOptic.slot.IsLinkedNightSight)
+            {
+                lock_text_optic = fcs.MainOptic.slot.LinkedDaySight.transform.GetChild(3).GetChild(2).GetChild(1).GetChild(1).gameObject;
+                lock_text_optic_night = fcs.MainOptic.transform.GetChild(0).GetChild(2).GetChild(1).GetChild(1).gameObject;
+            }
+            else
+            {
+                lock_text_optic = fcs.MainOptic.transform.GetChild(3).GetChild(2).GetChild(1).GetChild(1).gameObject;
+                lock_text_optic_night = fcs.MainOptic.slot.LinkedNightSight.transform.GetChild(0).GetChild(2).GetChild(1).GetChild(1).gameObject;
+            }
+
+            lock_text_optic.GetComponent<TMPro.TextMeshProUGUI>().text = text;
+            lock_text_optic_night.GetComponent<TMPro.TextMeshProUGUI>().text = text;
+        }
+
+        public static void ResetGuidance(MissileGuidanceUnit unit, FireControlSystem fcs)
+        {
+            unit.transform.localPosition = new Vector3(-1.1509f, 0.5546f, 0.0471f);
+            unit.transform.localEulerAngles = new Vector3(0.1569f, 359.86f, 0f);
+            LockOnData data = locked_on_targets[fcs.GetInstanceID()];
+            data.Target = null;
+            locked_on_targets[fcs.GetInstanceID()] = data;
+
+            UpdateLockText(fcs, "NO LOCK");
+        }
+
+        public static void SetTarget(FireControlSystem fcs, Vehicle target)
+        {
+            if (fcs == null) return;
+            if (target == null) return;
+
+            LockOnData data = locked_on_targets[fcs.GetInstanceID()];
+            data.Target = target;
+            locked_on_targets[fcs.GetInstanceID()] = data;
+
+            UpdateLockText(fcs, "LOCK");
+        }
+
+        // if you're wondering, yes: this is literally just teleporting the guidance computer over the target 
+        // and telling it to look down
+        public static void OnLateUpdate()
+        {
+            foreach (KeyValuePair<int, LockOnData> t in locked_on_targets)
+            {
+                Vehicle vic = t.Value.Target;
+                MissileGuidanceUnit unit = t.Value.Unit;
+
+                if (vic == null) continue;
+
+                Vector3 loc = vic.transform.position;
+                loc.y = vic.transform.position.y + 120f;//120f;
+                unit.transform.position = loc;
+                unit.transform.LookAt(vic.transform);
+            }
+        }
+
+        [HarmonyPatch(typeof(GHPC.Weapons.FireControlSystem), "DoLase")]
+        public static class LockTarget
+        {
+            private static void Postfix(GHPC.Weapons.FireControlSystem __instance)
+            {
+                if (__instance.gameObject.GetComponentInParent<Vehicle>().FriendlyName != "M1A1HU") return;
+                if (__instance.CurrentAmmoType.Name != "XM1111 MRM-CE") return;
+
+                float num = -10f; //was -1f
+                int layerMask = 1 << CodeUtils.LAYER_MASK_VISIBILITYONLY;
+                RaycastHit raycastHit;
+                if (Physics.Raycast(__instance.LaserOrigin.position, __instance.LaserOrigin.forward, out raycastHit, __instance.MaxLaserRange, layerMask) && raycastHit.collider.tag == "Smoke")
+                {
+                    return;
+                }
+                if (Physics.Raycast(__instance.LaserOrigin.position, __instance.LaserOrigin.forward, out raycastHit, __instance.MaxLaserRange, ConstantsAndInfoManager.Instance.LaserRangefinderLayerMask.value) && (raycastHit.distance < num || num == -10f)) //was -1f;
+                {
+                    num = raycastHit.distance;
+                }
+
+                GameObject raycast_hit = raycastHit.transform.gameObject;
+
+                if (raycast_hit.TryGetComponentInChildren<GHPC.VariableArmor>(out GHPC.VariableArmor var_armor))
+                {
+                    SetTarget(__instance, (GHPC.Vehicle.Vehicle)var_armor.Unit);
+                }
+                else if (raycast_hit.TryGetComponentInChildren<GHPC.UniformArmor>(out GHPC.UniformArmor uni_armor))
+                {
+                    SetTarget(__instance, (GHPC.Vehicle.Vehicle)uni_armor.Unit);
+                }
+                else
+                {
+                    ResetGuidance(__instance.CurrentWeaponSystem.GuidanceUnit, __instance);
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(GHPC.AI.UnitAI), "SetTarget")]
+        public static class AILockTarget
+        {
+            private static void Postfix(GHPC.AI.UnitAI __instance, object[] __args)
+            {
+                bool player_controlled = AbramsAMPMod.playerManager.CurrentPlayerUnit.InstanceId == __instance.Unit.InstanceId;
+
+                if (player_controlled) return;
+                if (__args[0] == null) return;
+                if ((__args[0] as GHPC.AI.ITarget).Owner == null) return;
+                if (__instance.Unit.FriendlyName != "M1A1HU") return;
+
+                WeaponSystemInfo weapon_system_info = __instance.UCI.GunnerBrain.ActiveWeapon;
+
+                if (weapon_system_info == null) return;
+
+                if (weapon_system_info.FCS.CurrentAmmoType.Name != "XM1111 MRM-CE") return;
+
+                SetTarget(weapon_system_info.FCS, (__args[0] as GHPC.AI.ITarget).Owner as GHPC.Vehicle.Vehicle);
+            }
+        }
+
+        [HarmonyPatch(typeof(GHPC.Weapons.MissileGuidanceUnit), "OnGuidanceStopped")]
+        public static class ResetTargetGuidanceStopped
+        {
+            private static void Postfix(GHPC.Weapons.MissileGuidanceUnit __instance)
+            {
+                Vehicle vic = __instance.gameObject.GetComponentInParent<Vehicle>();
+
+                if (vic.FriendlyName != "M1A1HU") return;
+
+                ResetGuidance(__instance, vic.GetComponentInChildren<FireControlSystem>());
+            }
+        }
+
+        [HarmonyPatch(typeof(GHPC.Weapons.MissileGuidanceUnit), "StopGuidance")]
+        public static class KeepTracking
+        {
+            private static bool Prefix(GHPC.Weapons.MissileGuidanceUnit __instance)
+            {
+                if (__instance.CurrentMissiles.Count > 0 && __instance.CurrentMissiles[0].ShotInfo.TypeInfo.Name == "XM1111 MRM-CE")
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(GHPC.Weapons.WeaponSystem), "Fire")]
+        public static class CannotFireWithoutLock
+        {
+            private static bool Prefix(GHPC.Weapons.WeaponSystem __instance)
+            {
+                FireControlSystem fcs = __instance.FCS;
+
+                if (fcs.CurrentAmmoType.Name == "XM1111 MRM-CE" && locked_on_targets[fcs.GetInstanceID()].Target == null)
+                {
+                    return false;
+                }
+
+                return true;
             }
         }
     }
