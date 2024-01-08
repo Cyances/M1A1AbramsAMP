@@ -34,7 +34,7 @@ namespace M1A1AMP
 
         public override void OnInitializeMelon()
         {
-            MelonPreferences_Category cfg = MelonPreferences.CreateCategory("M1A1Config");
+            MelonPreferences_Category cfg = MelonPreferences.CreateCategory("M1A1AMPConfig");
             M1A1AbramsAMPMod.Config(cfg);
         }
 
