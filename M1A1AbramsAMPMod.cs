@@ -20,6 +20,17 @@ using Reticle;
 
 namespace M1A1AbramsAMP
 {
+    public struct LockOnData
+    {
+        public LockOnData(Vehicle target, MissileGuidanceUnit unit)
+        {
+            Target = target;
+            Unit = unit;
+        }
+
+        public Vehicle Target { get; set; }
+        public MissileGuidanceUnit Unit { get; set; }
+    }
     public class M1A1AbramsAMPMod : MelonMod
     {
         MelonPreferences_Category cfg;
@@ -51,7 +62,7 @@ namespace M1A1AbramsAMP
         GameObject[] vic_gos;
         GameObject gameManager;
         CameraManager cameraManager;
-        PlayerInput playerManager;
+        static PlayerInput playerManager;
 
         WeaponSystemCodexScriptable gun_m256;
 
@@ -201,6 +212,8 @@ namespace M1A1AbramsAMP
         ArmorCodexScriptable armor_codex_turretsidesDUarmor_HA;
         ArmorType armor_turretsidesDUarmor_HA;
 
+        static Dictionary<int, LockOnData> locked_on_targets = new Dictionary<int, LockOnData>();
+
         public override void OnInitializeMelon()
         {
             cfg = MelonPreferences.CreateCategory("M1A1AMPConfig");
@@ -276,6 +289,68 @@ namespace M1A1AbramsAMP
             }
         }
 
+        public static void UpdateLockText(FireControlSystem fcs, string text)
+        {
+            GameObject lock_text_optic;
+            GameObject lock_text_optic_night;
+
+
+            if (fcs.MainOptic.slot.IsLinkedNightSight)
+            {
+                lock_text_optic = fcs.MainOptic.slot.LinkedDaySight.transform.GetChild(3).GetChild(2).GetChild(1).GetChild(1).gameObject;
+                lock_text_optic_night = fcs.MainOptic.transform.GetChild(0).GetChild(2).GetChild(1).GetChild(1).gameObject;
+            }
+            else
+            {
+                lock_text_optic = fcs.MainOptic.transform.GetChild(3).GetChild(2).GetChild(1).GetChild(1).gameObject;
+                lock_text_optic_night = fcs.MainOptic.slot.LinkedNightSight.transform.GetChild(0).GetChild(2).GetChild(1).GetChild(1).gameObject;
+            }
+
+            lock_text_optic.GetComponent<TMPro.TextMeshProUGUI>().text = text;
+            lock_text_optic_night.GetComponent<TMPro.TextMeshProUGUI>().text = text;
+        }
+
+        public static void ResetGuidance(MissileGuidanceUnit unit, FireControlSystem fcs)
+        {
+            unit.transform.localPosition = new Vector3(-1.1509f, 0.5546f, 0.0471f);
+            unit.transform.localEulerAngles = new Vector3(0.1569f, 359.86f, 0f);
+            LockOnData data = locked_on_targets[fcs.GetInstanceID()];
+            data.Target = null;
+            locked_on_targets[fcs.GetInstanceID()] = data;
+
+            UpdateLockText(fcs, "NO LOCK");
+        }
+
+        public static void SetTarget(FireControlSystem fcs, Vehicle target)
+        {
+            if (fcs == null) return;
+            if (target == null) return;
+
+            LockOnData data = locked_on_targets[fcs.GetInstanceID()];
+            data.Target = target;
+            locked_on_targets[fcs.GetInstanceID()] = data;
+
+            UpdateLockText(fcs, "LOCK");
+        }
+
+        // if you're wondering, yes: this is literally just teleporting the guidance computer over the target 
+        // and telling it to look down
+        public override void OnLateUpdate()
+        {
+            foreach (KeyValuePair<int, LockOnData> t in locked_on_targets)
+            {
+                Vehicle vic = t.Value.Target;
+                MissileGuidanceUnit unit = t.Value.Unit;
+
+                if (vic == null) continue;
+
+                Vector3 loc = vic.transform.position;
+                loc.y = vic.transform.position.y + 120f;//120f;
+                unit.transform.position = loc;
+                unit.transform.LookAt(vic.transform);
+            }
+        }
+
         public override async void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
             if (sceneName == "LOADER_INITIAL" || sceneName == "MainMenu2_Scene" || sceneName == "t64_menu") return;
@@ -287,6 +362,10 @@ namespace M1A1AbramsAMP
                 vic_gos = GameObject.FindGameObjectsWithTag("Vehicle");
                 await Task.Delay(3000);
             }
+
+            gameManager = GameObject.Find("_APP_GHPC_");
+            cameraManager = gameManager.GetComponent<CameraManager>();
+            playerManager = gameManager.GetComponent<PlayerInput>();
 
             if (gun_m256 == null)
             {
@@ -1742,9 +1821,6 @@ namespace M1A1AbramsAMP
 
                 if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
                 {
-                    gameManager = GameObject.Find("_APP_GHPC_");
-                    cameraManager = gameManager.GetComponent<CameraManager>();
-                    playerManager = gameManager.GetComponent<PlayerInput>();
 
                     GameObject ammo_m829_vis = null;
                     GameObject ammo_m829a1_vis = null;
@@ -1852,9 +1928,9 @@ namespace M1A1AbramsAMP
 
                         if (rotateAzimuth.Value)
                         {
-                            UsableOptic optic = Util.GetDayOptic(mainGun.FCS);
-                            optic.RotateAzimuth = true;
-                            optic.slot.LinkedNightSight.PairedOptic.RotateAzimuth = true;
+                            UsableOptic horizontalstab = Util.GetDayOptic(mainGun.FCS);
+                            horizontalstab.RotateAzimuth = true;
+                            horizontalstab.slot.LinkedNightSight.PairedOptic.RotateAzimuth = true;
                         }
 
                         mainGunInfo.Name = "120mm gun M256";
@@ -1891,6 +1967,44 @@ namespace M1A1AbramsAMP
                             muzzleFlashes.GetChild(2).transform.localScale = new Vector3(2f, 2f, 2f);
                             muzzleFlashes.GetChild(4).transform.localScale = new Vector3(2f, 2f, 2f);
                         }
+
+
+
+                        FieldInfo fixParallaxField = typeof(FireControlSystem).GetField("_fixParallaxForVectorMode", BindingFlags.Instance | BindingFlags.NonPublic);
+                        fixParallaxField.SetValue(mainGun.FCS, true);
+
+                        UsableOptic optic = Util.GetDayOptic(mainGun.FCS);
+                        UsableOptic night_optic = optic.slot.LinkedNightSight.PairedOptic;
+                        optic.RotateAzimuth = true;
+                        optic.slot.LinkedNightSight.PairedOptic.RotateAzimuth = true;
+                        optic.transform.GetChild(2).transform.localPosition = new Vector3(2.8227f, 2.7418f, 0f);
+                        night_optic.transform.GetChild(2).transform.localPosition = new Vector3(2.8227f, 2.7418f, 0f);
+                        night_optic.transform.GetChild(1).GetChild(1).transform.localPosition = new Vector3(2.8227f, 2.7418f, 0f);
+
+                        var lock_text = GameObject.Instantiate(optic.transform.GetChild(3).GetChild(2).GetChild(1).gameObject);
+                        lock_text.AddComponent<Reparent>();
+                        lock_text.GetComponent<Reparent>().NewParent = optic.transform.GetChild(3).GetChild(2).GetChild(1).transform;
+                        typeof(Reparent).GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(lock_text.GetComponent<Reparent>(), new object[] { });
+
+                        lock_text.transform.localPosition = new Vector3(91.1828f, 0f, 0f);
+                        lock_text.transform.localScale = new Vector3(1f, 1f, 1f);
+                        lock_text.GetComponent<TMPro.TextMeshProUGUI>().text = "NO LOCK";
+                        lock_text.SetActive(true);
+
+                        var lock_text_flir = GameObject.Instantiate(night_optic.transform.GetChild(0).GetChild(2).GetChild(1).gameObject);
+                        lock_text_flir.AddComponent<Reparent>();
+                        lock_text_flir.GetComponent<Reparent>().NewParent = night_optic.transform.GetChild(0).GetChild(2).GetChild(1).transform;
+                        typeof(Reparent).GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(lock_text_flir.GetComponent<Reparent>(), new object[] { });
+
+                        lock_text_flir.transform.localPosition = new Vector3(91.1828f, 0f, 0f);
+                        lock_text_flir.transform.localScale = new Vector3(1f, 1f, 1f);
+                        lock_text_flir.GetComponent<TMPro.TextMeshProUGUI>().text = "NO LOCK";
+                        lock_text_flir.SetActive(true);
+
+                        locked_on_targets.Add(mainGun.FCS.GetInstanceID(), new LockOnData(null, mainGun.GuidanceUnit));
+                        mainGun.TriggerHoldTime = 0.5f;
+                        mainGun.MaxSpeedToFire = 999f;
+                        mainGun.MaxSpeedToDeploy = 999f;
 
                         // Abrams loadout management
                         LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
@@ -1992,6 +2106,108 @@ namespace M1A1AbramsAMP
                 //funky math 
                 rangedFuseTimeField.SetValue(__instance, bc.GetFlightTime(ammo_xm1147, range + range / ammo_xm1147.MuzzleVelocity * 2 + (range + fallOff) / 2000f + extra_distance));
                 rangedFuseTimeActiveField.SetValue(__instance, true);
+            }
+        }
+
+        [HarmonyPatch(typeof(GHPC.Weapons.FireControlSystem), "DoLase")]
+        public static class LockTarget
+        {
+            private static void Postfix(GHPC.Weapons.FireControlSystem __instance)
+            {
+                if (__instance.gameObject.GetComponentInParent<Vehicle>().FriendlyName != "M1A1HU") return;
+                if (__instance.CurrentAmmoType.Name != "LAHAT") return;
+
+                float num = -10f; //was -1f
+                int layerMask = 1 << CodeUtils.LAYER_MASK_VISIBILITYONLY;
+                RaycastHit raycastHit;
+                if (Physics.Raycast(__instance.LaserOrigin.position, __instance.LaserOrigin.forward, out raycastHit, __instance.MaxLaserRange, layerMask) && raycastHit.collider.tag == "Smoke")
+                {
+                    return;
+                }
+                if (Physics.Raycast(__instance.LaserOrigin.position, __instance.LaserOrigin.forward, out raycastHit, __instance.MaxLaserRange, ConstantsAndInfoManager.Instance.LaserRangefinderLayerMask.value) && (raycastHit.distance < num || num == -10f)) //was -1f;
+                {
+                    num = raycastHit.distance;
+                }
+
+                GameObject raycast_hit = raycastHit.transform.gameObject;
+
+                if (raycast_hit.TryGetComponentInChildren<GHPC.VariableArmor>(out GHPC.VariableArmor var_armor))
+                {
+                    SetTarget(__instance, (GHPC.Vehicle.Vehicle)var_armor.Unit);
+                }
+                else if (raycast_hit.TryGetComponentInChildren<GHPC.UniformArmor>(out GHPC.UniformArmor uni_armor))
+                {
+                    SetTarget(__instance, (GHPC.Vehicle.Vehicle)uni_armor.Unit);
+                }
+                else
+                {
+                    ResetGuidance(__instance.CurrentWeaponSystem.GuidanceUnit, __instance);
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(GHPC.AI.UnitAI), "SetTarget")]
+        public static class AILockTarget
+        {
+            private static void Postfix(GHPC.AI.UnitAI __instance, object[] __args)
+            {
+                bool player_controlled = playerManager.CurrentPlayerUnit.InstanceId == __instance.Unit.InstanceId;
+
+                if (player_controlled) return;
+                if (__args[0] == null) return;
+                if ((__args[0] as GHPC.AI.ITarget).Owner == null) return;
+                if (__instance.Unit.FriendlyName != "M1A1HU") return;
+
+                WeaponSystemInfo weapon_system_info = __instance.UCI.GunnerBrain.ActiveWeapon;
+
+                if (weapon_system_info == null) return;
+
+                if (weapon_system_info.FCS.CurrentAmmoType.Name != "LAHAT") return;
+
+                SetTarget(weapon_system_info.FCS, (__args[0] as GHPC.AI.ITarget).Owner as GHPC.Vehicle.Vehicle);
+            }
+        }
+
+        [HarmonyPatch(typeof(GHPC.Weapons.MissileGuidanceUnit), "OnGuidanceStopped")]
+        public static class ResetTargetGuidanceStopped
+        {
+            private static void Postfix(GHPC.Weapons.MissileGuidanceUnit __instance)
+            {
+                Vehicle vic = __instance.gameObject.GetComponentInParent<Vehicle>();
+
+                if (vic.FriendlyName != "M1A1HU") return;
+
+                ResetGuidance(__instance, vic.GetComponentInChildren<FireControlSystem>());
+            }
+        }
+
+        [HarmonyPatch(typeof(GHPC.Weapons.MissileGuidanceUnit), "StopGuidance")]
+        public static class KeepTracking
+        {
+            private static bool Prefix(GHPC.Weapons.MissileGuidanceUnit __instance)
+            {
+                if (__instance.CurrentMissiles.Count > 0 && __instance.CurrentMissiles[0].ShotInfo.TypeInfo.Name == "LAHAT")
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(GHPC.Weapons.WeaponSystem), "Fire")]
+        public static class CannotFireWithoutLock
+        {
+            private static bool Prefix(GHPC.Weapons.WeaponSystem __instance)
+            {
+                FireControlSystem fcs = __instance.FCS;
+
+                if (fcs.CurrentAmmoType.Name == "LAHAT" && locked_on_targets[fcs.GetInstanceID()].Target == null)
+                {
+                    return false;
+                }
+
+                return true;
             }
         }
     }
