@@ -18,7 +18,6 @@ using M1A1AbramsAMP;
 using GHPC.Utility;
 using Reticle;
 
-
 namespace M1A1AbramsAMP
 {
     public class M1A1AbramsAMPMod : MelonMod
@@ -48,7 +47,6 @@ namespace M1A1AbramsAMP
         MelonPreferences_Entry<int> mpatFragments;
         MelonPreferences_Entry<string> m1a1Armor;
         MelonPreferences_Entry<string> m1e1Armor;
-
 
         GameObject[] vic_gos;
         GameObject gameManager;
@@ -601,8 +599,8 @@ namespace M1A1AbramsAMP
                 ammo_lahat.ArmingDistance = 50;
                 ammo_lahat.TntEquivalentKg = 4.5f;
                 ammo_lahat.TurnSpeed = 1.5f;
-                ammo_lahat.MaxSpallRha = 12f;
-                ammo_lahat.MinSpallRha = 4f;
+                ammo_lahat.MaxSpallRha = 30f;
+                ammo_lahat.MinSpallRha = 5f;
                 ammo_lahat.CertainRicochetAngle = 5.0f;
                 ammo_lahat.ShotVisual = ammo_bgm71.ShotVisual;
                 ammo_lahat.MaximumRange = 6000f;
