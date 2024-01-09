@@ -210,6 +210,19 @@ namespace M1A1AMP
         static ArmorCodexScriptable armor_codex_turretsidesDUarmor_HA;
         static ArmorType armor_turretsidesDUarmor_HA;
 
+        static UniformArmor hullsideCompositearray;
+        static UniformArmor hullrearCompositearray;
+        static UniformArmor hullfloorCompositearray;
+        static UniformArmor hullroofCompositearray;
+        static UniformArmor firewallSpalllining;
+        static UniformArmor ammorackdoorarray;
+        static UniformArmor enginedeckCompositearray;
+        static UniformArmor fenderCompositearray;
+        static UniformArmor sideskirtCompositearray;
+        static UniformArmor gunnersightCompositearray;
+        static UniformArmor sprocketwheelImprovedarmor;
+        static UniformArmor roadwheelIimprovedarmor;
+
         // gas
         static ReticleSO reticleSO_m829;
         static ReticleMesh.CachedReticle reticle_cached_m829;
@@ -293,7 +306,7 @@ namespace M1A1AMP
         public static IEnumerator Convert(GameState _)
         {
             //Abrams armor list//
-            var abrams_armorvariant = new Dictionary<string, ArmorCodexScriptable>()
+            var abrams_armorvariant_variable = new Dictionary<string, ArmorCodexScriptable>()
             {
                 ["HU"] = armor_codex_superCompositeskirt_HU,
                 ["HU"] = armor_codex_cheeksDUarmor_HU,
@@ -318,6 +331,20 @@ namespace M1A1AMP
                 ["HA"] = armor_codex_fronthullDUarmor_HA,
                 ["HA"] = armor_codex_mantletDUarmor_HA,
                 ["HA"] = armor_codex_turretsidesDUarmor_HA,
+            };
+            var abrams_armorvariant_uniform = new Dictionary<string, UniformArmor>()
+            {
+                ["HU"] = hullsideCompositearray,
+                ["HU"] = hullfloorCompositearray,
+                ["HU"] = hullroofCompositearray,
+                ["HU"] = firewallSpalllining,
+                ["HU"] = ammorackdoorarray,
+                ["HU"] = enginedeckCompositearray,
+                ["HU"] = fenderCompositearray,
+                ["HU"] = sideskirtCompositearray,
+                ["HU"] = gunnersightCompositearray,
+                ["HU"] = sprocketwheelImprovedarmor,
+                ["HU"] = roadwheelIimprovedarmor,
             };
 
             ////Assign modified armor to M1A1HU////
@@ -546,29 +573,209 @@ namespace M1A1AMP
                 MelonLogger.Msg(trackSpecialarmor_HU.ArmorType);
             }
 
-            ////test////
-            ///More attempts at modifying UniformArmor variables
-            ///PrimaryHeatRha
-            ///PrimarySabotRha
-            ///SecondaryHeatRha
-            ///SecondarySabotRha
-            //foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            //{
-            //    if (armour == null) continue;
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
 
-            //    UniformArmor hullsideSpecialarmor_HU = armour.GetComponent<UniformArmor>();
-            //    if (hullsideSpecialarmor_HU == null) continue;
-            //    if (hullsideSpecialarmor_HU.Unit == null) continue;
-            //    if (hullsideSpecialarmor_HU.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
-            //    if (hullsideSpecialarmor_HU.Name != "hull side") continue;
+                UniformArmor hullsideCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullsideCompositearray == null) continue;
+                if (hullsideCompositearray.Unit == null) continue;
+                if (hullsideCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (hullsideCompositearray.Name == "hull side")
+                {
+                    hullsideCompositearray.PrimaryHeatRha = 210f;
+                    hullsideCompositearray.PrimarySabotRha = 180f;
+                }
 
-            //    //FieldInfo hullsideSpecialHE_HU = typeof(UniformArmor).GetField("PrimaryHeatRha", BindingFlags.NonPublic | BindingFlags.Instance);
-            //    //hullsideSpecialHE_HU.SetValue(hullsideSpecialarmor_HU, 1000f);
+                MelonLogger.Msg("Composite hull side armor: Loaded");
+            }
 
-            //    PropertyInfo hullsideSpecialAP_HU = typeof(UniformArmor).GetProperty("PrimarySabotRha");
-            //    hullsideSpecialAP_HU.SetValue(hullsideSpecialarmor_HU, 1000f);
-            //}
-            ////test end////
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor hullrearCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullrearCompositearray == null) continue;
+                if (hullrearCompositearray.Unit == null) continue;
+                if (hullrearCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (hullrearCompositearray.Name == "hull rear")
+                {
+                    hullrearCompositearray.PrimaryHeatRha = 210f;
+                    hullrearCompositearray.PrimarySabotRha = 180f;
+                }
+
+                MelonLogger.Msg("Composite hull rear armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor hullfloorCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullfloorCompositearray == null) continue;
+                if (hullfloorCompositearray.Unit == null) continue;
+                if (hullfloorCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (hullfloorCompositearray.Name == "hull floor")
+                {
+                    hullfloorCompositearray.PrimaryHeatRha = 240f;
+                    hullfloorCompositearray.PrimarySabotRha = 210f;
+                }
+
+                MelonLogger.Msg("Composite hull floor armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor hullroofCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullroofCompositearray == null) continue;
+                if (hullroofCompositearray.Unit == null) continue;
+                if (hullroofCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (hullroofCompositearray.Name == "hull roof")
+                {
+                    hullroofCompositearray.PrimaryHeatRha = 240f;
+                    hullroofCompositearray.PrimarySabotRha = 210f;
+                }
+
+                MelonLogger.Msg("Composite hull roof armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor firewallSpalllining = armour.GetComponent<UniformArmor>();
+                if (firewallSpalllining == null) continue;
+                if (firewallSpalllining.Unit == null) continue;
+                if (firewallSpalllining.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (firewallSpalllining.Name == "firewall")
+                {
+                    firewallSpalllining.PrimaryHeatRha = 30f;
+                    firewallSpalllining.PrimarySabotRha = 30f;
+                }
+
+                MelonLogger.Msg("Spall lining: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor ammorackdoorarray = armour.GetComponent<UniformArmor>();
+                if (ammorackdoorarray == null) continue;
+                if (ammorackdoorarray.Unit == null) continue;
+                if (ammorackdoorarray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (ammorackdoorarray.Name == "hull ammo rack door")
+                {
+                    ammorackdoorarray.PrimaryHeatRha = 45f;
+                    ammorackdoorarray.PrimarySabotRha = 45f;
+                }
+
+                MelonLogger.Msg("Composite ammo rack door: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor enginedeckCompositearray = armour.GetComponent<UniformArmor>();
+                if (enginedeckCompositearray == null) continue;
+                if (enginedeckCompositearray.Unit == null) continue;
+                if (enginedeckCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (enginedeckCompositearray.Name == "engine deck")
+                {
+                    enginedeckCompositearray.PrimaryHeatRha = 300f;
+                    enginedeckCompositearray.PrimarySabotRha = 300f;
+                }
+
+                MelonLogger.Msg("Composite engine deck armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor fenderCompositearray = armour.GetComponent<UniformArmor>();
+                if (fenderCompositearray == null) continue;
+                if (fenderCompositearray.Unit == null) continue;
+                if (fenderCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (fenderCompositearray.Name == "fender")
+                {
+                    fenderCompositearray.PrimaryHeatRha = 150f;
+                    fenderCompositearray.PrimarySabotRha = 100f;
+                }
+
+                MelonLogger.Msg("Composite fender armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor sideskirtCompositearray = armour.GetComponent<UniformArmor>();
+                if (sideskirtCompositearray == null) continue;
+                if (sideskirtCompositearray.Unit == null) continue;
+                if (sideskirtCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (sideskirtCompositearray.Name == "side skirt")
+                {
+                    sideskirtCompositearray.PrimaryHeatRha = 550f;
+                    sideskirtCompositearray.PrimarySabotRha = 320f;
+                }
+
+                MelonLogger.Msg("Composite side skirt: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor gunnersightCompositearray = armour.GetComponent<UniformArmor>();
+                if (gunnersightCompositearray == null) continue;
+                if (gunnersightCompositearray.Unit == null) continue;
+                if (gunnersightCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (gunnersightCompositearray.Name == "gunner's primary sight")
+                {
+                    gunnersightCompositearray.PrimaryHeatRha = 50f;
+                    gunnersightCompositearray.PrimarySabotRha = 50f;
+                }
+
+                MelonLogger.Msg("Special gunner sight armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor sprocketwheelImprovedarmor = armour.GetComponent<UniformArmor>();
+                if (sprocketwheelImprovedarmor == null) continue;
+                if (sprocketwheelImprovedarmor.Unit == null) continue;
+                if (sprocketwheelImprovedarmor.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (sprocketwheelImprovedarmor.Name == "sprocket wheel")
+                {
+                    sprocketwheelImprovedarmor.PrimaryHeatRha = 150f;
+                    sprocketwheelImprovedarmor.PrimarySabotRha = 150f;
+                }
+
+                MelonLogger.Msg("Improved sprocket wheel armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor roadwheelImprovedarmor = armour.GetComponent<UniformArmor>();
+                if (roadwheelImprovedarmor == null) continue;
+                if (roadwheelImprovedarmor.Unit == null) continue;
+                if (roadwheelImprovedarmor.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (roadwheelImprovedarmor.Name == "road wheel")
+                {
+                    roadwheelImprovedarmor.PrimaryHeatRha = 100f;
+                    roadwheelImprovedarmor.PrimarySabotRha = 100f;
+                }
+
+                MelonLogger.Msg("Improved road wheel armor: Loaded");
+            }
             ////End////
 
             ////Assign modified armor to M1E1HU////
@@ -795,6 +1002,416 @@ namespace M1A1AMP
                 armortrackSpecial_HU.SetValue(trackSpecialarmor_HU, armor_codex_trackSpecialarmor_HU);
 
                 MelonLogger.Msg(trackSpecialarmor_HU.ArmorType);
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor hullsideCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullsideCompositearray == null) continue;
+                if (hullsideCompositearray.Unit == null) continue;
+                if (hullsideCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+
+                if (hullsideCompositearray.Name == "hull side")
+                {
+                    hullsideCompositearray.PrimaryHeatRha = 210f;
+                    hullsideCompositearray.PrimarySabotRha = 180f;
+                }
+
+                MelonLogger.Msg("Composite hull side armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor hullrearCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullrearCompositearray == null) continue;
+                if (hullrearCompositearray.Unit == null) continue;
+                if (hullrearCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (hullrearCompositearray.Name == "hull rear")
+                {
+                    hullrearCompositearray.PrimaryHeatRha = 210f;
+                    hullrearCompositearray.PrimarySabotRha = 180f;
+                }
+
+                MelonLogger.Msg("Composite hull rear armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor hullfloorCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullfloorCompositearray == null) continue;
+                if (hullfloorCompositearray.Unit == null) continue;
+                if (hullfloorCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (hullfloorCompositearray.Name == "hull floor")
+                {
+                    hullfloorCompositearray.PrimaryHeatRha = 240f;
+                    hullfloorCompositearray.PrimarySabotRha = 210f;
+                }
+
+                MelonLogger.Msg("Composite hull floor armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor hullroofCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullroofCompositearray == null) continue;
+                if (hullroofCompositearray.Unit == null) continue;
+                if (hullroofCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (hullroofCompositearray.Name == "hull roof")
+                {
+                    hullroofCompositearray.PrimaryHeatRha = 240f;
+                    hullroofCompositearray.PrimarySabotRha = 210f;
+                }
+
+                MelonLogger.Msg("Composite hull roof armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor firewallSpalllining = armour.GetComponent<UniformArmor>();
+                if (firewallSpalllining == null) continue;
+                if (firewallSpalllining.Unit == null) continue;
+                if (firewallSpalllining.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (firewallSpalllining.Name == "firewall")
+                {
+                    firewallSpalllining.PrimaryHeatRha = 30f;
+                    firewallSpalllining.PrimarySabotRha = 30f;
+                }
+
+                MelonLogger.Msg("Spall lining: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor ammorackdoorarray = armour.GetComponent<UniformArmor>();
+                if (ammorackdoorarray == null) continue;
+                if (ammorackdoorarray.Unit == null) continue;
+                if (ammorackdoorarray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (ammorackdoorarray.Name == "hull ammo rack door")
+                {
+                    ammorackdoorarray.PrimaryHeatRha = 45f;
+                    ammorackdoorarray.PrimarySabotRha = 45f;
+                }
+
+                MelonLogger.Msg("Composite ammo rack door: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor enginedeckCompositearray = armour.GetComponent<UniformArmor>();
+                if (enginedeckCompositearray == null) continue;
+                if (enginedeckCompositearray.Unit == null) continue;
+                if (enginedeckCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (enginedeckCompositearray.Name == "engine deck")
+                {
+                    enginedeckCompositearray.PrimaryHeatRha = 300f;
+                    enginedeckCompositearray.PrimarySabotRha = 300f;
+                }
+
+                MelonLogger.Msg("Composite engine deck armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor fenderCompositearray = armour.GetComponent<UniformArmor>();
+                if (fenderCompositearray == null) continue;
+                if (fenderCompositearray.Unit == null) continue;
+                if (fenderCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (fenderCompositearray.Name == "engine deck")
+                {
+                    fenderCompositearray.PrimaryHeatRha = 150f;
+                    fenderCompositearray.PrimarySabotRha = 100f;
+                }
+
+                MelonLogger.Msg("Composite fender armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor sideskirtCompositearray = armour.GetComponent<UniformArmor>();
+                if (sideskirtCompositearray == null) continue;
+                if (sideskirtCompositearray.Unit == null) continue;
+                if (sideskirtCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (sideskirtCompositearray.Name == "side skirt")
+                {
+                    sideskirtCompositearray.PrimaryHeatRha = 550f;
+                    sideskirtCompositearray.PrimarySabotRha = 320f;
+                }
+
+                MelonLogger.Msg("Composite side skirt: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor gunnersightCompositearray = armour.GetComponent<UniformArmor>();
+                if (gunnersightCompositearray == null) continue;
+                if (gunnersightCompositearray.Unit == null) continue;
+                if (gunnersightCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (gunnersightCompositearray.Name == "gunner's primary sight")
+                {
+                    gunnersightCompositearray.PrimaryHeatRha = 50f;
+                    gunnersightCompositearray.PrimarySabotRha = 50f;
+                }
+
+                MelonLogger.Msg("Special gunner sight armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor sprocketwheelImprovedarmor = armour.GetComponent<UniformArmor>();
+                if (sprocketwheelImprovedarmor == null) continue;
+                if (sprocketwheelImprovedarmor.Unit == null) continue;
+                if (sprocketwheelImprovedarmor.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (sprocketwheelImprovedarmor.Name == "sprocket wheel")
+                {
+                    sprocketwheelImprovedarmor.PrimaryHeatRha = 150f;
+                    sprocketwheelImprovedarmor.PrimarySabotRha = 150f;
+                }
+
+                MelonLogger.Msg("Improved sprocket wheel armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor roadwheelImprovedarmor = armour.GetComponent<UniformArmor>();
+                if (roadwheelImprovedarmor == null) continue;
+                if (roadwheelImprovedarmor.Unit == null) continue;
+                if (roadwheelImprovedarmor.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (roadwheelImprovedarmor.Name == "road wheel")
+                {
+                    roadwheelImprovedarmor.PrimaryHeatRha = 100f;
+                    roadwheelImprovedarmor.PrimarySabotRha = 100f;
+                }
+
+                MelonLogger.Msg("Improved road wheel armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor hullsideCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullsideCompositearray == null) continue;
+                if (hullsideCompositearray.Unit == null) continue;
+                if (hullsideCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+
+                if (hullsideCompositearray.Name == "hull side")
+                {
+                    hullsideCompositearray.PrimaryHeatRha = 210f;
+                    hullsideCompositearray.PrimarySabotRha = 180f;
+                }
+
+                MelonLogger.Msg("Composite hull side armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor hullrearCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullrearCompositearray == null) continue;
+                if (hullrearCompositearray.Unit == null) continue;
+                if (hullrearCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (hullrearCompositearray.Name == "hull rear")
+                {
+                    hullrearCompositearray.PrimaryHeatRha = 210f;
+                    hullrearCompositearray.PrimarySabotRha = 180f;
+                }
+
+                MelonLogger.Msg("Composite hull rear armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor hullfloorCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullfloorCompositearray == null) continue;
+                if (hullfloorCompositearray.Unit == null) continue;
+                if (hullfloorCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (hullfloorCompositearray.Name == "hull floor")
+                {
+                    hullfloorCompositearray.PrimaryHeatRha = 240f;
+                    hullfloorCompositearray.PrimarySabotRha = 210f;
+                }
+
+                MelonLogger.Msg("Composite hull floor armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor hullroofCompositearray = armour.GetComponent<UniformArmor>();
+                if (hullroofCompositearray == null) continue;
+                if (hullroofCompositearray.Unit == null) continue;
+                if (hullroofCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (hullroofCompositearray.Name == "hull roof")
+                {
+                    hullroofCompositearray.PrimaryHeatRha = 240f;
+                    hullroofCompositearray.PrimarySabotRha = 210f;
+                }
+
+                MelonLogger.Msg("Composite hull roof armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor firewallSpalllining = armour.GetComponent<UniformArmor>();
+                if (firewallSpalllining == null) continue;
+                if (firewallSpalllining.Unit == null) continue;
+                if (firewallSpalllining.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (firewallSpalllining.Name == "firewall")
+                {
+                    firewallSpalllining.PrimaryHeatRha = 30f;
+                    firewallSpalllining.PrimarySabotRha = 30f;
+                }
+
+                MelonLogger.Msg("Spall lining: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor ammorackdoorarray = armour.GetComponent<UniformArmor>();
+                if (ammorackdoorarray == null) continue;
+                if (ammorackdoorarray.Unit == null) continue;
+                if (ammorackdoorarray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (ammorackdoorarray.Name == "hull ammo rack door")
+                {
+                    ammorackdoorarray.PrimaryHeatRha = 45f;
+                    ammorackdoorarray.PrimarySabotRha = 45f;
+                }
+
+                MelonLogger.Msg("Composite ammo rack door: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor enginedeckCompositearray = armour.GetComponent<UniformArmor>();
+                if (enginedeckCompositearray == null) continue;
+                if (enginedeckCompositearray.Unit == null) continue;
+                if (enginedeckCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (enginedeckCompositearray.Name == "engine deck")
+                {
+                    enginedeckCompositearray.PrimaryHeatRha = 300f;
+                    enginedeckCompositearray.PrimarySabotRha = 300f;
+                }
+
+                MelonLogger.Msg("Composite engine deck armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor fenderCompositearray = armour.GetComponent<UniformArmor>();
+                if (fenderCompositearray == null) continue;
+                if (fenderCompositearray.Unit == null) continue;
+                if (fenderCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (fenderCompositearray.Name == "engine deck")
+                {
+                    fenderCompositearray.PrimaryHeatRha = 150f;
+                    fenderCompositearray.PrimarySabotRha = 100f;
+                }
+
+                MelonLogger.Msg("Composite fender armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor sideskirtCompositearray = armour.GetComponent<UniformArmor>();
+                if (sideskirtCompositearray == null) continue;
+                if (sideskirtCompositearray.Unit == null) continue;
+                if (sideskirtCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (sideskirtCompositearray.Name == "side skirt")
+                {
+                    sideskirtCompositearray.PrimaryHeatRha = 550f;
+                    sideskirtCompositearray.PrimarySabotRha = 320f;
+                }
+
+                MelonLogger.Msg("Composite side skirt: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor gunnersightCompositearray = armour.GetComponent<UniformArmor>();
+                if (gunnersightCompositearray == null) continue;
+                if (gunnersightCompositearray.Unit == null) continue;
+                if (gunnersightCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (gunnersightCompositearray.Name == "gunner's primary sight")
+                {
+                    gunnersightCompositearray.PrimaryHeatRha = 50f;
+                    gunnersightCompositearray.PrimarySabotRha = 50f;
+                }
+
+                MelonLogger.Msg("Special gunner sight armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor sprocketwheelImprovedarmor = armour.GetComponent<UniformArmor>();
+                if (sprocketwheelImprovedarmor == null) continue;
+                if (sprocketwheelImprovedarmor.Unit == null) continue;
+                if (sprocketwheelImprovedarmor.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (sprocketwheelImprovedarmor.Name == "sprocket wheel")
+                {
+                    sprocketwheelImprovedarmor.PrimaryHeatRha = 150f;
+                    sprocketwheelImprovedarmor.PrimarySabotRha = 150f;
+                }
+
+                MelonLogger.Msg("Improved sprocket wheel armor: Loaded");
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                UniformArmor roadwheelImprovedarmor = armour.GetComponent<UniformArmor>();
+                if (roadwheelImprovedarmor == null) continue;
+                if (roadwheelImprovedarmor.Unit == null) continue;
+                if (roadwheelImprovedarmor.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (roadwheelImprovedarmor.Name == "road wheel")
+                {
+                    roadwheelImprovedarmor.PrimaryHeatRha = 100f;
+                    roadwheelImprovedarmor.PrimarySabotRha = 100f;
+                }
+
+                MelonLogger.Msg("Improved road wheel armor: Loaded");
             }
             ////End////
 
@@ -1492,21 +2109,6 @@ namespace M1A1AMP
                             Util.EmptyRack(rack);
                         }
 
-                        // convert ammo
-                        //AmmoClipCodexScriptable sabotClipCodex = clip_codex_m829a1;
-                        //LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
-                        //loadoutManager.TotalAmmoCounts = new int[] { 16, 24 };
-                        //loadoutManager.LoadedAmmoTypes = new AmmoClipCodexScriptable[] { clip_codex_m829a1, clip_codex_m830a1 };
-                        //loadoutManager._totalAmmoCount = 40;
-
-                        //for (int i = 0; i <= 2; i++)
-                        //{
-                        //    GHPC.Weapons.AmmoRack rack = loadoutManager.RackLoadouts[i].Rack;
-                        //    rack.ClipCapacity = i == 2 ? 4 : 18;
-                        //    rack.ClipTypes = new AmmoType.AmmoClip[] { clip_m830a1, clip_m830a1 };
-                        //    Util.EmptyRack(rack);
-                        //}
-
                         loadoutManager.SpawnCurrentLoadout();
                         mainGun.Feed.AmmoTypeInBreech = null;
                         mainGun.Feed.Start();
@@ -1551,6 +2153,35 @@ namespace M1A1AMP
             {
                 reticle.SetActive(true);
             }
+
+
+            Vehicle vic = (Vehicle)AbramsAMPMod.playerManager.CurrentPlayerUnit;
+            var gps = vic.transform.gameObject.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS").transform;
+            if (gps == null || gps.gameObject.activeSelf == false) return;
+
+            FireControlSystem FCS = AbramsAMPMod.playerManager.CurrentPlayerWeapon.FCS;
+            ParticleSystem[] particleSystem = AbramsAMPMod.playerManager.CurrentPlayerWeapon.Weapon.MuzzleEffects;
+            //US Vehicles/M1IP/IPM1_rig/HULL/TURRET/Turret Scripts/GPS
+
+            if (FCS.CurrentAmmoType.Name == "LAHAT")
+            {
+                gps.GetChild(0).gameObject.SetActive(false);
+                gps.GetChild(2).gameObject.SetActive(true);
+
+                particleSystem[0].transform.GetChild(0).transform.gameObject.SetActive(false);
+                particleSystem[0].transform.GetChild(1).transform.gameObject.SetActive(false);
+                particleSystem[0].transform.GetChild(3).transform.gameObject.SetActive(false);
+            }
+            else
+            {
+                gps.GetChild(0).gameObject.SetActive(true);
+                gps.GetChild(2).gameObject.SetActive(false);
+
+                particleSystem[0].transform.GetChild(0).transform.gameObject.SetActive(true);
+                particleSystem[0].transform.GetChild(1).transform.gameObject.SetActive(true);
+                particleSystem[0].transform.GetChild(3).transform.gameObject.SetActive(true);
+            }
+
         }
 
         public static void Init()
@@ -1969,6 +2600,17 @@ namespace M1A1AMP
                 armor_codex_upperglacisCompositearmor_HU.ArmorType = armor_upperglacisCompositearmor_HU;
                 armor_upperglacisCompositearmor_HU = new ArmorType();
 
+                //armor_hullsideCompositearmor_HU = new ArmorType();
+                //Util.ShallowCopy(armor_hullsideCompositearmor_HU, armor_hullsidearmor_HU);
+                //armor_hullsideCompositearmor_HU.RhaeMultiplierCe = 50.35f; //default composite skirt 1.5
+                //armor_hullsideCompositearmor_HU.RhaeMultiplierKe = 50.9f; //default composite skirt 0.8
+                //armor_hullsideCompositearmor_HU.Name = "Abrams hull side special composite";
+
+                //armor_codex_hullsideCompositearmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                //armor_codex_hullsideCompositearmor_HU.name = "Abrams hull side special composite";
+                //armor_codex_hullsideCompositearmor_HU.ArmorType = armor_hullsideCompositearmor_HU;
+                //armor_hullsideCompositearmor_HU = new ArmorType();
+
                 armor_commmandershatchCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_commmandershatchCompositearmor_HU, armor_commmandershatcharmor_HU);
                 armor_commmandershatchCompositearmor_HU.RhaeMultiplierCe = 2.0f; //default composite skirt 1.5
@@ -2026,8 +2668,8 @@ namespace M1A1AMP
 
                 armor_trackSpecialarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_trackSpecialarmor_HU, armor_trackarmor_HU);
-                armor_trackSpecialarmor_HU.RhaeMultiplierCe = 2.4f; //default composite skirt 1.5
-                armor_trackSpecialarmor_HU.RhaeMultiplierKe = 2.2f; //default composite skirt 0.8
+                armor_trackSpecialarmor_HU.RhaeMultiplierCe = 15f; //default composite skirt 1.5
+                armor_trackSpecialarmor_HU.RhaeMultiplierKe = 15f; //default composite skirt 0.8
                 armor_trackSpecialarmor_HU.Name = "Abrams HU special track armor";
 
                 armor_codex_trackSpecialarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
