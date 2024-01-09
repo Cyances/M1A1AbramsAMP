@@ -332,9 +332,11 @@ namespace M1A1AMP
                 ["HA"] = armor_codex_mantletDUarmor_HA,
                 ["HA"] = armor_codex_turretsidesDUarmor_HA,
             };
+
             var abrams_armorvariant_uniform = new Dictionary<string, UniformArmor>()
             {
                 ["HU"] = hullsideCompositearray,
+                ["HU"] = hullrearCompositearray,
                 ["HU"] = hullfloorCompositearray,
                 ["HU"] = hullroofCompositearray,
                 ["HU"] = firewallSpalllining,
