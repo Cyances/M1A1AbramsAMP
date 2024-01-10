@@ -2602,17 +2602,6 @@ namespace M1A1AMP
                 armor_codex_upperglacisCompositearmor_HU.ArmorType = armor_upperglacisCompositearmor_HU;
                 armor_upperglacisCompositearmor_HU = new ArmorType();
 
-                //armor_hullsideCompositearmor_HU = new ArmorType();
-                //Util.ShallowCopy(armor_hullsideCompositearmor_HU, armor_hullsidearmor_HU);
-                //armor_hullsideCompositearmor_HU.RhaeMultiplierCe = 50.35f; //default composite skirt 1.5
-                //armor_hullsideCompositearmor_HU.RhaeMultiplierKe = 50.9f; //default composite skirt 0.8
-                //armor_hullsideCompositearmor_HU.Name = "Abrams hull side special composite";
-
-                //armor_codex_hullsideCompositearmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
-                //armor_codex_hullsideCompositearmor_HU.name = "Abrams hull side special composite";
-                //armor_codex_hullsideCompositearmor_HU.ArmorType = armor_hullsideCompositearmor_HU;
-                //armor_hullsideCompositearmor_HU = new ArmorType();
-
                 armor_commmandershatchCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_commmandershatchCompositearmor_HU, armor_commmandershatcharmor_HU);
                 armor_commmandershatchCompositearmor_HU.RhaeMultiplierCe = 2.0f; //default composite skirt 1.5
