@@ -761,8 +761,8 @@ namespace M1A1AMP
                 if (hullsideCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (hullsideCompositearray.Name == "hull side")
                 {
-                    hullsideCompositearray.PrimaryHeatRha = 210f;
-                    hullsideCompositearray.PrimarySabotRha = 180f;
+                    hullsideCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
+                    hullsideCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
                 }
 
                 //MelonLogger.Msg("Composite hull side armor: Loaded");
@@ -778,8 +778,8 @@ namespace M1A1AMP
                 if (hullrearCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (hullrearCompositearray.Name == "hull rear")
                 {
-                    hullrearCompositearray.PrimaryHeatRha = 210f;
-                    hullrearCompositearray.PrimarySabotRha = 180f;
+                    hullrearCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
+                    hullrearCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
                 }
 
                 //MelonLogger.Msg("Composite hull rear armor: Loaded");
@@ -795,8 +795,8 @@ namespace M1A1AMP
                 if (hullfloorCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (hullfloorCompositearray.Name == "hull floor")
                 {
-                    hullfloorCompositearray.PrimaryHeatRha = 240f;
-                    hullfloorCompositearray.PrimarySabotRha = 210f;
+                    hullfloorCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 3250f;
+                    hullfloorCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
                 }
 
                 //MelonLogger.Msg("Composite hull floor armor: Loaded");
@@ -812,8 +812,8 @@ namespace M1A1AMP
                 if (hullroofCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (hullroofCompositearray.Name == "hull roof")
                 {
-                    hullroofCompositearray.PrimaryHeatRha = 240f;
-                    hullroofCompositearray.PrimarySabotRha = 210f;
+                    hullroofCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
+                    hullroofCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
                 }
 
                 //MelonLogger.Msg("Composite hull roof armor: Loaded");
@@ -829,8 +829,8 @@ namespace M1A1AMP
                 if (firewallSpalllining.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (firewallSpalllining.Name == "firewall")
                 {
-                    firewallSpalllining.PrimaryHeatRha = 30f;
-                    firewallSpalllining.PrimarySabotRha = 30f;
+                    firewallSpalllining.PrimaryHeatRha = demigodArmor.Value ? 10000f : 30f;
+                    firewallSpalllining.PrimarySabotRha = demigodArmor.Value ? 10000f : 30f;
                 }
 
                 //MelonLogger.Msg("Spall lining: Loaded");
@@ -846,8 +846,8 @@ namespace M1A1AMP
                 if (ammorackdoorarray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (ammorackdoorarray.Name == "hull ammo rack door")
                 {
-                    ammorackdoorarray.PrimaryHeatRha = 45f;
-                    ammorackdoorarray.PrimarySabotRha = 45f;
+                    ammorackdoorarray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 45f;
+                    ammorackdoorarray.PrimarySabotRha = demigodArmor.Value ? 10000f : 45f;
                 }
 
                 //MelonLogger.Msg("Composite ammo rack door: Loaded");
@@ -863,8 +863,8 @@ namespace M1A1AMP
                 if (enginedeckCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (enginedeckCompositearray.Name == "engine deck")
                 {
-                    enginedeckCompositearray.PrimaryHeatRha = 300f;
-                    enginedeckCompositearray.PrimarySabotRha = 300f;
+                    enginedeckCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 350f;
+                    enginedeckCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 300f;
                 }
 
                 //MelonLogger.Msg("Composite engine deck armor: Loaded");
@@ -880,8 +880,8 @@ namespace M1A1AMP
                 if (fenderCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (fenderCompositearray.Name == "fender")
                 {
-                    fenderCompositearray.PrimaryHeatRha = 150f;
-                    fenderCompositearray.PrimarySabotRha = 100f;
+                    fenderCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
+                    fenderCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
                 }
 
                 //MelonLogger.Msg("Composite fender armor: Loaded");
@@ -897,8 +897,8 @@ namespace M1A1AMP
                 if (sideskirtCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (sideskirtCompositearray.Name == "side skirt")
                 {
-                    sideskirtCompositearray.PrimaryHeatRha = 550f;
-                    sideskirtCompositearray.PrimarySabotRha = 320f;
+                    sideskirtCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 550f;
+                    sideskirtCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 320f;
                 }
 
                 //MelonLogger.Msg("Composite side skirt: Loaded");
@@ -914,8 +914,8 @@ namespace M1A1AMP
                 if (gunnersightCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (gunnersightCompositearray.Name == "gunner's primary sight")
                 {
-                    gunnersightCompositearray.PrimaryHeatRha = 50f;
-                    gunnersightCompositearray.PrimarySabotRha = 50f;
+                    gunnersightCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                    gunnersightCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
                 }
 
                 //MelonLogger.Msg("Special gunner sight armor: Loaded");
@@ -931,8 +931,8 @@ namespace M1A1AMP
                 if (sprocketwheelImprovedarmor.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (sprocketwheelImprovedarmor.Name == "sprocket wheel")
                 {
-                    sprocketwheelImprovedarmor.PrimaryHeatRha = 150f;
-                    sprocketwheelImprovedarmor.PrimarySabotRha = 150f;
+                    sprocketwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
+                    sprocketwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 150f;
                 }
 
                 //MelonLogger.Msg("Improved sprocket wheel armor: Loaded");
@@ -948,8 +948,8 @@ namespace M1A1AMP
                 if (roadwheelImprovedarmor.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (roadwheelImprovedarmor.Name == "road wheel")
                 {
-                    roadwheelImprovedarmor.PrimaryHeatRha = 100f;
-                    roadwheelImprovedarmor.PrimarySabotRha = 100f;
+                    roadwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
+                    roadwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
                 }
 
                 //MelonLogger.Msg("Improved road wheel armor: Loaded");
@@ -1323,8 +1323,8 @@ namespace M1A1AMP
 
                 if (hullsideCompositearray.Name == "hull side")
                 {
-                    hullsideCompositearray.PrimaryHeatRha = 210f;
-                    hullsideCompositearray.PrimarySabotRha = 180f;
+                    hullsideCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
+                    hullsideCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
                 }
 
                 //MelonLogger.Msg("Composite hull side armor: Loaded");
@@ -1340,8 +1340,8 @@ namespace M1A1AMP
                 if (hullrearCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (hullrearCompositearray.Name == "hull rear")
                 {
-                    hullrearCompositearray.PrimaryHeatRha = 210f;
-                    hullrearCompositearray.PrimarySabotRha = 180f;
+                    hullrearCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
+                    hullrearCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
                 }
 
                 //MelonLogger.Msg("Composite hull rear armor: Loaded");
@@ -1357,8 +1357,8 @@ namespace M1A1AMP
                 if (hullfloorCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (hullfloorCompositearray.Name == "hull floor")
                 {
-                    hullfloorCompositearray.PrimaryHeatRha = 240f;
-                    hullfloorCompositearray.PrimarySabotRha = 210f;
+                    hullfloorCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
+                    hullfloorCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
                 }
 
                 //MelonLogger.Msg("Composite hull floor armor: Loaded");
@@ -1374,8 +1374,8 @@ namespace M1A1AMP
                 if (hullroofCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (hullroofCompositearray.Name == "hull roof")
                 {
-                    hullroofCompositearray.PrimaryHeatRha = 240f;
-                    hullroofCompositearray.PrimarySabotRha = 210f;
+                    hullroofCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
+                    hullroofCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
                 }
 
                 //MelonLogger.Msg("Composite hull roof armor: Loaded");
@@ -1391,8 +1391,8 @@ namespace M1A1AMP
                 if (firewallSpalllining.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (firewallSpalllining.Name == "firewall")
                 {
-                    firewallSpalllining.PrimaryHeatRha = 30f;
-                    firewallSpalllining.PrimarySabotRha = 30f;
+                    firewallSpalllining.PrimaryHeatRha = demigodArmor.Value ? 10000f : 30f;
+                    firewallSpalllining.PrimarySabotRha = demigodArmor.Value ? 10000f : 30f;
                 }
 
                 //MelonLogger.Msg("Spall lining: Loaded");
@@ -1408,8 +1408,8 @@ namespace M1A1AMP
                 if (ammorackdoorarray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (ammorackdoorarray.Name == "hull ammo rack door")
                 {
-                    ammorackdoorarray.PrimaryHeatRha = 45f;
-                    ammorackdoorarray.PrimarySabotRha = 45f;
+                    ammorackdoorarray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 45f;
+                    ammorackdoorarray.PrimarySabotRha = demigodArmor.Value ? 10000f : 45f;
                 }
 
                 //MelonLogger.Msg("Composite ammo rack door: Loaded");
@@ -1425,8 +1425,8 @@ namespace M1A1AMP
                 if (enginedeckCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (enginedeckCompositearray.Name == "engine deck")
                 {
-                    enginedeckCompositearray.PrimaryHeatRha = 300f;
-                    enginedeckCompositearray.PrimarySabotRha = 300f;
+                    enginedeckCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 350f;
+                    enginedeckCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 300f;
                 }
 
                 //MelonLogger.Msg("Composite engine deck armor: Loaded");
@@ -1442,8 +1442,8 @@ namespace M1A1AMP
                 if (fenderCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (fenderCompositearray.Name == "fender")
                 {
-                    fenderCompositearray.PrimaryHeatRha = 150f;
-                    fenderCompositearray.PrimarySabotRha = 100f;
+                    fenderCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
+                    fenderCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
                 }
 
                 //MelonLogger.Msg("Composite fender armor: Loaded");
@@ -1459,8 +1459,8 @@ namespace M1A1AMP
                 if (sideskirtCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (sideskirtCompositearray.Name == "side skirt")
                 {
-                    sideskirtCompositearray.PrimaryHeatRha = 550f;
-                    sideskirtCompositearray.PrimarySabotRha = 320f;
+                    sideskirtCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 550f;
+                    sideskirtCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 320f;
                 }
 
                 //MelonLogger.Msg("Composite side skirt: Loaded");
@@ -1476,8 +1476,8 @@ namespace M1A1AMP
                 if (gunnersightCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (gunnersightCompositearray.Name == "gunner's primary sight")
                 {
-                    gunnersightCompositearray.PrimaryHeatRha = 50f;
-                    gunnersightCompositearray.PrimarySabotRha = 50f;
+                    gunnersightCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                    gunnersightCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
                 }
 
                 //MelonLogger.Msg("Special gunner sight armor: Loaded");
@@ -1493,8 +1493,8 @@ namespace M1A1AMP
                 if (sprocketwheelImprovedarmor.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (sprocketwheelImprovedarmor.Name == "sprocket wheel")
                 {
-                    sprocketwheelImprovedarmor.PrimaryHeatRha = 150f;
-                    sprocketwheelImprovedarmor.PrimarySabotRha = 150f;
+                    sprocketwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
+                    sprocketwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 150f;
                 }
 
                 //MelonLogger.Msg("Improved sprocket wheel armor: Loaded");
@@ -1510,213 +1510,8 @@ namespace M1A1AMP
                 if (roadwheelImprovedarmor.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (roadwheelImprovedarmor.Name == "road wheel")
                 {
-                    roadwheelImprovedarmor.PrimaryHeatRha = 100f;
-                    roadwheelImprovedarmor.PrimarySabotRha = 100f;
-                }
-
-                //MelonLogger.Msg("Improved road wheel armor: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor hullsideCompositearray = armour.GetComponent<UniformArmor>();
-                if (hullsideCompositearray == null) continue;
-                if (hullsideCompositearray.Unit == null) continue;
-                if (hullsideCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-
-                if (hullsideCompositearray.Name == "hull side")
-                {
-                    hullsideCompositearray.PrimaryHeatRha = 210f;
-                    hullsideCompositearray.PrimarySabotRha = 180f;
-                }
-
-                //MelonLogger.Msg("Composite hull side armor: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor hullrearCompositearray = armour.GetComponent<UniformArmor>();
-                if (hullrearCompositearray == null) continue;
-                if (hullrearCompositearray.Unit == null) continue;
-                if (hullrearCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-                if (hullrearCompositearray.Name == "hull rear")
-                {
-                    hullrearCompositearray.PrimaryHeatRha = 210f;
-                    hullrearCompositearray.PrimarySabotRha = 180f;
-                }
-
-                //MelonLogger.Msg("Composite hull rear armor: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor hullfloorCompositearray = armour.GetComponent<UniformArmor>();
-                if (hullfloorCompositearray == null) continue;
-                if (hullfloorCompositearray.Unit == null) continue;
-                if (hullfloorCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-                if (hullfloorCompositearray.Name == "hull floor")
-                {
-                    hullfloorCompositearray.PrimaryHeatRha = 240f;
-                    hullfloorCompositearray.PrimarySabotRha = 210f;
-                }
-
-                //MelonLogger.Msg("Composite hull floor armor: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor hullroofCompositearray = armour.GetComponent<UniformArmor>();
-                if (hullroofCompositearray == null) continue;
-                if (hullroofCompositearray.Unit == null) continue;
-                if (hullroofCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-                if (hullroofCompositearray.Name == "hull roof")
-                {
-                    hullroofCompositearray.PrimaryHeatRha = 240f;
-                    hullroofCompositearray.PrimarySabotRha = 210f;
-                }
-
-                //MelonLogger.Msg("Composite hull roof armor: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor firewallSpalllining = armour.GetComponent<UniformArmor>();
-                if (firewallSpalllining == null) continue;
-                if (firewallSpalllining.Unit == null) continue;
-                if (firewallSpalllining.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-                if (firewallSpalllining.Name == "firewall")
-                {
-                    firewallSpalllining.PrimaryHeatRha = 30f;
-                    firewallSpalllining.PrimarySabotRha = 30f;
-                }
-
-                //MelonLogger.Msg("Spall lining: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor ammorackdoorarray = armour.GetComponent<UniformArmor>();
-                if (ammorackdoorarray == null) continue;
-                if (ammorackdoorarray.Unit == null) continue;
-                if (ammorackdoorarray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-                if (ammorackdoorarray.Name == "hull ammo rack door")
-                {
-                    ammorackdoorarray.PrimaryHeatRha = 45f;
-                    ammorackdoorarray.PrimarySabotRha = 45f;
-                }
-
-                //MelonLogger.Msg("Composite ammo rack door: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor enginedeckCompositearray = armour.GetComponent<UniformArmor>();
-                if (enginedeckCompositearray == null) continue;
-                if (enginedeckCompositearray.Unit == null) continue;
-                if (enginedeckCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-                if (enginedeckCompositearray.Name == "engine deck")
-                {
-                    enginedeckCompositearray.PrimaryHeatRha = 300f;
-                    enginedeckCompositearray.PrimarySabotRha = 300f;
-                }
-
-                //MelonLogger.Msg("Composite engine deck armor: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor fenderCompositearray = armour.GetComponent<UniformArmor>();
-                if (fenderCompositearray == null) continue;
-                if (fenderCompositearray.Unit == null) continue;
-                if (fenderCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-                if (fenderCompositearray.Name == "fender")
-                {
-                    fenderCompositearray.PrimaryHeatRha = 150f;
-                    fenderCompositearray.PrimarySabotRha = 100f;
-                }
-
-                //MelonLogger.Msg("Composite fender armor: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor sideskirtCompositearray = armour.GetComponent<UniformArmor>();
-                if (sideskirtCompositearray == null) continue;
-                if (sideskirtCompositearray.Unit == null) continue;
-                if (sideskirtCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-                if (sideskirtCompositearray.Name == "side skirt")
-                {
-                    sideskirtCompositearray.PrimaryHeatRha = 550f;
-                    sideskirtCompositearray.PrimarySabotRha = 320f;
-                }
-
-                //MelonLogger.Msg("Composite side skirt: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor gunnersightCompositearray = armour.GetComponent<UniformArmor>();
-                if (gunnersightCompositearray == null) continue;
-                if (gunnersightCompositearray.Unit == null) continue;
-                if (gunnersightCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-                if (gunnersightCompositearray.Name == "gunner's primary sight")
-                {
-                    gunnersightCompositearray.PrimaryHeatRha = 50f;
-                    gunnersightCompositearray.PrimarySabotRha = 50f;
-                }
-
-                //MelonLogger.Msg("Special gunner sight armor: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor sprocketwheelImprovedarmor = armour.GetComponent<UniformArmor>();
-                if (sprocketwheelImprovedarmor == null) continue;
-                if (sprocketwheelImprovedarmor.Unit == null) continue;
-                if (sprocketwheelImprovedarmor.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-                if (sprocketwheelImprovedarmor.Name == "sprocket wheel")
-                {
-                    sprocketwheelImprovedarmor.PrimaryHeatRha = 150f;
-                    sprocketwheelImprovedarmor.PrimarySabotRha = 150f;
-                }
-
-                //MelonLogger.Msg("Improved sprocket wheel armor: Loaded");
-            }
-
-            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-            {
-                if (armour == null) continue;
-
-                UniformArmor roadwheelImprovedarmor = armour.GetComponent<UniformArmor>();
-                if (roadwheelImprovedarmor == null) continue;
-                if (roadwheelImprovedarmor.Unit == null) continue;
-                if (roadwheelImprovedarmor.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
-                if (roadwheelImprovedarmor.Name == "road wheel")
-                {
-                    roadwheelImprovedarmor.PrimaryHeatRha = 100f;
-                    roadwheelImprovedarmor.PrimarySabotRha = 100f;
+                    roadwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
+                    roadwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
                 }
 
                 //MelonLogger.Msg("Improved road wheel armor: Loaded");
@@ -2840,8 +2635,8 @@ namespace M1A1AMP
                 ////HU armor modifiers////
                 armor_superCompositeskirt_HU = new ArmorType();
                 Util.ShallowCopy(armor_superCompositeskirt_HU, armor_compositeskirt_HU);
-                armor_superCompositeskirt_HU.RhaeMultiplierCe = 8.35f; //default 1.5
-                armor_superCompositeskirt_HU.RhaeMultiplierKe = 5.0f; //default 0.8
+                armor_superCompositeskirt_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 11f; //default 1.5
+                armor_superCompositeskirt_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 6f; //default 0.8
                 armor_superCompositeskirt_HU.Name = "Abrams HU super special composite skirt";
 
                 armor_codex_superCompositeskirt_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2850,8 +2645,8 @@ namespace M1A1AMP
 
                 armor_cheeksDUarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_cheeksDUarmor_HU, armor_cheeksnera_HU);
-                armor_cheeksDUarmor_HU.RhaeMultiplierCe = 2.2f; //default 1.3
-                armor_cheeksDUarmor_HU.RhaeMultiplierKe = 1.2f; //default 0.55
+                armor_cheeksDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.2f; //default 1.3
+                armor_cheeksDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.2f; //default 0.55
                 armor_cheeksDUarmor_HU.Name = "Abrams HU DU armor turret cheeks";
 
                 armor_codex_cheeksDUarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2861,8 +2656,8 @@ namespace M1A1AMP
 
                 armor_fronthullDUarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_fronthullDUarmor_HU, armor_fronthullnera_HU);
-                armor_fronthullDUarmor_HU.RhaeMultiplierCe = 2.2f; //default 1.3
-                armor_fronthullDUarmor_HU.RhaeMultiplierKe = 1.4f; //default 0.45
+                armor_fronthullDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.2f; //default 1.3
+                armor_fronthullDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.4f; //default 0.45
                 armor_fronthullDUarmor_HU.Name = "Abrams HU DU armor hull front";
 
                 armor_codex_fronthullDUarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2872,8 +2667,8 @@ namespace M1A1AMP
 
                 armor_mantletDUarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_mantletDUarmor_HU, armor_mantletnera_HU);
-                armor_mantletDUarmor_HU.RhaeMultiplierCe = 2.15f; //default 1.3
-                armor_mantletDUarmor_HU.RhaeMultiplierKe = 1.5f; //default 1.4
+                armor_mantletDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.15f; //default 1.3
+                armor_mantletDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.5f; //default 1.4
                 armor_mantletDUarmor_HU.Name = "Abrams HU DU armor mantlet";
 
                 armor_codex_mantletDUarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2883,8 +2678,8 @@ namespace M1A1AMP
 
                 armor_turretsidesDUarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_turretsidesDUarmor_HU, armor_turretsidesnera_HU);
-                armor_turretsidesDUarmor_HU.RhaeMultiplierCe = 4.4f; //default 1.3
-                armor_turretsidesDUarmor_HU.RhaeMultiplierKe = 2.21f; //default 1.4
+                armor_turretsidesDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 4.4f; //default 1.3
+                armor_turretsidesDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 2.21f; //default 1.4
                 armor_turretsidesDUarmor_HU.Name = "Abrams HU DU armor turret sides";
 
                 armor_codex_turretsidesDUarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2894,8 +2689,8 @@ namespace M1A1AMP
 
                 armor_turretroofCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_turretroofCompositearmor_HU, armor_turretroofarmor_HU);
-                armor_turretroofCompositearmor_HU.RhaeMultiplierCe = 2.0f; //default composite skirt 1.5
-                armor_turretroofCompositearmor_HU.RhaeMultiplierKe = 2.3f; //default composite skirt 0.8
+                armor_turretroofCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 7f; //default composite skirt 1.5
+                armor_turretroofCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 5.9f; //default composite skirt 0.8
                 armor_turretroofCompositearmor_HU.Name = "Abrams HU roof special composite";
 
                 armor_codex_turretroofCompositearmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2905,8 +2700,8 @@ namespace M1A1AMP
 
                 armor_upperglacisCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_upperglacisCompositearmor_HU, armor_upperglacisarmor_HU);
-                armor_upperglacisCompositearmor_HU.RhaeMultiplierCe = 3.0f; //default composite skirt 1.5
-                armor_upperglacisCompositearmor_HU.RhaeMultiplierKe = 2.6f; //default composite skirt 0.8
+                armor_upperglacisCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 5.5f; //default composite skirt 1.5
+                armor_upperglacisCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 4.7f; //default composite skirt 0.8
                 armor_upperglacisCompositearmor_HU.Name = "Abrams HU upper glacis special composite";
 
                 armor_codex_upperglacisCompositearmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2916,8 +2711,8 @@ namespace M1A1AMP
 
                 armor_commmandershatchCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_commmandershatchCompositearmor_HU, armor_commmandershatcharmor_HU);
-                armor_commmandershatchCompositearmor_HU.RhaeMultiplierCe = 2.0f; //default composite skirt 1.5
-                armor_commmandershatchCompositearmor_HU.RhaeMultiplierKe = 2.3f; //default composite skirt 0.8
+                armor_commmandershatchCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 3.6f; //default composite skirt 1.5
+                armor_commmandershatchCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 3f; //default composite skirt 0.8
                 armor_commmandershatchCompositearmor_HU.Name = "Abrams HU commander's hatch special composite";
 
                 armor_codex_commmandershatchCompositearmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2927,8 +2722,8 @@ namespace M1A1AMP
 
                 armor_loadershatchCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_loadershatchCompositearmor_HU, armor_loadershatcharmor_HU);
-                armor_loadershatchCompositearmor_HU.RhaeMultiplierCe = 2.0f; //default composite skirt 1.5
-                armor_loadershatchCompositearmor_HU.RhaeMultiplierKe = 2.3f; //default composite skirt 0.8
+                armor_loadershatchCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 3.6f; //default composite skirt 1.5
+                armor_loadershatchCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 3f; //default composite skirt 0.8
                 armor_loadershatchCompositearmor_HU.Name = "Abrams HU loader's hatch special composite";
 
                 armor_codex_loadershatchCompositearmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2938,8 +2733,8 @@ namespace M1A1AMP
 
                 armor_drivershatchCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_loadershatchCompositearmor_HU, armor_drivershatcharmor_HU);
-                armor_drivershatchCompositearmor_HU.RhaeMultiplierCe = 2.0f; //default composite skirt 1.5
-                armor_drivershatchCompositearmor_HU.RhaeMultiplierKe = 2.3f; //default composite skirt 0.8
+                armor_drivershatchCompositearmor_HU.RhaeMultiplierCe = 3.6f; //default composite skirt 1.5
+                armor_drivershatchCompositearmor_HU.RhaeMultiplierKe = 3f; //default composite skirt 0.8
                 armor_drivershatchCompositearmor_HU.Name = "Abrams HU driver's hatch special composite";
 
                 armor_codex_drivershatchCompositearmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2949,8 +2744,8 @@ namespace M1A1AMP
 
                 armor_turretringCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_turretringCompositearmor_HU, armor_turretringarmor_HU);
-                armor_turretringCompositearmor_HU.RhaeMultiplierCe = 2.6f; //default composite skirt 1.5
-                armor_turretringCompositearmor_HU.RhaeMultiplierKe = 3.0f; //default composite skirt 0.8
+                armor_turretringCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 5f; //default composite skirt 1.5
+                armor_turretringCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 5f; //default composite skirt 0.8
                 armor_turretringCompositearmor_HU.Name = "Abrams HU turret ring special composite";
 
                 armor_codex_turretringCompositearmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2960,8 +2755,8 @@ namespace M1A1AMP
 
                 armor_gunmantletfaceCompositearmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_gunmantletfaceCompositearmor_HU, armor_gunmantletfacearmor_HU);
-                armor_gunmantletfaceCompositearmor_HU.RhaeMultiplierCe = 2.6f; //default composite skirt 1.5
-                armor_gunmantletfaceCompositearmor_HU.RhaeMultiplierKe = 3.0f; //default composite skirt 0.8
+                armor_gunmantletfaceCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 23f; //default composite skirt 1.5
+                armor_gunmantletfaceCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 18f; //default composite skirt 0.8
                 armor_gunmantletfaceCompositearmor_HU.Name = "Abrams HU gun mantlet face special composite";
 
                 armor_codex_gunmantletfaceCompositearmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2971,8 +2766,8 @@ namespace M1A1AMP
 
                 armor_trackSpecialarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_trackSpecialarmor_HU, armor_trackarmor_HU);
-                armor_trackSpecialarmor_HU.RhaeMultiplierCe = 15f; //default composite skirt 1.5
-                armor_trackSpecialarmor_HU.RhaeMultiplierKe = 15f; //default composite skirt 0.8
+                armor_trackSpecialarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 20f; //default composite skirt 1.5
+                armor_trackSpecialarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 20f; //default composite skirt 0.8
                 armor_trackSpecialarmor_HU.Name = "Abrams HU special track armor";
 
                 armor_codex_trackSpecialarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2982,8 +2777,8 @@ namespace M1A1AMP
 
                 armor_gunbarrelImprovedarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_gunbarrelImprovedarmor_HU, armor_gunbarrel_HU);
-                armor_gunbarrelImprovedarmor_HU.RhaeMultiplierCe = 7f; //default composite skirt 1.5
-                armor_gunbarrelImprovedarmor_HU.RhaeMultiplierKe = 7f; //default composite skirt 0.8
+                armor_gunbarrelImprovedarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 7f; //default composite skirt 1.5
+                armor_gunbarrelImprovedarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 7f; //default composite skirt 0.8
                 armor_gunbarrelImprovedarmor_HU.Name = "Abrams HU Improved barrel armor";
 
                 armor_codex_gunbarrelImprovedarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2993,8 +2788,8 @@ namespace M1A1AMP
 
                 armor_bustleImprovedfirewall_HU = new ArmorType();
                 Util.ShallowCopy(armor_bustleImprovedfirewall_HU, armor_bustlefirewall_HU);
-                armor_bustleImprovedfirewall_HU.RhaeMultiplierCe = 2f; //default composite skirt 1.5
-                armor_bustleImprovedfirewall_HU.RhaeMultiplierKe = 2f; //default composite skirt 0.8
+                armor_bustleImprovedfirewall_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2f; //default composite skirt 1.5
+                armor_bustleImprovedfirewall_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 2f; //default composite skirt 0.8
                 armor_bustleImprovedfirewall_HU.Name = "Abrams HU bustle spall lining";
 
                 armor_codex_bustleImprovedfirewall_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -3004,8 +2799,8 @@ namespace M1A1AMP
 
                 armor_blowoutpanelCompositearmorC_HU = new ArmorType();
                 Util.ShallowCopy(armor_blowoutpanelCompositearmorC_HU, armor_blowoutpanel_HU);
-                armor_blowoutpanelCompositearmorC_HU.RhaeMultiplierCe = 10f; //default composite skirt 1.5
-                armor_blowoutpanelCompositearmorC_HU.RhaeMultiplierKe = 10f; //default composite skirt 0.8
+                armor_blowoutpanelCompositearmorC_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 10f; //default composite skirt 1.5
+                armor_blowoutpanelCompositearmorC_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 10f; //default composite skirt 0.8
                 armor_blowoutpanelCompositearmorC_HU.Name = "Abrams HU Composite blowout panel center";
 
                 armor_codex_blowoutpanelCompositearmorC_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -3015,8 +2810,8 @@ namespace M1A1AMP
 
                 armor_blowoutpanelCompositearmorL_HU = new ArmorType();
                 Util.ShallowCopy(armor_blowoutpanelCompositearmorL_HU, armor_blowoutpanel_HU);
-                armor_blowoutpanelCompositearmorL_HU.RhaeMultiplierCe = 10f; //default composite skirt 1.5
-                armor_blowoutpanelCompositearmorL_HU.RhaeMultiplierKe = 10f; //default composite skirt 0.8
+                armor_blowoutpanelCompositearmorL_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 10f; //default composite skirt 1.5
+                armor_blowoutpanelCompositearmorL_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 10f; //default composite skirt 0.8
                 armor_blowoutpanelCompositearmorL_HU.Name = "Abrams HU Composite blowout panel left";
 
                 armor_codex_blowoutpanelCompositearmorL_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -3026,8 +2821,8 @@ namespace M1A1AMP
 
                 armor_blowoutpanelCompositearmorR_HU = new ArmorType();
                 Util.ShallowCopy(armor_blowoutpanelCompositearmorR_HU, armor_blowoutpanel_HU);
-                armor_blowoutpanelCompositearmorR_HU.RhaeMultiplierCe = 10f; //default composite skirt 1.5
-                armor_blowoutpanelCompositearmorR_HU.RhaeMultiplierKe = 10f; //default composite skirt 0.8
+                armor_blowoutpanelCompositearmorR_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 10f; //default composite skirt 1.5
+                armor_blowoutpanelCompositearmorR_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 10f; //default composite skirt 0.8
                 armor_blowoutpanelCompositearmorR_HU.Name = "Abrams HU Composite blowout panel right";
 
                 armor_codex_blowoutpanelCompositearmorR_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -3037,8 +2832,8 @@ namespace M1A1AMP
 
                 armor_turretrearSpecialarray_HU = new ArmorType();
                 Util.ShallowCopy(armor_turretrearSpecialarray_HU, armor_turretrearnera_HU);
-                armor_turretrearSpecialarray_HU.RhaeMultiplierCe = 40f; //default special armor 1
-                armor_turretrearSpecialarray_HU.RhaeMultiplierKe = 20f; //default special armor 1
+                armor_turretrearSpecialarray_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 40f; //default special armor 1
+                armor_turretrearSpecialarray_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 20f; //default special armor 1
                 armor_turretrearSpecialarray_HU.Name = "Abrams HU Special armor turret rear";
 
                 armor_codex_turretrearSpecialarray_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -3048,8 +2843,8 @@ namespace M1A1AMP
 
                 armor_GPSImprovedhousing_HU = new ArmorType();
                 Util.ShallowCopy(armor_GPSImprovedhousing_HU, armor_GPShousing_HU);
-                armor_GPSImprovedhousing_HU.RhaeMultiplierCe = 5f; //default composite skirt 1.5
-                armor_GPSImprovedhousing_HU.RhaeMultiplierKe = 5f; //default composite skirt 0.8
+                armor_GPSImprovedhousing_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 5f; //default composite skirt 1.5
+                armor_GPSImprovedhousing_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 5f; //default composite skirt 0.8
                 armor_GPSImprovedhousing_HU.Name = "Abrams HU GPS housing composite";
 
                 armor_codex_GPSImprovedhousing_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -3059,8 +2854,8 @@ namespace M1A1AMP
 
                 armor_GPSImproveddoor_HU = new ArmorType();
                 Util.ShallowCopy(armor_GPSImproveddoor_HU, armor_GPSdoor_HU);
-                armor_GPSImproveddoor_HU.RhaeMultiplierCe = 5f; //default composite skirt 1.5
-                armor_GPSImproveddoor_HU.RhaeMultiplierKe = 5f; //default composite skirt 0.8
+                armor_GPSImproveddoor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 5f; //default composite skirt 1.5
+                armor_GPSImproveddoor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 5f; //default composite skirt 0.8
                 armor_GPSImproveddoor_HU.Name = "Abrams HU GPS door composite";
 
                 armor_codex_GPSImproveddoor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
