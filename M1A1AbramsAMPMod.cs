@@ -3002,7 +3002,7 @@ namespace M1A1AMP
                 ammo_m829a3.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m829a3;
 
                 ammo_m829a4_vis = GameObject.Instantiate(ammo_m833.VisualModel);
-                ammo_m829a4_vis.name = "m829a4 visual";
+                ammo_m829a4_vis.name = "M829A4 visual";
                 ammo_m829a4.VisualModel = ammo_m829a4_vis;
                 ammo_m829a4.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m829a4;
                 ammo_m829a4.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m829a4;
@@ -3014,7 +3014,7 @@ namespace M1A1AMP
                 ammo_m830.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830;
 
                 ammo_m830a1_vis = GameObject.Instantiate(ammo_m456.VisualModel);
-                ammo_m830a1_vis.name = "M830a1 visual";
+                ammo_m830a1_vis.name = "M830A1 visual";
                 ammo_m830a1.VisualModel = ammo_m830a1_vis;
                 ammo_m830a1.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830a1;
                 ammo_m830a1.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830a1;
