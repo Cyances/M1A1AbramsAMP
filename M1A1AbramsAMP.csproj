@@ -66,7 +66,7 @@
       <HintPath>D:\Program Files\SteamLibrary\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp_publicized">
-      <HintPath>C:\Users\Cyance\Documents\Desktop Shortcuts\SDK\GHPC\M1A1Abrams\Assembly-CSharp_publicized.dll</HintPath>
+      <HintPath>C:\Users\Cyance\Documents\Desktop Shortcuts\SDK\GHPC\M1A1AbramsAMP\Assembly-CSharp_publicized.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
