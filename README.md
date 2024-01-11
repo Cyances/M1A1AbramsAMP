@@ -1,15 +1,14 @@
-# M1A1 Abrams AMP v2.2 WIP
+# M1A1 Abrams AMP v2.2
 
 ## Branch release notes:
 <p>
 	<ul> 
-		<li>Increase round capacity to 50.</li>
-		<li>Added one more round type slot (4 in total)</li>
-		<li>Separated ammo management between M1A1 and M1E1</li>
-		<li>Added M830A1 HEAT-MP-T and LAHAT GLATGM</li>
-		<li>Default M1A1 loadout: 20x M829A4, 12x M830A2, 12x XM1147, 6x LAHAT</li>
-		<li>Default M1E1 loadout: 20x M829, 15x M830, 15x M830A1</li>
-		<li>If you already have ATLAS' Abrams mod or have an older version of the Abrams AMP mod installed, either delete MelonPreferences.cfg in UserData folder or remove the lines pertaining to the [M1A1Config]/[M1A1AMPConfig] to make it easier to understand the custom config. Launch the game first then close it to update the contents of MelonPreferences.cfg</li>
+		<li>Code refactoring (same setup as Atlas' M1A1 Abrams v1.0.9)</li>
+		<li>Revised round attributes (refer to table)</li>
+		<li>Revised HU armor protection (refer to table)</li>
+		<li>Added correct gunner auxilliary sight reticles per round type (however, this only applies to the first two rounds per tank)</li>
+		<li>Added demigod armor in configuration if you really want an almost deathproof Abrooms (false by default and only applies to HU variant)</li>
+		<li>NOTE: Mission loading might be longer if you are using the HU variant, potentially due to the extra armor configuration.</li>
 		<li>NOTE: XM1111 is in the config file but it is not implemented yet. Listing that in your loadout will make the mod use vanilla loadout (M833/M456). I only included it so there is no need to manually cleanup the config file if I could make it work.</li>
 	</ul>
 </p>
