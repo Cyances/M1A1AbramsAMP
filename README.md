@@ -14,8 +14,8 @@
 </p>
 
 
-| Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
-| ------------- | ------------- | ------------- | ------------- |
-| M830A1 HEAT-MP-T | 480 | 1400 | Point-detonate fuze only. 600 fragments (configurable count). |
-| LAHAT | 800 | 300 | Gun-launched ATGM with SALH guidance |
+| Name  | Note |
+| ------------- | ------------- |
+| M829A4 APFSDS-T | +100% spalling chance |
+| M830 HEAT-FS-T | Redisgnated from MP to FS. +50% spalling chance |
 
