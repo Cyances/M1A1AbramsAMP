@@ -26,5 +26,11 @@
 | ------------- | ------------- | ------------- | ------------- | 
 | Composite side skirt | 300 | 550 | from 315/605 |
 | Gun mantlet face | 240 | 300 | from 180/210 |
-| Turret roof | 140 | 175 | from 140/175 |
-| Turret rear | 500 | 1000 | New |
+| Turret roof | 150 | 180 | from 140/175 |
+| Turret rear | 500 | 1000 | From this on and below are new modified armor pieces |
+| Turret firewall | 30 | 30 | Acts as spall liner |
+| Side skirt | 300 | 550 | The non-composite ones |
+| Hull side/roof/bottom/rear | 200 | 300 | |
+| Engine deck | 250 | 350 | |
+| Hull firewall | 30 | 30 | Acts as spall liner |
+| Hull ammo rack door | 45 | 45 | |
