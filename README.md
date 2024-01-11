@@ -14,8 +14,21 @@
 </p>
 
 
+### Round changes
 | Name  | Note |
 | ------------- | ------------- |
 | M829A4 APFSDS-T | +100% spalling chance |
-| M830 HEAT-FS-T | Redisgnated from MP to FS. +50% spalling chance |
+| M830 HEAT-FS-T | Redisgnated from MP to FS and +50% spalling chance |
 
+
+### Heavy Ultra (HU) - armor changes
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
+| ------------- | ------------- | ------------- | ------------- | 
+| Hull front | 810  | 1280 ||
+| Turret cheek | 910 | 1580 ||
+| Turret side | 510 | 1020 ||
+| Composite side skirt | 300 | 550 ||
+| Gun mantlet face | 180 | 210 ||
+| Upper glacis | 180 | 210 ||
+| Turret ring | 180 | 210 ||
+| Turret roof | 140 | 175 ||
