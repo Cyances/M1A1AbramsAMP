@@ -27,3 +27,4 @@
 | Composite side skirt | 300 | 550 | from 315/605 |
 | Gun mantlet face | 240 | 300 | from 180/210 |
 | Turret roof | 140 | 175 | from 140/175 |
+| Turret rear | 500 | 1000 | New |
