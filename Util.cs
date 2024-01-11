@@ -8,7 +8,7 @@ using GHPC.Weapons;
 using GHPC.Equipment.Optics;
 using UnityEngine;
 
-namespace M1A1AbramsAMP
+namespace M1A1AMP
 {
     public class Util
     {

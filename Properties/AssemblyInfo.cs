@@ -1,11 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using MelonLoader;
-using M1A1AbramsAMP;
-
-[assembly: MelonInfo(typeof(M1A1AbramsAMPMod), "M1A1 Abrams AMP", "2.0", "ATLAS and Cyance")]
-[assembly: MelonGame("Radian Simulations LLC", "GHPC")]
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -15,7 +10,7 @@ using M1A1AbramsAMP;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("M1A1AbramsAMP")]
-[assembly: AssemblyCopyright("Copyright ©  2024")]
+[assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
