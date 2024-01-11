@@ -23,7 +23,7 @@ namespace M1A1AMP
 {
     public static class M1A1AbramsAMPMod
     {
-
+        ////MelonPreferences.cfg variables
         static MelonPreferences_Entry<int> m1a1firstammoCount;
         static MelonPreferences_Entry<int> m1a1secondammoCount;
         static MelonPreferences_Entry<int> m1a1thirdammoCount;
@@ -52,7 +52,7 @@ namespace M1A1AMP
 
         static WeaponSystemCodexScriptable gun_m256;
 
-        //Ammo variables
+        ////Ammo variables
         static AmmoClipCodexScriptable clip_codex_m829;
         static AmmoType.AmmoClip clip_m829;
         static AmmoCodexScriptable ammo_codex_m829;
@@ -118,8 +118,8 @@ namespace M1A1AMP
         static AmmoType ammo_m456;
         static AmmoType ammo_bgm71;
 
-        //Armor variables
-        //HU Variant
+        ////Armor variables
+        ////HU Variant
         static ArmorType armor_compositeskirt_HU;
         static ArmorCodexScriptable armor_codex_superCompositeskirt_HU;
         static ArmorType armor_superCompositeskirt_HU;
@@ -202,7 +202,11 @@ namespace M1A1AMP
         static ArmorCodexScriptable armor_codex_GPSImproveddoor_HU;
         static ArmorType armor_GPSImproveddoor_HU;
 
-        //HC Variant
+        static ArmorType armor_turretbottom_HU;
+        static ArmorCodexScriptable armor_codex_turretbottomCompositearmor_HU;
+        static ArmorType armor_turretbottomCompositearmor_HU;
+
+        ////HC Variant
         static ArmorType armor_compositeskirt_HC;
         static ArmorCodexScriptable armor_codex_superCompositeskirt_HC;
         static ArmorType armor_superCompositeskirt_HC;
@@ -227,7 +231,7 @@ namespace M1A1AMP
         static ArmorCodexScriptable armor_codex_superCompositeskirt_HA;
         static ArmorType armor_superCompositeskirt_HA;
 
-        //HA Variant
+        ////HA Variant
         static ArmorType armor_cheeksnera_HA;
         static ArmorCodexScriptable armor_codex_cheeksDUarmor_HA;
         static ArmorType armor_cheeksDUarmor_HA;
@@ -257,7 +261,7 @@ namespace M1A1AMP
         static UniformArmor sprocketwheelImprovedarmor;
         static UniformArmor roadwheelIimprovedarmor;
 
-        // gas
+        ////GAS variables
         static ReticleSO reticleSO_m1a1firstRound;
         static ReticleMesh.CachedReticle reticle_cached_m1a1firstRound;
 
@@ -269,7 +273,6 @@ namespace M1A1AMP
 
         static ReticleSO reticleSO_m1e1secondRound;
         static ReticleMesh.CachedReticle reticle_cached_m1e1secondRound;
-
 
         public static void Config(MelonPreferences_Category cfg)
         {
@@ -378,6 +381,7 @@ namespace M1A1AMP
                 ["HU"] = armor_codex_turretrearSpecialarray_HU,
                 ["HU"] = armor_codex_GPSImprovedhousing_HU,
                 ["HU"] = armor_codex_GPSImproveddoor_HU,
+                ["HU"] = armor_codex_turretbottomCompositearmor_HU,
 
                 ["HC"] = armor_codex_superCompositeskirt_HC,
                 ["HC"] = armor_codex_cheeksDUarmor_HC,
@@ -760,6 +764,22 @@ namespace M1A1AMP
                 GPShousingImproved_HU.SetValue(GPShousingImpvrovedarmor_HU, armor_codex_GPSImproveddoor_HU);
 
                 MelonLogger.Msg(GPShousingImpvrovedarmor_HU.ArmorType);
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                VariableArmor turretbottomCompositearmor_HU = armour.GetComponent<VariableArmor>();
+                if (turretbottomCompositearmor_HU == null) continue;
+                if (turretbottomCompositearmor_HU.Unit == null) continue;
+                if (turretbottomCompositearmor_HU.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
+                if (turretbottomCompositearmor_HU.Name != "turret bottom") continue;
+
+                FieldInfo turretbottomComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                turretbottomComposite_HU.SetValue(turretbottomCompositearmor_HU, armor_codex_turretbottomCompositearmor_HU);
+
+                MelonLogger.Msg(turretbottomCompositearmor_HU.ArmorType);
             }
 
             ////M1A1HU UniformArmor pieces
@@ -1321,6 +1341,22 @@ namespace M1A1AMP
                 GPShousingImproved_HU.SetValue(GPShousingImpvrovedarmor_HU, armor_codex_GPSImproveddoor_HU);
 
                 MelonLogger.Msg(GPShousingImpvrovedarmor_HU.ArmorType);
+            }
+
+            foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (armour == null) continue;
+
+                VariableArmor turretbottomCompositearmor_HU = armour.GetComponent<VariableArmor>();
+                if (turretbottomCompositearmor_HU == null) continue;
+                if (turretbottomCompositearmor_HU.Unit == null) continue;
+                if (turretbottomCompositearmor_HU.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
+                if (turretbottomCompositearmor_HU.Name != "turret bottom") continue;
+
+                FieldInfo turretbottomComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                turretbottomComposite_HU.SetValue(turretbottomCompositearmor_HU, armor_codex_turretbottomCompositearmor_HU);
+
+                MelonLogger.Msg(turretbottomCompositearmor_HU.ArmorType);
             }
 
             ////M1E1HU UniformArmor pieces
@@ -2148,6 +2184,7 @@ namespace M1A1AMP
                     if (s.ArmorType.Name == "special armor") armor_turretrearnera_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_GPShousing_HU = s.ArmorType;
                     if (s.ArmorType.Name == "composite skirt") armor_GPSdoor_HU = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_turretbottom_HU = s.ArmorType;
 
                     if (s.ArmorType.Name == "composite skirt") armor_compositeskirt_HC = s.ArmorType;
                     if (s.ArmorType.Name == "special armor") armor_cheeksnera_HC = s.ArmorType;
@@ -2691,6 +2728,17 @@ namespace M1A1AMP
                 armor_codex_GPSImproveddoor_HU.name = "Abrams HU GPS door composite";
                 armor_codex_GPSImproveddoor_HU.ArmorType = armor_GPSImproveddoor_HU;
                 armor_GPSImproveddoor_HU = new ArmorType();
+
+                armor_turretbottomCompositearmor_HU = new ArmorType();
+                Util.ShallowCopy(armor_turretbottomCompositearmor_HU, armor_turretbottom_HU);
+                armor_turretbottomCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 14f; //default composite skirt 1.5
+                armor_turretbottomCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 12f; //default composite skirt 0.8
+                armor_turretbottomCompositearmor_HU.Name = "Abrams HU turret bottom composite";
+
+                armor_codex_turretbottomCompositearmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_turretbottomCompositearmor_HU.name = "Abrams HU turret bottom composite";
+                armor_codex_turretbottomCompositearmor_HU.ArmorType = armor_turretbottomCompositearmor_HU;
+                armor_turretbottomCompositearmor_HU = new ArmorType();
                 ////End
 
                 ////HC armor modifiers (12.5% increase
