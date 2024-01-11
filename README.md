@@ -14,14 +14,14 @@
 </p>
 
 
-### Round changes
+### Round Changes
 | Name  | Note |
 | ------------- | ------------- |
 | M829A4 APFSDS-T | +100% spalling chance |
 | M830 HEAT-FS-T | Redisgnated from MP to FS and +50% spalling chance |
 
 
-### Heavy Ultra (HU) - armor changes
+### Heavy Ultra (HU) Armor Changes
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
 | ------------- | ------------- | ------------- | ------------- | 
 | Composite side skirt | 300 | 550 | from 315/605 |
