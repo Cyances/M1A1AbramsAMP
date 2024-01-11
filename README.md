@@ -47,20 +47,27 @@ If you get an error launching through Steam you will need to run the game execut
 | Gun mantlet | 565 | 910 | 
 
 ### Heavy Ultra (HU) - Custom protection values
-| Area  | Protection vs KE (mm) | Protection vs CE (mm) 
-| ------------- | ------------- | ------------- | 
-| Hull front | 810  | 1280  |
-| Turret cheek | 910 | 1580 | 
-| Turret side | 510 | 1020 | 
-| Composite side skirt | 310 | 600 |
-| Gun mantlet | 660 | 1020 | 
-| Gun mantlet face | 180 | 210 | 
-| Upper glacis | 180 | 210 | 
-| Turret ring | 180 | 210 | 
-| Turret roof | 140 | 175 | 
-| Commander's hatch | 140 | 175 | 
-| Loader's hatch | 140 | 175 | 
-| Driver's hatch | 140 | 175 | 
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
+| ------------- | ------------- | ------------- | ------------- | 
+| Hull front | 810  | 1280  | |
+| Hull side/roof/bottom/rear | 200 | 300 | |
+| Hull firewall | 30 | 30 | Acts as spall liner |
+| Engine deck | 250 | 350 | |
+| Turret cheek | 910 | 1580 | |
+| Turret side | 510 | 1020 | |
+| Turret rear | 500 | 1000 | |
+| Turret firewall | 30 | 30 | Acts as spall liner |
+| Composite side skirt | 300 | 550 | |
+| Side skirt | 300 | 550 | The non-composite ones |
+| Gun mantlet | 660 | 1020 | |
+| Gun mantlet face | 240 | 300 | |
+| Upper glacis | 180 | 210 | |
+| Turret ring | 180 | 210 | |
+| Turret roof | 150 | 180 | |
+| Commander's hatch | 140 | 175 | |
+| Loader's hatch | 140 | 175 | |
+| Driver's hatch | 140 | 175 | |
+| Hull ammo rack door | 45 | 45 | |
 
 <p>
 	<ul> 
@@ -68,7 +75,7 @@ If you get an error launching through Steam you will need to run the game execut
 		<li>The only exception is the turret cheek and hull front where I emulated a headon engagement.</li>
 		<li>HA and HC armor figures are just a flat 12.5% and 25% increase in protection becaue finding proper documentation is difficult (please don't violate ITAR). However, the values can be changed in the future if required. Although if you believe you found a seemingly decent (and unclass) source for the values, please let me know.</li>
 		<li>If the protection increase appears to be low, I'm basing the values relative to the available (REDFOR) vanilla and modded penetrators. Example would be HA's cheek array would barely hold against a vanilla 3BM32 (560mm which is highest REDFOR pen value) while the HC would completely protect against it.</li>
-		<li>HU armor figures are based on Steal Beasts Abrams and my own inputs. It's basically the Abrams that received armor improvements everywhere (SWaP-C begone).</li>
+		<li>HU armor figures are based on Steal Beasts Abrams and my own inputs. It's basically the Abrams that received armor improvements everywhere (BEGONE SWaP-C).</li>
 	</ul>
 </p>
 
@@ -109,7 +116,7 @@ If you get an error launching through Steam you will need to run the game execut
 	</ul>
 </p>
 
-![Screenshot_5](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20MelonPreferences.PNG)
+![Screenshot_5](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20MelonPreferences%20v2.PNG)
 
 ## NOTE!
 <p>
