@@ -24,11 +24,6 @@
 ### Heavy Ultra (HU) - armor changes
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
 | ------------- | ------------- | ------------- | ------------- | 
-| Hull front | 810  | 1280 ||
-| Turret cheek | 910 | 1580 ||
-| Turret side | 510 | 1020 ||
-| Composite side skirt | 300 | 550 ||
-| Gun mantlet face | 180 | 210 ||
-| Upper glacis | 180 | 210 ||
-| Turret ring | 180 | 210 ||
-| Turret roof | 140 | 175 ||
+| Composite side skirt | 300 | 550 | from 315/605 |
+| Gun mantlet face | 240 | 300 | from 180/210 |
+| Turret roof | 140 | 175 | from 140/175 |
