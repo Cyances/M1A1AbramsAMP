@@ -2279,7 +2279,7 @@ namespace M1A1AMP
                 ammo_m829a4.RhaPenetration = 1000f;
                 ammo_m829a4.MuzzleVelocity = 1700f;
                 ammo_m829a4.Mass = 4.94f;
-                ammo_m829a4.SpallMultiplier = 1.5f;
+                ammo_m829a4.SpallMultiplier = 2f;
 
                 ammo_codex_m829a4 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829a4.AmmoType = ammo_m829a4;
@@ -2308,6 +2308,7 @@ namespace M1A1AMP
                 ammo_m830.Mass = 13.5f;
                 ammo_m830.CertainRicochetAngle = 8.0f;
                 ammo_m830.ShatterOnRicochet = false;
+                ammo_m830.SpallMultiplier = 1.5f;
 
                 ammo_codex_m830 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m830.AmmoType = ammo_m830;
