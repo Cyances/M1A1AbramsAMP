@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.1
+# M1A1 Abrams AMP v2.2
 Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. I also would like to thank Swiss/SovGrenadier for the GLATGM implementation. Be sure to checkout their mods because they are great!
 
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
@@ -68,7 +68,7 @@ If you get an error launching through Steam you will need to run the game execut
 		<li>The only exception is the turret cheek and hull front where I emulated a headon engagement.</li>
 		<li>HA and HC armor figures are just a flat 12.5% and 25% increase in protection becaue finding proper documentation is difficult (please don't violate ITAR). However, the values can be changed in the future if required. Although if you believe you found a seemingly decent (and unclass) source for the values, please let me know.</li>
 		<li>If the protection increase appears to be low, I'm basing the values relative to the available (REDFOR) vanilla and modded penetrators. Example would be HA's cheek array would barely hold against a vanilla 3BM32 (560mm which is highest REDFOR pen value) while the HC would completely protect against it.</li>
-		<li>HU armor figures are based on Steal Beasts Abrams and my own inputs.</li>
+		<li>HU armor figures are based on Steal Beasts Abrams and my own inputs. It's basically the Abrams that received armor improvements everywhere (SWaP-C begone).</li>
 	</ul>
 </p>
 
