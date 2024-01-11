@@ -258,35 +258,17 @@ namespace M1A1AMP
         static UniformArmor roadwheelIimprovedarmor;
 
         // gas
-        static ReticleSO reticleSO_m829;
-        static ReticleMesh.CachedReticle reticle_cached_m829;
+        static ReticleSO reticleSO_m1a1firstRound;
+        static ReticleMesh.CachedReticle reticle_cached_m1a1firstRound;
 
-        static ReticleSO reticleSO_m829a1;
-        static ReticleMesh.CachedReticle reticle_cached_m829a1;
+        static ReticleSO reticleSO_m1a1secondRound;
+        static ReticleMesh.CachedReticle reticle_cached_m1a1secondRound;
 
-        static ReticleSO reticleSO_m829a2;
-        static ReticleMesh.CachedReticle reticle_cached_m829a2;
+        static ReticleSO reticleSO_m1e1firstRound;
+        static ReticleMesh.CachedReticle reticle_cached_m1e1firstRound;
 
-        static ReticleSO reticleSO_m829a3;
-        static ReticleMesh.CachedReticle reticle_cached_m829a3;
-
-        static ReticleSO reticleSO_m829a4;
-        static ReticleMesh.CachedReticle reticle_cached_m829a4;
-
-        static ReticleSO reticleSO_m830;
-        static ReticleMesh.CachedReticle reticle_cached_m830;
-
-        static ReticleSO reticleSO_m830a1;
-        static ReticleMesh.CachedReticle reticle_cached_m830a1;
-
-        static ReticleSO reticleSO_m830a2;
-        static ReticleMesh.CachedReticle reticle_cached_m830a2;
-
-        static ReticleSO reticleSO_xm1147;
-        static ReticleMesh.CachedReticle reticle_cached_xm1147;
-
-        static ReticleSO reticleSO_lahat;
-        static ReticleMesh.CachedReticle reticle_cached_lahat;
+        static ReticleSO reticleSO_m1e1secondRound;
+        static ReticleMesh.CachedReticle reticle_cached_m1e1secondRound;
 
 
         public static void Config(MelonPreferences_Category cfg)
@@ -342,7 +324,37 @@ namespace M1A1AMP
         }
         public static IEnumerator Convert(GameState _)
         {
-            //Abrams armor list//
+
+            ////Abrams round list
+            var abrams_clipcodex = new Dictionary<string, AmmoClipCodexScriptable>()
+            {
+                ["M829"] = clip_codex_m829,
+                ["M829A1"] = clip_codex_m829a1,
+                ["M829A2"] = clip_codex_m829a2,
+                ["M829A3"] = clip_codex_m829a3,
+                ["M829A4"] = clip_codex_m829a4,
+                ["M830"] = clip_codex_m830,
+                ["M830A1"] = clip_codex_m830a1,
+                ["M830A2"] = clip_codex_m830a2,
+                ["XM1147"] = clip_codex_XM1147,
+                ["LAHAT"] = clip_codex_lahat,
+            };
+
+            var abrams_ammocodex = new Dictionary<string, AmmoCodexScriptable>()
+            {
+                ["M829"] = ammo_codex_m829,
+                ["M829A1"] = ammo_codex_m829a1,
+                ["M829A2"] = ammo_codex_m829a2,
+                ["M829A3"] = ammo_codex_m829a3,
+                ["M829A4"] = ammo_codex_m829a4,
+                ["M830"] = ammo_codex_m830,
+                ["M830A1"] = ammo_codex_m830a1,
+                ["M830A2"] = ammo_codex_m830a2,
+                ["XM1147"] = ammo_codex_XM1147,
+                ["LAHAT"] = ammo_codex_lahat,
+            };
+
+            ////Abrams armor list
             var abrams_armorvariant_variable = new Dictionary<string, ArmorCodexScriptable>()
             {
                 ["HU"] = armor_codex_superCompositeskirt_HU,
@@ -396,7 +408,7 @@ namespace M1A1AMP
                 ["HU"] = roadwheelIimprovedarmor,
             };
 
-            ////Assign modified armor to M1A1HU////
+            ////Assign modified armor to M1A1HU
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
                 if (armour == null) continue;
@@ -761,8 +773,8 @@ namespace M1A1AMP
                 if (hullsideCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (hullsideCompositearray.Name == "hull side")
                 {
-                    hullsideCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
-                    hullsideCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
+                    hullsideCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                    hullsideCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
                 }
 
                 //MelonLogger.Msg("Composite hull side armor: Loaded");
@@ -778,8 +790,8 @@ namespace M1A1AMP
                 if (hullrearCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (hullrearCompositearray.Name == "hull rear")
                 {
-                    hullrearCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
-                    hullrearCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
+                    hullrearCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                    hullrearCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
                 }
 
                 //MelonLogger.Msg("Composite hull rear armor: Loaded");
@@ -795,8 +807,8 @@ namespace M1A1AMP
                 if (hullfloorCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (hullfloorCompositearray.Name == "hull floor")
                 {
-                    hullfloorCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 3250f;
-                    hullfloorCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
+                    hullfloorCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                    hullfloorCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
                 }
 
                 //MelonLogger.Msg("Composite hull floor armor: Loaded");
@@ -812,8 +824,8 @@ namespace M1A1AMP
                 if (hullroofCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (hullroofCompositearray.Name == "hull roof")
                 {
-                    hullroofCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
-                    hullroofCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
+                    hullroofCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                    hullroofCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
                 }
 
                 //MelonLogger.Msg("Composite hull roof armor: Loaded");
@@ -864,7 +876,7 @@ namespace M1A1AMP
                 if (enginedeckCompositearray.Name == "engine deck")
                 {
                     enginedeckCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 350f;
-                    enginedeckCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 300f;
+                    enginedeckCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
                 }
 
                 //MelonLogger.Msg("Composite engine deck armor: Loaded");
@@ -880,8 +892,8 @@ namespace M1A1AMP
                 if (fenderCompositearray.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (fenderCompositearray.Name == "fender")
                 {
-                    fenderCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
-                    fenderCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
+                    fenderCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
+                    fenderCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
                 }
 
                 //MelonLogger.Msg("Composite fender armor: Loaded");
@@ -898,7 +910,7 @@ namespace M1A1AMP
                 if (sideskirtCompositearray.Name == "side skirt")
                 {
                     sideskirtCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 550f;
-                    sideskirtCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 320f;
+                    sideskirtCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 300f;
                 }
 
                 //MelonLogger.Msg("Composite side skirt: Loaded");
@@ -931,8 +943,8 @@ namespace M1A1AMP
                 if (sprocketwheelImprovedarmor.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (sprocketwheelImprovedarmor.Name == "sprocket wheel")
                 {
-                    sprocketwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
-                    sprocketwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 150f;
+                    sprocketwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                    sprocketwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
                 }
 
                 //MelonLogger.Msg("Improved sprocket wheel armor: Loaded");
@@ -948,16 +960,16 @@ namespace M1A1AMP
                 if (roadwheelImprovedarmor.Unit.FriendlyName != "M1IP" || m1a1Armor.Value != "HU") continue;
                 if (roadwheelImprovedarmor.Name == "road wheel")
                 {
-                    roadwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
-                    roadwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
+                    roadwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                    roadwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
                 }
 
                 //MelonLogger.Msg("Improved road wheel armor: Loaded");
                 MelonLogger.Msg("M1A1HU UniformArmor: Modified");
             }
-            ////End////
+            ////End
 
-            ////Assign modified armor to M1E1HU////
+            ////Assign modified armor to M1E1HU
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
                 if (armour == null) continue;
@@ -1323,8 +1335,8 @@ namespace M1A1AMP
 
                 if (hullsideCompositearray.Name == "hull side")
                 {
-                    hullsideCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
-                    hullsideCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
+                    hullsideCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                    hullsideCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
                 }
 
                 //MelonLogger.Msg("Composite hull side armor: Loaded");
@@ -1340,8 +1352,8 @@ namespace M1A1AMP
                 if (hullrearCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (hullrearCompositearray.Name == "hull rear")
                 {
-                    hullrearCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
-                    hullrearCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
+                    hullrearCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                    hullrearCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
                 }
 
                 //MelonLogger.Msg("Composite hull rear armor: Loaded");
@@ -1357,8 +1369,8 @@ namespace M1A1AMP
                 if (hullfloorCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (hullfloorCompositearray.Name == "hull floor")
                 {
-                    hullfloorCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
-                    hullfloorCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
+                    hullfloorCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                    hullfloorCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
                 }
 
                 //MelonLogger.Msg("Composite hull floor armor: Loaded");
@@ -1374,8 +1386,8 @@ namespace M1A1AMP
                 if (hullroofCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (hullroofCompositearray.Name == "hull roof")
                 {
-                    hullroofCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 325f;
-                    hullroofCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
+                    hullroofCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                    hullroofCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
                 }
 
                 //MelonLogger.Msg("Composite hull roof armor: Loaded");
@@ -1426,7 +1438,7 @@ namespace M1A1AMP
                 if (enginedeckCompositearray.Name == "engine deck")
                 {
                     enginedeckCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 350f;
-                    enginedeckCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 300f;
+                    enginedeckCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
                 }
 
                 //MelonLogger.Msg("Composite engine deck armor: Loaded");
@@ -1442,8 +1454,8 @@ namespace M1A1AMP
                 if (fenderCompositearray.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (fenderCompositearray.Name == "fender")
                 {
-                    fenderCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
-                    fenderCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
+                    fenderCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
+                    fenderCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
                 }
 
                 //MelonLogger.Msg("Composite fender armor: Loaded");
@@ -1460,7 +1472,7 @@ namespace M1A1AMP
                 if (sideskirtCompositearray.Name == "side skirt")
                 {
                     sideskirtCompositearray.PrimaryHeatRha = demigodArmor.Value ? 10000f : 550f;
-                    sideskirtCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 320f;
+                    sideskirtCompositearray.PrimarySabotRha = demigodArmor.Value ? 10000f : 300f;
                 }
 
                 //MelonLogger.Msg("Composite side skirt: Loaded");
@@ -1493,8 +1505,8 @@ namespace M1A1AMP
                 if (sprocketwheelImprovedarmor.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (sprocketwheelImprovedarmor.Name == "sprocket wheel")
                 {
-                    sprocketwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
-                    sprocketwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 150f;
+                    sprocketwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                    sprocketwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
                 }
 
                 //MelonLogger.Msg("Improved sprocket wheel armor: Loaded");
@@ -1510,16 +1522,16 @@ namespace M1A1AMP
                 if (roadwheelImprovedarmor.Unit.FriendlyName != "M1" || (m1e1Convert.Value == true && m1e1Armor.Value != "HU")) continue;
                 if (roadwheelImprovedarmor.Name == "road wheel")
                 {
-                    roadwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
-                    roadwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
+                    roadwheelImprovedarmor.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                    roadwheelImprovedarmor.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
                 }
 
                 //MelonLogger.Msg("Improved road wheel armor: Loaded");
                 MelonLogger.Msg("M1E1HU UniformArmor: Modified");
             }
-            ////End////
+            ////End
 
-            ////Assign modified armor to M1A1HC////
+            ////Assign modified armor to M1A1HC
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
                 if (armour == null) continue;
@@ -1600,9 +1612,9 @@ namespace M1A1AMP
 
                 MelonLogger.Msg(turretsidesDUarray_HC.ArmorType);
             }
-            ////End////
+            ////End
 
-            ////Assign modified armor to M1E1HC////
+            ////Assign modified armor to M1E1HC
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
                 if (armour == null) continue;
@@ -1683,9 +1695,9 @@ namespace M1A1AMP
 
                 MelonLogger.Msg(turretsidesDUarray_HC.ArmorType);
             }
-            ////End////
+            ////End
 
-            ////Assign modified armor to M1A1HA////
+            ////Assign modified armor to M1A1HA
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
                 if (armour == null) continue;
@@ -1766,9 +1778,9 @@ namespace M1A1AMP
 
                 MelonLogger.Msg(turretsidesDUarray_HA.ArmorType);
             }
-            ////End////
+            ////End
 
-            ////Assign modified armor to M1E1HA////
+            ////Assign modified armor to M1E1HA
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
                 if (armour == null) continue;
@@ -1849,22 +1861,7 @@ namespace M1A1AMP
 
                 MelonLogger.Msg(turretsidesDUarray_HA.ArmorType);
             }
-            ////End////
-
-            //Abrams round list
-            var abrams_ammotype = new Dictionary<string, AmmoClipCodexScriptable>()
-            {
-                ["M829"] = clip_codex_m829,
-                ["M829A1"] = clip_codex_m829a1,
-                ["M829A2"] = clip_codex_m829a2,
-                ["M829A3"] = clip_codex_m829a3,
-                ["M829A4"] = clip_codex_m829a4,
-                ["M830"] = clip_codex_m830,
-                ["M830A1"] = clip_codex_m830a1,
-                ["M830A2"] = clip_codex_m830a2,
-                ["XM1147"] = clip_codex_XM1147,
-                ["LAHAT"] = clip_codex_lahat,
-            }; 
+            ////End
             
             foreach (GameObject vic_go in AbramsAMPMod.vic_gos)
             {
@@ -1878,7 +1875,7 @@ namespace M1A1AMP
 
                     if (rand <= randomChanceNum.Value)
                     {
-                        //Rename Abrams////
+                        ////Rename Abrams
                         if (vic.FriendlyName == "M1IP")
                         {
                             vic._friendlyName = "M1A1" + m1a1Armor.Value;
@@ -1900,265 +1897,125 @@ namespace M1A1AMP
                             optic.slot.LinkedNightSight.PairedOptic.RotateAzimuth = true;
                         }
 
-                        ////GAS stuff////
-                        if (reticleSO_m829 == null)
+                        ////GAS stuff
+
+                        if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
                         {
-                            ////M829 GAS
-                            reticleSO_m829 = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"].tree);
-                            reticleSO_m829.name = "120mm_gas_ap";
+                            if (reticleSO_m1e1firstRound == null)
+                            {
+                                reticleSO_m1e1firstRound = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"].tree);
+                                reticleSO_m1e1firstRound.name = "120mm_gas_m1e1firstRound";
 
-                            Util.ShallowCopy(reticle_cached_m829, ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"]);
-                            reticle_cached_m829.tree = reticleSO_m829;
+                                Util.ShallowCopy(reticle_cached_m1e1firstRound, ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"]);
+                                reticle_cached_m1e1firstRound.tree = reticleSO_m1e1firstRound;
 
-                            ReticleTree.VerticalBallistic reticle_range_m829 = (reticleSO_m829.planes[0]
-                                as ReticleTree.FocalPlane).elements[1]
-                                as ReticleTree.VerticalBallistic;
-                            reticle_range_m829.projectile = ammo_codex_m829;
-                            reticle_range_m829.UpdateBC();
+                                ReticleTree.VerticalBallistic reticle_range_m1e1firstRound = (reticleSO_m1e1firstRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[1]
+                                    as ReticleTree.VerticalBallistic;
+                                reticle_range_m1e1firstRound.projectile = abrams_ammocodex[m1e1firstAmmo.Value];
+                                reticle_range_m1e1firstRound.UpdateBC();
 
-                            ReticleTree.Text reticle_text_m829 = (((reticleSO_m829.planes[0]
-                                as ReticleTree.FocalPlane).elements[0])
-                                as ReticleTree.Angular).elements[0]
-                                as ReticleTree.Text;
-                            reticle_text_m829.text = "120-MM\nAPFSDS-T M829\nMETERS";
+                                ReticleTree.Text reticle_text_m1e1firstRound = (((reticleSO_m1e1firstRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[0])
+                                    as ReticleTree.Angular).elements[0]
+                                    as ReticleTree.Text;
 
-                            ////M829A1 GAS
-                            reticleSO_m829a1 = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"].tree);
-                            reticleSO_m829a1.name = "120mm_gas_ap";
+                                string m1e1firstRound_name = abrams_ammocodex[m1e1firstAmmo.Value].AmmoType.Name;
+                                reticle_text_m1e1firstRound.text = "120 MM\n " + m1e1firstRound_name + "\nMETERS";
 
-                            Util.ShallowCopy(reticle_cached_m829a1, ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"]);
-                            reticle_cached_m829a1.tree = reticleSO_m829a1;
+                                reticleSO_m1e1secondRound = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_HEAT"].tree);
+                                reticleSO_m1e1secondRound.name = "120mm_gas_m1e1secondRound";
 
-                            ReticleTree.VerticalBallistic reticle_range_m829a1 = (reticleSO_m829a1.planes[0]
-                                as ReticleTree.FocalPlane).elements[1]
-                                as ReticleTree.VerticalBallistic;
-                            reticle_range_m829a1.projectile = ammo_codex_m829a1;
-                            reticle_range_m829a1.UpdateBC();
+                                Util.ShallowCopy(reticle_cached_m1e1secondRound, ReticleMesh.cachedReticles["M1_105_GAS_HEAT"]);
+                                reticle_cached_m1e1secondRound.tree = reticleSO_m1e1secondRound;
 
-                            ReticleTree.Text reticle_text_m829a1 = (((reticleSO_m829a1.planes[0]
-                                as ReticleTree.FocalPlane).elements[0])
-                                as ReticleTree.Angular).elements[0]
-                                as ReticleTree.Text;
-                            reticle_text_m829a1.text = "120-MM\nAPFSDS-T M829A1\nMETERS";
+                                ReticleTree.VerticalBallistic reticle_range_m1e1secondRound = (reticleSO_m1e1secondRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[1]
+                                    as ReticleTree.VerticalBallistic;
+                                reticle_range_m1e1secondRound.projectile = abrams_ammocodex[m1e1secondAmmo.Value];
+                                reticle_range_m1e1secondRound.UpdateBC();
 
-                            ////M829A2 GAS
-                            reticleSO_m829a2 = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"].tree);
-                            reticleSO_m829a2.name = "120mm_gas_ap";
+                                ReticleTree.Text reticle_text_m1e1secondRound = (((reticleSO_m1e1secondRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[0])
+                                    as ReticleTree.Angular).elements[0]
+                                    as ReticleTree.Text;
 
-                            Util.ShallowCopy(reticle_cached_m829a2, ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"]);
-                            reticle_cached_m829a2.tree = reticleSO_m829a2;
+                                string m1e1secondRound_name = abrams_ammocodex[m1e1secondAmmo.Value].AmmoType.Name;
+                                reticle_text_m1e1secondRound.text = "120 MM\n " + m1e1secondRound_name + "\nMETERS";
+                            }
 
-                            ReticleTree.VerticalBallistic reticle_range_m829a2 = (reticleSO_m829a2.planes[0]
-                                as ReticleTree.FocalPlane).elements[1]
-                                as ReticleTree.VerticalBallistic;
-                            reticle_range_m829a2.projectile = ammo_codex_m829a2;
-                            reticle_range_m829a2.UpdateBC();
+                            ////Setting the reticles
+                            ReticleMesh gas_m1e1firstRound = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh").gameObject.GetComponent<ReticleMesh>();
+                            gas_m1e1firstRound.reticleSO = reticleSO_m1e1firstRound;
+                            gas_m1e1firstRound.reticle = reticle_cached_m1e1firstRound;
+                            gas_m1e1firstRound.SMR = null;
+                            gas_m1e1firstRound.Load();
 
-                            ReticleTree.Text reticle_text_m829a2 = (((reticleSO_m829a2.planes[0]
-                                as ReticleTree.FocalPlane).elements[0])
-                                as ReticleTree.Angular).elements[0]
-                                as ReticleTree.Text;
-                            reticle_text_m829a2.text = "120-MM\nAPFSDS-T M829A2\nMETERS";
-
-                            ////M829A3 GAS
-                            reticleSO_m829a3 = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"].tree);
-                            reticleSO_m829a3.name = "120mm_gas_ap";
-
-                            Util.ShallowCopy(reticle_cached_m829a3, ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"]);
-                            reticle_cached_m829a3.tree = reticleSO_m829a3;
-
-                            ReticleTree.VerticalBallistic reticle_range_m829a3 = (reticleSO_m829a3.planes[0]
-                                as ReticleTree.FocalPlane).elements[1]
-                                as ReticleTree.VerticalBallistic;
-                            reticle_range_m829a3.projectile = ammo_codex_m829a3;
-                            reticle_range_m829a3.UpdateBC();
-
-                            ReticleTree.Text reticle_text_m829a3 = (((reticleSO_m829a3.planes[0]
-                                as ReticleTree.FocalPlane).elements[0])
-                                as ReticleTree.Angular).elements[0]
-                                as ReticleTree.Text;
-                            reticle_text_m829a3.text = "120-MM\nAPFSDS-T M829A3\nMETERS";
-
-                            ////M829A4 GAS
-                            reticleSO_m829a4 = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"].tree);
-                            reticleSO_m829a4.name = "120mm_gas_ap";
-
-                            Util.ShallowCopy(reticle_cached_m829a4, ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"]);
-                            reticle_cached_m829a4.tree = reticleSO_m829a4;
-
-                            ReticleTree.VerticalBallistic reticle_range_m829a4 = (reticleSO_m829a4.planes[0]
-                                as ReticleTree.FocalPlane).elements[1]
-                                as ReticleTree.VerticalBallistic;
-                            reticle_range_m829a4.projectile = ammo_codex_m829a4;
-                            reticle_range_m829a4.UpdateBC();
-
-                            ReticleTree.Text reticle_text_m829a4 = (((reticleSO_m829a4.planes[0]
-                                as ReticleTree.FocalPlane).elements[0])
-                                as ReticleTree.Angular).elements[0]
-                                as ReticleTree.Text;
-                            reticle_text_m829a4.text = "120-MM\nAPFSDS-T M829A4\nMETERS";
-
-                            ////M830 GAS
-                            reticleSO_m830 = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_HEAT"].tree);
-                            reticleSO_m830.name = "120mm_gas_heat";
-
-                            Util.ShallowCopy(reticle_cached_m830, ReticleMesh.cachedReticles["M1_105_GAS_HEAT"]);
-                            reticle_cached_m830.tree = reticleSO_m830;
-
-                            ReticleTree.VerticalBallistic reticle_range_m830 = (reticleSO_m830.planes[0]
-                                as ReticleTree.FocalPlane).elements[1]
-                                as ReticleTree.VerticalBallistic;
-                            reticle_range_m830.projectile = ammo_codex_m830;
-                            reticle_range_m830.UpdateBC();
-
-                            ReticleTree.Text reticle_text_m830 = (((reticleSO_m830.planes[0]
-                                as ReticleTree.FocalPlane).elements[0])
-                                as ReticleTree.Angular).elements[0]
-                                as ReticleTree.Text;
-
-                            reticle_text_m830.text = "120-MM\nHEAT-FS-T M830\nMETERS";
-
-                            ////M830A1 GAS
-                            reticleSO_m830a1 = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_HEAT"].tree);
-                            reticleSO_m830a1.name = "120mm_gas_heat";
-
-                            Util.ShallowCopy(reticle_cached_m830a1, ReticleMesh.cachedReticles["M1_105_GAS_HEAT"]);
-                            reticle_cached_m830a1.tree = reticleSO_m830a1;
-
-                            ReticleTree.VerticalBallistic reticle_range_m830a1 = (reticleSO_m830a1.planes[0]
-                                as ReticleTree.FocalPlane).elements[1]
-                                as ReticleTree.VerticalBallistic;
-                            reticle_range_m830a1.projectile = ammo_codex_m830a1;
-                            reticle_range_m830a1.UpdateBC();
-
-                            ReticleTree.Text reticle_text_m830a1 = (((reticleSO_m830a1.planes[0]
-                                as ReticleTree.FocalPlane).elements[0])
-                                as ReticleTree.Angular).elements[0]
-                                as ReticleTree.Text;
-
-                            reticle_text_m830a1.text = "120-MM\nHEAT-MP-T M830A1\nMETERS";
-
-                            ////M830A2 GAS
-                            reticleSO_m830a2 = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_HEAT"].tree);
-                            reticleSO_m830a2.name = "120mm_gas_heat";
-
-                            Util.ShallowCopy(reticle_cached_m830a2, ReticleMesh.cachedReticles["M1_105_GAS_HEAT"]);
-                            reticle_cached_m830a2.tree = reticleSO_m830a2;
-
-                            ReticleTree.VerticalBallistic reticle_range_m830a2 = (reticleSO_m830a2.planes[0]
-                                as ReticleTree.FocalPlane).elements[1]
-                                as ReticleTree.VerticalBallistic;
-                            reticle_range_m830a2.projectile = ammo_codex_m830a2;
-                            reticle_range_m830a2.UpdateBC();
-
-                            ReticleTree.Text reticle_text_m830a2 = (((reticleSO_m830a2.planes[0]
-                                as ReticleTree.FocalPlane).elements[0])
-                                as ReticleTree.Angular).elements[0]
-                                as ReticleTree.Text;
-
-                            reticle_text_m830a2.text = "120-MM\nHEAT-FS-T M830A2\nMETERS";
-
-                            ////XM1147 GAS
-                            reticleSO_xm1147 = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_HEAT"].tree);
-                            reticleSO_xm1147.name = "120mm_gas_heat";
-
-                            Util.ShallowCopy(reticle_cached_xm1147, ReticleMesh.cachedReticles["M1_105_GAS_HEAT"]);
-                            reticle_cached_xm1147.tree = reticleSO_xm1147;
-
-                            ReticleTree.VerticalBallistic reticle_range_xm1147 = (reticleSO_xm1147.planes[0]
-                                as ReticleTree.FocalPlane).elements[1]
-                                as ReticleTree.VerticalBallistic;
-                            reticle_range_xm1147.projectile = ammo_codex_XM1147;
-                            reticle_range_xm1147.UpdateBC();
-
-                            ReticleTree.Text reticle_text_xm1147 = (((reticleSO_xm1147.planes[0]
-                                as ReticleTree.FocalPlane).elements[0])
-                                as ReticleTree.Angular).elements[0]
-                                as ReticleTree.Text;
-
-                            reticle_text_xm1147.text = "120-MM\nAMP-T XM1147\nMETERS";
-
-                            ////LAHAT GAS
-                            reticleSO_lahat = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_HEAT"].tree);
-                            reticleSO_lahat.name = "120mm_gas_heat";
-
-                            Util.ShallowCopy(reticle_cached_lahat, ReticleMesh.cachedReticles["M1_105_GAS_HEAT"]);
-                            reticle_cached_lahat.tree = reticleSO_lahat;
-
-                            ReticleTree.VerticalBallistic reticle_range_lahat = (reticleSO_lahat.planes[0]
-                                as ReticleTree.FocalPlane).elements[1]
-                                as ReticleTree.VerticalBallistic;
-                            reticle_range_lahat.projectile = ammo_codex_lahat;
-                            reticle_range_lahat.UpdateBC();
-
-                            ReticleTree.Text reticle_text_lahat = (((reticleSO_lahat.planes[0]
-                                as ReticleTree.FocalPlane).elements[0])
-                                as ReticleTree.Angular).elements[0]
-                                as ReticleTree.Text;
-
-                            reticle_text_lahat.text = "120-MM\nLAHAT\nMETERS";
+                            ReticleMesh gas_m1e1secondRound = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh HEAT").gameObject.GetComponent<ReticleMesh>();
+                            gas_m1e1secondRound.reticleSO = reticleSO_m1e1secondRound;
+                            gas_m1e1secondRound.reticle = reticle_cached_m1e1secondRound;
+                            gas_m1e1secondRound.SMR = null;
+                            gas_m1e1secondRound.Load();
                         }
 
-                        ReticleMesh gas_m829 = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh").gameObject.GetComponent<ReticleMesh>();
-                        gas_m829.reticleSO = reticleSO_m829;
-                        gas_m829.reticle = reticle_cached_m829;
-                        gas_m829.SMR = null;
-                        gas_m829.Load();
+                        if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
+                        {
+                            if (reticleSO_m1a1firstRound == null)
+                            {
+                                reticleSO_m1a1firstRound = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"].tree);
+                                reticleSO_m1a1firstRound.name = "120mm_gas_m1a1firstRound";
 
-                        ReticleMesh gas_m829a1 = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh").gameObject.GetComponent<ReticleMesh>();
-                        gas_m829a1.reticleSO = reticleSO_m829a1;
-                        gas_m829a1.reticle = reticle_cached_m829a1;
-                        gas_m829a1.SMR = null;
-                        gas_m829a1.Load();
+                                Util.ShallowCopy(reticle_cached_m1a1firstRound, ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"]);
+                                reticle_cached_m1a1firstRound.tree = reticleSO_m1a1firstRound;
 
-                        ReticleMesh gas_m829a2 = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh").gameObject.GetComponent<ReticleMesh>();
-                        gas_m829a2.reticleSO = reticleSO_m829a2;
-                        gas_m829a2.reticle = reticle_cached_m829a2;
-                        gas_m829a2.SMR = null;
-                        gas_m829a2.Load();
+                                ReticleTree.VerticalBallistic reticle_range_m1a1firstRound = (reticleSO_m1a1firstRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[1]
+                                    as ReticleTree.VerticalBallistic;
+                                reticle_range_m1a1firstRound.projectile = abrams_ammocodex[m1a1firstAmmo.Value];
+                                reticle_range_m1a1firstRound.UpdateBC();
 
-                        ReticleMesh gas_m829a3 = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh").gameObject.GetComponent<ReticleMesh>();
-                        gas_m829a3.reticleSO = reticleSO_m829a3;
-                        gas_m829a3.reticle = reticle_cached_m829a3;
-                        gas_m829a3.SMR = null;
-                        gas_m829a3.Load();
+                                ReticleTree.Text reticle_text_m1a1firstRound = (((reticleSO_m1a1firstRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[0])
+                                    as ReticleTree.Angular).elements[0]
+                                    as ReticleTree.Text;
 
-                        ReticleMesh gas_m829a4 = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh").gameObject.GetComponent<ReticleMesh>();
-                        gas_m829a4.reticleSO = reticleSO_m829a4;
-                        gas_m829a4.reticle = reticle_cached_m829a4;
-                        gas_m829a4.SMR = null;
-                        gas_m829a4.Load();
+                                string m1a1firstRound_name = abrams_ammocodex[m1a1firstAmmo.Value].AmmoType.Name;
+                                reticle_text_m1a1firstRound.text = "120 MM\n " + m1a1firstRound_name + "\nMETERS";
 
-                        ReticleMesh gas_m830 = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh HEAT").gameObject.GetComponent<ReticleMesh>();
-                        gas_m830.reticleSO = reticleSO_m830;
-                        gas_m830.reticle = reticle_cached_m830;
-                        gas_m830.SMR = null;
-                        gas_m830.Load();
+                                reticleSO_m1a1secondRound = ScriptableObject.Instantiate(ReticleMesh.cachedReticles["M1_105_GAS_HEAT"].tree);
+                                reticleSO_m1a1secondRound.name = "120mm_gas_m1a1secondRound";
 
-                        ReticleMesh gas_m830a1 = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh HEAT").gameObject.GetComponent<ReticleMesh>();
-                        gas_m830a1.reticleSO = reticleSO_m830a1;
-                        gas_m830a1.reticle = reticle_cached_m830a1;
-                        gas_m830a1.SMR = null;
-                        gas_m830a1.Load();
+                                Util.ShallowCopy(reticle_cached_m1a1secondRound, ReticleMesh.cachedReticles["M1_105_GAS_HEAT"]);
+                                reticle_cached_m1a1secondRound.tree = reticleSO_m1a1secondRound;
 
-                        ReticleMesh gas_m830a2 = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh HEAT").gameObject.GetComponent<ReticleMesh>();
-                        gas_m830a2.reticleSO = reticleSO_m830a2;
-                        gas_m830a2.reticle = reticle_cached_m830a2;
-                        gas_m830a2.SMR = null;
-                        gas_m830a2.Load();
+                                ReticleTree.VerticalBallistic reticle_range_m1a1secondRound = (reticleSO_m1a1secondRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[1]
+                                    as ReticleTree.VerticalBallistic;
+                                reticle_range_m1a1secondRound.projectile = abrams_ammocodex[m1a1secondAmmo.Value];
+                                reticle_range_m1a1secondRound.UpdateBC();
 
-                        ReticleMesh gas_xm1147 = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh HEAT").gameObject.GetComponent<ReticleMesh>();
-                        gas_xm1147.reticleSO = reticleSO_xm1147;
-                        gas_xm1147.reticle = reticle_cached_xm1147;
-                        gas_xm1147.SMR = null;
-                        gas_xm1147.Load();
+                                ReticleTree.Text reticle_text_m1a1secondRound = (((reticleSO_m1a1secondRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[0])
+                                    as ReticleTree.Angular).elements[0]
+                                    as ReticleTree.Text;
 
-                        ReticleMesh gas_lahat = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh HEAT").gameObject.GetComponent<ReticleMesh>();
-                        gas_lahat.reticleSO = reticleSO_lahat;
-                        gas_lahat.reticle = reticle_cached_lahat;
-                        gas_lahat.SMR = null;
-                        gas_lahat.Load();
-                        ////End////
+                                string m1a1secondRound_name = abrams_ammocodex[m1a1secondAmmo.Value].AmmoType.Name;
+                                reticle_text_m1a1secondRound.text = "120 MM\n " + m1a1secondRound_name + "\nMETERS";
+                            }
+
+                            ////Setting the reticles
+                            ReticleMesh gas_m1a1firstRound = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh").gameObject.GetComponent<ReticleMesh>();
+                            gas_m1a1firstRound.reticleSO = reticleSO_m1a1firstRound;
+                            gas_m1a1firstRound.reticle = reticle_cached_m1a1firstRound;
+                            gas_m1a1firstRound.SMR = null;
+                            gas_m1a1firstRound.Load();
+
+                            ReticleMesh gas_m1a1secondRound = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/Reticle Mesh HEAT").gameObject.GetComponent<ReticleMesh>();
+                            gas_m1a1secondRound.reticleSO = reticleSO_m1a1secondRound;
+                            gas_m1a1secondRound.reticle = reticle_cached_m1a1secondRound;
+                            gas_m1a1secondRound.SMR = null;
+                            gas_m1a1secondRound.Load();
+                        }
 
                         Transform muzzleFlashes = mainGun.MuzzleEffects[1].transform;
                         muzzleFlashes.GetChild(1).transform.localScale = new Vector3(2f, 2f, 2f);
@@ -2174,16 +2031,16 @@ namespace M1A1AMP
                         GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
                         gunTube.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
 
-                        // Abrams loadout management
+                        //// Abrams loadout management
                         LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
                         AmmoType.AmmoClip[] ammo_clip_types = new AmmoType.AmmoClip[] { };
 
                         if (vic.FriendlyName == "M1A1" + m1a1Armor.Value || vic.FriendlyName == "M1E1" + m1e1Armor.Value)
                         {
-                            AmmoClipCodexScriptable firstClipCodex = abrams_ammotype[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1firstAmmo.Value : m1e1firstAmmo.Value];
-                            AmmoClipCodexScriptable secondClipCodex = abrams_ammotype[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1secondAmmo.Value : m1e1secondAmmo.Value];
-                            AmmoClipCodexScriptable thirdClipCodex = abrams_ammotype[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1thirdAmmo.Value : m1e1thirdAmmo.Value];
-                            AmmoClipCodexScriptable fourthClipCodex = abrams_ammotype[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1fourthAmmo.Value : m1e1fourthAmmo.Value];
+                            AmmoClipCodexScriptable firstClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1firstAmmo.Value : m1e1firstAmmo.Value];
+                            AmmoClipCodexScriptable secondClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1secondAmmo.Value : m1e1secondAmmo.Value];
+                            AmmoClipCodexScriptable thirdClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1thirdAmmo.Value : m1e1thirdAmmo.Value];
+                            AmmoClipCodexScriptable fourthClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1fourthAmmo.Value : m1e1fourthAmmo.Value];
 
                             loadoutManager.LoadedAmmoTypes = new AmmoClipCodexScriptable[] { firstClipCodex, secondClipCodex, thirdClipCodex, fourthClipCodex };
 
@@ -2218,7 +2075,7 @@ namespace M1A1AMP
                         mainGun.Feed.Start();
                         loadoutManager.RegisterAllBallistics();
 
-                        //Guidance computer for LAHAT
+                        ////Guidance computer for LAHAT
                         GameObject guidance_computer_obj = new GameObject("Abrams Guidance Computer");
                         guidance_computer_obj.transform.parent = vic.transform;
                         guidance_computer_obj.AddComponent<MissileGuidanceUnit>();
@@ -2229,7 +2086,6 @@ namespace M1A1AMP
                         typeof(Reparent).GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(reparent, new object[] { });
 
                         MissileGuidanceUnit computer = guidance_computer_obj.GetComponent<MissileGuidanceUnit>();
-                        //computer.AimElement = mainGunInfo.FCS.AimTransform;
                         computer.AimElement = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/laser/").gameObject.transform;
                         mainGun.GuidanceUnit = computer;
                     }
@@ -2249,7 +2105,7 @@ namespace M1A1AMP
             if (AbramsAMPMod.playerManager.CurrentPlayerWeapon.Name != "120mm gun M256") return;
 
             AmmoType currentAmmo = AbramsAMPMod.playerManager.CurrentPlayerWeapon.FCS.CurrentAmmoType;
-            int reticleId = (currentAmmo.Name == "M829 APFSDS-T" || currentAmmo.Name == "M829A1 APFSDS-T") ? 0 : 2;
+            int reticleId = (currentAmmo.Name == "M829 APFSDS-T" || currentAmmo.Name == "M829A1 APFSDS-T" || currentAmmo.Name == "M829A2 APFSDS-T" || currentAmmo.Name == "M829A3 APFSDS-T" || currentAmmo.Name == "M829A4 APFSDS-T") ? 0 : 2;
 
             GameObject reticle = cam.transform.GetChild(reticleId).gameObject;
 
@@ -2258,40 +2114,12 @@ namespace M1A1AMP
                 reticle.SetActive(true);
             }
 
-
-            Vehicle vic = (Vehicle)AbramsAMPMod.playerManager.CurrentPlayerUnit;
-            var gps = vic.transform.gameObject.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS").transform;
-            if (gps == null || gps.gameObject.activeSelf == false) return;
-
-            FireControlSystem FCS = AbramsAMPMod.playerManager.CurrentPlayerWeapon.FCS;
-            ParticleSystem[] particleSystem = AbramsAMPMod.playerManager.CurrentPlayerWeapon.Weapon.MuzzleEffects;
-            //US Vehicles/M1IP/IPM1_rig/HULL/TURRET/Turret Scripts/GPS
-
-            if (FCS.CurrentAmmoType.Name == "LAHAT")
-            {
-                gps.GetChild(0).gameObject.SetActive(false);
-                gps.GetChild(2).gameObject.SetActive(true);
-
-                particleSystem[0].transform.GetChild(0).transform.gameObject.SetActive(false);
-                particleSystem[0].transform.GetChild(1).transform.gameObject.SetActive(false);
-                particleSystem[0].transform.GetChild(3).transform.gameObject.SetActive(false);
-            }
-            else
-            {
-                gps.GetChild(0).gameObject.SetActive(true);
-                gps.GetChild(2).gameObject.SetActive(false);
-
-                particleSystem[0].transform.GetChild(0).transform.gameObject.SetActive(true);
-                particleSystem[0].transform.GetChild(1).transform.gameObject.SetActive(true);
-                particleSystem[0].transform.GetChild(3).transform.gameObject.SetActive(true);
-            }
-
         }
         public static void Init()
         {
             if (gun_m256 == null)
             {
-                //borrow existing ammo and armor attributes
+                ////Borrow existing ammo and armor attributes
                 foreach (AmmoCodexScriptable s in Resources.FindObjectsOfTypeAll(typeof(AmmoCodexScriptable)))
                 {
                     if (s.AmmoType.Name == "M833 APFSDS-T") ammo_m833 = s.AmmoType;
@@ -2487,7 +2315,7 @@ namespace M1A1AMP
 
                 clip_m830 = new AmmoType.AmmoClip();
                 clip_m830.Capacity = 1;
-                clip_m830.Name = "M830 HEAT-MP-T";
+                clip_m830.Name = "M830 HEAT-FS-T";
                 clip_m830.MinimalPattern = new AmmoCodexScriptable[1];
                 clip_m830.MinimalPattern[0] = ammo_codex_m830;
 
@@ -2510,7 +2338,7 @@ namespace M1A1AMP
                 ammo_m830a1.ShatterOnRicochet = false;
                 ammo_m830a1.DetonateSpallCount = mpatFragments.Value; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
                 ammo_m830a1.SpallMultiplier = 0.5f;
-                ammo_m830a1.MaxSpallRha = 80f;
+                ammo_m830a1.MaxSpallRha = 60f;
                 ammo_m830a1.MinSpallRha = 1f;
                 //ammo_m830a1.ImpactFuseTime = 0.000357143f; //0.5 meters after impact //delay removed since it negatively affects armor penetration
 
@@ -2539,11 +2367,11 @@ namespace M1A1AMP
                 ammo_m830a2.TntEquivalentKg = 2.721f;
                 ammo_m830a2.MuzzleVelocity = 1240f;
                 ammo_m830a2.Mass = 13.5f;
-                ammo_m830a2.CertainRicochetAngle = 8.0f;
+                ammo_m830a2.CertainRicochetAngle = 5.0f;
                 ammo_m830a2.ShatterOnRicochet = false;
                 ammo_m830a2.DetonateSpallCount = 150;
                 ammo_m830a2.SpallMultiplier = 2f;
-                ammo_m830a2.MaxSpallRha = 40f;
+                ammo_m830a2.MaxSpallRha = 50f;
                 ammo_m830a2.MinSpallRha = 5f;
 
                 ammo_codex_m830a2 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
@@ -2568,12 +2396,12 @@ namespace M1A1AMP
                 ammo_xm1147.Name = "XM1147 AMP-T";
                 ammo_xm1147.Caliber = 120;
                 ammo_xm1147.RhaPenetration = 480;
-                ammo_xm1147.TntEquivalentKg = 3.324f;
+                ammo_xm1147.TntEquivalentKg = 3.45f; //50% more power than equivalent load
                 ammo_xm1147.MaxSpallRha = 180f;
                 ammo_xm1147.MinSpallRha = 55f;
                 ammo_xm1147.MuzzleVelocity = 1410f;
                 ammo_xm1147.Mass = 11.4f;
-                ammo_xm1147.CertainRicochetAngle = 5.0f;
+                ammo_xm1147.CertainRicochetAngle = 1.0f;
                 ammo_xm1147.ShatterOnRicochet = false;
                 ammo_xm1147.SpallMultiplier = 2f;
                 ammo_xm1147.DetonateSpallCount = ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
@@ -2632,7 +2460,7 @@ namespace M1A1AMP
 
                 //Armor stuff
 
-                ////HU armor modifiers////
+                ////HU armor modifiers
                 armor_superCompositeskirt_HU = new ArmorType();
                 Util.ShallowCopy(armor_superCompositeskirt_HU, armor_compositeskirt_HU);
                 armor_superCompositeskirt_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 11f; //default 1.5
@@ -2766,8 +2594,8 @@ namespace M1A1AMP
 
                 armor_trackSpecialarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_trackSpecialarmor_HU, armor_trackarmor_HU);
-                armor_trackSpecialarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 20f; //default composite skirt 1.5
-                armor_trackSpecialarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 20f; //default composite skirt 0.8
+                armor_trackSpecialarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 10f; //default composite skirt 1.5
+                armor_trackSpecialarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 10f; //default composite skirt 0.8
                 armor_trackSpecialarmor_HU.Name = "Abrams HU special track armor";
 
                 armor_codex_trackSpecialarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2862,9 +2690,9 @@ namespace M1A1AMP
                 armor_codex_GPSImproveddoor_HU.name = "Abrams HU GPS door composite";
                 armor_codex_GPSImproveddoor_HU.ArmorType = armor_GPSImproveddoor_HU;
                 armor_GPSImproveddoor_HU = new ArmorType();
-                ////End////
+                ////End
 
-                ////HC armor modifiers (12.5% increase)////
+                ////HC armor modifiers (12.5% increase
                 armor_superCompositeskirt_HC = new ArmorType();
                 Util.ShallowCopy(armor_superCompositeskirt_HC, armor_compositeskirt_HC);
                 armor_superCompositeskirt_HC.RhaeMultiplierCe = 1.875f; //default 1.5
@@ -2918,9 +2746,9 @@ namespace M1A1AMP
                 armor_codex_turretsidesDUarmor_HC.name = "Abrams HC DU armor turret sides";
                 armor_codex_turretsidesDUarmor_HC.ArmorType = armor_turretsidesDUarmor_HC;
                 armor_turretsidesDUarmor_HC = new ArmorType();
-                ////End////
+                ////End
 
-                ////HA armor modifiers (25% increase)////
+                ////HA armor modifiers (25% increase
                 armor_superCompositeskirt_HA = new ArmorType();
                 Util.ShallowCopy(armor_superCompositeskirt_HA, armor_compositeskirt_HA);
                 armor_superCompositeskirt_HA.RhaeMultiplierCe = 1.6875f; //default 1.5
@@ -2974,9 +2802,9 @@ namespace M1A1AMP
                 armor_codex_turretsidesDUarmor_HA.name = "Abrams HA DU armor turret sides";
                 armor_codex_turretsidesDUarmor_HA.ArmorType = armor_turretsidesDUarmor_HA;
                 armor_turretsidesDUarmor_HA = new ArmorType();
-                ////End////
+                ////End
 
-                ////Visual models////
+                ////Visual models
                 ammo_m829_vis = GameObject.Instantiate(ammo_m833.VisualModel);
                 ammo_m829_vis.name = "M829 visual";
                 ammo_m829.VisualModel = ammo_m829_vis;
