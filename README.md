@@ -79,8 +79,8 @@ If you get an error launching through Steam you will need to run the game execut
 | M829A1 APFSDS-T  | 700 | 1575 | - |
 | M829A2 APFSDS-T | 800 | 1680 | - |
 | M829A3 APFSDS-T | 900 | 1555 | - |
-| M829A4 APFSDS-T | 1000 | 1700 | +50% spalling chance |
-| M830 HEAT-FS-T | 600 | 1140 | - |
+| M829A4 APFSDS-T | 1000 | 1700 | +100% spalling chance |
+| M830 HEAT-FS-T | 600 | 1140 | +50% spalling chance |
 | M830A1 HEAT-MP-T | 480 | 1400 | Point-detonate fuze only. 600 fragments (configurable count). |
 | M830A2 IHEAT-FS-T | 1200 | 1240 | +100% spalling chance |
 | XM1147 AMP-T | 480 | 1410 | Point-detonate and airburst fuze. 600 fragments (configurable count). |
@@ -105,6 +105,7 @@ If you get an error launching through Steam you will need to run the game execut
 		<li>Convert non-IP M1s to M1E1s (enabled by default)</li>
 		<li>Randomize M1A1/E1 conversions (enabled by default) </li>
 		<li>Customize the armor variant used by M1A1 and M1E1 (HU for both by default). M1 must be converted to M1E1 to allow armor conversions. The mod will default to vanilla base armor when there is a typo or if a field is left blank.</li>
+		<li>Demigod armor for the HU variant (disabled by default)</li>
 	</ul>
 </p>
 
@@ -116,5 +117,6 @@ If you get an error launching through Steam you will need to run the game execut
 		<li>Only include ATLAS' Abrams mod .dll file in the mods folder or this one. Do not place both .dll files at the same time.</li>
 		<li>If you already have ATLAS' Abrams mod or have an older version of the Abrams AMP mod installed, either delete MelonPreferences.cfg in UserData folder or remove the lines pertaining to the [M1A1Config]/[M1A1AMPConfig] to make it easier to understand the custom config. Launch the game first then close it to update the contents of MelonPreferences.cfg</li>
 		<li>XM1111 is in the config file but it is not implemented yet. Listing that in your loadout will make the mod use vanilla loadout (M833/M456A2). I only included it so there is no need to manually cleanup the config file if I could make it work.</li>
+		<li>Mission loading might be longer if you are using the HU variant, potentially due to the extra armor configuration.</li>
 	</ul>
 </p>
