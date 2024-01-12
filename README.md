@@ -93,6 +93,13 @@ If you get an error launching through Steam you will need to run the game execut
 | XM1147 AMP-T | 480 | 1410 | Point-detonate and airburst fuze. 600 fragments (configurable count). |
 | LAHAT | 800 | 300 | Gun-launched ATGM with SALH guidance.|
 
+<p>
+	<ul> 
+		<li>The enetration values chosen are relative to the existing penetrators in the game and on assumptions/guesstimations based on open sourece information.</li>
+		<li>The penetration values for the M829 series are just a simple 100mm increase in performance compared to the previous version for simplicity.</li>
+	</ul>
+</p>
+
 ## How to use the XM1147 AMP-T:
 <p>
 	<ul> 
