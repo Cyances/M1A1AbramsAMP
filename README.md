@@ -95,8 +95,8 @@ If you get an error launching through Steam you will need to run the game execut
 
 <p>
 	<ul> 
-		<li>The enetration values chosen are relative to the existing penetrators in the game and on assumptions/guesstimations based on open sourece information.</li>
-		<li>The penetration values for the M829 series are just a simple 100mm increase in performance compared to the previous version for simplicity.</li>
+		<li>The penetration values chosen are relative to the existing penetrators in the game and on assumptions/guesstimations based on open sourece information.</li>
+		<li>The performance for the M829 series are just a simple 100mm increase in penetration compared to the previous version for simplicity.</li>
 	</ul>
 </p>
 
