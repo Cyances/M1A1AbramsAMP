@@ -18,7 +18,6 @@ using GHPC.Equipment;
 using GHPC.Utility;
 using GHPC;
 using HarmonyLib;
-using M1A1AbramsAMP;
 
 namespace M1A1AMP
 {

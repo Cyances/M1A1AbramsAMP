@@ -16,7 +16,7 @@ using HarmonyLib;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace M1A1AbramsAMP
+namespace M1A1AMP
 {
 
     public static class Kontakt1
