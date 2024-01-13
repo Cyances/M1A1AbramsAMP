@@ -2,10 +2,14 @@
 M1IP HULL FOLLOW/HULLARMOR/
 M1 TURRET FOLLOW/Turret_Armor
 M1 HULL FOLLOW/HULLARMOR/
+
 ####
+
 T-72 TURRET COLLIDERS/ARMOR/
 T-72 HULL COLLIDERS/ARMOR/hull era array(Clone)/right side skirt array/
+
 ####
+
 Unity Editor T-72 position
 -1.939999
 1.025
@@ -19,6 +23,7 @@ Kontakt 1 reference
 -0.0015
 2.14
 -0.4646
+
 ####
 
 
