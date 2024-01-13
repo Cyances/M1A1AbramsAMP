@@ -53,6 +53,7 @@ namespace M1A1AMP
 
             StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(GetVics), GameStatePriority.Low);
             M1A1AbramsAMPMod.Init();
+            Kontakt1.Init();
         }
     }
 }

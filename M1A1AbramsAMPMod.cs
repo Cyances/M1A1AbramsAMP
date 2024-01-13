@@ -406,26 +406,31 @@ namespace M1A1AMP
             ////ARAT stuff
             foreach (GameObject armor_go in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
+                //hid the hull era to make it less cluttered when searching in UE
+                //    if (Kontakt1.kontakt_1_hull_array == null) continue;
                 if (Kontakt1.kontakt_1_turret_array == null) continue;
                 if (!armor_go.GetComponent<LateFollow>()) continue;
 
                 string name = armor_go.GetComponent<LateFollow>().ParentUnit.FriendlyName;
 
-                if (name == "M1IP") continue;
+                if (name != "M1IP") continue;
 
-                if (armor_go.name == "M1IP HULL FOLLOW")
-                {
-                    if (armor_go.transform.Find("HULLARMOR/hull era array(Clone)")) continue;
-                    GameObject hull_array = GameObject.Instantiate(Kontakt1.kontakt_1_hull_array, armor_go.transform.Find("HULLARMOR"));
-                    hull_array.transform.localEulerAngles = new Vector3(0f, 00f, 0f);
-                    hull_array.transform.localPosition = new Vector3(0f, 0f, 0f);
+                //if (armor_go.name == "M1IP HULL FOLLOW")
+                //{
+                //    if (armor_go.transform.Find("HULLARMOR/hull era array(Clone)")) continue;
+                //    GameObject hull_array = GameObject.Instantiate(Kontakt1.kontakt_1_hull_array, armor_go.transform.Find("HULLARMOR"));
+                //    hull_array.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+                //    hull_array.transform.localPosition = new Vector3(0f, 0f, 0f);
 
-                }
+                //}
 
                 if (armor_go.name == "M1IP TURRET FOLLOW")
                 {
-                    if (armor_go.transform.Find("Turret_Armor/side up era array(Clone)")) continue;
+                    if (armor_go.transform.Find("Turret_Armor/side up array(Clone)")) continue;
                     GameObject turret_array = GameObject.Instantiate(Kontakt1.kontakt_1_turret_array, armor_go.transform.Find("Turret_Armor"));
+                    //IPM1_rig/HULL/TURRET/Turret Scripts/GPS/
+                    //if (armor_go.transform.Find("TURRET/side up array(Clone)")) continue;
+                    //GameObject turret_array = GameObject.Instantiate(Kontakt1.kontakt_1_turret_array, armor_go.transform.Find("TURRET"));
                     turret_array.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
                     turret_array.transform.localPosition = new Vector3(0f, 0f, 0f);
                 }

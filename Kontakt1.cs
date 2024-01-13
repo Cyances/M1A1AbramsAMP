@@ -81,9 +81,10 @@ namespace M1A1AMP
 
         public static void Init()
         {
-            if (kontakt_1_hull_array == null)
+            if (kontakt_1_turret_array == null)
             {
-                var kontakt_bundle_hull = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/kontakt1assets", "hull"));
+                //hid the hull era to make it less cluttered when searching in UE
+                //var kontakt_bundle_hull = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/kontakt1assets", "hull"));
                 var kontakt_bundle_turret = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/kontakt1assets", "turret"));
 
                 foreach (Texture t in Resources.FindObjectsOfTypeAll<Texture>())
@@ -96,16 +97,16 @@ namespace M1A1AMP
                     if (t.name == "GHPC_ConcretePanels_Normal") { concrete_tex_normal = t; break; }
                 }
 
-                kontakt_1_hull_array = kontakt_bundle_hull.LoadAsset<GameObject>("hull era array.prefab");
-                kontakt_1_hull_array.transform.localScale = new Vector3(10f, 10f, 10f);
+                //kontakt_1_hull_array = kontakt_bundle_hull.LoadAsset<GameObject>("hull era array.prefab");
+                //kontakt_1_hull_array.transform.localScale = new Vector3(10f, 10f, 10f);
 
                 kontakt_1_turret_array = kontakt_bundle_turret.LoadAsset<GameObject>("side up array.prefab");
                 kontakt_1_turret_array.transform.localScale = new Vector3(1f, 1f, 1f);
 
-                kontakt_1_hull_array.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                //kontakt_1_hull_array.hideFlags = HideFlags.DontUnloadUnusedAsset;
                 kontakt_1_turret_array.hideFlags = HideFlags.DontUnloadUnusedAsset;
 
-                ERA_Setup(kontakt_1_hull_array.GetComponentsInChildren<Transform>());
+                //ERA_Setup(kontakt_1_hull_array.GetComponentsInChildren<Transform>());
                 ERA_Setup(kontakt_1_turret_array.GetComponentsInChildren<Transform>());
             }
         }
