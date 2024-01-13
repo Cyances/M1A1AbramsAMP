@@ -18,6 +18,7 @@ using GHPC.Equipment;
 using GHPC.Utility;
 using GHPC;
 using HarmonyLib;
+using M1A1AbramsAMP;
 
 namespace M1A1AMP
 {
@@ -119,64 +120,71 @@ namespace M1A1AMP
         static AmmoType ammo_bgm71;
 
         ////Armor variables
+        ////Variables for copying existing ArmorType
+        static ArmorType armor_compositeskirt_VNL;
+        static ArmorType armor_cheeksnera_VNL;
+        static ArmorType armor_fronthullnera_VNL;
+        static ArmorType armor_mantletnera_VNL;
+        static ArmorType armor_turretsidesnera_VNL;
+        static ArmorType armor_turretroofarmor_VNL;
+        static ArmorType armor_upperglacisarmor_VNL;
+        static ArmorType armor_commmandershatcharmor_VNL;
+        static ArmorType armor_loadershatcharmor_VNL;
+        static ArmorType armor_drivershatcharmor_VNL;
+        static ArmorType armor_turretringarmor_VNL;
+        static ArmorType armor_gunmantletfacearmor_VNL;
+        static ArmorType armor_trackarmor_VNL;
+        static ArmorType armor_gunbarrel_VNL;
+        static ArmorType armor_blowoutpanel_VNL;
+        static ArmorType armor_bustlefirewall_VNL;
+        static ArmorType armor_turretrearnera_VNL;
+        static ArmorType armor_GPShousing_VNL;
+        static ArmorType armor_GPSdoor_VNL;
+        static ArmorType armor_turretbottom_VNL;
+
         ////HU Variant
-        static ArmorType armor_compositeskirt_HU;
         static ArmorCodexScriptable armor_codex_superCompositeskirt_HU;
         static ArmorType armor_superCompositeskirt_HU;
 
-        static ArmorType armor_cheeksnera_HU;
         static ArmorCodexScriptable armor_codex_cheeksDUarmor_HU;
         static ArmorType armor_cheeksDUarmor_HU;
 
-        static ArmorType armor_fronthullnera_HU;
         static ArmorCodexScriptable armor_codex_fronthullDUarmor_HU;
         static ArmorType armor_fronthullDUarmor_HU;
 
-        static ArmorType armor_mantletnera_HU;
         static ArmorCodexScriptable armor_codex_mantletDUarmor_HU;
         static ArmorType armor_mantletDUarmor_HU;
 
-        static ArmorType armor_turretsidesnera_HU;
         static ArmorCodexScriptable armor_codex_turretsidesDUarmor_HU;
         static ArmorType armor_turretsidesDUarmor_HU;
 
-        static ArmorType armor_turretroofarmor_HU;
         static ArmorCodexScriptable armor_codex_turretroofCompositearmor_HU;
         static ArmorType armor_turretroofCompositearmor_HU;
 
-        static ArmorType armor_upperglacisarmor_HU;
         static ArmorCodexScriptable armor_codex_upperglacisCompositearmor_HU;
         static ArmorType armor_upperglacisCompositearmor_HU;
 
-        static ArmorType armor_commmandershatcharmor_HU;
         static ArmorCodexScriptable armor_codex_commmandershatchCompositearmor_HU;
         static ArmorType armor_commmandershatchCompositearmor_HU;
 
-        static ArmorType armor_loadershatcharmor_HU;
         static ArmorCodexScriptable armor_codex_loadershatchCompositearmor_HU;
         static ArmorType armor_loadershatchCompositearmor_HU;
 
-        static ArmorType armor_drivershatcharmor_HU;
         static ArmorCodexScriptable armor_codex_drivershatchCompositearmor_HU;
         static ArmorType armor_drivershatchCompositearmor_HU;
 
-        static ArmorType armor_turretringarmor_HU;
         static ArmorCodexScriptable armor_codex_turretringCompositearmor_HU;
         static ArmorType armor_turretringCompositearmor_HU;
 
-        static ArmorType armor_gunmantletfacearmor_HU;
         static ArmorCodexScriptable armor_codex_gunmantletfaceCompositearmor_HU;
         static ArmorType armor_gunmantletfaceCompositearmor_HU;
 
-        static ArmorType armor_trackarmor_HU;
         static ArmorCodexScriptable armor_codex_trackSpecialarmor_HU;
         static ArmorType armor_trackSpecialarmor_HU;
 
-        static ArmorType armor_gunbarrel_HU;
         static ArmorCodexScriptable armor_codex_gunbarrelImprovedarmor_HU;
         static ArmorType armor_gunbarrelImprovedarmor_HU;
 
-        static ArmorType armor_blowoutpanel_HU;
         static ArmorCodexScriptable armor_codex_blowoutpanelCompositearmorC_HU;
         static ArmorType armor_blowoutpanelCompositearmorC_HU;
 
@@ -186,65 +194,50 @@ namespace M1A1AMP
         static ArmorCodexScriptable armor_codex_blowoutpanelCompositearmorR_HU;
         static ArmorType armor_blowoutpanelCompositearmorR_HU;
 
-        static ArmorType armor_bustlefirewall_HU;
         static ArmorCodexScriptable armor_codex_bustleImprovedfirewall_HU;
         static ArmorType armor_bustleImprovedfirewall_HU;
 
-        static ArmorType armor_turretrearnera_HU;
         static ArmorCodexScriptable armor_codex_turretrearSpecialarray_HU;
         static ArmorType armor_turretrearSpecialarray_HU;
 
-        static ArmorType armor_GPShousing_HU;
         static ArmorCodexScriptable armor_codex_GPSImprovedhousing_HU;
         static ArmorType armor_GPSImprovedhousing_HU;
 
-        static ArmorType armor_GPSdoor_HU;
         static ArmorCodexScriptable armor_codex_GPSImproveddoor_HU;
         static ArmorType armor_GPSImproveddoor_HU;
 
-        static ArmorType armor_turretbottom_HU;
         static ArmorCodexScriptable armor_codex_turretbottomCompositearmor_HU;
         static ArmorType armor_turretbottomCompositearmor_HU;
 
         ////HC Variant
-        static ArmorType armor_compositeskirt_HC;
         static ArmorCodexScriptable armor_codex_superCompositeskirt_HC;
         static ArmorType armor_superCompositeskirt_HC;
 
-        static ArmorType armor_cheeksnera_HC;
         static ArmorCodexScriptable armor_codex_cheeksDUarmor_HC;
         static ArmorType armor_cheeksDUarmor_HC;
 
-        static ArmorType armor_fronthullnera_HC;
         static ArmorCodexScriptable armor_codex_fronthullDUarmor_HC;
         static ArmorType armor_fronthullDUarmor_HC;
 
-        static ArmorType armor_mantletnera_HC;
         static ArmorCodexScriptable armor_codex_mantletDUarmor_HC;
         static ArmorType armor_mantletDUarmor_HC;
 
-        static ArmorType armor_turretsidesnera_HC;
         static ArmorCodexScriptable armor_codex_turretsidesDUarmor_HC;
         static ArmorType armor_turretsidesDUarmor_HC;
 
-        static ArmorType armor_compositeskirt_HA;
         static ArmorCodexScriptable armor_codex_superCompositeskirt_HA;
         static ArmorType armor_superCompositeskirt_HA;
 
         ////HA Variant
-        static ArmorType armor_cheeksnera_HA;
         static ArmorCodexScriptable armor_codex_cheeksDUarmor_HA;
         static ArmorType armor_cheeksDUarmor_HA;
 
-        static ArmorType armor_fronthullnera_HA;
         static ArmorCodexScriptable armor_codex_fronthullDUarmor_HA;
         static ArmorType armor_fronthullDUarmor_HA;
 
-        static ArmorType armor_mantletnera_HA;
         static ArmorCodexScriptable armor_codex_mantletDUarmor_HA;
         static ArmorType armor_mantletDUarmor_HA;
 
-        static ArmorType armor_turretsidesnera_HA;
         static ArmorCodexScriptable armor_codex_turretsidesDUarmor_HA;
         static ArmorType armor_turretsidesDUarmor_HA;
 
@@ -327,7 +320,6 @@ namespace M1A1AMP
         }
         public static IEnumerator Convert(GameState _)
         {
-
             ////Abrams round list
             var abrams_clipcodex = new Dictionary<string, AmmoClipCodexScriptable>()
             {
@@ -411,6 +403,34 @@ namespace M1A1AMP
                 ["HU"] = sprocketwheelImprovedarmor,
                 ["HU"] = roadwheelIimprovedarmor,
             };
+
+            ////ARAT stuff
+            foreach (GameObject armor_go in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (Kontakt1.kontakt_1_turret_array == null) continue;
+                if (!armor_go.GetComponent<LateFollow>()) continue;
+
+                string name = armor_go.GetComponent<LateFollow>().ParentUnit.FriendlyName;
+
+                if (name == "M1IP") continue;
+
+                if (armor_go.name == "M1IP HULL FOLLOW")
+                {
+                    if (armor_go.transform.Find("HULLARMOR/hull era array(Clone)")) continue;
+                    GameObject hull_array = GameObject.Instantiate(Kontakt1.kontakt_1_hull_array, armor_go.transform.Find("HULLARMOR"));
+                    hull_array.transform.localEulerAngles = new Vector3(0f, 00f, 0f);
+                    hull_array.transform.localPosition = new Vector3(0f, 0f, 0f);
+
+                }
+
+                if (armor_go.name == "M1IP TURRET FOLLOW")
+                {
+                    if (armor_go.transform.Find("Turret_Armor/side up era array(Clone)")) continue;
+                    GameObject turret_array = GameObject.Instantiate(Kontakt1.kontakt_1_turret_array, armor_go.transform.Find("Turret_Armor"));
+                    turret_array.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+                    turret_array.transform.localPosition = new Vector3(0f, 0f, 0f);
+                }
+            }
 
             ////Assign modified armor to M1A1HU
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
@@ -2165,38 +2185,26 @@ namespace M1A1AMP
 
                 foreach (ArmorCodexScriptable s in Resources.FindObjectsOfTypeAll(typeof(ArmorCodexScriptable)))
                 {
-                    if (s.ArmorType.Name == "composite skirt") armor_compositeskirt_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_cheeksnera_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_fronthullnera_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_mantletnera_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_turretsidesnera_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_turretroofarmor_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_upperglacisarmor_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_commmandershatcharmor_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_loadershatcharmor_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_drivershatcharmor_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_turretringarmor_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_gunmantletfacearmor_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "tracks") armor_trackarmor_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "gun steel") armor_gunbarrel_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_bustlefirewall_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_blowoutpanel_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_turretrearnera_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_GPShousing_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_GPSdoor_HU = s.ArmorType;
-                    if (s.ArmorType.Name == "composite skirt") armor_turretbottom_HU = s.ArmorType;
-
-                    if (s.ArmorType.Name == "composite skirt") armor_compositeskirt_HC = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_cheeksnera_HC = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_fronthullnera_HC = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_mantletnera_HC = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_turretsidesnera_HC = s.ArmorType;
-
-                    if (s.ArmorType.Name == "composite skirt") armor_compositeskirt_HA = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_cheeksnera_HA = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_fronthullnera_HA = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_mantletnera_HA = s.ArmorType;
-                    if (s.ArmorType.Name == "special armor") armor_turretsidesnera_HA = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_compositeskirt_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "special armor") armor_cheeksnera_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "special armor") armor_fronthullnera_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "special armor") armor_mantletnera_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "special armor") armor_turretsidesnera_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_turretroofarmor_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_upperglacisarmor_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_commmandershatcharmor_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_loadershatcharmor_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_drivershatcharmor_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_turretringarmor_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_gunmantletfacearmor_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "tracks") armor_trackarmor_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "gun steel") armor_gunbarrel_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_bustlefirewall_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_blowoutpanel_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "special armor") armor_turretrearnera_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_GPShousing_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_GPSdoor_VNL = s.ArmorType;
+                    if (s.ArmorType.Name == "composite skirt") armor_turretbottom_VNL = s.ArmorType;
                 }
 
                 // m256
@@ -2500,7 +2508,7 @@ namespace M1A1AMP
 
                 ////HU armor modifiers
                 armor_superCompositeskirt_HU = new ArmorType();
-                Util.ShallowCopy(armor_superCompositeskirt_HU, armor_compositeskirt_HU);
+                Util.ShallowCopy(armor_superCompositeskirt_HU, armor_compositeskirt_VNL);
                 armor_superCompositeskirt_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 11f; //default 1.5
                 armor_superCompositeskirt_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 6f; //default 0.8
                 armor_superCompositeskirt_HU.Name = "Abrams HU super special composite skirt";
@@ -2510,7 +2518,7 @@ namespace M1A1AMP
                 armor_codex_superCompositeskirt_HU.ArmorType = armor_superCompositeskirt_HU;
 
                 armor_cheeksDUarmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_cheeksDUarmor_HU, armor_cheeksnera_HU);
+                Util.ShallowCopy(armor_cheeksDUarmor_HU, armor_cheeksnera_VNL);
                 armor_cheeksDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.2f; //default 1.3
                 armor_cheeksDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.2f; //default 0.55
                 armor_cheeksDUarmor_HU.Name = "Abrams HU DU armor turret cheeks";
@@ -2521,7 +2529,7 @@ namespace M1A1AMP
                 armor_cheeksDUarmor_HU = new ArmorType();
 
                 armor_fronthullDUarmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_fronthullDUarmor_HU, armor_fronthullnera_HU);
+                Util.ShallowCopy(armor_fronthullDUarmor_HU, armor_fronthullnera_VNL);
                 armor_fronthullDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.2f; //default 1.3
                 armor_fronthullDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.4f; //default 0.45
                 armor_fronthullDUarmor_HU.Name = "Abrams HU DU armor hull front";
@@ -2532,7 +2540,7 @@ namespace M1A1AMP
                 armor_fronthullDUarmor_HU = new ArmorType();
 
                 armor_mantletDUarmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_mantletDUarmor_HU, armor_mantletnera_HU);
+                Util.ShallowCopy(armor_mantletDUarmor_HU, armor_mantletnera_VNL);
                 armor_mantletDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.15f; //default 1.3
                 armor_mantletDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.5f; //default 1.4
                 armor_mantletDUarmor_HU.Name = "Abrams HU DU armor mantlet";
@@ -2543,7 +2551,7 @@ namespace M1A1AMP
                 armor_mantletDUarmor_HU = new ArmorType();
 
                 armor_turretsidesDUarmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_turretsidesDUarmor_HU, armor_turretsidesnera_HU);
+                Util.ShallowCopy(armor_turretsidesDUarmor_HU, armor_turretsidesnera_VNL);
                 armor_turretsidesDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 4.4f; //default 1.3
                 armor_turretsidesDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 2.21f; //default 1.4
                 armor_turretsidesDUarmor_HU.Name = "Abrams HU DU armor turret sides";
@@ -2554,7 +2562,7 @@ namespace M1A1AMP
                 armor_turretsidesDUarmor_HU = new ArmorType();
 
                 armor_turretroofCompositearmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_turretroofCompositearmor_HU, armor_turretroofarmor_HU);
+                Util.ShallowCopy(armor_turretroofCompositearmor_HU, armor_turretroofarmor_VNL);
                 armor_turretroofCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 7f; //default composite skirt 1.5
                 armor_turretroofCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 5.9f; //default composite skirt 0.8
                 armor_turretroofCompositearmor_HU.Name = "Abrams HU roof special composite";
@@ -2565,7 +2573,7 @@ namespace M1A1AMP
                 armor_turretroofCompositearmor_HU = new ArmorType();
 
                 armor_upperglacisCompositearmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_upperglacisCompositearmor_HU, armor_upperglacisarmor_HU);
+                Util.ShallowCopy(armor_upperglacisCompositearmor_HU, armor_upperglacisarmor_VNL);
                 armor_upperglacisCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 5.5f; //default composite skirt 1.5
                 armor_upperglacisCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 4.7f; //default composite skirt 0.8
                 armor_upperglacisCompositearmor_HU.Name = "Abrams HU upper glacis special composite";
@@ -2576,7 +2584,7 @@ namespace M1A1AMP
                 armor_upperglacisCompositearmor_HU = new ArmorType();
 
                 armor_commmandershatchCompositearmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_commmandershatchCompositearmor_HU, armor_commmandershatcharmor_HU);
+                Util.ShallowCopy(armor_commmandershatchCompositearmor_HU, armor_commmandershatcharmor_VNL);
                 armor_commmandershatchCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 3.6f; //default composite skirt 1.5
                 armor_commmandershatchCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 3f; //default composite skirt 0.8
                 armor_commmandershatchCompositearmor_HU.Name = "Abrams HU commander's hatch special composite";
@@ -2587,7 +2595,7 @@ namespace M1A1AMP
                 armor_commmandershatchCompositearmor_HU = new ArmorType();
 
                 armor_loadershatchCompositearmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_loadershatchCompositearmor_HU, armor_loadershatcharmor_HU);
+                Util.ShallowCopy(armor_loadershatchCompositearmor_HU, armor_loadershatcharmor_VNL);
                 armor_loadershatchCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 3.6f; //default composite skirt 1.5
                 armor_loadershatchCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 3f; //default composite skirt 0.8
                 armor_loadershatchCompositearmor_HU.Name = "Abrams HU loader's hatch special composite";
@@ -2598,7 +2606,7 @@ namespace M1A1AMP
                 armor_loadershatchCompositearmor_HU = new ArmorType();
 
                 armor_drivershatchCompositearmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_loadershatchCompositearmor_HU, armor_drivershatcharmor_HU);
+                Util.ShallowCopy(armor_loadershatchCompositearmor_HU, armor_drivershatcharmor_VNL);
                 armor_drivershatchCompositearmor_HU.RhaeMultiplierCe = 3.6f; //default composite skirt 1.5
                 armor_drivershatchCompositearmor_HU.RhaeMultiplierKe = 3f; //default composite skirt 0.8
                 armor_drivershatchCompositearmor_HU.Name = "Abrams HU driver's hatch special composite";
@@ -2609,7 +2617,7 @@ namespace M1A1AMP
                 armor_drivershatchCompositearmor_HU = new ArmorType();
 
                 armor_turretringCompositearmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_turretringCompositearmor_HU, armor_turretringarmor_HU);
+                Util.ShallowCopy(armor_turretringCompositearmor_HU, armor_turretringarmor_VNL);
                 armor_turretringCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 5f; //default composite skirt 1.5
                 armor_turretringCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 5f; //default composite skirt 0.8
                 armor_turretringCompositearmor_HU.Name = "Abrams HU turret ring special composite";
@@ -2620,7 +2628,7 @@ namespace M1A1AMP
                 armor_turretringCompositearmor_HU = new ArmorType();
 
                 armor_gunmantletfaceCompositearmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_gunmantletfaceCompositearmor_HU, armor_gunmantletfacearmor_HU);
+                Util.ShallowCopy(armor_gunmantletfaceCompositearmor_HU, armor_gunmantletfacearmor_VNL);
                 armor_gunmantletfaceCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 23f; //default composite skirt 1.5
                 armor_gunmantletfaceCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 18f; //default composite skirt 0.8
                 armor_gunmantletfaceCompositearmor_HU.Name = "Abrams HU gun mantlet face special composite";
@@ -2631,7 +2639,7 @@ namespace M1A1AMP
                 armor_gunmantletfaceCompositearmor_HU = new ArmorType();
 
                 armor_trackSpecialarmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_trackSpecialarmor_HU, armor_trackarmor_HU);
+                Util.ShallowCopy(armor_trackSpecialarmor_HU, armor_trackarmor_VNL);
                 armor_trackSpecialarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 10f; //default composite skirt 1.5
                 armor_trackSpecialarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 10f; //default composite skirt 0.8
                 armor_trackSpecialarmor_HU.Name = "Abrams HU special track armor";
@@ -2642,7 +2650,7 @@ namespace M1A1AMP
                 armor_trackSpecialarmor_HU = new ArmorType();
 
                 armor_gunbarrelImprovedarmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_gunbarrelImprovedarmor_HU, armor_gunbarrel_HU);
+                Util.ShallowCopy(armor_gunbarrelImprovedarmor_HU, armor_gunbarrel_VNL);
                 armor_gunbarrelImprovedarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 7f; //default composite skirt 1.5
                 armor_gunbarrelImprovedarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 7f; //default composite skirt 0.8
                 armor_gunbarrelImprovedarmor_HU.Name = "Abrams HU Improved barrel armor";
@@ -2653,7 +2661,7 @@ namespace M1A1AMP
                 armor_gunbarrelImprovedarmor_HU = new ArmorType();
 
                 armor_bustleImprovedfirewall_HU = new ArmorType();
-                Util.ShallowCopy(armor_bustleImprovedfirewall_HU, armor_bustlefirewall_HU);
+                Util.ShallowCopy(armor_bustleImprovedfirewall_HU, armor_bustlefirewall_VNL);
                 armor_bustleImprovedfirewall_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2f; //default composite skirt 1.5
                 armor_bustleImprovedfirewall_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 2f; //default composite skirt 0.8
                 armor_bustleImprovedfirewall_HU.Name = "Abrams HU bustle spall lining";
@@ -2664,7 +2672,7 @@ namespace M1A1AMP
                 armor_bustleImprovedfirewall_HU = new ArmorType();
 
                 armor_blowoutpanelCompositearmorC_HU = new ArmorType();
-                Util.ShallowCopy(armor_blowoutpanelCompositearmorC_HU, armor_blowoutpanel_HU);
+                Util.ShallowCopy(armor_blowoutpanelCompositearmorC_HU, armor_blowoutpanel_VNL);
                 armor_blowoutpanelCompositearmorC_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 10f; //default composite skirt 1.5
                 armor_blowoutpanelCompositearmorC_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 10f; //default composite skirt 0.8
                 armor_blowoutpanelCompositearmorC_HU.Name = "Abrams HU Composite blowout panel center";
@@ -2675,7 +2683,7 @@ namespace M1A1AMP
                 armor_blowoutpanelCompositearmorC_HU = new ArmorType();
 
                 armor_blowoutpanelCompositearmorL_HU = new ArmorType();
-                Util.ShallowCopy(armor_blowoutpanelCompositearmorL_HU, armor_blowoutpanel_HU);
+                Util.ShallowCopy(armor_blowoutpanelCompositearmorL_HU, armor_blowoutpanel_VNL);
                 armor_blowoutpanelCompositearmorL_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 10f; //default composite skirt 1.5
                 armor_blowoutpanelCompositearmorL_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 10f; //default composite skirt 0.8
                 armor_blowoutpanelCompositearmorL_HU.Name = "Abrams HU Composite blowout panel left";
@@ -2686,7 +2694,7 @@ namespace M1A1AMP
                 armor_blowoutpanelCompositearmorL_HU = new ArmorType();
 
                 armor_blowoutpanelCompositearmorR_HU = new ArmorType();
-                Util.ShallowCopy(armor_blowoutpanelCompositearmorR_HU, armor_blowoutpanel_HU);
+                Util.ShallowCopy(armor_blowoutpanelCompositearmorR_HU, armor_blowoutpanel_VNL);
                 armor_blowoutpanelCompositearmorR_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 10f; //default composite skirt 1.5
                 armor_blowoutpanelCompositearmorR_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 10f; //default composite skirt 0.8
                 armor_blowoutpanelCompositearmorR_HU.Name = "Abrams HU Composite blowout panel right";
@@ -2697,7 +2705,7 @@ namespace M1A1AMP
                 armor_blowoutpanelCompositearmorR_HU = new ArmorType();
 
                 armor_turretrearSpecialarray_HU = new ArmorType();
-                Util.ShallowCopy(armor_turretrearSpecialarray_HU, armor_turretrearnera_HU);
+                Util.ShallowCopy(armor_turretrearSpecialarray_HU, armor_turretrearnera_VNL);
                 armor_turretrearSpecialarray_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 40f; //default special armor 1
                 armor_turretrearSpecialarray_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 20f; //default special armor 1
                 armor_turretrearSpecialarray_HU.Name = "Abrams HU Special armor turret rear";
@@ -2708,7 +2716,7 @@ namespace M1A1AMP
                 armor_turretrearSpecialarray_HU = new ArmorType();
 
                 armor_GPSImprovedhousing_HU = new ArmorType();
-                Util.ShallowCopy(armor_GPSImprovedhousing_HU, armor_GPShousing_HU);
+                Util.ShallowCopy(armor_GPSImprovedhousing_HU, armor_GPShousing_VNL);
                 armor_GPSImprovedhousing_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 5f; //default composite skirt 1.5
                 armor_GPSImprovedhousing_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 5f; //default composite skirt 0.8
                 armor_GPSImprovedhousing_HU.Name = "Abrams HU GPS housing composite";
@@ -2719,7 +2727,7 @@ namespace M1A1AMP
                 armor_GPSImprovedhousing_HU = new ArmorType();
 
                 armor_GPSImproveddoor_HU = new ArmorType();
-                Util.ShallowCopy(armor_GPSImproveddoor_HU, armor_GPSdoor_HU);
+                Util.ShallowCopy(armor_GPSImproveddoor_HU, armor_GPSdoor_VNL);
                 armor_GPSImproveddoor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 5f; //default composite skirt 1.5
                 armor_GPSImproveddoor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 5f; //default composite skirt 0.8
                 armor_GPSImproveddoor_HU.Name = "Abrams HU GPS door composite";
@@ -2730,7 +2738,7 @@ namespace M1A1AMP
                 armor_GPSImproveddoor_HU = new ArmorType();
 
                 armor_turretbottomCompositearmor_HU = new ArmorType();
-                Util.ShallowCopy(armor_turretbottomCompositearmor_HU, armor_turretbottom_HU);
+                Util.ShallowCopy(armor_turretbottomCompositearmor_HU, armor_turretbottom_VNL);
                 armor_turretbottomCompositearmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 14f; //default composite skirt 1.5
                 armor_turretbottomCompositearmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 12f; //default composite skirt 0.8
                 armor_turretbottomCompositearmor_HU.Name = "Abrams HU turret bottom composite";
@@ -2743,7 +2751,7 @@ namespace M1A1AMP
 
                 ////HC armor modifiers (12.5% increase
                 armor_superCompositeskirt_HC = new ArmorType();
-                Util.ShallowCopy(armor_superCompositeskirt_HC, armor_compositeskirt_HC);
+                Util.ShallowCopy(armor_superCompositeskirt_HC, armor_compositeskirt_VNL);
                 armor_superCompositeskirt_HC.RhaeMultiplierCe = 1.875f; //default 1.5
                 armor_superCompositeskirt_HC.RhaeMultiplierKe = 1.0f; //default 0.8
                 armor_superCompositeskirt_HC.Name = "Abrams HC super special composite skirt";
@@ -2753,7 +2761,7 @@ namespace M1A1AMP
                 armor_codex_superCompositeskirt_HC.ArmorType = armor_superCompositeskirt_HC;
 
                 armor_cheeksDUarmor_HC = new ArmorType();
-                Util.ShallowCopy(armor_cheeksDUarmor_HC, armor_cheeksnera_HC);
+                Util.ShallowCopy(armor_cheeksDUarmor_HC, armor_cheeksnera_VNL);
                 armor_cheeksDUarmor_HC.RhaeMultiplierCe = 1.625f; //default 1.3
                 armor_cheeksDUarmor_HC.RhaeMultiplierKe = 0.6875f; //default 0.55
                 armor_cheeksDUarmor_HC.Name = "Abrams HC DU armor turret cheeks";
@@ -2764,7 +2772,7 @@ namespace M1A1AMP
                 armor_cheeksDUarmor_HC = new ArmorType();
 
                 armor_fronthullDUarmor_HC = new ArmorType();
-                Util.ShallowCopy(armor_fronthullDUarmor_HC, armor_fronthullnera_HC);
+                Util.ShallowCopy(armor_fronthullDUarmor_HC, armor_fronthullnera_VNL);
                 armor_fronthullDUarmor_HC.RhaeMultiplierCe = 1.625f; //default 1.3
                 armor_fronthullDUarmor_HC.RhaeMultiplierKe = 0.625f; //default 0.45
                 armor_fronthullDUarmor_HC.Name = "Abrams HC DU armor hull front";
@@ -2775,7 +2783,7 @@ namespace M1A1AMP
                 armor_fronthullDUarmor_HC = new ArmorType();
 
                 armor_mantletDUarmor_HC = new ArmorType();
-                Util.ShallowCopy(armor_mantletDUarmor_HC, armor_mantletnera_HC);
+                Util.ShallowCopy(armor_mantletDUarmor_HC, armor_mantletnera_VNL);
                 armor_mantletDUarmor_HC.RhaeMultiplierCe = 1.625f; //default 1.3
                 armor_mantletDUarmor_HC.RhaeMultiplierKe = 1.75f; //default 1.4
                 armor_mantletDUarmor_HC.Name = "Abrams HC DU armor mantlet";
@@ -2786,7 +2794,7 @@ namespace M1A1AMP
                 armor_mantletDUarmor_HC = new ArmorType();
 
                 armor_turretsidesDUarmor_HC = new ArmorType();
-                Util.ShallowCopy(armor_turretsidesDUarmor_HC, armor_turretsidesnera_HC);
+                Util.ShallowCopy(armor_turretsidesDUarmor_HC, armor_turretsidesnera_VNL);
                 armor_turretsidesDUarmor_HC.RhaeMultiplierCe = 1.625f; //default 1.3
                 armor_turretsidesDUarmor_HC.RhaeMultiplierKe = 1.75f; //default 1.4
                 armor_turretsidesDUarmor_HC.Name = "Abrams HC DU armor turret sides";
@@ -2799,7 +2807,7 @@ namespace M1A1AMP
 
                 ////HA armor modifiers (25% increase
                 armor_superCompositeskirt_HA = new ArmorType();
-                Util.ShallowCopy(armor_superCompositeskirt_HA, armor_compositeskirt_HA);
+                Util.ShallowCopy(armor_superCompositeskirt_HA, armor_compositeskirt_VNL);
                 armor_superCompositeskirt_HA.RhaeMultiplierCe = 1.6875f; //default 1.5
                 armor_superCompositeskirt_HA.RhaeMultiplierKe = 0.9f; //default 0.8
                 armor_superCompositeskirt_HA.Name = "Abrams HA super special composite skirt";
@@ -2809,7 +2817,7 @@ namespace M1A1AMP
                 armor_codex_superCompositeskirt_HA.ArmorType = armor_superCompositeskirt_HA;
 
                 armor_cheeksDUarmor_HA = new ArmorType();
-                Util.ShallowCopy(armor_cheeksDUarmor_HA, armor_cheeksnera_HA);
+                Util.ShallowCopy(armor_cheeksDUarmor_HA, armor_cheeksnera_VNL);
                 armor_cheeksDUarmor_HA.RhaeMultiplierCe = 1.4625f; //default 1.3
                 armor_cheeksDUarmor_HA.RhaeMultiplierKe = 0.61875f; //default 0.55
                 armor_cheeksDUarmor_HA.Name = "Abrams HA DU armor turret cheeks";
@@ -2820,7 +2828,7 @@ namespace M1A1AMP
                 armor_cheeksDUarmor_HA = new ArmorType();
 
                 armor_fronthullDUarmor_HA = new ArmorType();
-                Util.ShallowCopy(armor_fronthullDUarmor_HA, armor_fronthullnera_HA);
+                Util.ShallowCopy(armor_fronthullDUarmor_HA, armor_fronthullnera_VNL);
                 armor_fronthullDUarmor_HA.RhaeMultiplierCe = 1.4625f; //default 1.3
                 armor_fronthullDUarmor_HA.RhaeMultiplierKe = 0.5625f; //default 0.45
                 armor_fronthullDUarmor_HA.Name = "Abrams HA DU armor hull front";
@@ -2831,7 +2839,7 @@ namespace M1A1AMP
                 armor_fronthullDUarmor_HA = new ArmorType();
 
                 armor_mantletDUarmor_HA = new ArmorType();
-                Util.ShallowCopy(armor_mantletDUarmor_HA, armor_mantletnera_HA);
+                Util.ShallowCopy(armor_mantletDUarmor_HA, armor_mantletnera_VNL);
                 armor_mantletDUarmor_HA.RhaeMultiplierCe = 1.4625f; //default 1.3
                 armor_mantletDUarmor_HA.RhaeMultiplierKe = 1.575f; //default 1.4
                 armor_mantletDUarmor_HA.Name = "Abrams HA DU armor mantlet";
@@ -2842,7 +2850,7 @@ namespace M1A1AMP
                 armor_mantletDUarmor_HA = new ArmorType();
 
                 armor_turretsidesDUarmor_HA = new ArmorType();
-                Util.ShallowCopy(armor_turretsidesDUarmor_HA, armor_turretsidesnera_HA);
+                Util.ShallowCopy(armor_turretsidesDUarmor_HA, armor_turretsidesnera_VNL);
                 armor_turretsidesDUarmor_HA.RhaeMultiplierCe = 1.4625f; //default 1.3
                 armor_turretsidesDUarmor_HA.RhaeMultiplierKe = 1.575f; //default 1.4
                 armor_turretsidesDUarmor_HA.Name = "Abrams HA DU armor turret sides";
