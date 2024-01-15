@@ -406,35 +406,70 @@ namespace M1A1AMP
             ////ARAT stuff
             foreach (GameObject armor_go in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
-                //hid the hull era to make it less cluttered when searching in UE
-                //    if (Kontakt1.kontakt_1_hull_array == null) continue;
-                if (Kontakt1.kontakt_1_turret_array == null) continue;
-                if (!armor_go.GetComponent<LateFollow>()) continue;
+                if (ARAT.ARAT_1_turret_array == null) continue;
 
-                string name = armor_go.GetComponent<LateFollow>().ParentUnit.FriendlyName;
+                //if (armor_go.name != "Turret_Armor") continue;
+                if (armor_go.name != "Turret_Armor" && armor_go.name != "HULLARMOR") continue;
+                if (!armor_go.transform.parent.GetComponent<LateFollow>()) continue;
+                // when you add hull era 
+
+                string name = armor_go.transform.parent.GetComponent<LateFollow>().ParentUnit.FriendlyName;
 
                 if (name != "M1IP") continue;
 
-                //if (armor_go.name == "M1IP HULL FOLLOW")
-                //{
-                //    if (armor_go.transform.Find("HULLARMOR/hull era array(Clone)")) continue;
-                //    GameObject hull_array = GameObject.Instantiate(Kontakt1.kontakt_1_hull_array, armor_go.transform.Find("HULLARMOR"));
-                //    hull_array.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
-                //    hull_array.transform.localPosition = new Vector3(0f, 0f, 0f);
-
-                //}
-
-                if (armor_go.name == "M1IP TURRET FOLLOW")
+                if (armor_go.name == "Turret_Armor")
                 {
-                    if (armor_go.transform.Find("Turret_Armor/side up array(Clone)")) continue;
-                    GameObject turret_array = GameObject.Instantiate(Kontakt1.kontakt_1_turret_array, armor_go.transform.Find("Turret_Armor"));
-                    //IPM1_rig/HULL/TURRET/Turret Scripts/GPS/
-                    //if (armor_go.transform.Find("TURRET/side up array(Clone)")) continue;
-                    //GameObject turret_array = GameObject.Instantiate(Kontakt1.kontakt_1_turret_array, armor_go.transform.Find("TURRET"));
-                    turret_array.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
-                    turret_array.transform.localPosition = new Vector3(0f, 0f, 0f);
+                    if (armor_go.transform.Find("Turret ERA Array(Clone)")) continue;
+                    GameObject turret_array = GameObject.Instantiate(ARAT.ARAT_1_turret_array, armor_go.transform);
+                    turret_array.transform.localEulerAngles = new Vector3(0f, 270f, 0f);
+                    //turret_array.transform.localPosition = new Vector3(0f, 0.03f, 0f);
+                    turret_array.transform.localPosition = new Vector3(0f, 0f, -0.69f);
+                }
+
+                if (armor_go.name == "HULLARMOR")
+                {
+                    if (armor_go.transform.Find("Hull ERA Array(Clone)")) continue;
+                    GameObject hull_array = GameObject.Instantiate(ARAT.ARAT_1_hull_array, armor_go.transform);
+                    hull_array.transform.localEulerAngles = new Vector3(0f, 270f, 0f);
+                    hull_array.transform.localPosition = new Vector3(0f, 0f, -0.69f);
+                    GameObject.Destroy(hull_array.transform.Find("Hull Lower Front Array").gameObject);
+                    GameObject.Destroy(hull_array.transform.Find("Hull Upper Front").gameObject);
                 }
             }
+            foreach (GameObject armor_go in GameObject.FindGameObjectsWithTag("Penetrable"))
+            {
+                if (ARAT.ARAT_1_turret_array == null) continue;
+
+                //if (armor_go.name != "Turret_Armor") continue;
+                if (armor_go.name != "Turret_Armor" && armor_go.name != "HULLARMOR") continue;
+                if (!armor_go.transform.parent.GetComponent<LateFollow>()) continue;
+                // when you add hull era 
+
+                string name = armor_go.transform.parent.GetComponent<LateFollow>().ParentUnit.FriendlyName;
+
+                if (name != "M1") continue;
+
+                if (armor_go.name == "Turret_Armor")
+                {
+                    if (armor_go.transform.Find("Turret ERA Array(Clone)")) continue;
+                    GameObject turret_array = GameObject.Instantiate(ARAT.ARAT_1_turret_array, armor_go.transform);
+                    turret_array.transform.localEulerAngles = new Vector3(0f, 270f, 0f);
+                    //turret_array.transform.localPosition = new Vector3(0f, 0.03f, 0f);
+                    turret_array.transform.localPosition = new Vector3(0f, 0f, -0.69f);
+                }
+
+                if (armor_go.name == "HULLARMOR")
+                {
+                    if (armor_go.transform.Find("Hull ERA Array(Clone)")) continue;
+                    GameObject hull_array = GameObject.Instantiate(ARAT.ARAT_1_hull_array, armor_go.transform);
+                    hull_array.transform.localEulerAngles = new Vector3(0f, 270f, 0f);
+                    hull_array.transform.localPosition = new Vector3(0f, 0f, -0.69f);
+                    GameObject.Destroy(hull_array.transform.Find("Hull Lower Front Array").gameObject);
+                    GameObject.Destroy(hull_array.transform.Find("Hull Upper Front").gameObject);
+                    GameObject.Destroy(hull_array.transform.Find("Hull Plus Array").gameObject);
+                }
+            }
+
 
             ////Assign modified armor to M1A1HU
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))

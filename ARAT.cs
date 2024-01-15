@@ -19,16 +19,16 @@ using System.Reflection.Emit;
 namespace M1A1AMP
 {
 
-    public static class Kontakt1
+    public static class ARAT
     {
-        public static GameObject kontakt_1_hull_array;
-        public static GameObject kontakt_1_turret_array;
+        public static GameObject ARAT_1_hull_array;
+        public static GameObject ARAT_1_turret_array;
         private static Texture concrete_tex;
         private static Texture concrete_tex_normal;
-        private static UnityEngine.Color colour_primary = new UnityEngine.Color(0.6165f, 0.6996f, 0.5015f);
-        private static UnityEngine.Color colour_2 = new UnityEngine.Color(0.4565f, 0.5426f, 0.3762f);
-        private static UnityEngine.Color colour_3 = new UnityEngine.Color(0.4565f, 0.5226f, 0.3762f);
-        private static UnityEngine.Color colour_4 = new UnityEngine.Color(0.4565f, 0.5555f, 0.3762f);
+        private static UnityEngine.Color colour_primary = new UnityEngine.Color(0.2941f, 0.3255f, 0.1255f);
+        private static UnityEngine.Color colour_2 = new UnityEngine.Color(0.2941f, 0.3255f, 0.1255f);
+        private static UnityEngine.Color colour_3 = new UnityEngine.Color(0.2941f, 0.3255f, 0.1255f);
+        private static UnityEngine.Color colour_4 = new UnityEngine.Color(0.2941f, 0.3255f, 0.1255f);
         private static UnityEngine.Color[] colours = new UnityEngine.Color[] {
             colour_primary, colour_primary, colour_primary, colour_primary, colour_primary, colour_primary, colour_primary,
             colour_primary, colour_primary, colour_primary, colour_primary, colour_primary, colour_primary, colour_primary,
@@ -45,13 +45,13 @@ namespace M1A1AMP
         {
             foreach (Transform transform in era_transforms)
             {
-                if (!transform.gameObject.name.Contains("kontakt")) continue;
+                if (!transform.gameObject.name.Contains("ARAT-1")) continue;
 
                 transform.gameObject.AddComponent<UniformArmor>();
                 UniformArmor armor = transform.gameObject.GetComponent<UniformArmor>();
-                armor.SetName("Kontakt-1");
-                armor.PrimaryHeatRha = 300f;
-                armor.PrimarySabotRha = 25f;
+                armor.SetName("ARAT-1");
+                armor.PrimaryHeatRha = 500f;
+                armor.PrimarySabotRha = 50f;
                 armor.SecondaryHeatRha = 0f;
                 armor.SecondarySabotRha = 0f;
                 armor._canShatterLongRods = true;
@@ -81,11 +81,11 @@ namespace M1A1AMP
 
         public static void Init()
         {
-            if (kontakt_1_turret_array == null)
+            if (ARAT_1_turret_array == null)
             {
                 //hid the hull era to make it less cluttered when searching in UE
-                //var kontakt_bundle_hull = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/kontakt1assets", "hull"));
-                var kontakt_bundle_turret = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/kontakt1assets", "turret"));
+                var ARAT1_bundle_hull = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/NatoEraAssets", "hull_arat"));
+                var ARAT1_bundle_turret = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/NatoEraAssets", "turret_arat"));
 
                 foreach (Texture t in Resources.FindObjectsOfTypeAll<Texture>())
                 {
@@ -97,17 +97,17 @@ namespace M1A1AMP
                     if (t.name == "GHPC_ConcretePanels_Normal") { concrete_tex_normal = t; break; }
                 }
 
-                //kontakt_1_hull_array = kontakt_bundle_hull.LoadAsset<GameObject>("hull era array.prefab");
-                //kontakt_1_hull_array.transform.localScale = new Vector3(10f, 10f, 10f);
+                ARAT_1_hull_array = ARAT1_bundle_hull.LoadAsset<GameObject>("Hull ERA Array.prefab");
+                ARAT_1_hull_array.transform.localScale = new Vector3(1f, 1f, 1f);
 
-                kontakt_1_turret_array = kontakt_bundle_turret.LoadAsset<GameObject>("side up array.prefab");
-                kontakt_1_turret_array.transform.localScale = new Vector3(1f, 1f, 1f);
+                ARAT_1_turret_array = ARAT1_bundle_turret.LoadAsset<GameObject>("Turret ERA Array.prefab");
+                ARAT_1_turret_array.transform.localScale = new Vector3(1f, 1f, 1f);
 
-                //kontakt_1_hull_array.hideFlags = HideFlags.DontUnloadUnusedAsset;
-                kontakt_1_turret_array.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                ARAT_1_hull_array.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                ARAT_1_turret_array.hideFlags = HideFlags.DontUnloadUnusedAsset;
 
-                //ERA_Setup(kontakt_1_hull_array.GetComponentsInChildren<Transform>());
-                ERA_Setup(kontakt_1_turret_array.GetComponentsInChildren<Transform>());
+                ERA_Setup(ARAT_1_hull_array.GetComponentsInChildren<Transform>());
+                ERA_Setup(ARAT_1_turret_array.GetComponentsInChildren<Transform>());
             }
         }
     }

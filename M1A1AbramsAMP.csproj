@@ -79,7 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Kontakt1.cs" />
+    <Compile Include="ARAT.cs" />
     <Compile Include="M1A1AbramsAMPMod.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
