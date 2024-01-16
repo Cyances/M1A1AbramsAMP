@@ -83,7 +83,6 @@ namespace M1A1AMP
         {
             if (ARAT_1_turret_array == null)
             {
-                //hid the hull era to make it less cluttered when searching in UE
                 var ARAT1_bundle_hull = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/NatoEraAssets", "hull_arat"));
                 var ARAT1_bundle_turret = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/NatoEraAssets", "turret_arat"));
 

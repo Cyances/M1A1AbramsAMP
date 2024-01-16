@@ -408,7 +408,7 @@ namespace M1A1AMP
             {
                 if (ARAT.ARAT_1_turret_array == null) continue;
 
-                //if (armor_go.name != "Turret_Armor") continue;
+                //if (armor_go.name != "HULLARMOR") continue;
                 if (armor_go.name != "Turret_Armor" && armor_go.name != "HULLARMOR") continue;
                 if (!armor_go.transform.parent.GetComponent<LateFollow>()) continue;
                 // when you add hull era 
@@ -424,7 +424,7 @@ namespace M1A1AMP
                     turret_array.transform.localEulerAngles = new Vector3(0f, 270f, 0f);
                     //turret_array.transform.localPosition = new Vector3(0f, 0.03f, 0f);
                     turret_array.transform.localPosition = new Vector3(0f, 0.9817f, -0.69f);
-                    GameObject.Destroy(turret_array.transform.Find("Plus Array").gameObject);
+                    //GameObject.Destroy(turret_array.transform.Find("Plus Array").gameObject);
                 }
 
                 if (armor_go.name == "HULLARMOR")
@@ -433,17 +433,17 @@ namespace M1A1AMP
                     GameObject hull_array = GameObject.Instantiate(ARAT.ARAT_1_hull_array, armor_go.transform);
                     hull_array.transform.localEulerAngles = new Vector3(0f, 270f, 0f);
                     hull_array.transform.localPosition = new Vector3(0f, 0.9817f, -0.69f);
-                    GameObject.Destroy(hull_array.transform.Find("Lower Front Array").gameObject);
-                    GameObject.Destroy(hull_array.transform.Find("Upper Front Array").gameObject);
-                    GameObject.Destroy(hull_array.transform.Find("Plus Array").gameObject);
+                    //GameObject.Destroy(hull_array.transform.Find("Lower Front Array").gameObject);
+                    //GameObject.Destroy(hull_array.transform.Find("Upper Front Array").gameObject);
+                    //GameObject.Destroy(hull_array.transform.Find("Plus Array").gameObject);
                 }
             }
             foreach (GameObject armor_go in GameObject.FindGameObjectsWithTag("Penetrable"))
             {
                 if (ARAT.ARAT_1_turret_array == null) continue;
 
-                //if (armor_go.name != "Turret_Armor") continue;
-                if (armor_go.name != "Turret_Armor" && armor_go.name != "HULLARMOR") continue;
+                //if (armor_go.name != "HULLARMOR") continue;
+                if (armor_go.name != "M1A0_turret_armour" && armor_go.name != "HULLARMOR") continue;
                 if (!armor_go.transform.parent.GetComponent<LateFollow>()) continue;
                 // when you add hull era 
 
@@ -451,14 +451,14 @@ namespace M1A1AMP
 
                 if (name != "M1") continue;
 
-                if (armor_go.name == "Turret_Armor")
+                if (armor_go.name == "M1A0_turret_armour")
                 {
                     if (armor_go.transform.Find("Turret ERA Array(Clone)")) continue;
                     GameObject turret_array = GameObject.Instantiate(ARAT.ARAT_1_turret_array, armor_go.transform);
                     turret_array.transform.localEulerAngles = new Vector3(0f, 270f, 0f);
                     //turret_array.transform.localPosition = new Vector3(0f, 0.03f, 0f);
                     turret_array.transform.localPosition = new Vector3(0f, 0.9817f, -0.69f);
-                    GameObject.Destroy(turret_array.transform.Find("Plus Array").gameObject);
+                    //GameObject.Destroy(turret_array.transform.Find("Plus Array").gameObject);
                 }
 
                 if (armor_go.name == "HULLARMOR")
@@ -467,12 +467,11 @@ namespace M1A1AMP
                     GameObject hull_array = GameObject.Instantiate(ARAT.ARAT_1_hull_array, armor_go.transform);
                     hull_array.transform.localEulerAngles = new Vector3(0f, 270f, 0f);
                     hull_array.transform.localPosition = new Vector3(0f, 0.9817f, -0.69f);
-                    GameObject.Destroy(hull_array.transform.Find("Lower Front Array").gameObject);
-                    GameObject.Destroy(hull_array.transform.Find("Upper Front Array").gameObject);
-                    GameObject.Destroy(hull_array.transform.Find("Plus Array").gameObject);
+                    //GameObject.Destroy(hull_array.transform.Find("Lower Front Array").gameObject);
+                    //GameObject.Destroy(hull_array.transform.Find("Upper Front Array").gameObject);
+                    //GameObject.Destroy(hull_array.transform.Find("Plus Array").gameObject);
                 }
             }
-
 
             ////Assign modified armor to M1A1HU
             foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
