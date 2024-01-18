@@ -52,7 +52,7 @@ namespace M1A1AMP
             playerManager = gameManager.GetComponent<PlayerInput>();
 
             StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(GetVics), GameStatePriority.Low);
-            ARAT.Init();
+            //ARAT.Init();
             M1A1AbramsAMPMod.Init();
         }
     }

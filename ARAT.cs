@@ -25,7 +25,7 @@ namespace M1A1AMP
         public static GameObject ARAT_1_turret_array;
         private static Texture concrete_tex;
         private static Texture concrete_tex_normal;
-        private static UnityEngine.Color colour_primary = new UnityEngine.Color(0.2941f, 0.3255f, 0.1255f);
+        /*private static UnityEngine.Color colour_primary = new UnityEngine.Color(0.2941f, 0.3255f, 0.1255f);
         private static UnityEngine.Color colour_2 = new UnityEngine.Color(0.2941f, 0.3255f, 0.1255f);
         private static UnityEngine.Color colour_3 = new UnityEngine.Color(0.2941f, 0.3255f, 0.1255f);
         private static UnityEngine.Color colour_4 = new UnityEngine.Color(0.2941f, 0.3255f, 0.1255f);
@@ -39,6 +39,9 @@ namespace M1A1AMP
             colour_2,
             colour_3,
             colour_4,
+        };*/
+        private static UnityEngine.Color colour_primary = new UnityEngine.Color(0.9020f, 0.8118f, 0.6314f);
+        private static UnityEngine.Color[] colours = new UnityEngine.Color[] {colour_primary
         };
 
         private static void ERA_Setup(Transform[] era_transforms)
@@ -50,8 +53,8 @@ namespace M1A1AMP
                 transform.gameObject.AddComponent<UniformArmor>();
                 UniformArmor armor = transform.gameObject.GetComponent<UniformArmor>();
                 armor.SetName("ARAT-1");
-                armor.PrimaryHeatRha = 500f;
-                armor.PrimarySabotRha = 50f;
+                armor.PrimaryHeatRha = 450f;
+                armor.PrimarySabotRha = 30f;
                 armor.SecondaryHeatRha = 0f;
                 armor.SecondarySabotRha = 0f;
                 armor._canShatterLongRods = true;
@@ -114,7 +117,7 @@ namespace M1A1AMP
     [HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "penCheck")]
     public class InsensitiveERA
     {
-        private static float pen_threshold = 25f;
+        private static float pen_threshold = 30f;
         private static float caliber_threshold = 20f;
 
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator il)
