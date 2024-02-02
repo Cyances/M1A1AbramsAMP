@@ -94,8 +94,8 @@ namespace M1A1AMP
         static AmmoType ammo_m830a2;
 
         static AmmoClipCodexScriptable clip_codex_XM1147;
-        static AmmoType.AmmoClip clip_XM1147;
-        static AmmoCodexScriptable ammo_codex_XM1147;
+        static AmmoType.AmmoClip clip_xm1147;
+        static AmmoCodexScriptable ammo_codex_xm1147;
         static AmmoType ammo_xm1147;
 
         static AmmoClipCodexScriptable clip_codex_lahat;
@@ -253,6 +253,8 @@ namespace M1A1AMP
         static UniformArmor sprocketwheelImprovedarmor;
         static UniformArmor roadwheelIimprovedarmor;
 
+        static DestructibleComponent barrelhealth;
+
         ////GAS variables
         static ReticleSO reticleSO_m1a1firstRound;
         static ReticleMesh.CachedReticle reticle_cached_m1a1firstRound;
@@ -344,7 +346,7 @@ namespace M1A1AMP
                 ["M830"] = ammo_codex_m830,
                 ["M830A1"] = ammo_codex_m830a1,
                 ["M830A2"] = ammo_codex_m830a2,
-                ["XM1147"] = ammo_codex_XM1147,
+                ["XM1147"] = ammo_codex_xm1147,
                 ["LAHAT"] = ammo_codex_lahat,
             };
 
@@ -2266,6 +2268,9 @@ namespace M1A1AMP
                 ammo_m829.RhaPenetration = 600;
                 ammo_m829.MuzzleVelocity = 1670f;
                 ammo_m829.Mass = 3.94f;
+                ammo_m829.CertainRicochetAngle = 5f;
+                ammo_m829.MaxSpallRha = 16f;
+                ammo_m829.SpallMultiplier = 1.5f;
 
                 ammo_codex_m829 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829.AmmoType = ammo_m829;
@@ -2291,6 +2296,9 @@ namespace M1A1AMP
                 ammo_m829a1.RhaPenetration = 700f;
                 ammo_m829a1.MuzzleVelocity = 1575f;
                 ammo_m829a1.Mass = 4.64f;
+                ammo_m829a1.CertainRicochetAngle = 5f;
+                ammo_m829a1.MaxSpallRha = 20f;
+                ammo_m829a1.SpallMultiplier = 1.75f;
 
                 ammo_codex_m829a1 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829a1.AmmoType = ammo_m829a1;
@@ -2316,6 +2324,9 @@ namespace M1A1AMP
                 ammo_m829a2.RhaPenetration = 800f;
                 ammo_m829a2.MuzzleVelocity = 1680f;
                 ammo_m829a2.Mass = 4.74f;
+                ammo_m829a2.CertainRicochetAngle = 4f;
+                ammo_m829a2.MaxSpallRha = 24f;
+                ammo_m829a2.SpallMultiplier = 2.0f;
 
                 ammo_codex_m829a2 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829a2.AmmoType = ammo_m829a2;
@@ -2341,6 +2352,9 @@ namespace M1A1AMP
                 ammo_m829a3.RhaPenetration = 900f;
                 ammo_m829a3.MuzzleVelocity = 1555f;
                 ammo_m829a3.Mass = 4.84f;
+                ammo_m829a3.CertainRicochetAngle = 3f;
+                ammo_m829a3.MaxSpallRha = 28f;
+                ammo_m829a3.SpallMultiplier = 2.5f;
 
                 ammo_codex_m829a3 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829a3.AmmoType = ammo_m829a3;
@@ -2366,7 +2380,9 @@ namespace M1A1AMP
                 ammo_m829a4.RhaPenetration = 1000f;
                 ammo_m829a4.MuzzleVelocity = 1700f;
                 ammo_m829a4.Mass = 4.94f;
-                ammo_m829a4.SpallMultiplier = 2f;
+                ammo_m829a4.MaxSpallRha = 32f;
+                ammo_m829a4.SpallMultiplier = 3f;
+                ammo_m829.CertainRicochetAngle = 2f;
 
                 ammo_codex_m829a4 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829a4.AmmoType = ammo_m829a4;
@@ -2393,7 +2409,7 @@ namespace M1A1AMP
                 ammo_m830.TntEquivalentKg = 1.814f;
                 ammo_m830.MuzzleVelocity = 1140f;
                 ammo_m830.Mass = 13.5f;
-                ammo_m830.CertainRicochetAngle = 8.0f;
+                ammo_m830.CertainRicochetAngle = 4.0f;
                 ammo_m830.ShatterOnRicochet = false;
                 ammo_m830.SpallMultiplier = 1.5f;
 
@@ -2422,7 +2438,7 @@ namespace M1A1AMP
                 ammo_m830a1.TntEquivalentKg = 2.721f;
                 ammo_m830a1.MuzzleVelocity = 1400f;
                 ammo_m830a1.Mass = 11.4f;
-                ammo_m830a1.CertainRicochetAngle = 5.0f;
+                ammo_m830a1.CertainRicochetAngle = 0.0f;
                 ammo_m830a1.ShatterOnRicochet = false;
                 ammo_m830a1.DetonateSpallCount = mpatFragments.Value; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
                 ammo_m830a1.SpallMultiplier = 0.5f;
@@ -2455,7 +2471,7 @@ namespace M1A1AMP
                 ammo_m830a2.TntEquivalentKg = 2.721f;
                 ammo_m830a2.MuzzleVelocity = 1240f;
                 ammo_m830a2.Mass = 13.5f;
-                ammo_m830a2.CertainRicochetAngle = 5.0f;
+                ammo_m830a2.CertainRicochetAngle = 0.0f;
                 ammo_m830a2.ShatterOnRicochet = false;
                 ammo_m830a2.DetonateSpallCount = 150;
                 ammo_m830a2.SpallMultiplier = 2f;
@@ -2478,7 +2494,7 @@ namespace M1A1AMP
                 clip_codex_m830a2.CompatibleWeaponSystems[0] = gun_m256;
                 clip_codex_m830a2.ClipType = clip_m830a2;
 
-                // XM1147
+                // xm1147
                 ammo_xm1147 = new AmmoType();
                 Util.ShallowCopy(ammo_xm1147, ammo_m456);
                 ammo_xm1147.Name = "XM1147 AMP-T";
@@ -2489,26 +2505,26 @@ namespace M1A1AMP
                 ammo_xm1147.MinSpallRha = 55f;
                 ammo_xm1147.MuzzleVelocity = 1410f;
                 ammo_xm1147.Mass = 11.4f;
-                ammo_xm1147.CertainRicochetAngle = 1.0f;
+                ammo_xm1147.CertainRicochetAngle = 0.0f;
                 ammo_xm1147.ShatterOnRicochet = false;
                 ammo_xm1147.SpallMultiplier = 2f;
                 ammo_xm1147.DetonateSpallCount = ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
 
-                ammo_codex_XM1147 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
-                ammo_codex_XM1147.AmmoType = ammo_xm1147;
-                ammo_codex_XM1147.name = "ammo_xm1147";
+                ammo_codex_xm1147 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
+                ammo_codex_xm1147.AmmoType = ammo_xm1147;
+                ammo_codex_xm1147.name = "ammo_xm1147";
 
-                clip_XM1147 = new AmmoType.AmmoClip();
-                clip_XM1147.Capacity = 1;
-                clip_XM1147.Name = "XM1147 AMP-T";
-                clip_XM1147.MinimalPattern = new AmmoCodexScriptable[1];
-                clip_XM1147.MinimalPattern[0] = ammo_codex_XM1147;
+                clip_xm1147 = new AmmoType.AmmoClip();
+                clip_xm1147.Capacity = 1;
+                clip_xm1147.Name = "XM1147 AMP-T";
+                clip_xm1147.MinimalPattern = new AmmoCodexScriptable[1];
+                clip_xm1147.MinimalPattern[0] = ammo_codex_xm1147;
 
                 clip_codex_XM1147 = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
-                clip_codex_XM1147.name = "clip_XM1147";
+                clip_codex_XM1147.name = "clip_xm1147";
                 clip_codex_XM1147.CompatibleWeaponSystems = new WeaponSystemCodexScriptable[1];
                 clip_codex_XM1147.CompatibleWeaponSystems[0] = gun_m256;
-                clip_codex_XM1147.ClipType = clip_XM1147;
+                clip_codex_XM1147.ClipType = clip_xm1147;
 
                 // lahat
                 ammo_lahat = new AmmoType();
@@ -2524,7 +2540,7 @@ namespace M1A1AMP
                 ammo_lahat.TurnSpeed = 1.5f;
                 ammo_lahat.MaxSpallRha = 30f;
                 ammo_lahat.MinSpallRha = 5f;
-                ammo_lahat.CertainRicochetAngle = 5.0f;
+                ammo_lahat.CertainRicochetAngle = 3.0f;
                 ammo_lahat.ShotVisual = ammo_bgm71.ShotVisual;
                 ammo_lahat.MaximumRange = 6000f;
                 ammo_lahat.RangedFuseTime = 20f;
@@ -2956,7 +2972,7 @@ namespace M1A1AMP
                 ammo_xm1147_vis.name = "XM1147 visual";
                 ammo_xm1147.VisualModel = ammo_xm1147_vis;
                 ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_xm1147;
-                ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_XM1147;
+                ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_xm1147;
 
                 ammo_lahat_vis = GameObject.Instantiate(ammo_m456.VisualModel);
                 ammo_lahat_vis.name = "LAHAT visual";
