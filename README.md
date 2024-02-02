@@ -1,19 +1,9 @@
-# M1A1 Abrams AMP v2.3 WIP
+# M1A1 Abrams AMP v2.3 ERA
 
 ## Branch release notes:
 <p>
 	<ul> 
-		<li></li>
+		<li>Minor code optimizations</li>
+		<li>Commented ARAT implemenation in case of future reference. Refer to my NATO-ERA mod for the actual implementation.</li>
 	</ul>
 </p>
-
-### Round Changes
-| Name  | Note |
-| ------------- | ------------- |
-| | |
-
-
-### Heavy Ultra (HU) Armor Changes
-| Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
-| ------------- | ------------- | ------------- | ------------- | 
-|  |  |  |  |
