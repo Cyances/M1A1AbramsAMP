@@ -11,7 +11,7 @@ using UnityEngine;
 using GHPC.Camera;
 using GHPC.Player;
 
-[assembly: MelonInfo(typeof(AbramsAMPMod), "M1A1 Abrams AMP", "2.2", "Cyance, ATLAS and Schweiz")]
+[assembly: MelonInfo(typeof(AbramsAMPMod), "M1A1 Abrams AMP", "2.3", "Cyance, ATLAS and Schweiz")]
 [assembly: MelonGame("Radian Simulations LLC", "GHPC")]
 
 namespace M1A1AMP
