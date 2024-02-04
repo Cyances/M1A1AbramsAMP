@@ -316,7 +316,7 @@ namespace M1A1AMP
                 ["M830"] = clip_codex_m830,
                 ["M830A1"] = clip_codex_m830a1,
                 ["M830A2"] = clip_codex_m830a2,
-                ["xm1147"] = clip_codex_xm1147,
+                ["XM1147"] = clip_codex_xm1147,
                 ["LAHAT"] = clip_codex_lahat,
             };
 
@@ -330,7 +330,7 @@ namespace M1A1AMP
                 ["M830"] = ammo_codex_m830,
                 ["M830A1"] = ammo_codex_m830a1,
                 ["M830A2"] = ammo_codex_m830a2,
-                ["xm1147"] = ammo_codex_xm1147,
+                ["XM1147"] = ammo_codex_xm1147,
                 ["LAHAT"] = ammo_codex_lahat,
             };
 
@@ -1832,6 +1832,7 @@ namespace M1A1AMP
                             vic._friendlyName = "M1E1" + m1e1Armor.Value;
                         }
 
+
                         WeaponsManager weaponsManager = vic.GetComponent<WeaponsManager>();
                         WeaponSystemInfo mainGunInfo = weaponsManager.Weapons[0];
                         WeaponSystem mainGun = mainGunInfo.Weapon;
@@ -2034,10 +2035,26 @@ namespace M1A1AMP
                         MissileGuidanceUnit computer = guidance_computer_obj.GetComponent<MissileGuidanceUnit>();
                         computer.AimElement = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/laser/").gameObject.transform;
                         mainGun.GuidanceUnit = computer;
+
+                        ////ERA detection for designation amendment
+                        foreach (GameObject armor_go in GameObject.FindGameObjectsWithTag("Penetrable"))
+                        {
+                            if (armor_go.name != "HULLARMOR") continue;
+                            if (!armor_go.transform.parent.GetComponent<LateFollow>()) continue;
+
+                            string name = armor_go.transform.parent.GetComponent<LateFollow>().ParentUnit.FriendlyName;
+
+                            if (name == "M1A1" + m1a1Armor.Value || name == "M1E1" + m1e1Armor.Value)
+                            {
+                                if (armor_go.transform.Find("Hull ERA Array(Clone)"))
+                                {
+                                    vic._friendlyName += " TUSK";
+                                }
+                            }
+                        }
                     }
                 }
             }
-
             yield break;
         }
 
@@ -2242,6 +2259,7 @@ namespace M1A1AMP
                 ammo_m830.CertainRicochetAngle = 4.0f;
                 ammo_m830.ShatterOnRicochet = false;
                 ammo_m830.SpallMultiplier = 1.5f;
+                ammo_m830.DetonateSpallCount = 100;
 
                 ammo_codex_m830 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m830.AmmoType = ammo_m830;
@@ -2303,7 +2321,7 @@ namespace M1A1AMP
                 ammo_m830a2.Mass = 13.5f;
                 ammo_m830a2.CertainRicochetAngle = 0.0f;
                 ammo_m830a2.ShatterOnRicochet = false;
-                ammo_m830a2.DetonateSpallCount = 150;
+                ammo_m830a2.DetonateSpallCount = 200;
                 ammo_m830a2.SpallMultiplier = 2f;
                 ammo_m830a2.MaxSpallRha = 50f;
                 ammo_m830a2.MinSpallRha = 5f;
@@ -2819,7 +2837,7 @@ namespace M1A1AMP
         {
             private static void Postfix(GHPC.Weapons.LiveRound __instance)
             {
-                if (__instance.Info.Name != "xm1147 AMP-T") return;
+                if (__instance.Info.Name != "XM1147 AMP-T") return;
 
                 FieldInfo rangedFuseTimeField = typeof(GHPC.Weapons.LiveRound).GetField("_rangedFuseCountdown", BindingFlags.Instance | BindingFlags.NonPublic);
                 FieldInfo rangedFuseTimeActiveField = typeof(GHPC.Weapons.LiveRound).GetField("_rangedFuseActive", BindingFlags.Instance | BindingFlags.NonPublic);
