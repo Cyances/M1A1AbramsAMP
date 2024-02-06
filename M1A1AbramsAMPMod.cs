@@ -1516,9 +1516,9 @@ namespace M1A1AMP
 
                 string[] era_names = new string[] {
                     "kontakt-1 armour",
-                    /*"ARAT-1",
-                    "BRAT-M3",
-                    "BRAT-M5",*/
+                    "ARAT-1 Armor",
+                    "BRAT-M3 Armor",
+                    "BRAT-M5 Armor",
                 };
 
                 foreach (ArmorCodexScriptable s in Resources.FindObjectsOfTypeAll<ArmorCodexScriptable>())
@@ -1537,12 +1537,12 @@ namespace M1A1AMP
 
                         AmmoType.ArmorOptimization optimization_m830a2 = new AmmoType.ArmorOptimization();
                         optimization_m830a2.Armor = s;
-                        optimization_m830a2.RhaRatio = 0.1f;
+                        optimization_m830a2.RhaRatio = 0.2f;
                         era_optimizations_m830a2.Add(optimization_m830a2);
 
                         AmmoType.ArmorOptimization optimization_lahat = new AmmoType.ArmorOptimization();
                         optimization_lahat.Armor = s;
-                        optimization_lahat.RhaRatio = 0.1f;
+                        optimization_lahat.RhaRatio = 0.2f;
                         era_optimizations_lahat.Add(optimization_lahat);
                     }
 
@@ -1561,13 +1561,13 @@ namespace M1A1AMP
                 // m829 
                 ammo_m829 = new AmmoType();
                 Util.ShallowCopy(ammo_m829, ammo_m833);
-                ammo_m829.Name = "M829 APFSDS-T";
                 ammo_m829.Caliber = 120;
-                ammo_m829.RhaPenetration = 600;
-                ammo_m829.MuzzleVelocity = 1670f;
-                ammo_m829.Mass = 3.94f;
                 ammo_m829.CertainRicochetAngle = 5f;
+                ammo_m829.Mass = 3.94f;
                 ammo_m829.MaxSpallRha = 16f;
+                ammo_m829.MuzzleVelocity = 1670f;
+                ammo_m829.Name = "M829 APFSDS-T";
+                ammo_m829.RhaPenetration = 600;
                 ammo_m829.SpallMultiplier = 1.5f;
 
                 ammo_codex_m829 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
@@ -1589,13 +1589,13 @@ namespace M1A1AMP
                 // m829a1
                 ammo_m829a1 = new AmmoType();
                 Util.ShallowCopy(ammo_m829a1, ammo_m833);
-                ammo_m829a1.Name = "M829A1 APFSDS-T";
                 ammo_m829a1.Caliber = 120;
-                ammo_m829a1.RhaPenetration = 700f;
-                ammo_m829a1.MuzzleVelocity = 1575f;
-                ammo_m829a1.Mass = 4.64f;
                 ammo_m829a1.CertainRicochetAngle = 5f;
+                ammo_m829a1.Mass = 4.64f;
+                ammo_m829a1.MuzzleVelocity = 1575f;
+                ammo_m829a1.Name = "M829A1 APFSDS-T";
                 ammo_m829a1.MaxSpallRha = 20f;
+                ammo_m829a1.RhaPenetration = 700f;
                 ammo_m829a1.SpallMultiplier = 1.75f;
 
                 ammo_codex_m829a1 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
@@ -1617,13 +1617,13 @@ namespace M1A1AMP
                 // m829a2
                 ammo_m829a2 = new AmmoType();
                 Util.ShallowCopy(ammo_m829a2, ammo_m833);
-                ammo_m829a2.Name = "M829A2 APFSDS-T";
                 ammo_m829a2.Caliber = 120;
-                ammo_m829a2.RhaPenetration = 800f;
-                ammo_m829a2.MuzzleVelocity = 1680f;
-                ammo_m829a2.Mass = 4.74f;
                 ammo_m829a2.CertainRicochetAngle = 4f;
+                ammo_m829a2.Mass = 4.74f;
                 ammo_m829a2.MaxSpallRha = 24f;
+                ammo_m829a2.MuzzleVelocity = 1680f;
+                ammo_m829a2.Name = "M829A2 APFSDS-T";
+                ammo_m829a2.RhaPenetration = 750f;
                 ammo_m829a2.SpallMultiplier = 2.0f;
 
                 ammo_codex_m829a2 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
@@ -1645,15 +1645,15 @@ namespace M1A1AMP
                 // m829a3
                 ammo_m829a3 = new AmmoType();
                 Util.ShallowCopy(ammo_m829a3, ammo_m833);
-                ammo_m829a3.Name = "M829A3 APFSDS-T";
-                ammo_m829a3.Caliber = 120;
-                ammo_m829a3.RhaPenetration = 900f;
-                ammo_m829a3.MuzzleVelocity = 1555f;
-                ammo_m829a3.Mass = 4.84f;
-                ammo_m829a3.CertainRicochetAngle = 3f;
-                ammo_m829a3.MaxSpallRha = 28f;
-                ammo_m829a3.SpallMultiplier = 2.5f;
                 ammo_m829a3.ArmorOptimizations = era_optimizations_m829a3.ToArray<AmmoType.ArmorOptimization>();
+                ammo_m829a3.Caliber = 120;
+                ammo_m829a3.CertainRicochetAngle = 3f;
+                ammo_m829a3.Mass = 4.84f;
+                ammo_m829a3.MaxSpallRha = 28f;
+                ammo_m829a3.MuzzleVelocity = 1555f;
+                ammo_m829a3.Name = "M829A3 APFSDS-T";
+                ammo_m829a3.RhaPenetration = 840f;
+                ammo_m829a3.SpallMultiplier = 2.5f;
 
                 ammo_codex_m829a3 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829a3.AmmoType = ammo_m829a3;
@@ -1674,15 +1674,15 @@ namespace M1A1AMP
                 // m829a4
                 ammo_m829a4 = new AmmoType();
                 Util.ShallowCopy(ammo_m829a4, ammo_m833);
-                ammo_m829a4.Name = "M829A4 APFSDS-T";
+                ammo_m829a4.ArmorOptimizations = era_optimizations_m829a4.ToArray<AmmoType.ArmorOptimization>();
                 ammo_m829a4.Caliber = 120;
-                ammo_m829a4.RhaPenetration = 1000f;
-                ammo_m829a4.MuzzleVelocity = 1700f;
+                ammo_m829a4.CertainRicochetAngle = 2f;
                 ammo_m829a4.Mass = 4.94f;
                 ammo_m829a4.MaxSpallRha = 32f;
+                ammo_m829a4.Name = "M829A4 APFSDS-T";
+                ammo_m829a4.MuzzleVelocity = 1700f;
+                ammo_m829a4.RhaPenetration = 1000f;
                 ammo_m829a4.SpallMultiplier = 3f;
-                ammo_m829a4.CertainRicochetAngle = 2f;
-                ammo_m829a4.ArmorOptimizations = era_optimizations_m829a4.ToArray<AmmoType.ArmorOptimization>();
 
                 ammo_codex_m829a4 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829a4.AmmoType = ammo_m829a4;
@@ -1703,16 +1703,16 @@ namespace M1A1AMP
                 // m830
                 ammo_m830 = new AmmoType();
                 Util.ShallowCopy(ammo_m830, ammo_m456);
-                ammo_m830.Name = "M830 HEAT-FS-T";
                 ammo_m830.Caliber = 120;
-                ammo_m830.RhaPenetration = 600;
-                ammo_m830.TntEquivalentKg = 1.814f;
-                ammo_m830.MuzzleVelocity = 1140f;
-                ammo_m830.Mass = 13.5f;
                 ammo_m830.CertainRicochetAngle = 4.0f;
+                ammo_m830.DetonateSpallCount = 100;
+                ammo_m830.Mass = 13.5f;
+                ammo_m830.MuzzleVelocity = 1140f;
+                ammo_m830.Name = "M830 HEAT-FS-T";
+                ammo_m830.RhaPenetration = 600;
                 ammo_m830.ShatterOnRicochet = false;
                 ammo_m830.SpallMultiplier = 1.5f;
-                ammo_m830.DetonateSpallCount = 100;
+                ammo_m830.TntEquivalentKg = 1.814f;
 
                 ammo_codex_m830 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m830.AmmoType = ammo_m830;
@@ -1733,19 +1733,19 @@ namespace M1A1AMP
                 // m830a1
                 ammo_m830a1 = new AmmoType();
                 Util.ShallowCopy(ammo_m830a1, ammo_m456);
-                ammo_m830a1.Name = "M830A1 HEAT-MP-T";
                 ammo_m830a1.Caliber = 120;
-                ammo_m830a1.RhaPenetration = 480;
-                ammo_m830a1.TntEquivalentKg = 2.721f;
-                ammo_m830a1.MuzzleVelocity = 1400f;
-                ammo_m830a1.Mass = 11.4f;
                 ammo_m830a1.CertainRicochetAngle = 0.0f;
-                ammo_m830a1.ShatterOnRicochet = false;
                 ammo_m830a1.DetonateSpallCount = mpatFragments.Value; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
-                ammo_m830a1.SpallMultiplier = 0.5f;
+                //ammo_m830a1.ImpactFuseTime = 0.000357143f; //0.5 meters after impact //delay removed since it negatively affects armor penetration
+                ammo_m830a1.Mass = 11.4f;
                 ammo_m830a1.MaxSpallRha = 60f;
                 ammo_m830a1.MinSpallRha = 1f;
-                //ammo_m830a1.ImpactFuseTime = 0.000357143f; //0.5 meters after impact //delay removed since it negatively affects armor penetration
+                ammo_m830a1.MuzzleVelocity = 1400f;
+                ammo_m830a1.Name = "M830A1 HEAT-MP-T";
+                ammo_m830a1.RhaPenetration = 480;
+                ammo_m830a1.ShatterOnRicochet = false;
+                ammo_m830a1.SpallMultiplier = 0.5f;
+                ammo_m830a1.TntEquivalentKg = 2.721f;
 
                 ammo_codex_m830a1 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m830a1.AmmoType = ammo_m830a1;
@@ -1766,19 +1766,19 @@ namespace M1A1AMP
                 // m830a2
                 ammo_m830a2 = new AmmoType();
                 Util.ShallowCopy(ammo_m830a2, ammo_m456);
-                ammo_m830a2.Name = "M830A2 IHEAT-FS-T";
+                ammo_m830a2.ArmorOptimizations = era_optimizations_m830a2.ToArray<AmmoType.ArmorOptimization>();
                 ammo_m830a2.Caliber = 120;
-                ammo_m830a2.RhaPenetration = 1200;
-                ammo_m830a2.TntEquivalentKg = 2.721f;
-                ammo_m830a2.MuzzleVelocity = 1400f;
-                ammo_m830a2.Mass = 13.5f;
                 ammo_m830a2.CertainRicochetAngle = 0.0f;
-                ammo_m830a2.ShatterOnRicochet = false;
                 ammo_m830a2.DetonateSpallCount = 200;
-                ammo_m830a2.SpallMultiplier = 2f;
+                ammo_m830a2.Mass = 13.5f;
                 ammo_m830a2.MaxSpallRha = 50f;
                 ammo_m830a2.MinSpallRha = 5f;
-                ammo_m830a2.ArmorOptimizations = era_optimizations_m830a2.ToArray<AmmoType.ArmorOptimization>();
+                ammo_m830a2.MuzzleVelocity = 1400f;
+                ammo_m830a2.Name = "M830A2 IHEAT-FS-T";
+                ammo_m830a2.RhaPenetration = 900;
+                ammo_m830a2.ShatterOnRicochet = false;
+                ammo_m830a2.SpallMultiplier = 2f;
+                ammo_m830a2.TntEquivalentKg = 2.721f;
 
                 ammo_codex_m830a2 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m830a2.AmmoType = ammo_m830a2;
@@ -1799,18 +1799,18 @@ namespace M1A1AMP
                 // xm1147
                 ammo_xm1147 = new AmmoType();
                 Util.ShallowCopy(ammo_xm1147, ammo_m456);
-                ammo_xm1147.Name = "XM1147 AMP-T";
                 ammo_xm1147.Caliber = 120;
-                ammo_xm1147.RhaPenetration = 480;
-                ammo_xm1147.TntEquivalentKg = 3.45f; //50% more power than equivalent load
+                ammo_xm1147.CertainRicochetAngle = 0.0f;
+                ammo_xm1147.DetonateSpallCount = ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
+                ammo_xm1147.Mass = 11.4f;
                 ammo_xm1147.MaxSpallRha = 180f;
                 ammo_xm1147.MinSpallRha = 55f;
                 ammo_xm1147.MuzzleVelocity = 1410f;
-                ammo_xm1147.Mass = 11.4f;
-                ammo_xm1147.CertainRicochetAngle = 0.0f;
+                ammo_xm1147.Name = "XM1147 AMP-T";
+                ammo_xm1147.RhaPenetration = 480;
                 ammo_xm1147.ShatterOnRicochet = false;
                 ammo_xm1147.SpallMultiplier = 2f;
-                ammo_xm1147.DetonateSpallCount = ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
+                ammo_xm1147.TntEquivalentKg = 3.45f; //50% more power than equivalent load
 
                 ammo_codex_xm1147 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_xm1147.AmmoType = ammo_xm1147;
@@ -1831,25 +1831,25 @@ namespace M1A1AMP
                 // lahat
                 ammo_lahat = new AmmoType();
                 Util.ShallowCopy(ammo_lahat, ammo_bgm71);
-                ammo_lahat.Name = "LAHAT";
-                ammo_lahat.Guidance = AmmoType.GuidanceType.Laser;
-                ammo_lahat.Caliber = 120;
-                ammo_lahat.RhaPenetration = 800f;
-                ammo_lahat.MuzzleVelocity = 300f;
-                ammo_lahat.Mass = 13f;
                 ammo_lahat.ArmingDistance = 50;
-                ammo_lahat.TntEquivalentKg = 4.5f;
-                ammo_lahat.TurnSpeed = 1.5f;
+                ammo_lahat.ArmorOptimizations = era_optimizations_lahat.ToArray<AmmoType.ArmorOptimization>();
+                ammo_lahat.Caliber = 120;
+                ammo_lahat.CertainRicochetAngle = 3.0f;
+                ammo_lahat.Guidance = AmmoType.GuidanceType.Laser;
+                ammo_lahat.MaximumRange = 6000f;
                 ammo_lahat.MaxSpallRha = 25f;
                 ammo_lahat.MinSpallRha = 5f;
-                ammo_lahat.CertainRicochetAngle = 3.0f;
+                ammo_lahat.MuzzleVelocity = 300f;
+                ammo_lahat.Mass = 13f;
+                ammo_lahat.Name = "LAHAT";
+                ammo_lahat.RhaPenetration = 800f;
                 ammo_lahat.ShotVisual = ammo_bgm71.ShotVisual;
-                ammo_lahat.MaximumRange = 6000f;
-                ammo_lahat.RangedFuseTime = 20f;
-                ammo_lahat.UseTracer = true;
-                ammo_lahat.Tandem = true;
                 ammo_lahat.SpallMultiplier = 1.5f;
-                ammo_lahat.ArmorOptimizations = era_optimizations_lahat.ToArray<AmmoType.ArmorOptimization>();
+                ammo_lahat.TurnSpeed = 1.5f;
+                ammo_lahat.RangedFuseTime = 20f;
+                ammo_lahat.Tandem = true;
+                ammo_lahat.TntEquivalentKg = 4.5f;
+                ammo_lahat.UseTracer = true;
 
                 ammo_codex_lahat = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_lahat.AmmoType = ammo_lahat;
