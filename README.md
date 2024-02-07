@@ -5,7 +5,7 @@
 	<ul> 
 		<li>Code optimization</li>
 		<li>Renamed .dll to zzM1A1AbramsAMP.dll </li>
-		<li>HA variant is +30% and HC variant is +45% armor compared to vanilla (refer to table)</li>
+		<li>HA variant is now +30% and HC variant is +45% armor compared to vanilla (refer to table)</li>
 		<li>New round: M830A3 IHEAT-FS-T</li>
 		<li>Ammo changes (refer to table)</li>
 		<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT)</li>
