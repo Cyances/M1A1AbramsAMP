@@ -94,6 +94,11 @@ namespace M1A1AMP
         static AmmoCodexScriptable ammo_codex_m830a2;
         static AmmoType ammo_m830a2;
 
+        static AmmoClipCodexScriptable clip_codex_m830a3;
+        static AmmoType.AmmoClip clip_m830a3;
+        static AmmoCodexScriptable ammo_codex_m830a3;
+        static AmmoType ammo_m830a3;
+
         static AmmoClipCodexScriptable clip_codex_xm1147;
         static AmmoType.AmmoClip clip_xm1147;
         static AmmoCodexScriptable ammo_codex_xm1147;
@@ -112,6 +117,7 @@ namespace M1A1AMP
         static GameObject ammo_m830_vis = null;
         static GameObject ammo_m830a1_vis = null;
         static GameObject ammo_m830a2_vis = null;
+        static GameObject ammo_m830a3_vis = null;
         static GameObject ammo_xm1147_vis = null;
         static GameObject ammo_lahat_vis = null;
 
@@ -262,7 +268,7 @@ namespace M1A1AMP
         public static void Config(MelonPreferences_Category cfg)
         {
             m1a1firstAmmo = cfg.CreateEntry<string>("M1A1 1st Round Type", "M829A4");
-            m1a1firstAmmo.Description = "Round types carried by M1A1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'xm1147', 'LAHAT' or 'XM1111'";
+            m1a1firstAmmo.Description = "Round types carried by M1A1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'XM1147', 'LAHAT' or 'XM1111'";
             m1a1secondAmmo = cfg.CreateEntry<string>("M1A1 2nd Round Type", "M830A2");
             m1a1thirdAmmo = cfg.CreateEntry<string>("M1A1 3rd Round Type", "xm1147");
             m1a1fourthAmmo = cfg.CreateEntry<string>("M1A1 4th Round Type", "LAHAT");
@@ -274,7 +280,7 @@ namespace M1A1AMP
             m1a1fourthammoCount = cfg.CreateEntry<int>("M1A1 4th Round Count", 6);
 
             m1e1firstAmmo = cfg.CreateEntry<string>("M1E1 1st Round Type", "M829");
-            m1e1firstAmmo.Description = "Round types carried by M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'xm1147', 'LAHAT' or 'XM1111'";
+            m1e1firstAmmo.Description = "Round types carried by M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'XM1147', 'LAHAT' or 'XM1111'";
             m1e1secondAmmo = cfg.CreateEntry<string>("M1E1 2nd Round Type", "M829");
             m1e1thirdAmmo = cfg.CreateEntry<string>("M1E1 3rd Round Type", "M830");
             m1e1fourthAmmo = cfg.CreateEntry<string>("M1E1 4th Round Type", "M830A1");
@@ -337,6 +343,7 @@ namespace M1A1AMP
                 ["M830"] = ammo_codex_m830,
                 ["M830A1"] = ammo_codex_m830a1,
                 ["M830A2"] = ammo_codex_m830a2,
+                ["M830A3"] = ammo_codex_m830a3,
                 ["XM1147"] = ammo_codex_xm1147,
                 ["LAHAT"] = ammo_codex_lahat,
             };
@@ -1516,9 +1523,9 @@ namespace M1A1AMP
 
                 string[] era_names = new string[] {
                     "kontakt-1 armour",
-                    "ARAT-1 Armor",
-                    "BRAT-M3 Armor",
-                    "BRAT-M5 Armor",
+                    "ARAT-1 Armor Codex",
+                    "BRAT-M3 Armor Codex",
+                    "BRAT-M5 Armor Codex",
                 };
 
                 foreach (ArmorCodexScriptable s in Resources.FindObjectsOfTypeAll<ArmorCodexScriptable>())
@@ -1738,7 +1745,7 @@ namespace M1A1AMP
                 ammo_m830a1.DetonateSpallCount = mpatFragments.Value; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
                 //ammo_m830a1.ImpactFuseTime = 0.000357143f; //0.5 meters after impact //delay removed since it negatively affects armor penetration
                 ammo_m830a1.Mass = 11.4f;
-                ammo_m830a1.MaxSpallRha = 60f;
+                ammo_m830a1.MaxSpallRha = 50f;
                 ammo_m830a1.MinSpallRha = 1f;
                 ammo_m830a1.MuzzleVelocity = 1400f;
                 ammo_m830a1.Name = "M830A1 HEAT-MP-T";
@@ -1771,11 +1778,11 @@ namespace M1A1AMP
                 ammo_m830a2.CertainRicochetAngle = 0.0f;
                 ammo_m830a2.DetonateSpallCount = 200;
                 ammo_m830a2.Mass = 13.5f;
-                ammo_m830a2.MaxSpallRha = 50f;
+                ammo_m830a2.MaxSpallRha = 35f;
                 ammo_m830a2.MinSpallRha = 5f;
                 ammo_m830a2.MuzzleVelocity = 1400f;
                 ammo_m830a2.Name = "M830A2 IHEAT-FS-T";
-                ammo_m830a2.RhaPenetration = 900;
+                ammo_m830a2.RhaPenetration = 700;
                 ammo_m830a2.ShatterOnRicochet = false;
                 ammo_m830a2.SpallMultiplier = 2f;
                 ammo_m830a2.TntEquivalentKg = 2.721f;
@@ -1795,6 +1802,39 @@ namespace M1A1AMP
                 clip_codex_m830a2.CompatibleWeaponSystems = new WeaponSystemCodexScriptable[1];
                 clip_codex_m830a2.CompatibleWeaponSystems[0] = gun_m256;
                 clip_codex_m830a2.ClipType = clip_m830a2;
+
+                // m830a3
+                ammo_m830a3 = new AmmoType();
+                Util.ShallowCopy(ammo_m830a3, ammo_m456);
+                ammo_m830a3.ArmorOptimizations = era_optimizations_m830a2.ToArray<AmmoType.ArmorOptimization>();
+                ammo_m830a3.Caliber = 120;
+                ammo_m830a3.CertainRicochetAngle = 0.0f;
+                ammo_m830a3.DetonateSpallCount = 100;
+                ammo_m830a3.Mass = 13.5f;
+                ammo_m830a3.MaxSpallRha = 25f;
+                ammo_m830a3.MinSpallRha = 5f;
+                ammo_m830a3.MuzzleVelocity = 1400f;
+                ammo_m830a3.Name = "M830A3 IHEAT-FS-T";
+                ammo_m830a3.RhaPenetration = 1000;
+                ammo_m830a3.ShatterOnRicochet = false;
+                ammo_m830a3.SpallMultiplier = 2f;
+                ammo_m830a3.TntEquivalentKg = 2.721f;
+
+                ammo_codex_m830a3 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
+                ammo_codex_m830a3.AmmoType = ammo_m830a3;
+                ammo_codex_m830a3.name = "ammo_m830a3";
+
+                clip_m830a3 = new AmmoType.AmmoClip();
+                clip_m830a3.Capacity = 1;
+                clip_m830a3.Name = "M830A3 IHEAT-FS-T";
+                clip_m830a3.MinimalPattern = new AmmoCodexScriptable[1];
+                clip_m830a3.MinimalPattern[0] = ammo_codex_m830a3;
+
+                clip_codex_m830a3 = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+                clip_codex_m830a3.name = "clip_m830a3";
+                clip_codex_m830a3.CompatibleWeaponSystems = new WeaponSystemCodexScriptable[1];
+                clip_codex_m830a3.CompatibleWeaponSystems[0] = gun_m256;
+                clip_codex_m830a3.ClipType = clip_m830a3;
 
                 // xm1147
                 ammo_xm1147 = new AmmoType();
@@ -1903,7 +1943,7 @@ namespace M1A1AMP
                 armor_mantletDUarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_mantletDUarmor_HU, armor_specialarmor_VNL);
                 armor_mantletDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.15f; //default 1.3
-                armor_mantletDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.5f; //default 1.4
+                armor_mantletDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.75f; //default 1.4
                 armor_mantletDUarmor_HU.Name = "Abrams HU DU armor mantlet";
 
                 armor_codex_mantletDUarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2187,11 +2227,11 @@ namespace M1A1AMP
                 armor_turretsidefaceCompositearmor_HU = new ArmorType();
                 ////End
 
-                ////HC armor modifiers (12.5% increase)
+                ////HC armor modifiers (45% increase)
                 armor_superCompositeskirt_HC = new ArmorType();
                 Util.ShallowCopy(armor_superCompositeskirt_HC, armor_compositeskirt_VNL);
-                armor_superCompositeskirt_HC.RhaeMultiplierCe = 1.875f; //default 1.5
-                armor_superCompositeskirt_HC.RhaeMultiplierKe = 1.0f; //default 0.8
+                armor_superCompositeskirt_HC.RhaeMultiplierCe = 2.175f; //default 1.5
+                armor_superCompositeskirt_HC.RhaeMultiplierKe = 1.16f; //default 0.8
                 armor_superCompositeskirt_HC.Name = "Abrams HC super special composite skirt";
 
                 armor_codex_superCompositeskirt_HC = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2200,8 +2240,8 @@ namespace M1A1AMP
 
                 armor_cheeksDUarmor_HC = new ArmorType();
                 Util.ShallowCopy(armor_cheeksDUarmor_HC, armor_specialarmor_VNL);
-                armor_cheeksDUarmor_HC.RhaeMultiplierCe = 1.625f; //default 1.3
-                armor_cheeksDUarmor_HC.RhaeMultiplierKe = 0.6875f; //default 0.55
+                armor_cheeksDUarmor_HC.RhaeMultiplierCe = 1.885f; //default 1.3
+                armor_cheeksDUarmor_HC.RhaeMultiplierKe = 0.7975f; //default 0.55
                 armor_cheeksDUarmor_HC.Name = "Abrams HC DU armor turret cheeks";
 
                 armor_codex_cheeksDUarmor_HC = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2211,8 +2251,8 @@ namespace M1A1AMP
 
                 armor_fronthullDUarmor_HC = new ArmorType();
                 Util.ShallowCopy(armor_fronthullDUarmor_HC, armor_specialarmor_VNL);
-                armor_fronthullDUarmor_HC.RhaeMultiplierCe = 1.625f; //default 1.3
-                armor_fronthullDUarmor_HC.RhaeMultiplierKe = 0.625f; //default 0.45
+                armor_fronthullDUarmor_HC.RhaeMultiplierCe = 1.885f; //default 1.3
+                armor_fronthullDUarmor_HC.RhaeMultiplierKe = 0.7975f; //default 0.45
                 armor_fronthullDUarmor_HC.Name = "Abrams HC DU armor hull front";
 
                 armor_codex_fronthullDUarmor_HC = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2222,8 +2262,8 @@ namespace M1A1AMP
 
                 armor_mantletDUarmor_HC = new ArmorType();
                 Util.ShallowCopy(armor_mantletDUarmor_HC, armor_specialarmor_VNL);
-                armor_mantletDUarmor_HC.RhaeMultiplierCe = 1.625f; //default 1.3
-                armor_mantletDUarmor_HC.RhaeMultiplierKe = 1.75f; //default 1.4
+                armor_mantletDUarmor_HC.RhaeMultiplierCe = 1.495f; //default 1.3
+                armor_mantletDUarmor_HC.RhaeMultiplierKe = 1.61f; //default 1.4
                 armor_mantletDUarmor_HC.Name = "Abrams HC DU armor mantlet";
 
                 armor_codex_mantletDUarmor_HC = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2233,8 +2273,8 @@ namespace M1A1AMP
 
                 armor_turretsidesDUarmor_HC = new ArmorType();
                 Util.ShallowCopy(armor_turretsidesDUarmor_HC, armor_specialarmor_VNL);
-                armor_turretsidesDUarmor_HC.RhaeMultiplierCe = 1.625f; //default 1.3
-                armor_turretsidesDUarmor_HC.RhaeMultiplierKe = 1.75f; //default 1.4
+                armor_turretsidesDUarmor_HC.RhaeMultiplierCe = 1.885f; //default 1.3
+                armor_turretsidesDUarmor_HC.RhaeMultiplierKe = 2.03f; //default 1.4
                 armor_turretsidesDUarmor_HC.Name = "Abrams HC DU armor turret sides";
 
                 armor_codex_turretsidesDUarmor_HC = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2243,11 +2283,11 @@ namespace M1A1AMP
                 armor_turretsidesDUarmor_HC = new ArmorType();
                 ////End
 
-                ////HA armor modifiers (25% increase)
+                ////HA armor modifiers (30% increase)
                 armor_superCompositeskirt_HA = new ArmorType();
                 Util.ShallowCopy(armor_superCompositeskirt_HA, armor_compositeskirt_VNL);
-                armor_superCompositeskirt_HA.RhaeMultiplierCe = 1.6875f; //default 1.5
-                armor_superCompositeskirt_HA.RhaeMultiplierKe = 0.9f; //default 0.8
+                armor_superCompositeskirt_HA.RhaeMultiplierCe = 1.95f; //default 1.5
+                armor_superCompositeskirt_HA.RhaeMultiplierKe = 1.04f; //default 0.8
                 armor_superCompositeskirt_HA.Name = "Abrams HA super special composite skirt";
 
                 armor_codex_superCompositeskirt_HA = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2256,8 +2296,8 @@ namespace M1A1AMP
 
                 armor_cheeksDUarmor_HA = new ArmorType();
                 Util.ShallowCopy(armor_cheeksDUarmor_HA, armor_specialarmor_VNL);
-                armor_cheeksDUarmor_HA.RhaeMultiplierCe = 1.4625f; //default 1.3
-                armor_cheeksDUarmor_HA.RhaeMultiplierKe = 0.61875f; //default 0.55
+                armor_cheeksDUarmor_HA.RhaeMultiplierCe = 1.69f; //default 1.3
+                armor_cheeksDUarmor_HA.RhaeMultiplierKe = 0.65f; //default 0.55
                 armor_cheeksDUarmor_HA.Name = "Abrams HA DU armor turret cheeks";
 
                 armor_codex_cheeksDUarmor_HA = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2267,8 +2307,8 @@ namespace M1A1AMP
 
                 armor_fronthullDUarmor_HA = new ArmorType();
                 Util.ShallowCopy(armor_fronthullDUarmor_HA, armor_specialarmor_VNL);
-                armor_fronthullDUarmor_HA.RhaeMultiplierCe = 1.4625f; //default 1.3
-                armor_fronthullDUarmor_HA.RhaeMultiplierKe = 0.5625f; //default 0.45
+                armor_fronthullDUarmor_HA.RhaeMultiplierCe = 1.69f; //default 1.3
+                armor_fronthullDUarmor_HA.RhaeMultiplierKe = 0.65f; //default 0.45
                 armor_fronthullDUarmor_HA.Name = "Abrams HA DU armor hull front";
 
                 armor_codex_fronthullDUarmor_HA = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2278,8 +2318,8 @@ namespace M1A1AMP
 
                 armor_mantletDUarmor_HA = new ArmorType();
                 Util.ShallowCopy(armor_mantletDUarmor_HA, armor_specialarmor_VNL);
-                armor_mantletDUarmor_HA.RhaeMultiplierCe = 1.4625f; //default 1.3
-                armor_mantletDUarmor_HA.RhaeMultiplierKe = 1.575f; //default 1.4
+                armor_mantletDUarmor_HA.RhaeMultiplierCe = 1.43f; //default 1.3
+                armor_mantletDUarmor_HA.RhaeMultiplierKe = 1.54f; //default 1.4
                 armor_mantletDUarmor_HA.Name = "Abrams HA DU armor mantlet";
 
                 armor_codex_mantletDUarmor_HA = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2289,8 +2329,8 @@ namespace M1A1AMP
 
                 armor_turretsidesDUarmor_HA = new ArmorType();
                 Util.ShallowCopy(armor_turretsidesDUarmor_HA, armor_specialarmor_VNL);
-                armor_turretsidesDUarmor_HA.RhaeMultiplierCe = 1.4625f; //default 1.3
-                armor_turretsidesDUarmor_HA.RhaeMultiplierKe = 1.575f; //default 1.4
+                armor_turretsidesDUarmor_HA.RhaeMultiplierCe = 1.69f; //default 1.3
+                armor_turretsidesDUarmor_HA.RhaeMultiplierKe = 1.82f; //default 1.4
                 armor_turretsidesDUarmor_HA.Name = "Abrams HA DU armor turret sides";
 
                 armor_codex_turretsidesDUarmor_HA = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
