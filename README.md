@@ -43,7 +43,7 @@
 ### Heavy Common (HC) - roughly 45% increase in protection
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) 
 | ------------- | ------------- | ------------- | 
-| Hull front | 530  | 1070  |
+| Hull front | 590  | 1200  |
 | Turret cheek | 690 | 1510 | 
 | Turret side | 510 | 560 | 
 | Composite side skirt | 105 | 145 | 
