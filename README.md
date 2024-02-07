@@ -51,6 +51,6 @@
 
 <p>
 	<ul> 
-		<li>Gunt mantlet only have a slight armor increase compared to vanilla since it seems to be overperforming</li>
+		<li>Gun mantlet only have a slight armor increase compared to vanilla since it seems to be overperforming</li>
 	</ul>
 </p>
