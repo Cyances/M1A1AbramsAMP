@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.2
+# M1A1 Abrams AMP v2.3
 Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. I also would like to thank Swiss/SovGrenadier for the GLATGM implementation. Be sure to checkout their mods because they are great!
 
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
@@ -10,41 +10,66 @@ If you get an error launching through Steam you will need to run the game execut
 ![Screenshot_3](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A.png)
 ![Screenshot_4](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A%20XRay.png)
 
-## AMP 2.2 Update:
+## AMP 2.3 Update:
 <p>
 	<ul>
 	<li>120mm M256 Gun</li>
 	<li>M1IP automatically converted to M1A1</li>
 	<li>Tank upgrades based on real life developments (but guesstimated values) and hypothetical thinking</li>
-    	<li>Selectable Abrams armor variants: base armor, Heavy Armor (+12.5% protection), Heavy Common (+25% protection) and Heavy Ultra (custom)</li>
+    	<li>Selectable Abrams armor variants: base armor, Heavy Armor (+30% protection), Heavy Common (+45% protection) and Heavy Ultra (custom)</li>
     	<li>Selectable rounds (up to four slots and 50 max total rounds).</li>
 	<li>Default M1A1 loadout: 20x M829A4, 12x M830A2, 12x XM1147, 6x LAHAT</li>
 	<li>Default M1E1 loadout: 20x M829, 15x M830, 15x M830A1 (press key 3/4 to select M830/A1)</li>
 	<li>APFSDS: M829, M829A1, M829A2, M829A3, M829A4</li>
-    	<li>HEAT: M830, M830A1, M830A2, XM1147</li>
+    	<li>HEAT: M830, M830A1, M830A2, M830A3, XM1147</li>
     	<li>GLATGM: LAHAT</li>
     	<li>XM1147 AMP-T multifuze round (airburst or point-detonate)</li>
+	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT)</li>
+	<li>"TUSK" postfix when ERA is detected (NATO-ERA mod)</li>
  	</ul>
 </p>
 
-## Armor variants list:
-### Heavy Armor (HA) - roughly 12.5% increase in protection
-| Area  | Protection vs KE (mm) | Protection vs CE (mm) 
-| ------------- | ------------- | ------------- | 
-| Hull front | 450  | 930  |
-| Turret cheek | 540 | 1170 | 
-| Turret side | 400 | 430 | 
-| Composite side skirt | 80 | 112 | 
-| Gun mantlet | 510 | 820 | 
+## Installation:
+1.) Install [MelonLoader](https://github.com/LavaGang/MelonLoader/).
 
-### Heavy Common (HC) - roughly 25% increase in protection
+2.) Download the latest version from the [release page](https://github.com/Cyances/M1A1AbramsAMP/releases).
+
+3.) Place the .dll file in the mods folder:
+
+4.) Launch the game directly (not from Steam).
+   
+5.) On first time running this mod, the entries in MelonPreferences.cfg will only appear after launching the game then closing it.
+
+
+## NOTE!
+<p>
+	<ul> 
+		<li>Only include ATLAS' Abrams mod .dll file in the mods folder or this one. Do not place both .dll files at the same time.</li>
+		<li>If you already have ATLAS' Abrams mod or have an older version of the Abrams AMP mod installed, either delete MelonPreferences.cfg in UserData folder or remove the lines pertaining to the [M1A1Config]/[M1A1AMPConfig] to make it easier to understand the custom config. Launch the game first then close it to update the contents of MelonPreferences.cfg</li>
+		<li>XM1111 is in the config file but it is not implemented yet. Listing that in your loadout will make the mod use vanilla loadout (M833/M456A2). I only included it so there is no need to manually cleanup the config file if I could make it work.</li>
+		<li>Mission loading might be longer if you are using the HU variant, potentially due to the extra armor configuration.</li>
+	</ul>
+</p>
+
+
+## Armor variants list:
+### Heavy Armor (HA) - roughly 30% increase in protection
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) 
 | ------------- | ------------- | ------------- | 
-| Hull front | 510  | 1030  |
-| Turret cheek | 600 | 1300 | 
-| Turret side | 430 | 480 | 
-| Composite side skirt | 90 | 125 | 
-| Gun mantlet | 565 | 910 | 
+| Hull front | 530  | 1070  |
+| Turret cheek | 620 | 1350 | 
+| Turret side | 500 | 460 | 
+| Composite side skirt | 95 | 130 | 
+| Gun mantlet | 500 | 800 | 
+
+### Heavy Common (HC) - roughly 45% increase in protection
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) 
+| ------------- | ------------- | ------------- | 
+| Hull front | 590  | 1200  |
+| Turret cheek | 690 | 1510 | 
+| Turret side | 510 | 560 | 
+| Composite side skirt | 105 | 145 | 
+| Gun mantlet | 540 | 820 | 
 
 ### Heavy Ultra (HU) - Custom protection values
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
@@ -73,8 +98,8 @@ If you get an error launching through Steam you will need to run the game execut
 	<ul> 
 		<li>Armor testing done in game which can result in inconsistency between the area shot at, and the angle and distance from it. However, I did my best to shoot at less than 100 meters and as close to 0 degrees for the perpendicular shot to the armor face.</li>
 		<li>The only exception is the turret cheek and hull front where I emulated a headon engagement.</li>
-		<li>HA and HC armor figures are just a flat 12.5% and 25% increase in protection becaue finding proper documentation is difficult (please don't violate ITAR). However, the values can be changed in the future if required. Although if you believe you found a seemingly decent (and unclass) source for the values, please let me know.</li>
-		<li>If the protection increase appears to be low, I'm basing the values relative to the available (REDFOR) vanilla and modded penetrators. Example would be HA's cheek array would barely hold against a vanilla 3BM32 (560mm which is highest REDFOR pen value) while the HC would completely protect against it.</li>
+		<li>HA and HC armor figures are rouhgly a 30% and 45% increase in protection becaue finding proper documentation is difficult (please don't violate ITAR). However, the values can be changed in the future if required. Although if you believe you found a seemingly decent (and unclass) source for the values, please let me know.</li>
+		<li>If the protection increase seem to be arbitrary, I'm basing the values relative to the available (REDFOR) vanilla and modded penetrators. Example would be HA's cheek array would barely hold against a vanilla 3BM32 (560mm which is highest REDFOR pen value) while the HC would completely protect against it.</li>
 		<li>HU armor figures are based on Steal Beasts Abrams and my own inputs. It's basically the Abrams that received armor improvements everywhere (BEGONE SWaP-C).</li>
 	</ul>
 </p>
@@ -84,19 +109,21 @@ If you get an error launching through Steam you will need to run the game execut
 | ------------- | ------------- | ------------- | ------------- |
 | M829 APFSDS-T | 600 | 1670  | - |
 | M829A1 APFSDS-T  | 700 | 1575 | - |
-| M829A2 APFSDS-T | 800 | 1680 | - |
-| M829A3 APFSDS-T | 900 | 1555 | - |
-| M829A4 APFSDS-T | 1000 | 1700 | +100% spalling chance |
+| M829A2 APFSDS-T | 750 | 1680 | - |
+| M829A3 APFSDS-T | 840 | 1555 | ERA is only 25% effective. |
+| M829A4 APFSDS-T | 1000 | 1700 | +100% spalling chance and performance. ERA is only 15% effective.  |
 | M830 HEAT-FS-T | 600 | 1140 | +50% spalling chance |
 | M830A1 HEAT-MP-T | 480 | 1400 | Point-detonate fuze only. 600 fragments (configurable count). |
-| M830A2 IHEAT-FS-T | 1200 | 1240 | +100% spalling chance |
+| M830A2 IHEAT-FS-T | 700 | 1400 | +100% spalling chance. ERA is only 15% effective. |
+| M830A3 IHEAT-FS-T | 1000 | 1300 | +100% spalling chance. ERA is only 15% effective. |
 | XM1147 AMP-T | 480 | 1410 | Point-detonate and airburst fuze. 600 fragments (configurable count). |
-| LAHAT | 800 | 300 | Gun-launched ATGM with SALH guidance.|
+| LAHAT | 800 | 300 | Gun-launched ATGM with SALH guidance. ERA is only 20% effective.|
 
 <p>
 	<ul> 
-		<li>The penetration values chosen are relative to the existing penetrators in the game and on assumptions/guesstimations based on open sourece information.</li>
-		<li>The performance for the M829 series are just a simple 100mm increase in penetration compared to the previous version for simplicity.</li>
+		<li>The penetration values chosen are relative to the existing penetrators in the game and on assumptions/guesstimations based on open source information.</li>
+		<li>Steel Beasts used as reference for M829 penetration values, except for the M829A4 which has completely made up stats</li>
+		<li>Values for Anti-ERA effects are a total guess</li>
 	</ul>
 </p>
 
@@ -124,13 +151,3 @@ If you get an error launching through Steam you will need to run the game execut
 </p>
 
 ![Screenshot_5](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20MelonPreferences%20v2.PNG)
-
-## NOTE!
-<p>
-	<ul> 
-		<li>Only include ATLAS' Abrams mod .dll file in the mods folder or this one. Do not place both .dll files at the same time.</li>
-		<li>If you already have ATLAS' Abrams mod or have an older version of the Abrams AMP mod installed, either delete MelonPreferences.cfg in UserData folder or remove the lines pertaining to the [M1A1Config]/[M1A1AMPConfig] to make it easier to understand the custom config. Launch the game first then close it to update the contents of MelonPreferences.cfg</li>
-		<li>XM1111 is in the config file but it is not implemented yet. Listing that in your loadout will make the mod use vanilla loadout (M833/M456A2). I only included it so there is no need to manually cleanup the config file if I could make it work.</li>
-		<li>Mission loading might be longer if you are using the HU variant, potentially due to the extra armor configuration.</li>
-	</ul>
-</p>
