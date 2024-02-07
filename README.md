@@ -30,11 +30,11 @@ If you get an error launching through Steam you will need to run the game execut
 </p>
 
 ## Installation:
-1.) Install [MelonLoader](https://github.com/LavaGang/MelonLoader/).
+1.) Install [MelonLoader v0.6.1](https://github.com/LavaGang/MelonLoader/).
 
 2.) Download the latest version from the [release page](https://github.com/Cyances/M1A1AbramsAMP/releases).
 
-3.) Place the .dll file in the mods folder:
+3.) Place zzM1A1AbramsAMP.dll.dll file in the mods folder:
 
 4.) Launch the game directly (not from Steam).
    
