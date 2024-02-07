@@ -1534,22 +1534,22 @@ namespace M1A1AMP
                     {
                         AmmoType.ArmorOptimization optimization_m829a3 = new AmmoType.ArmorOptimization();
                         optimization_m829a3.Armor = s;
-                        optimization_m829a3.RhaRatio = 0.1f;
+                        optimization_m829a3.RhaRatio = 0.25f;
                         era_optimizations_m829a3.Add(optimization_m829a3);
 
                         AmmoType.ArmorOptimization optimization_m829a4 = new AmmoType.ArmorOptimization();
                         optimization_m829a4.Armor = s;
-                        optimization_m829a4.RhaRatio = 0.05f;
+                        optimization_m829a4.RhaRatio = 0.15f;
                         era_optimizations_m829a4.Add(optimization_m829a4);
 
                         AmmoType.ArmorOptimization optimization_m830a2 = new AmmoType.ArmorOptimization();
                         optimization_m830a2.Armor = s;
-                        optimization_m830a2.RhaRatio = 0.2f;
+                        optimization_m830a2.RhaRatio = 0.15f;
                         era_optimizations_m830a2.Add(optimization_m830a2);
 
                         AmmoType.ArmorOptimization optimization_lahat = new AmmoType.ArmorOptimization();
                         optimization_lahat.Armor = s;
-                        optimization_lahat.RhaRatio = 0.15f;
+                        optimization_lahat.RhaRatio = 0.2f;
                         era_optimizations_lahat.Add(optimization_lahat);
                     }
 
@@ -1712,7 +1712,7 @@ namespace M1A1AMP
                 Util.ShallowCopy(ammo_m830, ammo_m456);
                 ammo_m830.Caliber = 120;
                 ammo_m830.CertainRicochetAngle = 4.0f;
-                ammo_m830.DetonateSpallCount = 100;
+                ammo_m830.DetonateSpallCount = 50;
                 ammo_m830.Mass = 13.5f;
                 ammo_m830.MuzzleVelocity = 1140f;
                 ammo_m830.Name = "M830 HEAT-FS-T";
@@ -1813,7 +1813,7 @@ namespace M1A1AMP
                 ammo_m830a3.Mass = 13.5f;
                 ammo_m830a3.MaxSpallRha = 25f;
                 ammo_m830a3.MinSpallRha = 5f;
-                ammo_m830a3.MuzzleVelocity = 1400f;
+                ammo_m830a3.MuzzleVelocity = 1300f;
                 ammo_m830a3.Name = "M830A3 IHEAT-FS-T";
                 ammo_m830a3.RhaPenetration = 1000;
                 ammo_m830a3.ShatterOnRicochet = false;
