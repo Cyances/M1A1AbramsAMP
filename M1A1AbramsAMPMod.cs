@@ -1539,7 +1539,7 @@ namespace M1A1AMP
 
                         AmmoType.ArmorOptimization optimization_m829a4 = new AmmoType.ArmorOptimization();
                         optimization_m829a4.Armor = s;
-                        optimization_m829a4.RhaRatio = 0.1f;
+                        optimization_m829a4.RhaRatio = 0.05f;
                         era_optimizations_m829a4.Add(optimization_m829a4);
 
                         AmmoType.ArmorOptimization optimization_m830a2 = new AmmoType.ArmorOptimization();
@@ -1549,7 +1549,7 @@ namespace M1A1AMP
 
                         AmmoType.ArmorOptimization optimization_lahat = new AmmoType.ArmorOptimization();
                         optimization_lahat.Armor = s;
-                        optimization_lahat.RhaRatio = 0.2f;
+                        optimization_lahat.RhaRatio = 0.15f;
                         era_optimizations_lahat.Add(optimization_lahat);
                     }
 
@@ -1571,11 +1571,11 @@ namespace M1A1AMP
                 ammo_m829.Caliber = 120;
                 ammo_m829.CertainRicochetAngle = 5f;
                 ammo_m829.Mass = 3.94f;
-                ammo_m829.MaxSpallRha = 16f;
+                //ammo_m829.MaxSpallRha = 16f;
                 ammo_m829.MuzzleVelocity = 1670f;
                 ammo_m829.Name = "M829 APFSDS-T";
                 ammo_m829.RhaPenetration = 600;
-                ammo_m829.SpallMultiplier = 1.5f;
+                //ammo_m829.SpallMultiplier = 1.5f;
 
                 ammo_codex_m829 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829.AmmoType = ammo_m829;
@@ -1601,9 +1601,9 @@ namespace M1A1AMP
                 ammo_m829a1.Mass = 4.64f;
                 ammo_m829a1.MuzzleVelocity = 1575f;
                 ammo_m829a1.Name = "M829A1 APFSDS-T";
-                ammo_m829a1.MaxSpallRha = 20f;
+                //ammo_m829a1.MaxSpallRha = 20f;
                 ammo_m829a1.RhaPenetration = 700f;
-                ammo_m829a1.SpallMultiplier = 1.75f;
+                //ammo_m829a1.SpallMultiplier = 1.75f;
 
                 ammo_codex_m829a1 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829a1.AmmoType = ammo_m829a1;
@@ -1627,11 +1627,11 @@ namespace M1A1AMP
                 ammo_m829a2.Caliber = 120;
                 ammo_m829a2.CertainRicochetAngle = 4f;
                 ammo_m829a2.Mass = 4.74f;
-                ammo_m829a2.MaxSpallRha = 24f;
+                //ammo_m829a2.MaxSpallRha = 24f;
                 ammo_m829a2.MuzzleVelocity = 1680f;
                 ammo_m829a2.Name = "M829A2 APFSDS-T";
                 ammo_m829a2.RhaPenetration = 750f;
-                ammo_m829a2.SpallMultiplier = 2.0f;
+                //ammo_m829a2.SpallMultiplier = 2.0f;
 
                 ammo_codex_m829a2 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829a2.AmmoType = ammo_m829a2;
@@ -1656,11 +1656,11 @@ namespace M1A1AMP
                 ammo_m829a3.Caliber = 120;
                 ammo_m829a3.CertainRicochetAngle = 3f;
                 ammo_m829a3.Mass = 4.84f;
-                ammo_m829a3.MaxSpallRha = 28f;
+                //ammo_m829a3.MaxSpallRha = 28f;
                 ammo_m829a3.MuzzleVelocity = 1555f;
                 ammo_m829a3.Name = "M829A3 APFSDS-T";
                 ammo_m829a3.RhaPenetration = 840f;
-                ammo_m829a3.SpallMultiplier = 2.5f;
+                //ammo_m829a3.SpallMultiplier = 2.5f;
 
                 ammo_codex_m829a3 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829a3.AmmoType = ammo_m829a3;
@@ -1685,11 +1685,11 @@ namespace M1A1AMP
                 ammo_m829a4.Caliber = 120;
                 ammo_m829a4.CertainRicochetAngle = 2f;
                 ammo_m829a4.Mass = 4.94f;
-                ammo_m829a4.MaxSpallRha = 32f;
+                ammo_m829a4.MaxSpallRha = 25f;
                 ammo_m829a4.Name = "M829A4 APFSDS-T";
                 ammo_m829a4.MuzzleVelocity = 1700f;
                 ammo_m829a4.RhaPenetration = 1000f;
-                ammo_m829a4.SpallMultiplier = 3f;
+                ammo_m829a4.SpallMultiplier = 2f;
 
                 ammo_codex_m829a4 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_m829a4.AmmoType = ammo_m829a4;
@@ -1877,7 +1877,7 @@ namespace M1A1AMP
                 ammo_lahat.CertainRicochetAngle = 3.0f;
                 ammo_lahat.Guidance = AmmoType.GuidanceType.Laser;
                 ammo_lahat.MaximumRange = 6000f;
-                ammo_lahat.MaxSpallRha = 25f;
+                ammo_lahat.MaxSpallRha = 15f;
                 ammo_lahat.MinSpallRha = 5f;
                 ammo_lahat.MuzzleVelocity = 300f;
                 ammo_lahat.Mass = 13f;
@@ -2252,7 +2252,7 @@ namespace M1A1AMP
                 armor_fronthullDUarmor_HC = new ArmorType();
                 Util.ShallowCopy(armor_fronthullDUarmor_HC, armor_specialarmor_VNL);
                 armor_fronthullDUarmor_HC.RhaeMultiplierCe = 1.885f; //default 1.3
-                armor_fronthullDUarmor_HC.RhaeMultiplierKe = 0.7975f; //default 0.45
+                armor_fronthullDUarmor_HC.RhaeMultiplierKe = 0.87f; //default 0.45
                 armor_fronthullDUarmor_HC.Name = "Abrams HC DU armor hull front";
 
                 armor_codex_fronthullDUarmor_HC = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2297,7 +2297,7 @@ namespace M1A1AMP
                 armor_cheeksDUarmor_HA = new ArmorType();
                 Util.ShallowCopy(armor_cheeksDUarmor_HA, armor_specialarmor_VNL);
                 armor_cheeksDUarmor_HA.RhaeMultiplierCe = 1.69f; //default 1.3
-                armor_cheeksDUarmor_HA.RhaeMultiplierKe = 0.65f; //default 0.55
+                armor_cheeksDUarmor_HA.RhaeMultiplierKe = 0.715f; //default 0.55
                 armor_cheeksDUarmor_HA.Name = "Abrams HA DU armor turret cheeks";
 
                 armor_codex_cheeksDUarmor_HA = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
