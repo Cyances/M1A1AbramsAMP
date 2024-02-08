@@ -14,8 +14,8 @@ If you get an error launching through Steam you will need to run the game execut
 <p>
 	<ul>
 	<li>120mm M256 Gun</li>
-	<li>M1IP automatically converted to M1A1</li>
-	<li>Tank upgrades based on real life developments (but guesstimated values) and hypothetical thinking</li>
+	<li>M1IP automatically converted to M1A1.</li>
+	<li>Tank upgrades based on real life developments (but guesstimated values) and hypothetical thinking.</li>
     	<li>Selectable Abrams armor variants: base armor, Heavy Armor (+30% protection), Heavy Common (+45% protection) and Heavy Ultra (custom)</li>
     	<li>Selectable rounds (up to four slots and 50 max total rounds).</li>
 	<li>Default M1A1 loadout: 20x M829A4, 12x M830A2, 12x XM1147, 6x LAHAT</li>
@@ -23,9 +23,9 @@ If you get an error launching through Steam you will need to run the game execut
 	<li>APFSDS: M829, M829A1, M829A2, M829A3, M829A4</li>
     	<li>HEAT: M830, M830A1, M830A2, M830A3, XM1147</li>
     	<li>GLATGM: LAHAT</li>
-    	<li>XM1147 AMP-T multifuze round (airburst or point-detonate)</li>
-	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT)</li>
-	<li>"TUSK" postfix when ERA is detected (NATO-ERA mod)</li>
+    	<li>XM1147 AMP-T multifuze round (airburst or point-detonate).</li>
+	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT. Requires NATO ERA v1.1.1b and/or Pact Increased Lethality v 1.2.5<.)</li>
+	<li>"TUSK" postfix when ERA is detected (NATO ERA mod).</li>
  	</ul>
 </p>
 
