@@ -24,7 +24,7 @@ If you get an error launching through Steam you will need to run the game execut
     	<li>HEAT: M830, M830A1, M830A2, M830A3, XM1147</li>
     	<li>GLATGM: LAHAT</li>
     	<li>XM1147 AMP-T multifuze round (airburst or point-detonate).</li>
-	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT. Requires NATO ERA v1.1.1b and/or Pact Increased Lethality v 1.2.5<.)</li>
+	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT. Requires NATO ERA v1.1.1b and/or Pact Increased Lethality v 1.2.5.).</li>
 	<li>"TUSK" postfix when ERA is detected (NATO ERA mod).</li>
  	</ul>
 </p>
