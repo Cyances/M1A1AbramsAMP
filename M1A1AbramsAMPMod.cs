@@ -270,7 +270,7 @@ namespace M1A1AMP
             m1a1firstAmmo = cfg.CreateEntry<string>("M1A1 1st Round Type", "M829A4");
             m1a1firstAmmo.Description = "Round types carried by M1A1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'XM1147', 'LAHAT' or 'XM1111'";
             m1a1secondAmmo = cfg.CreateEntry<string>("M1A1 2nd Round Type", "M830A2");
-            m1a1thirdAmmo = cfg.CreateEntry<string>("M1A1 3rd Round Type", "xm1147");
+            m1a1thirdAmmo = cfg.CreateEntry<string>("M1A1 3rd Round Type", "XM1147");
             m1a1fourthAmmo = cfg.CreateEntry<string>("M1A1 4th Round Type", "LAHAT");
 
             m1a1firstammoCount = cfg.CreateEntry<int>("M1A1 1st Round Count", 20);
@@ -1534,7 +1534,7 @@ namespace M1A1AMP
                     {
                         AmmoType.ArmorOptimization optimization_m829a3 = new AmmoType.ArmorOptimization();
                         optimization_m829a3.Armor = s;
-                        optimization_m829a3.RhaRatio = 0.25f;
+                        optimization_m829a3.RhaRatio = 0.2f;
                         era_optimizations_m829a3.Add(optimization_m829a3);
 
                         AmmoType.ArmorOptimization optimization_m829a4 = new AmmoType.ArmorOptimization();
