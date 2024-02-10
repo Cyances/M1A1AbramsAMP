@@ -329,6 +329,7 @@ namespace M1A1AMP
                 ["M830"] = clip_codex_m830,
                 ["M830A1"] = clip_codex_m830a1,
                 ["M830A2"] = clip_codex_m830a2,
+                ["M830A3"] = clip_codex_m830a3,
                 ["XM1147"] = clip_codex_xm1147,
                 ["LAHAT"] = clip_codex_lahat,
             };
