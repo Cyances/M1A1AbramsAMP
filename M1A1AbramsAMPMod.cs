@@ -270,7 +270,7 @@ namespace M1A1AMP
             m1a1firstAmmo = cfg.CreateEntry<string>("M1A1 1st Round Type", "M829A4");
             m1a1firstAmmo.Description = "Round types carried by M1A1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'XM1147', 'LAHAT' or 'XM1111'";
             m1a1secondAmmo = cfg.CreateEntry<string>("M1A1 2nd Round Type", "M830A2");
-            m1a1thirdAmmo = cfg.CreateEntry<string>("M1A1 3rd Round Type", "xm1147");
+            m1a1thirdAmmo = cfg.CreateEntry<string>("M1A1 3rd Round Type", "XM1147");
             m1a1fourthAmmo = cfg.CreateEntry<string>("M1A1 4th Round Type", "LAHAT");
 
             m1a1firstammoCount = cfg.CreateEntry<int>("M1A1 1st Round Count", 20);
@@ -329,6 +329,7 @@ namespace M1A1AMP
                 ["M830"] = clip_codex_m830,
                 ["M830A1"] = clip_codex_m830a1,
                 ["M830A2"] = clip_codex_m830a2,
+                ["M830A3"] = clip_codex_m830a3,
                 ["XM1147"] = clip_codex_xm1147,
                 ["LAHAT"] = clip_codex_lahat,
             };
@@ -1534,7 +1535,7 @@ namespace M1A1AMP
                     {
                         AmmoType.ArmorOptimization optimization_m829a3 = new AmmoType.ArmorOptimization();
                         optimization_m829a3.Armor = s;
-                        optimization_m829a3.RhaRatio = 0.25f;
+                        optimization_m829a3.RhaRatio = 0.2f;
                         era_optimizations_m829a3.Add(optimization_m829a3);
 
                         AmmoType.ArmorOptimization optimization_m829a4 = new AmmoType.ArmorOptimization();
@@ -1564,7 +1565,6 @@ namespace M1A1AMP
                 gun_m256.Type = WeaponSystemCodexScriptable.WeaponType.LargeCannon;
 
                 //Ammo stuff
-
                 // m829 
                 ammo_m829 = new AmmoType();
                 Util.ShallowCopy(ammo_m829, ammo_m833);
@@ -1921,7 +1921,7 @@ namespace M1A1AMP
                 armor_cheeksDUarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_cheeksDUarmor_HU, armor_specialarmor_VNL);
                 armor_cheeksDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.2f; //default 1.3
-                armor_cheeksDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.2f; //default 0.55
+                armor_cheeksDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.25f; //default 0.55
                 armor_cheeksDUarmor_HU.Name = "Abrams HU DU armor turret cheeks";
 
                 armor_codex_cheeksDUarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -1932,7 +1932,7 @@ namespace M1A1AMP
                 armor_fronthullDUarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_fronthullDUarmor_HU, armor_specialarmor_VNL);
                 armor_fronthullDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.2f; //default 1.3
-                armor_fronthullDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.4f; //default 0.45
+                armor_fronthullDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.2f; //default 0.45
                 armor_fronthullDUarmor_HU.Name = "Abrams HU DU armor hull front";
 
                 armor_codex_fronthullDUarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -1943,7 +1943,7 @@ namespace M1A1AMP
                 armor_mantletDUarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_mantletDUarmor_HU, armor_specialarmor_VNL);
                 armor_mantletDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.15f; //default 1.3
-                armor_mantletDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.75f; //default 1.4
+                armor_mantletDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.65f; //default 1.4
                 armor_mantletDUarmor_HU.Name = "Abrams HU DU armor mantlet";
 
                 armor_codex_mantletDUarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2388,8 +2388,14 @@ namespace M1A1AMP
                 ammo_m830a2.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830a2;
                 ammo_m830a2.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830a2;
 
+                ammo_m830a3_vis = GameObject.Instantiate(ammo_m456.VisualModel);
+                ammo_m830a3_vis.name = "M830A3 visual";
+                ammo_m830a3.VisualModel = ammo_m830a3_vis;
+                ammo_m830a3.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830a3;
+                ammo_m830a3.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830a3;
+
                 ammo_xm1147_vis = GameObject.Instantiate(ammo_m456.VisualModel);
-                ammo_xm1147_vis.name = "xm1147 visual";
+                ammo_xm1147_vis.name = "XM1147 visual";
                 ammo_xm1147.VisualModel = ammo_xm1147_vis;
                 ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_xm1147;
                 ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_xm1147;
