@@ -1565,7 +1565,6 @@ namespace M1A1AMP
                 gun_m256.Type = WeaponSystemCodexScriptable.WeaponType.LargeCannon;
 
                 //Ammo stuff
-
                 // m829 
                 ammo_m829 = new AmmoType();
                 Util.ShallowCopy(ammo_m829, ammo_m833);
@@ -1922,7 +1921,7 @@ namespace M1A1AMP
                 armor_cheeksDUarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_cheeksDUarmor_HU, armor_specialarmor_VNL);
                 armor_cheeksDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.2f; //default 1.3
-                armor_cheeksDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.2f; //default 0.55
+                armor_cheeksDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.25f; //default 0.55
                 armor_cheeksDUarmor_HU.Name = "Abrams HU DU armor turret cheeks";
 
                 armor_codex_cheeksDUarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -1933,7 +1932,7 @@ namespace M1A1AMP
                 armor_fronthullDUarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_fronthullDUarmor_HU, armor_specialarmor_VNL);
                 armor_fronthullDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.2f; //default 1.3
-                armor_fronthullDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.4f; //default 0.45
+                armor_fronthullDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.2f; //default 0.45
                 armor_fronthullDUarmor_HU.Name = "Abrams HU DU armor hull front";
 
                 armor_codex_fronthullDUarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -1944,7 +1943,7 @@ namespace M1A1AMP
                 armor_mantletDUarmor_HU = new ArmorType();
                 Util.ShallowCopy(armor_mantletDUarmor_HU, armor_specialarmor_VNL);
                 armor_mantletDUarmor_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 2.15f; //default 1.3
-                armor_mantletDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.75f; //default 1.4
+                armor_mantletDUarmor_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 1.65f; //default 1.4
                 armor_mantletDUarmor_HU.Name = "Abrams HU DU armor mantlet";
 
                 armor_codex_mantletDUarmor_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -2389,8 +2388,14 @@ namespace M1A1AMP
                 ammo_m830a2.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830a2;
                 ammo_m830a2.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830a2;
 
+                ammo_m830a3_vis = GameObject.Instantiate(ammo_m456.VisualModel);
+                ammo_m830a3_vis.name = "M830A3 visual";
+                ammo_m830a3.VisualModel = ammo_m830a3_vis;
+                ammo_m830a3.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830a3;
+                ammo_m830a3.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830a3;
+
                 ammo_xm1147_vis = GameObject.Instantiate(ammo_m456.VisualModel);
-                ammo_xm1147_vis.name = "xm1147 visual";
+                ammo_xm1147_vis.name = "XM1147 visual";
                 ammo_xm1147.VisualModel = ammo_xm1147_vis;
                 ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_xm1147;
                 ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_xm1147;
