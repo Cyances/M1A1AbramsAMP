@@ -8,7 +8,7 @@
 		<li>HA variant is now +30% and HC variant is +45% armor compared to vanilla (refer to table)</li>
 		<li>New round: M830A3 IHEAT-FS-T</li>
 		<li>Ammo changes (refer to table)</li>
-		<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT). Requires NATO ERA v1.1.1b and/or Pact Increased Lethality v 1.2.5</li>
+		<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT), requires NATO ERA v1.1.1b and/or Pact Increased Lethality v1.2.5)</li>
 		<li>"TUSK" postfix when ERA is detected (NATO ERA mod)</li>
 	</ul>
 </p>
@@ -17,7 +17,7 @@
 | Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- |
 | M829A2 APFSDS-T | 750 | 1680 | - |
-| M829A3 APFSDS-T | 840 | 1555 | ERA is only 25% effective. |
+| M829A3 APFSDS-T | 840 | 1555 | ERA is only 20% effective. |
 | M829A4 APFSDS-T | 1000 | 1700 | ERA is only 15% effective. +100% spalling performance. |
 | M830A2 IHEAT-FS-T | 700 | 1400 | ERA is only 15% effective. |
 | M830A3 IHEAT-FS-T | 1000 | 1300 | ERA is only 15% effective. +100% spalling chance. |
