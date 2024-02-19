@@ -112,11 +112,11 @@ If you get an error launching through Steam you will need to run the game execut
 | M829A1 APFSDS-T  | 700 | 1575 | - |
 | M829A2 APFSDS-T | 750 | 1680 | - |
 | M829A3 APFSDS-T | 840 | 1555 | ERA is only 25% effective. |
-| M829A4 APFSDS-T | 1000 | 1700 | +100% spalling chance and performance. ERA is only 15% effective.  |
+| M829A4 APFSDS-T | 1000 | 1700 | Hypothethical round. +100% spalling chance and performance. ERA is only 15% effective.  |
 | M830 HEAT-FS-T | 600 | 1140 | +50% spalling chance |
 | M830A1 HEAT-MP-T | 480 | 1400 | Point-detonate fuze only. 600 fragments (configurable count). |
-| M830A2 IHEAT-FS-T | 700 | 1400 | +100% spalling chance. ERA is only 15% effective. |
-| M830A3 IHEAT-FS-T | 1000 | 1300 | +100% spalling chance. ERA is only 15% effective. |
+| M830A2 IHEAT-FS-T | 700 | 1400 | Hypothethical round. +100% spalling chance. ERA is only 15% effective. |
+| M830A3 IHEAT-FS-T | 1000 | 1300 | Hypothethical round. +100% spalling chance. ERA is only 15% effective. |
 | XM1147 AMP-T | 480 | 1410 | Point-detonate and airburst fuze. 600 fragments (configurable count). |
 | LAHAT | 800 | 300 | Gun-launched ATGM with SALH guidance. ERA is only 20% effective.|
 
