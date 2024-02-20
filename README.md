@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.3.2
+# M1A1 Abrams AMP v2.3.3
 Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. I also would like to thank Swiss/SovGrenadier for the GLATGM implementation. Be sure to checkout their mods because they are great!
 
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
@@ -19,12 +19,12 @@ If you get an error launching through Steam you will need to run the game execut
     	<li>Selectable Abrams armor variants: base armor, Heavy Armor (+30% protection), Heavy Common (+45% protection) and Heavy Ultra (custom)</li>
     	<li>Selectable rounds (up to four slots and 50 max total rounds)</li>
 	<li>Default M1A1 loadout: 20x M829A4, 12x M830A2, 12x XM1147, 6x LAHAT</li>
-	<li>Default M1E1 loadout: 20x M829, 15x M830, 15x M830A1 (press key 3/4 to select M830/A1)</li>
+	<li>Default M1E1 loadout: 20x M829, 15x M830, 15x M830A1 (press key 2/3 to select M830/A1 [key 4 is just an empty rack of M830A1])</li>
 	<li>APFSDS: M829, M829A1, M829A2, M829A3, M829A4</li>
     	<li>HEAT: M830, M830A1, M830A2, M830A3, XM1147</li>
     	<li>GLATGM: LAHAT</li>
     	<li>XM1147 AMP-T multifuze round (airburst or point-detonate)</li>
-	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT), requires NATO ERA v1.1.1b and/or Pact Increased Lethality v1.2.5)</li>
+	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT), requires at least NATO ERA v1.1.1b and/or Pact Increased Lethality v1.2.5)</li>
 	<li>"TUSK" postfix when ERA is detected (NATO ERA mod)</li>
  	</ul>
 </p>
@@ -49,6 +49,7 @@ If you get an error launching through Steam you will need to run the game execut
 		<li>XM1111 is in the config file but it is not implemented yet. Listing that in your loadout will make the mod use vanilla loadout (M833/M456A2). I only included it so there is no need to manually cleanup the config file if I could make it work.</li>
 		<li>Mission loading might be longer if you are using the HU variant, potentially due to the extra armor configuration.</li>
 		<li>For compatibility with other mods for the TUSK upgrade and anti-ERA effects, ensure that the AMP mod is loaded after NATO ERA and Pact Increased Lethatlity mod.</li>
+		<li>On the Gunner Auxiliary Sight (GAS) behavior: Only the first two rounds are considered and only one type of APFSDS (M829 series) and HEAT (other rounds) are considered. This means if you carry an all APFSDS/HEAT loadout but with different types, only the first round is considered by the GAS.</li>
 	</ul>
 </p>
 
