@@ -281,15 +281,15 @@ namespace M1A1AMP
 
             m1e1firstAmmo = cfg.CreateEntry<string>("M1E1 1st Round Type", "M829");
             m1e1firstAmmo.Description = "Round types carried by M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'XM1147', 'LAHAT' or 'XM1111'";
-            m1e1secondAmmo = cfg.CreateEntry<string>("M1E1 2nd Round Type", "M829");
-            m1e1thirdAmmo = cfg.CreateEntry<string>("M1E1 3rd Round Type", "M830");
+            m1e1secondAmmo = cfg.CreateEntry<string>("M1E1 2nd Round Type", "M830");
+            m1e1thirdAmmo = cfg.CreateEntry<string>("M1E1 3rd Round Type", "M830A1");
             m1e1fourthAmmo = cfg.CreateEntry<string>("M1E1 4th Round Type", "M830A1");
 
-            m1e1firstammoCount = cfg.CreateEntry<int>("M1E1 1st Round Count", 10);
+            m1e1firstammoCount = cfg.CreateEntry<int>("M1E1 1st Round Count", 20);
             m1e1firstammoCount.Description = "How many rounds per type each M1E1 should carry. Maximum of 50 rounds total. Bring in at least one primary round.";
-            m1e1secondammoCount = cfg.CreateEntry<int>("M1E1 2nd Round Count", 10);
+            m1e1secondammoCount = cfg.CreateEntry<int>("M1E1 2nd Round Count", 15);
             m1e1thirdammoCount = cfg.CreateEntry<int>("M1E1 3rd Round Count", 15);
-            m1e1fourthammoCount = cfg.CreateEntry<int>("M1E1 4th Round Count", 15);
+            m1e1fourthammoCount = cfg.CreateEntry<int>("M1E1 4th Round Count", 0);
 
             ampFragments = cfg.CreateEntry<int>("AMP Fragments", 600);
             ampFragments.Description = "How many fragments are generated when the AMP round explodes (in point-detonate/airburst mode). NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
@@ -1235,6 +1235,7 @@ namespace M1A1AMP
 
                 if (vic == null) continue;
 
+                //if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
                 if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
                 {
                     int rand = (randomChance.Value) ? UnityEngine.Random.Range(1, 100) : 0;
@@ -1264,6 +1265,7 @@ namespace M1A1AMP
                         }
 
                         ////GAS stuff
+                        
                         if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
                         {
                             if (reticleSO_m1e1firstRound == null)
@@ -1274,15 +1276,15 @@ namespace M1A1AMP
                                 Util.ShallowCopy(reticle_cached_m1e1firstRound, ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"]);
                                 reticle_cached_m1e1firstRound.tree = reticleSO_m1e1firstRound;
 
-                                ReticleTree.VerticalBallistic reticle_range_m1e1firstRound = (reticleSO_m1e1firstRound.planes[0]
-                                    as ReticleTree.FocalPlane).elements[1]
-                                    as ReticleTree.VerticalBallistic;
+                                ReticleTree.Angular boresight_m1e1firstRound = ((reticleSO_m1e1firstRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[0]
+                                    as ReticleTree.Angular);
+
+                                ReticleTree.VerticalBallistic reticle_range_m1e1firstRound = boresight_m1e1firstRound.elements[4] as ReticleTree.VerticalBallistic;
                                 reticle_range_m1e1firstRound.projectile = abrams_ammocodex[m1e1firstAmmo.Value];
                                 reticle_range_m1e1firstRound.UpdateBC();
 
-                                ReticleTree.Text reticle_text_m1e1firstRound = (((reticleSO_m1e1firstRound.planes[0]
-                                    as ReticleTree.FocalPlane).elements[0])
-                                    as ReticleTree.Angular).elements[0]
+                                ReticleTree.Text reticle_text_m1e1firstRound = boresight_m1e1firstRound.elements[0]
                                     as ReticleTree.Text;
 
                                 string m1e1firstRound_name = abrams_ammocodex[m1e1firstAmmo.Value].AmmoType.Name;
@@ -1294,15 +1296,15 @@ namespace M1A1AMP
                                 Util.ShallowCopy(reticle_cached_m1e1secondRound, ReticleMesh.cachedReticles["M1_105_GAS_HEAT"]);
                                 reticle_cached_m1e1secondRound.tree = reticleSO_m1e1secondRound;
 
-                                ReticleTree.VerticalBallistic reticle_range_m1e1secondRound = (reticleSO_m1e1secondRound.planes[0]
-                                    as ReticleTree.FocalPlane).elements[1]
-                                    as ReticleTree.VerticalBallistic;
+                                ReticleTree.Angular boresight_m1e1secondRound = ((reticleSO_m1e1secondRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[0]
+                                    as ReticleTree.Angular);
+
+                                ReticleTree.VerticalBallistic reticle_range_m1e1secondRound = boresight_m1e1secondRound.elements[4] as ReticleTree.VerticalBallistic;
                                 reticle_range_m1e1secondRound.projectile = abrams_ammocodex[m1e1secondAmmo.Value];
                                 reticle_range_m1e1secondRound.UpdateBC();
 
-                                ReticleTree.Text reticle_text_m1e1secondRound = (((reticleSO_m1e1secondRound.planes[0]
-                                    as ReticleTree.FocalPlane).elements[0])
-                                    as ReticleTree.Angular).elements[0]
+                                ReticleTree.Text reticle_text_m1e1secondRound = boresight_m1e1secondRound.elements[0]
                                     as ReticleTree.Text;
 
                                 string m1e1secondRound_name = abrams_ammocodex[m1e1secondAmmo.Value].AmmoType.Name;
@@ -1333,15 +1335,15 @@ namespace M1A1AMP
                                 Util.ShallowCopy(reticle_cached_m1a1firstRound, ReticleMesh.cachedReticles["M1_105_GAS_APFSDS"]);
                                 reticle_cached_m1a1firstRound.tree = reticleSO_m1a1firstRound;
 
-                                ReticleTree.VerticalBallistic reticle_range_m1a1firstRound = (reticleSO_m1a1firstRound.planes[0]
-                                    as ReticleTree.FocalPlane).elements[1]
-                                    as ReticleTree.VerticalBallistic;
+                                ReticleTree.Angular boresight_m1a1firstRound = ((reticleSO_m1a1firstRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[0]
+                                    as ReticleTree.Angular);
+
+                                ReticleTree.VerticalBallistic reticle_range_m1a1firstRound = boresight_m1a1firstRound.elements[4] as ReticleTree.VerticalBallistic;
                                 reticle_range_m1a1firstRound.projectile = abrams_ammocodex[m1a1firstAmmo.Value];
                                 reticle_range_m1a1firstRound.UpdateBC();
 
-                                ReticleTree.Text reticle_text_m1a1firstRound = (((reticleSO_m1a1firstRound.planes[0]
-                                    as ReticleTree.FocalPlane).elements[0])
-                                    as ReticleTree.Angular).elements[0]
+                                ReticleTree.Text reticle_text_m1a1firstRound = boresight_m1a1firstRound.elements[0]
                                     as ReticleTree.Text;
 
                                 string m1a1firstRound_name = abrams_ammocodex[m1a1firstAmmo.Value].AmmoType.Name;
@@ -1353,15 +1355,15 @@ namespace M1A1AMP
                                 Util.ShallowCopy(reticle_cached_m1a1secondRound, ReticleMesh.cachedReticles["M1_105_GAS_HEAT"]);
                                 reticle_cached_m1a1secondRound.tree = reticleSO_m1a1secondRound;
 
-                                ReticleTree.VerticalBallistic reticle_range_m1a1secondRound = (reticleSO_m1a1secondRound.planes[0]
-                                    as ReticleTree.FocalPlane).elements[1]
-                                    as ReticleTree.VerticalBallistic;
+                                ReticleTree.Angular boresight_m1a1secondRound = ((reticleSO_m1a1secondRound.planes[0]
+                                    as ReticleTree.FocalPlane).elements[0]
+                                    as ReticleTree.Angular);
+
+                                ReticleTree.VerticalBallistic reticle_range_m1a1secondRound = boresight_m1a1secondRound.elements[4] as ReticleTree.VerticalBallistic;
                                 reticle_range_m1a1secondRound.projectile = abrams_ammocodex[m1a1secondAmmo.Value];
                                 reticle_range_m1a1secondRound.UpdateBC();
 
-                                ReticleTree.Text reticle_text_m1a1secondRound = (((reticleSO_m1a1secondRound.planes[0]
-                                    as ReticleTree.FocalPlane).elements[0])
-                                    as ReticleTree.Angular).elements[0]
+                                ReticleTree.Text reticle_text_m1a1secondRound = boresight_m1a1secondRound.elements[0]
                                     as ReticleTree.Text;
 
                                 string m1a1secondRound_name = abrams_ammocodex[m1a1secondAmmo.Value].AmmoType.Name;
@@ -1381,7 +1383,7 @@ namespace M1A1AMP
                             gas_m1a1secondRound.SMR = null;
                             gas_m1a1secondRound.Load();
                         }
-
+                        
                         Transform muzzleFlashes = mainGun.MuzzleEffects[1].transform;
                         muzzleFlashes.GetChild(1).transform.localScale = new Vector3(2f, 2f, 2f);
                         muzzleFlashes.GetChild(2).transform.localScale = new Vector3(2f, 2f, 2f);
