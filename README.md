@@ -3,7 +3,7 @@
 ## Branch release notes:
 <p>
 	<ul> 
-		<li>/li>
+		<li></li>
 	</ul>
 </p>
 
@@ -14,7 +14,7 @@
 
 <p>
 	<ul> 
-		<li>/li>
+		<li></li>
 	</ul>
 </p>
 
