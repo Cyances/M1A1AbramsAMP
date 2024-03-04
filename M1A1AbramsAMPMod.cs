@@ -57,7 +57,9 @@ namespace M1A1AMP
         static MelonPreferences_Entry<string> m1a1Armor;
         static MelonPreferences_Entry<string> m1e1Armor;
         static MelonPreferences_Entry<bool> demigodArmor;
-        static MelonPreferences_Entry<bool> betterEngine;
+        static MelonPreferences_Entry<bool> agt2000;
+        static MelonPreferences_Entry<bool> agt2500;
+        static MelonPreferences_Entry<bool> betterTransmission;
         static MelonPreferences_Entry<bool> governorDelete;
 
         static WeaponSystemCodexScriptable gun_m256;
@@ -133,7 +135,7 @@ namespace M1A1AMP
         static AmmoType.AmmoClip clip_m2apt;
         static AmmoCodexScriptable ammo_codex_m2apt;
         static AmmoType ammo_m2apt;
-        
+
         static AmmoClipCodexScriptable clip_codex_m962slapt;
         static AmmoType.AmmoClip clip_m962slapt;
         static AmmoCodexScriptable ammo_codex_m962slapt;
@@ -363,8 +365,13 @@ namespace M1A1AMP
             demigodArmor = cfg.CreateEntry<bool>("Demigod Armor", false);
             demigodArmor.Description = "Almost deathproof Abrooms (HU variant only)";
 
-            betterEngine = cfg.CreateEntry<bool>("AGT1500+", false);
-            betterEngine.Description = "Better engine or transmission";
+            agt2000 = cfg.CreateEntry<bool>("AGT2000", false);
+            agt2000.Description = "SPEEEED AND POWWAAAH";
+
+            agt2500 = cfg.CreateEntry<bool>("AGT2500", false);
+            agt2500.Comment = "overrides AGT2000";
+
+            betterTransmission = cfg.CreateEntry<bool>("Transmission+", false);
 
             governorDelete = cfg.CreateEntry<bool>("GovernorDelete", false);
         }
@@ -1366,7 +1373,7 @@ namespace M1A1AMP
                             var agsOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/").gameObject.transform;
                             CameraSlot agsPlus = agsOptic.GetComponent<CameraSlot>();
                             agsPlus.DefaultFov = 6.5f;//4.2f
-                            agsPlus.OtherFovs = agsFovs.ToArray<float>();
+                            agsPlus.OtherFovs = new float[] { 4.2f, 2.716f, 1.96f };
                             agsPlus.VibrationBlurScale = 0.1f;//0.2
                             agsPlus.VibrationShakeMultiplier = 0.2f;//0.5
                         }
@@ -1557,7 +1564,7 @@ namespace M1A1AMP
                             coaxHeavy.SetCycleTime(0.133f);
 
                             coaxHeavy.Feed.AmmoTypeInBreech = null;
-                            coaxHeavy.Feed.ReadyRack.ClipTypes[0] = m2Slap.Value ? clip_m962slapt: clip_m8api;
+                            coaxHeavy.Feed.ReadyRack.ClipTypes[0] = m2Slap.Value ? clip_m962slapt : clip_m8api;
                             coaxHeavy.Feed.ReadyRack.Awake();
                             coaxHeavy.Feed.Start();
                         }
@@ -1598,22 +1605,73 @@ namespace M1A1AMP
                             }
                         }
 
-                        VehicleController abramsEngine = vic_go.GetComponent<VehicleController>();
-                        NwhChassis abramsTransmission = vic_go.GetComponent<NwhChassis>();
-
-                        if (betterEngine.Value)
+                        VehicleController abramsVC = vic_go.GetComponent<VehicleController>();
+                        NwhChassis abramsChassis = vic_go.GetComponent<NwhChassis>();
+                        if (agt2000.Value)
                         {
-                            abramsEngine.engine.maxPower = 2125f;//1518.55
+                            abramsVC.engine.maxPower = 2000f;
+                            abramsChassis._originalEnginePower = abramsVC.engine.maxPower;
+                        }
+
+                        if (agt2500.Value)
+                        {
+                            abramsVC.engine.maxPower = 2500f;
+
+                            abramsVC.engine.maxRPM = 4000;//3100
+                            abramsVC.engine.maxRpmChange = 3000;//2000
+                            abramsVC.engine.minRPM = 600;//600
+
+                            abramsChassis._originalEnginePower = abramsVC.engine.maxPower;
+                        }
+
+                        if (betterTransmission.Value)
+                        {
+                            List<float> fwGears = new List<float>();
+                            fwGears.Add(8.28f);
+                            fwGears.Add(5.81f);
+                            fwGears.Add(2.98f);
+                            fwGears.Add(1.76f);
+                            fwGears.Add(1.36f);
+                            fwGears.Add(1.16f);
+
+                            List<float> rvGears = new List<float>();
+                            rvGears.Add(-1.76f);
+                            rvGears.Add(-2.98f);
+                            rvGears.Add(-5.81f);
+                            rvGears.Add(-8.28f);
+
+                            List<float> Gears = new List<float>();
+                            Gears.Add(-1.76f);
+                            Gears.Add(-2.98f);
+                            Gears.Add(-5.81f);
+                            Gears.Add(-8.28f);
+                            Gears.Add(0f);
+                            Gears.Add(8.28f);
+                            Gears.Add(5.81f);
+                            Gears.Add(2.98f);
+                            Gears.Add(1.76f);
+                            Gears.Add(1.36f);
+                            Gears.Add(1.16f);
+
+                            //abramsPowerpack.transmission.adjustedShiftDownRpm = 720f;// 720f;
+                            //abramsPowerpack.transmission.adjustedShiftUpRpm = 3500f;//2900f;
+                            abramsVC.transmission.forwardGears = fwGears;//5.81 2.98 1.86 1.26
+                            abramsVC.transmission.gearMultiplier = 9.28f;//9.28f
+                            abramsVC.transmission.gears = Gears;//-2.32 -8.19 0 5.81 2.98 1.86 1.26
+                            abramsVC.transmission.reverseGears = rvGears;//-2.32 -8.19
+                            //abramsPowerpack.transmission.targetClutchRPM = 3000f;//2300f;
+                            //abramsPowerpack.transmission.targetShiftDownRPM = 750f;//750;
+                            //abramsPowerpack.transmission.targetShiftUpRPM = 3500f;//2900;
+                            abramsVC.transmission.shiftDuration = 0.1f;//.309
+                            abramsVC.transmission.shiftDurationRandomness = 0.1f;//.2
+                            abramsVC.transmission.shiftPointRandomness = 0.05f;//.05
+                            //abramsVC.transmission.differentialType = Transmission.DifferentialType.LimitedSlip;
                         }
 
                         if (governorDelete.Value)
                         {
-                            abramsEngine.engine.maxRPM = 4650;//3100
-                            abramsEngine.engine.maxRpmChange = 3000;//2000
-                            abramsEngine.engine.minRPM = 600;//600
-
-                            abramsTransmission._maxForwardSpeed = 30f;//20
-                            abramsTransmission._maxReverseSpeed = 15f;//11.176
+                            abramsChassis._maxForwardSpeed = 30f;//20
+                            abramsChassis._maxReverseSpeed = 15f;//11.176
                         }
                     }
                 }
