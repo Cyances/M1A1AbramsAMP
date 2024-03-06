@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.3.2
+# M1A1 Abrams AMP v2.3.3
 
 ## Branch release notes:
 <p>
@@ -10,6 +10,8 @@
 		<li>Ammo changes (refer to table)</li>
 		<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT), requires NATO ERA v1.1.1b and/or Pact Increased Lethality v1.2.5)</li>
 		<li>"TUSK" postfix when ERA is detected (NATO ERA mod)</li>
+		<li>Updated default M1E1 loadout order so that the GAS would correctly reflect the first two round types, still at 20x M829, 15x M830, 15x M830A1 (press key 2/3 to select M830/A1 [key 4 is just an empty rack of M830A1])</li>
+		<li>GHPC update 20240219 compatibility</li>
 	</ul>
 </p>
 
