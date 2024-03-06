@@ -37,4 +37,8 @@
 ### Engines
 | Engine type  | Peak power (HP) | Note
 | ------------- | ------------- | ------------- | 
-| AGT1500 |  |  |
+| AGT1500 | 1500 |  |
+| AGT2000 | 2000 | Fictional. |
+| AGT2500 | 2500 | Fictional. |
+| AGT3000 | 3000 | Fictional. |
+| T64 | 4430 | Fictional but it's the T64-GE-100. |
