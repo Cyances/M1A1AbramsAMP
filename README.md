@@ -7,7 +7,7 @@
 		<li>M2 Coaxial (replaced M240 and has two ammo types)</li>
 		<li>XM1147 AMP-T update, using proximity fuze now</li>
 		<li>More powertrain options and removable governor</li>
-		<li>Updated tank mass depending on the armor type used</li>
+		<li>Updated tank weight depending on the armor type used</li>
 		<li></li>
 		<li></li>
 	</ul>
@@ -33,6 +33,14 @@
 | Composite side skirt |  |  | 
 | Gun mantlet |  |  | 
 
+
+### Weight
+| Armor Type | Weight (KG) | Note |
+| ------------- | ------------- | ------------- |
+| HA | 60,599 |  | 
+| HC | 61,416 |  | 
+| SA | 62,232 |  | 
+| HU | 70,000 | Has optional Unobtanium armor package that lets it weigh the same as the HA | 
 
 ### Powertrain
 | Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Note |
