@@ -20,6 +20,7 @@ using GHPC;
 using HarmonyLib;
 using static NWH.WheelController3D.WheelController;
 using NWH.VehiclePhysics;
+using FMOD;
 
 namespace M1A1AMP
 {
@@ -57,10 +58,13 @@ namespace M1A1AMP
         static MelonPreferences_Entry<string> m1a1Armor;
         static MelonPreferences_Entry<string> m1e1Armor;
         static MelonPreferences_Entry<bool> demigodArmor;
-        static MelonPreferences_Entry<bool> agt2000;
-        static MelonPreferences_Entry<bool> agt2500;
+        static MelonPreferences_Entry<bool> agt2000mp;
+        static MelonPreferences_Entry<bool> agt2500mp;
+        static MelonPreferences_Entry<string> m1a1Agt;
+        static MelonPreferences_Entry<string> m1e1Agt;
         static MelonPreferences_Entry<bool> betterTransmission;
         static MelonPreferences_Entry<bool> governorDelete;
+        static MelonPreferences_Entry<bool> uapWeight;
 
         static WeaponSystemCodexScriptable gun_m256;
 
@@ -357,19 +361,18 @@ namespace M1A1AMP
             randomChanceNum = cfg.CreateEntry<int>("ConversionChance", 100);
 
             m1a1Armor = cfg.CreateEntry<string>("M1A1 Armor", "HU");
-            m1a1Armor.Description = "Armor used by M1A1: 'HA', 'HC', 'HU' or blank for base M1IP armor";
-
+            m1a1Armor.Description = "Armor used by M1A1 and M1E1: 'HA', 'HC', 'HU' or blank for base M1/IP armor";
             m1e1Armor = cfg.CreateEntry<string>("M1E1 Armor", "HU");
-            m1e1Armor.Description = "Armor used by M1E1: 'HA', 'HC', 'HU' or blank for base M1 armor";
+
+            uapWeight = cfg.CreateEntry<bool>("UAP", true);
+            uapWeight.Description = "Unobtanium armor package for HU that gives it HA weight";
 
             demigodArmor = cfg.CreateEntry<bool>("Demigod Armor", false);
             demigodArmor.Description = "Almost deathproof Abrooms (HU variant only)";
 
-            agt2000 = cfg.CreateEntry<bool>("AGT2000", false);
-            agt2000.Description = "SPEEEED AND POWWAAAH";
-
-            agt2500 = cfg.CreateEntry<bool>("AGT2500", false);
-            agt2500.Comment = "overrides AGT2000";
+            m1a1Agt = cfg.CreateEntry<string>("M1A1 Engine", "AGT1500");
+            m1a1Agt.Description = "SPEEEED AND POWWAAAAH!";
+            m1e1Agt = cfg.CreateEntry<string>("M1E1 Engine", "AGT1500");
 
             betterTransmission = cfg.CreateEntry<bool>("Transmission+", false);
 
@@ -1314,6 +1317,8 @@ namespace M1A1AMP
                             vic._friendlyName = "M1E1" + m1e1Armor.Value;
                         }
 
+                        vic_go.AddComponent<ProxySwitch>();
+
                         ////Weapons management
                         WeaponsManager weaponsManager = vic.GetComponent<WeaponsManager>();
                         WeaponSystemInfo mainGunInfo = weaponsManager.Weapons[0];
@@ -1588,40 +1593,156 @@ namespace M1A1AMP
                         computer.AimElement = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/laser/").gameObject.transform;
                         mainGun.GuidanceUnit = computer;
 
-                        ////ERA detection for TUSK designation
-                        foreach (GameObject armor_go in GameObject.FindGameObjectsWithTag("Penetrable"))
+                        VehicleController m1VC = vic_go.GetComponent<VehicleController>();
+                        NwhChassis m1Chassis = vic_go.GetComponent<NwhChassis>();
+                        Rigidbody m1Rb = vic_go.GetComponent <Rigidbody>();
+
+                        //SA 62232
+                        //Chonk quantifier
+                        if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
                         {
-                            if (armor_go.name != "HULLARMOR") continue;
-                            if (!armor_go.transform.parent.GetComponent<LateFollow>()) continue;
-
-                            string name = armor_go.transform.parent.GetComponent<LateFollow>().ParentUnit.FriendlyName;
-
-                            if (name == "M1A1" + m1a1Armor.Value || name == "M1E1" + m1e1Armor.Value)
+                            switch (m1a1Armor.Value)
                             {
-                                if (armor_go.transform.Find("Hull ERA Array(Clone)"))
-                                {
-                                    vic._friendlyName += " TUSK";
-                                }
+                                case "HA":
+                                    m1Rb.mass = 60599;
+                                    break;
+                                case "HC":
+                                    m1Rb.mass = 61416;
+                                    break;
+                                case "HU":
+                                    m1Rb.mass = uapWeight.Value ? 60599 : 70000;// 68038;
+                                    break;
+                                default:
+                                    m1Rb.mass = 59057;//55338;
+                                    break;
+                            }
+
+                            switch (m1a1Agt.Value)
+                            {
+                                case "AGT2000":
+                                    m1VC.engine.maxPower = 1491.4f;// 2004.49f;
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+                                    break;
+
+                                case "AGT2500":
+                                    m1VC.engine.maxPower = 1864.25f;//2505.61f;
+                                    m1VC.engine.maxRPM = 4000;//3100
+                                    m1VC.engine.maxRpmChange = 3000;//2000
+                                    m1VC.engine.minRPM = 600;//600
+
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+                                    break;
+
+                                case "AGT3000":
+                                    m1VC.engine.maxPower = 2237.1f;// 3037.1f;
+                                    m1VC.engine.maxRPM = 4000;//3100
+                                    m1VC.engine.maxRpmChange = 3000;//2000
+                                    m1VC.engine.minRPM = 600;//600
+                                    break;
+
+                                case "T64":
+                                    m1VC.engine.maxPower = 3228.88f;// 4330f;
+                                    m1VC.engine.maxRPM = 4000;//3100
+                                    m1VC.engine.maxRpmChange = 3000;//2000
+                                    m1VC.engine.minRPM = 600;//600
+
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+                                    break;
+
+                                default:
+                                    m1VC.engine.maxPower = 1118.55f;//1518.55f;
+                                    break;
+                                    /*
+                                case "AGT2000":
+                                    m1VC.engine.maxPower = 2004.49f;
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+                                    break;
+
+                                case "AGT2500":
+                                    m1VC.engine.maxPower = 2505.61f;
+                                    m1VC.engine.maxRPM = 4000;//3100
+                                    m1VC.engine.maxRpmChange = 3000;//2000
+                                    m1VC.engine.minRPM = 600;//600
+
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+                                    break;
+
+                                case "AGT3000":
+                                    m1VC.engine.maxPower = 3037.1f;
+                                    m1VC.engine.maxRPM = 4000;//3100
+                                    m1VC.engine.maxRpmChange = 3000;//2000
+                                    m1VC.engine.minRPM = 600;//600
+                                    break;
+
+                                case "T64":
+                                    m1VC.engine.maxPower = 4330f;
+                                    m1VC.engine.maxRPM = 4000;//3100
+                                    m1VC.engine.maxRpmChange = 3000;//2000
+                                    m1VC.engine.minRPM = 600;//600
+
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+                                    break;
+
+                                default:
+                                    m1VC.engine.maxPower = 1518.55f;
+                                    break;*/
                             }
                         }
 
-                        VehicleController m1VC = vic_go.GetComponent<VehicleController>();
-                        NwhChassis m1Chassis = vic_go.GetComponent<NwhChassis>();
-                        if (agt2000.Value)
+                        if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
                         {
-                            m1VC.engine.maxPower = 2000f;
-                            m1Chassis._originalEnginePower = m1VC.engine.maxPower;
-                        }
+                            switch (m1e1Armor.Value)
+                            {
+                                case "HA":
+                                    m1Rb.mass = 60599;
+                                    break;
+                                case "HC":
+                                    m1Rb.mass = 61416;
+                                    break;
+                                case "HU":
+                                    m1Rb.mass = uapWeight.Value ? 60599 : 70000;//68038;
+                                    break;
+                                default:
+                                    m1Rb.mass = 59057;//55338;
+                                    break;
+                            }
 
-                        if (agt2500.Value)
-                        {
-                            m1VC.engine.maxPower = 2500f;
+                            switch (m1e1Agt.Value)
+                            {
+                                case "AGT2000":
+                                    m1VC.engine.maxPower = 1491.4f;// 2004.49f;
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+                                    break;
 
-                            m1VC.engine.maxRPM = 4000;//3100
-                            m1VC.engine.maxRpmChange = 3000;//2000
-                            m1VC.engine.minRPM = 600;//600
+                                case "AGT2500":
+                                    m1VC.engine.maxPower = 1864.25f;//2505.61f;
+                                    m1VC.engine.maxRPM = 4000;//3100
+                                    m1VC.engine.maxRpmChange = 3000;//2000
+                                    m1VC.engine.minRPM = 600;//600
 
-                            m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+                                    break;
+
+                                case "AGT3000":
+                                    m1VC.engine.maxPower = 2237.1f;// 3037.1f;
+                                    m1VC.engine.maxRPM = 4000;//3100
+                                    m1VC.engine.maxRpmChange = 3000;//2000
+                                    m1VC.engine.minRPM = 600;//600
+                                    break;
+
+                                case "T64":
+                                    m1VC.engine.maxPower = 3228.88f;// 4330f;
+                                    m1VC.engine.maxRPM = 4000;//3100
+                                    m1VC.engine.maxRpmChange = 3000;//2000
+                                    m1VC.engine.minRPM = 600;//600
+
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+                                    break;
+
+                                default:
+                                    m1VC.engine.maxPower = 1118.55f;//1518.55f;
+                                    break;
+                            }
                         }
 
                         if (betterTransmission.Value)
@@ -1668,8 +1789,25 @@ namespace M1A1AMP
 
                         if (governorDelete.Value)
                         {
-                            m1Chassis._maxForwardSpeed = 30f;//20
-                            m1Chassis._maxReverseSpeed = 15f;//11.176
+                            m1Chassis._maxForwardSpeed = 32f;//20
+                            m1Chassis._maxReverseSpeed = 16f;//11.176
+                        }
+
+                        ////ERA detection for TUSK designation
+                        foreach (GameObject armor_go in GameObject.FindGameObjectsWithTag("Penetrable"))
+                        {
+                            if (armor_go.name != "HULLARMOR") continue;
+                            if (!armor_go.transform.parent.GetComponent<LateFollow>()) continue;
+
+                            string name = armor_go.transform.parent.GetComponent<LateFollow>().ParentUnit.FriendlyName;
+
+                            if (name == "M1A1" + m1a1Armor.Value || name == "M1E1" + m1e1Armor.Value)
+                            {
+                                if (armor_go.transform.Find("Hull ERA Array(Clone)"))
+                                {
+                                    vic._friendlyName += " TUSK";
+                                }
+                            }
                         }
                     }
                 }
@@ -2056,8 +2194,8 @@ namespace M1A1AMP
                 ammo_xm1147.CertainRicochetAngle = 0.0f;
                 ammo_xm1147.DetonateSpallCount = ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
                 ammo_xm1147.Mass = 11.4f;
-                ammo_xm1147.MaxSpallRha = 180f;
-                ammo_xm1147.MinSpallRha = 55f;
+                ammo_xm1147.MaxSpallRha = 100f;
+                ammo_xm1147.MinSpallRha = 50f;
                 ammo_xm1147.MuzzleVelocity = 1410f;
                 ammo_xm1147.Name = "XM1147 AMP-T";
                 ammo_xm1147.RhaPenetration = 480;
@@ -2083,16 +2221,16 @@ namespace M1A1AMP
 
 
                 xm1147_forward_frag.Name = "AMP forward frag";
-                xm1147_forward_frag.RhaPenetration = 250f;
-                xm1147_forward_frag.MuzzleVelocity = 600f;
+                xm1147_forward_frag.RhaPenetration = 100f;
+                xm1147_forward_frag.MuzzleVelocity = 700f;
                 xm1147_forward_frag.Category = AmmoType.AmmoCategory.Penetrator;
-                xm1147_forward_frag.Mass = 0.80f;
-                xm1147_forward_frag.SectionalArea = 0.0055f;
-                xm1147_forward_frag.Coeff = 0.5f;
+                xm1147_forward_frag.Mass = 0.005f;
+                xm1147_forward_frag.SectionalArea = 0.03f ;
+                xm1147_forward_frag.Coeff = 1f;
                 xm1147_forward_frag.UseTracer = false;
                 xm1147_forward_frag.CertainRicochetAngle = 10f;
                 xm1147_forward_frag.SpallMultiplier = 0.2f;
-                xm1147_forward_frag.Caliber = 5f;
+                xm1147_forward_frag.Caliber = 3f;
                 xm1147_forward_frag.ImpactTypeUnfuzed = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpact;
                 xm1147_forward_frag.ImpactTypeUnfuzedTerrain = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpactTerrain;
 

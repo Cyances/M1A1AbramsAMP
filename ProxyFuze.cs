@@ -94,7 +94,7 @@ namespace M1A1AMP
                     Detonate();
 
             RaycastHit hit3;
-            if (Physics.SphereCast(pos, 3f, live_round.transform.forward, out hit3, 0.1f, 1 << 8))
+            if (Physics.SphereCast(pos, 6f, live_round.transform.forward, out hit3, 0.1f, 1 << 8))
                 if (hit3.collider.CompareTag("Penetrable"))
                     Detonate();
 
@@ -127,22 +127,22 @@ namespace M1A1AMP
                 if (!__instance.gameObject.GetComponentInChildren<ProxyFuze>()) return true;
                 if (!__instance.gameObject.GetComponentInChildren<ProxyFuze>().detonated) return true;
 
-                for (int i = 0; i < 25; i++)
+                for (int i = 0; i < 600; i++)
                 {
                     GHPC.Weapons.LiveRound component;
                     component = LiveRoundMarshaller.Instance.GetRoundOfVisualType(LiveRoundMarshaller.LiveRoundVisualType.Invisible)
                         .GetComponent<GHPC.Weapons.LiveRound>();
 
                     component.Info = M1A1AbramsAMPMod.xm1147_forward_frag;
-                    component.CurrentSpeed = 600f;
-                    component.MaxSpeed = 600f;
+                    component.CurrentSpeed = 700f;
+                    component.MaxSpeed = 700f;
                     component.IsSpall = false;
                     component.Shooter = __instance.Shooter;
                     component.transform.position = __instance.transform.position;
                     component.transform.forward = Quaternion.Euler(
-                        UnityEngine.Random.Range(-5f, 5f),
-                        UnityEngine.Random.Range(-5f, 5f),
-                        UnityEngine.Random.Range(-5f, 5f)) * __instance.transform.forward;
+                        UnityEngine.Random.Range(-30f, 30f),
+                        UnityEngine.Random.Range(-30f, 30f),
+                        UnityEngine.Random.Range(-30f, 30f)) * __instance.transform.forward;
                     component.Init(__instance, null);
                     component.name = "AMP forward frag " + i;
                 }
