@@ -44,8 +44,15 @@
 | T64 | 4430 |  | 4000 | Fictional but it's the T64-GE-100. | 
 
 
-### Powertrain
+### Transmission
 | Transmission type  | Forward Gears | Reverse Gears | Note |
 | ------------- | ------------- | ------------- | ------------- |
-| Default | 1500 | 3100 | Default engine. | 
-| Transmission+ | 2000 | 3100 | Fictional. | 
+| Default | 4 | 2 |  | 
+| Transmission+ | 6 | 3 |  | 
+
+
+### Governor
+| Transmission type  | Potential Top Speed (kph) | Potential Reverse Top Speed (kph) | Note |
+| ------------- | ------------- | ------------- | ------------- |
+| Restricted | 72 | 40.23 |  | 
+| Unrestricted | 115.2 | 57.6 |  | 
