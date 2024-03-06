@@ -1610,7 +1610,7 @@ namespace M1A1AMP
                                     m1Rb.mass = 61416;
                                     break;
                                 case "HU":
-                                    m1Rb.mass = uapWeight.Value ? 60599 : 70000;// 68038;
+                                    m1Rb.mass = uapWeight.Value ? 60599 : 72665;// 68038;
                                     break;
                                 default:
                                     m1Rb.mass = 59057;//55338;
@@ -1700,7 +1700,7 @@ namespace M1A1AMP
                                     m1Rb.mass = 61416;
                                     break;
                                 case "HU":
-                                    m1Rb.mass = uapWeight.Value ? 60599 : 70000;//68038;
+                                    m1Rb.mass = uapWeight.Value ? 60599 : 72665;//68038;
                                     break;
                                 default:
                                     m1Rb.mass = 59057;//55338;
