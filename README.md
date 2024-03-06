@@ -35,8 +35,8 @@
 
 
 ### Engines
-| Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Note
-| ------------- | ------------- | ------------- |------------- | 
+| Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Note |
+| ------------- | ------------- | ------------- | ------------- | ------------- | 
 | AGT1500 | 1500 |  |  |  | 
 | AGT2000 | 2000 | Fictional. |  |  | 
 | AGT2500 | 2500 | Fictional. |  |  | 
