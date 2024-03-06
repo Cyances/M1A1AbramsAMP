@@ -1605,23 +1605,23 @@ namespace M1A1AMP
                             }
                         }
 
-                        VehicleController abramsVC = vic_go.GetComponent<VehicleController>();
-                        NwhChassis abramsChassis = vic_go.GetComponent<NwhChassis>();
+                        VehicleController m1VC = vic_go.GetComponent<VehicleController>();
+                        NwhChassis m1Chassis = vic_go.GetComponent<NwhChassis>();
                         if (agt2000.Value)
                         {
-                            abramsVC.engine.maxPower = 2000f;
-                            abramsChassis._originalEnginePower = abramsVC.engine.maxPower;
+                            m1VC.engine.maxPower = 2000f;
+                            m1Chassis._originalEnginePower = m1VC.engine.maxPower;
                         }
 
                         if (agt2500.Value)
                         {
-                            abramsVC.engine.maxPower = 2500f;
+                            m1VC.engine.maxPower = 2500f;
 
-                            abramsVC.engine.maxRPM = 4000;//3100
-                            abramsVC.engine.maxRpmChange = 3000;//2000
-                            abramsVC.engine.minRPM = 600;//600
+                            m1VC.engine.maxRPM = 4000;//3100
+                            m1VC.engine.maxRpmChange = 3000;//2000
+                            m1VC.engine.minRPM = 600;//600
 
-                            abramsChassis._originalEnginePower = abramsVC.engine.maxPower;
+                            m1Chassis._originalEnginePower = m1VC.engine.maxPower;
                         }
 
                         if (betterTransmission.Value)
@@ -1637,13 +1637,11 @@ namespace M1A1AMP
                             List<float> rvGears = new List<float>();
                             rvGears.Add(-1.76f);
                             rvGears.Add(-2.98f);
-                            rvGears.Add(-5.81f);
                             rvGears.Add(-8.28f);
 
                             List<float> Gears = new List<float>();
                             Gears.Add(-1.76f);
                             Gears.Add(-2.98f);
-                            Gears.Add(-5.81f);
                             Gears.Add(-8.28f);
                             Gears.Add(0f);
                             Gears.Add(8.28f);
@@ -1655,23 +1653,23 @@ namespace M1A1AMP
 
                             //abramsPowerpack.transmission.adjustedShiftDownRpm = 720f;// 720f;
                             //abramsPowerpack.transmission.adjustedShiftUpRpm = 3500f;//2900f;
-                            abramsVC.transmission.forwardGears = fwGears;//5.81 2.98 1.86 1.26
-                            abramsVC.transmission.gearMultiplier = 9.28f;//9.28f
-                            abramsVC.transmission.gears = Gears;//-2.32 -8.19 0 5.81 2.98 1.86 1.26
-                            abramsVC.transmission.reverseGears = rvGears;//-2.32 -8.19
+                            m1VC.transmission.forwardGears = fwGears;//5.81 2.98 1.86 1.26
+                            m1VC.transmission.gearMultiplier = 9.28f;//9.28f
+                            m1VC.transmission.gears = Gears;//-2.32 -8.19 0 5.81 2.98 1.86 1.26
+                            m1VC.transmission.reverseGears = rvGears;//-2.32 -8.19
                             //abramsPowerpack.transmission.targetClutchRPM = 3000f;//2300f;
                             //abramsPowerpack.transmission.targetShiftDownRPM = 750f;//750;
                             //abramsPowerpack.transmission.targetShiftUpRPM = 3500f;//2900;
-                            abramsVC.transmission.shiftDuration = 0.1f;//.309
-                            abramsVC.transmission.shiftDurationRandomness = 0.1f;//.2
-                            abramsVC.transmission.shiftPointRandomness = 0.05f;//.05
+                            m1VC.transmission.shiftDuration = 0.1f;//.309
+                            m1VC.transmission.shiftDurationRandomness = 0.2f;//.2
+                            m1VC.transmission.shiftPointRandomness = 0.05f;//.05
                             //abramsVC.transmission.differentialType = Transmission.DifferentialType.LimitedSlip;
                         }
 
                         if (governorDelete.Value)
                         {
-                            abramsChassis._maxForwardSpeed = 30f;//20
-                            abramsChassis._maxReverseSpeed = 15f;//11.176
+                            m1Chassis._maxForwardSpeed = 30f;//20
+                            m1Chassis._maxReverseSpeed = 15f;//11.176
                         }
                     }
                 }
