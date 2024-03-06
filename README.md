@@ -32,3 +32,9 @@
 | Turret side |  |  | 
 | Composite side skirt |  |  | 
 | Gun mantlet |  |  | 
+
+
+### Engines
+| Engine type  | Peak power (HP) | Note
+| ------------- | ------------- | ------------- | 
+| AGT1500 |  |  |
