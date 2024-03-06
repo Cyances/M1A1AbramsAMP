@@ -34,11 +34,11 @@
 | Gun mantlet |  |  | 
 
 
-### Engines
+### Powertrain
 | Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | 
-| AGT1500 | 1500 |  |  |  | 
-| AGT2000 | 2000 | Fictional. |  |  | 
-| AGT2500 | 2500 | Fictional. |  |  | 
-| AGT3000 | 3000 | Fictional. |  |  | 
-| T64 | 4430 | Fictional but it's the T64-GE-100. |  |  | 
+| AGT1500 | 1500 |  |  | 3100 | 
+| AGT2000 | 2000 |  | 3100 | Fictional. | 
+| AGT2500 | 2500 |  | 4000 | Fictional. | 
+| AGT3000 | 3000 |  | 4000 | Fictional. | 
+| T64 | 4430 |  | 4000 | Fictional but it's the T64-GE-100. | 
