@@ -8,6 +8,9 @@
 		<li>XM1147 AMP-T update, using proximity fuze now</li>
 		<li>More powertrain options and removable governor</li>
 		<li>Updated tank weight depending on the armor type used</li>
+		<li>New round: M908 HE-OR-T</li>
+		<li>Configurable loader proficiency</li>
+		<li></li>
 		<li></li>
 		<li></li>
 	</ul>
