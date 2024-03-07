@@ -56,14 +56,16 @@
 
 
 ### Transmission
-| Transmission type  | Forward Gears | Reverse Gears | Note |
-| ------------- | ------------- | ------------- | ------------- |
-| Default | 4 | 2 |  | 
-| Transmission+ | 6 | 3 |  | 
+<p>
+	<ul> 
+		<li>Upgraded transmission with 6 forward gears and 3 reverse gears (compared to 4/2 of default)</li>
+	</ul>
+</p>
 
 
 ### Governor
-| Transmission type  | Potential Top Speed (kph) | Potential Reverse Top Speed (kph) | Note |
-| ------------- | ------------- | ------------- | ------------- |
-| Restricted | 72 | 40.23 |  | 
-| Unrestricted | 115.2 | 57.6 |  | 
+<p>
+	<ul> 
+		<li>Goveror delete option which raises potential top speed to 115 km/h forwards and 57 km/h backwards (compared to 72 km/h and 40 km/h with governor)</li>
+	</ul>
+</p>
