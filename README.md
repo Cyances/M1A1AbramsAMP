@@ -58,7 +58,7 @@
 ### Transmission
 <p>
 	<ul> 
-		<li>Upgraded transmission with 6 forward gears and 3 reverse gears (compared to 4/2 of default)</li>
+		<li>Upgradeable transmission with 6 forward gears and 3 reverse gears (compared to 4/2 of default)</li>
 	</ul>
 </p>
 
