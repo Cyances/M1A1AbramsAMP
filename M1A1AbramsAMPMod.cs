@@ -55,6 +55,7 @@ namespace M1A1AMP
         static MelonPreferences_Entry<bool> m829spall;
         static MelonPreferences_Entry<int> ampFragments;
         static MelonPreferences_Entry<int> mpatFragments;
+        static MelonPreferences_Entry<bool> ampFuze;
         static MelonPreferences_Entry<string> m1a1Armor;
         static MelonPreferences_Entry<string> m1e1Armor;
         static MelonPreferences_Entry<bool> demigodArmor;
@@ -344,6 +345,9 @@ namespace M1A1AMP
 
             mpatFragments = cfg.CreateEntry<int>("MPAT Fragments", 600);
             mpatFragments.Description = "How many fragments are generated when the MPAT round explodes (in point-detonate mode). NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
+
+            ampFuze = cfg.CreateEntry<bool>("AMP TD Fuze", false);
+            ampFuze.Description = "Switches AMP fuze to time-delay instead of proximity.";
 
             rotateAzimuth = cfg.CreateEntry<bool>("RotateAzimuth", false);
             rotateAzimuth.Description = "Horizontal stabilization of M1A1 sights when applying lead.";
@@ -1317,7 +1321,7 @@ namespace M1A1AMP
                             vic._friendlyName = "M1E1" + m1e1Armor.Value;
                         }
 
-                        vic_go.AddComponent<ProxySwitch>();
+                        if (!ampFuze.Value) vic_go.AddComponent<ProxySwitch>();
 
                         ////Weapons management
                         WeaponsManager weaponsManager = vic.GetComponent<WeaponsManager>();
@@ -2234,7 +2238,7 @@ namespace M1A1AMP
                 xm1147_forward_frag.ImpactTypeUnfuzed = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpact;
                 xm1147_forward_frag.ImpactTypeUnfuzedTerrain = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpactTerrain;
 
-                ProxyFuze.AddAmpFuze(ammo_xm1147);
+                if (!ampFuze.Value) ProxyFuze.AddAmpFuze(ammo_xm1147);
 
                 //lahat
                 ammo_lahat = new AmmoType();
@@ -2905,27 +2909,30 @@ namespace M1A1AMP
             StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(Convert), GameStatePriority.Lowest);
         }
 
-        //[HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "Start")]
-        /*public static class Airburst
+        [HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "Start")]
+        public static class Airburst
         {
             private static void Postfix(GHPC.Weapons.LiveRound __instance)
             {
-                if (__instance.Info.Name != "XM1147 AMP-T") return;
+                if (ampFuze.Value)
+                {
+                    if (__instance.Info.Name != "XM1147 AMP-T") return;
 
-                FieldInfo rangedFuseTimeField = typeof(GHPC.Weapons.LiveRound).GetField("_rangedFuseCountdown", BindingFlags.Instance | BindingFlags.NonPublic);
-                FieldInfo rangedFuseTimeActiveField = typeof(GHPC.Weapons.LiveRound).GetField("_rangedFuseActive", BindingFlags.Instance | BindingFlags.NonPublic);
-                FieldInfo ballisticsComputerField = typeof(FireControlSystem).GetField("_bc", BindingFlags.Instance | BindingFlags.NonPublic);
+                    FieldInfo rangedFuseTimeField = typeof(GHPC.Weapons.LiveRound).GetField("_rangedFuseCountdown", BindingFlags.Instance | BindingFlags.NonPublic);
+                    FieldInfo rangedFuseTimeActiveField = typeof(GHPC.Weapons.LiveRound).GetField("_rangedFuseActive", BindingFlags.Instance | BindingFlags.NonPublic);
+                    FieldInfo ballisticsComputerField = typeof(FireControlSystem).GetField("_bc", BindingFlags.Instance | BindingFlags.NonPublic);
 
-                FireControlSystem FCS = __instance.Shooter.WeaponsManager.Weapons[0].FCS;
-                BallisticComputerRepository bc = ballisticsComputerField.GetValue(FCS) as BallisticComputerRepository;
-                float range = FCS.CurrentRange;
-                float fallOff = bc.GetFallOfShot(ammo_xm1147, range);
-                float extra_distance = range > 2000 ? 19f + 3.5f : 17f;
+                    FireControlSystem FCS = __instance.Shooter.WeaponsManager.Weapons[0].FCS;
+                    BallisticComputerRepository bc = ballisticsComputerField.GetValue(FCS) as BallisticComputerRepository;
+                    float range = FCS.CurrentRange;
+                    float fallOff = bc.GetFallOfShot(ammo_xm1147, range);
+                    float extra_distance = range > 2000 ? 19f + 3.5f : 17f;
 
-                //funky math 
-                rangedFuseTimeField.SetValue(__instance, bc.GetFlightTime(ammo_xm1147, range + range / ammo_xm1147.MuzzleVelocity * 2 + (range + fallOff) / 2000f + extra_distance));
-                rangedFuseTimeActiveField.SetValue(__instance, true);
+                    //funky math 
+                    rangedFuseTimeField.SetValue(__instance, bc.GetFlightTime(ammo_xm1147, range + range / ammo_xm1147.MuzzleVelocity * 2 + (range + fallOff) / 2000f + extra_distance));
+                    rangedFuseTimeActiveField.SetValue(__instance, true);
+                }
             }
-        }*/
+        }
     }
 }

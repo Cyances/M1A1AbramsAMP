@@ -94,7 +94,7 @@ namespace M1A1AMP
                     Detonate();
 
             RaycastHit hit3;
-            if (Physics.SphereCast(pos, 6f, live_round.transform.forward, out hit3, 0.1f, 1 << 8))
+            if (Physics.SphereCast(pos, 3f, live_round.transform.forward, out hit3, 0.1f, 1 << 8))
                 if (hit3.collider.CompareTag("Penetrable"))
                     Detonate();
 
