@@ -66,6 +66,8 @@ namespace M1A1AMP
         static MelonPreferences_Entry<bool> betterTransmission;
         static MelonPreferences_Entry<bool> governorDelete;
         static MelonPreferences_Entry<bool> uapWeight;
+        static MelonPreferences_Entry<string> m1a1Loader;
+        static MelonPreferences_Entry<string> m1e1Loader;
 
         static WeaponSystemCodexScriptable gun_m256;
 
@@ -330,6 +332,10 @@ namespace M1A1AMP
             m1e1secondammoCount = cfg.CreateEntry<int>("M1E1 2nd Round Count", 15);
             m1e1thirdammoCount = cfg.CreateEntry<int>("M1E1 3rd Round Count", 15);
             m1e1fourthammoCount = cfg.CreateEntry<int>("M1E1 4th Round Count", 0);
+
+            m1a1Loader = cfg.CreateEntry<string>("M1A1 Loader", "Regular");
+            m1a1Loader.Description = "Crew loading skill: Cadet, Regular, Veteran or Ace";
+            m1e1Loader = cfg.CreateEntry<string>("M1E1 Loader", "Regular");
 
             m2Coax = cfg.CreateEntry<bool>("M2 Coax", false);
             m2Coax.Description = "Replaces M240 coaxial gun with M2.";
@@ -1520,93 +1526,12 @@ namespace M1A1AMP
                         mainGun.Feed.ReloadDuringMissileTracking = true;
                         mainGun.FireWhileGuidingMissile = true;
 
-                        mainGun.Feed._totalReloadTime = 4;//6
-                        mainGun.Feed.SlowReloadMultiplier = 4;//5
-                        mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4;//5
-                        mainGun.Feed.ReadyRack._storageDelaySeconds = 4;//5
 
                         //Novice Cadet Regular Veteran Ace
 
-                        //// Abrams loadout management
-                        LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
-                        AmmoType.AmmoClip[] m256_ammo_clip_types = new AmmoType.AmmoClip[] { };
-
-                        if (vic.FriendlyName == "M1A1" + m1a1Armor.Value || vic.FriendlyName == "M1E1" + m1e1Armor.Value)
-                        {
-                            AmmoClipCodexScriptable firstClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1firstAmmo.Value : m1e1firstAmmo.Value];
-                            AmmoClipCodexScriptable secondClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1secondAmmo.Value : m1e1secondAmmo.Value];
-                            AmmoClipCodexScriptable thirdClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1thirdAmmo.Value : m1e1thirdAmmo.Value];
-                            AmmoClipCodexScriptable fourthClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1fourthAmmo.Value : m1e1fourthAmmo.Value];
-
-                            loadoutManager.LoadedAmmoTypes = new AmmoClipCodexScriptable[] { firstClipCodex, secondClipCodex, thirdClipCodex, fourthClipCodex };
-
-                            FieldInfo totalAmmoTypes = typeof(LoadoutManager).GetField("_totalAmmoTypes", BindingFlags.NonPublic | BindingFlags.Instance);
-                            totalAmmoTypes.SetValue(loadoutManager, 4);
-                        }
-
-                        if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
-                        {
-                            loadoutManager.TotalAmmoCounts = new int[] { m1a1firstammoCount.Value, m1a1secondammoCount.Value, m1a1thirdammoCount.Value, m1a1fourthammoCount.Value };
-                            FieldInfo totalAmmoCount = typeof(LoadoutManager).GetField("_totalAmmoCount", BindingFlags.NonPublic | BindingFlags.Instance);
-                            totalAmmoCount.SetValue(loadoutManager, 50);
-                        }
-
-                        if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
-                        {
-                            loadoutManager.TotalAmmoCounts = new int[] { m1e1firstammoCount.Value, m1e1secondammoCount.Value, m1e1thirdammoCount.Value, m1e1fourthammoCount.Value };
-                            FieldInfo totalAmmoCount = typeof(LoadoutManager).GetField("_totalAmmoCount", BindingFlags.NonPublic | BindingFlags.Instance);
-                            totalAmmoCount.SetValue(loadoutManager, 50);
-                        }
-
-                        for (int i = 0; i <= 2; i++)
-                        {
-                            GHPC.Weapons.AmmoRack m256rack = loadoutManager.RackLoadouts[i].Rack;
-                            m256rack.ClipCapacity = i == 2 ? 4 : 21;
-                            m256rack.ClipTypes = m256_ammo_clip_types;
-                            Util.EmptyRack(m256rack);
-                        }
-
-                        if (m2Coax.Value)
-                        {
-                            WeaponSystemInfo coaxHeavyInfo = weaponsManager.Weapons[1];
-                            WeaponSystem coaxHeavy = coaxHeavyInfo.Weapon;
-                            coaxHeavyInfo.Name = "M2HB Coaxial Gun";
-                            //coaxGun.WeaponSound.LoopEventPath = null;
-                            coaxHeavy.WeaponSound.LoopEventPath = "event:/Weapons/MG_m85_400rmp";
-                            //coaxGun.WeaponSound.LoopEvent.eventBuffer
-
-                            //coaxGun.WeaponSound.SingleShotByDefault = true;
-                            //coaxGun.WeaponSound.SingleShotEventPaths[0] = "event:/Weapons/MG_m85_400rmp";
-                            coaxHeavy.SetCycleTime(0.133f);
-
-                            coaxHeavy.Feed.AmmoTypeInBreech = null;
-                            coaxHeavy.Feed.ReadyRack.ClipTypes[0] = m2Slap.Value ? clip_m962slapt : clip_m8api;
-                            coaxHeavy.Feed.ReadyRack.Awake();
-                            coaxHeavy.Feed.Start();
-                        }
-
-                        loadoutManager.SpawnCurrentLoadout();
-                        mainGun.Feed.AmmoTypeInBreech = null;
-                        mainGun.Feed.Start();
-                        loadoutManager.RegisterAllBallistics();
-
-                        ////Guidance computer for LAHAT
-                        GameObject guidance_computer_obj = new GameObject("Abrams Guidance Computer");
-                        guidance_computer_obj.transform.parent = vic.transform;
-                        guidance_computer_obj.AddComponent<MissileGuidanceUnit>();
-
-                        guidance_computer_obj.AddComponent<Reparent>();
-                        Reparent reparent = guidance_computer_obj.GetComponent<Reparent>();
-                        reparent.NewParent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/").gameObject.transform;
-                        typeof(Reparent).GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(reparent, new object[] { });
-
-                        MissileGuidanceUnit computer = guidance_computer_obj.GetComponent<MissileGuidanceUnit>();
-                        computer.AimElement = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/laser/").gameObject.transform;
-                        mainGun.GuidanceUnit = computer;
-
                         VehicleController m1VC = vic_go.GetComponent<VehicleController>();
                         NwhChassis m1Chassis = vic_go.GetComponent<NwhChassis>();
-                        Rigidbody m1Rb = vic_go.GetComponent <Rigidbody>();
+                        Rigidbody m1Rb = vic_go.GetComponent<Rigidbody>();
 
                         //SA 62232
                         //Chonk quantifier
@@ -1698,6 +1623,40 @@ namespace M1A1AMP
                                     m1VC.engine.maxPower = 1518.55f;
                                     break;*/
                             }
+
+                            switch (m1a1Loader.Value)
+                            {
+                                case "Cadet":
+                                    mainGun.Feed._totalReloadTime = 7;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;
+                                    break;
+                                case "Regular":
+                                    mainGun.Feed._totalReloadTime = 6;//6
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;//5
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;//5
+                                    break;
+                                case "Veteran":
+                                    mainGun.Feed._totalReloadTime = 5;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4;
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4;
+                                    break;
+                                case "Ace":
+                                    mainGun.Feed._totalReloadTime = 4;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 3;
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 3;
+                                    break;
+                                default:
+                                    mainGun.Feed._totalReloadTime = 6;//6
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;//5
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;//5
+                                    break;
+                            }
                         }
 
                         if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
@@ -1754,6 +1713,40 @@ namespace M1A1AMP
                                     m1VC.engine.maxPower = 1118.55f;//1518.55f;
                                     break;
                             }
+
+                            switch (m1e1Loader.Value)
+                            {
+                                case "Cadet":
+                                    mainGun.Feed._totalReloadTime = 7;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;
+                                    break;
+                                case "Regular":
+                                    mainGun.Feed._totalReloadTime = 6;//6
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;//5
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;//5
+                                    break;
+                                case "Veteran":
+                                    mainGun.Feed._totalReloadTime = 5;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4;
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4;
+                                    break;
+                                case "Ace":
+                                    mainGun.Feed._totalReloadTime = 4;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 3;
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 3;
+                                    break;
+                                default:
+                                    mainGun.Feed._totalReloadTime = 6;//6
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;//5
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;//5
+                                    break;
+                            }
                         }
 
                         if (betterTransmission.Value)
@@ -1803,6 +1796,83 @@ namespace M1A1AMP
                             m1Chassis._maxForwardSpeed = 32f;//20
                             m1Chassis._maxReverseSpeed = 16f;//11.176
                         }
+
+                        //// Abrams loadout management
+                        LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
+                        AmmoType.AmmoClip[] m256_ammo_clip_types = new AmmoType.AmmoClip[] { };
+
+                        if (vic.FriendlyName == "M1A1" + m1a1Armor.Value || vic.FriendlyName == "M1E1" + m1e1Armor.Value)
+                        {
+                            AmmoClipCodexScriptable firstClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1firstAmmo.Value : m1e1firstAmmo.Value];
+                            AmmoClipCodexScriptable secondClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1secondAmmo.Value : m1e1secondAmmo.Value];
+                            AmmoClipCodexScriptable thirdClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1thirdAmmo.Value : m1e1thirdAmmo.Value];
+                            AmmoClipCodexScriptable fourthClipCodex = abrams_clipcodex[vic.FriendlyName == "M1A1" + m1a1Armor.Value ? m1a1fourthAmmo.Value : m1e1fourthAmmo.Value];
+
+                            loadoutManager.LoadedAmmoTypes = new AmmoClipCodexScriptable[] { firstClipCodex, secondClipCodex, thirdClipCodex, fourthClipCodex };
+
+                            FieldInfo totalAmmoTypes = typeof(LoadoutManager).GetField("_totalAmmoTypes", BindingFlags.NonPublic | BindingFlags.Instance);
+                            totalAmmoTypes.SetValue(loadoutManager, 4);
+                        }
+
+                        if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
+                        {
+                            loadoutManager.TotalAmmoCounts = new int[] { m1a1firstammoCount.Value, m1a1secondammoCount.Value, m1a1thirdammoCount.Value, m1a1fourthammoCount.Value };
+                            FieldInfo totalAmmoCount = typeof(LoadoutManager).GetField("_totalAmmoCount", BindingFlags.NonPublic | BindingFlags.Instance);
+                            totalAmmoCount.SetValue(loadoutManager, 50);
+                        }
+
+                        if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
+                        {
+                            loadoutManager.TotalAmmoCounts = new int[] { m1e1firstammoCount.Value, m1e1secondammoCount.Value, m1e1thirdammoCount.Value, m1e1fourthammoCount.Value };
+                            FieldInfo totalAmmoCount = typeof(LoadoutManager).GetField("_totalAmmoCount", BindingFlags.NonPublic | BindingFlags.Instance);
+                            totalAmmoCount.SetValue(loadoutManager, 50);
+                        }
+
+                        for (int i = 0; i <= 2; i++)
+                        {
+                            GHPC.Weapons.AmmoRack m256rack = loadoutManager.RackLoadouts[i].Rack;
+                            m256rack.ClipCapacity = i == 2 ? 4 : 21;
+                            m256rack.ClipTypes = m256_ammo_clip_types;
+                            Util.EmptyRack(m256rack);
+                        }
+
+                        if (m2Coax.Value)
+                        {
+                            WeaponSystemInfo coaxHeavyInfo = weaponsManager.Weapons[1];
+                            WeaponSystem coaxHeavy = coaxHeavyInfo.Weapon;
+                            coaxHeavyInfo.Name = "M2HB Coaxial Gun";
+                            //coaxGun.WeaponSound.LoopEventPath = null;
+                            coaxHeavy.WeaponSound.LoopEventPath = "event:/Weapons/MG_m85_400rmp";
+                            //coaxGun.WeaponSound.LoopEvent.eventBuffer
+
+                            //coaxGun.WeaponSound.SingleShotByDefault = true;
+                            //coaxGun.WeaponSound.SingleShotEventPaths[0] = "event:/Weapons/MG_m85_400rmp";
+                            coaxHeavy.SetCycleTime(0.133f);
+
+                            coaxHeavy.Feed.AmmoTypeInBreech = null;
+                            coaxHeavy.Feed.ReadyRack.ClipTypes[0] = m2Slap.Value ? clip_m962slapt : clip_m8api;
+                            coaxHeavy.Feed.ReadyRack.Awake();
+                            coaxHeavy.Feed.Start();
+                        }
+
+                        loadoutManager.SpawnCurrentLoadout();
+                        mainGun.Feed.AmmoTypeInBreech = null;
+                        mainGun.Feed.Start();
+                        loadoutManager.RegisterAllBallistics();
+
+                        ////Guidance computer for LAHAT
+                        GameObject guidance_computer_obj = new GameObject("Abrams Guidance Computer");
+                        guidance_computer_obj.transform.parent = vic.transform;
+                        guidance_computer_obj.AddComponent<MissileGuidanceUnit>();
+
+                        guidance_computer_obj.AddComponent<Reparent>();
+                        Reparent reparent = guidance_computer_obj.GetComponent<Reparent>();
+                        reparent.NewParent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/").gameObject.transform;
+                        typeof(Reparent).GetMethod("Awake", BindingFlags.Instance | BindingFlags.NonPublic).Invoke(reparent, new object[] { });
+
+                        MissileGuidanceUnit computer = guidance_computer_obj.GetComponent<MissileGuidanceUnit>();
+                        computer.AimElement = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/laser/").gameObject.transform;
+                        mainGun.GuidanceUnit = computer;
 
                         ////ERA detection for TUSK designation
                         foreach (GameObject armor_go in GameObject.FindGameObjectsWithTag("Penetrable"))
