@@ -1520,6 +1520,13 @@ namespace M1A1AMP
                         mainGun.Feed.ReloadDuringMissileTracking = true;
                         mainGun.FireWhileGuidingMissile = true;
 
+                        mainGun.Feed._totalReloadTime = 4;//6
+                        mainGun.Feed.SlowReloadMultiplier = 4;//5
+                        mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4;//5
+                        mainGun.Feed.ReadyRack._storageDelaySeconds = 4;//5
+
+                        //Novice Cadet Regular Veteran Ace
+
                         //// Abrams loadout management
                         LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
                         AmmoType.AmmoClip[] m256_ammo_clip_types = new AmmoType.AmmoClip[] { };
@@ -2102,7 +2109,7 @@ namespace M1A1AMP
                 ammo_m830a1.Mass = 11.4f;
                 ammo_m830a1.MaxSpallRha = 50f;
                 ammo_m830a1.MinSpallRha = 1f;
-                ammo_m830a1.MuzzleVelocity = 1400f;
+                ammo_m830a1.MuzzleVelocity = 1410f;
                 ammo_m830a1.Name = "M830A1 HEAT-MP-T";
                 ammo_m830a1.RhaPenetration = 480;
                 ammo_m830a1.ShatterOnRicochet = false;
@@ -2135,7 +2142,7 @@ namespace M1A1AMP
                 ammo_m830a2.Mass = 13.5f;
                 ammo_m830a2.MaxSpallRha = 35f;
                 ammo_m830a2.MinSpallRha = 5f;
-                ammo_m830a2.MuzzleVelocity = 1400f;
+                ammo_m830a2.MuzzleVelocity = 1410f;
                 ammo_m830a2.Name = "M830A2 IHEAT-FS-T";
                 ammo_m830a2.RhaPenetration = 700;
                 ammo_m830a2.ShatterOnRicochet = false;
@@ -2168,7 +2175,7 @@ namespace M1A1AMP
                 ammo_m830a3.Mass = 13.5f;
                 ammo_m830a3.MaxSpallRha = 25f;
                 ammo_m830a3.MinSpallRha = 5f;
-                ammo_m830a3.MuzzleVelocity = 1300f;
+                ammo_m830a3.MuzzleVelocity = 1310f;
                 ammo_m830a3.Name = "M830A3 IHEAT-FS-T";
                 ammo_m830a3.RhaPenetration = 1000;
                 ammo_m830a3.ShatterOnRicochet = false;
@@ -2287,7 +2294,7 @@ namespace M1A1AMP
                 ammo_m908.Mass = 11.4f;
                 ammo_m908.MaxSpallRha = 75f;
                 ammo_m908.MinSpallRha = 1f;
-                ammo_m908.MuzzleVelocity = 1400f;
+                ammo_m908.MuzzleVelocity = 1410f;
                 ammo_m908.Name = "M908 HE-OR-T";
                 ammo_m908.RhaPenetration = 300;
                 ammo_m908.ShatterOnRicochet = false;
@@ -2380,7 +2387,7 @@ namespace M1A1AMP
                 ammo_m962slapt.Name = "M962 SLAP-T";
                 ammo_m962slapt.NutationPenaltyDistance = 0f;
                 ammo_m962slapt.MaxNutationPenalty = 0f;
-                ammo_m962slapt.RhaPenetration = 40f;
+                ammo_m962slapt.RhaPenetration = 36f;
                 ammo_m962slapt.SpallMultiplier = 15f;
                 ammo_m962slapt.UseTracer = true;
 
