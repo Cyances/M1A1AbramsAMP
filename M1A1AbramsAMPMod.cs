@@ -1334,20 +1334,18 @@ namespace M1A1AMP
                         WeaponSystemInfo mainGunInfo = weaponsManager.Weapons[0];
                         WeaponSystem mainGun = mainGunInfo.Weapon;
 
+                        var gpsOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/Optic/").gameObject.transform;
+                        var flirOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/FLIR/").gameObject.transform;
+                        var agsOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/").gameObject.transform;
+
                         ////Better optics stuff
                         UsableOptic optic = Util.GetDayOptic(mainGun.FCS);
                         if (rotateAzimuth.Value)
                         {
-                            //optic.RotateAzimuth = true;
-                            //optic.slot.LinkedNightSight.PairedOptic.RotateAzimuth = true;
-
-                            var gpsReticle = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/Optic/").gameObject.transform;
-                            var flirReticle = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/FLIR/").gameObject.transform;
-
-                            UsableOptic horizontalGps = gpsReticle.GetComponent<UsableOptic>();
+                            UsableOptic horizontalGps = gpsOptic.GetComponent<UsableOptic>();
                             horizontalGps.RotateAzimuth = true;
 
-                            UsableOptic horizontalFlir = flirReticle.GetComponent<UsableOptic>();
+                            UsableOptic horizontalFlir = flirOptic.GetComponent<UsableOptic>();
                             horizontalFlir.RotateAzimuth = true;
                         }
 
@@ -1359,7 +1357,6 @@ namespace M1A1AMP
 
                         if (betterDaysight.Value)
                         {
-                            var gpsOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/Optic/").gameObject.transform;
                             CameraSlot daysightPlus = gpsOptic.GetComponent<CameraSlot>();
                             daysightPlus.DefaultFov = 12.5f;
                             daysightPlus.OtherFovs = gpsFovs.ToArray<float>();
@@ -1368,13 +1365,12 @@ namespace M1A1AMP
                         if (betterFlir.Value)
                         {
                             //Scanline FOV change
-                            var flirscanlines = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/FLIR/").gameObject.transform;
-                            GameObject.Destroy(flirscanlines.transform.Find("Canvas Scanlines").gameObject);
+                            GameObject.Destroy(flirOptic.transform.Find("Canvas Scanlines").gameObject);
 
-                            var flirOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/FLIR/").gameObject.transform;
                             CameraSlot flirPlus = flirOptic.GetComponent<CameraSlot>();
                             flirPlus.DefaultFov = 12.5f;
                             flirPlus.OtherFovs = gpsFovs.ToArray<float>();
+                            flirPlus.BaseBlur = 0;
 
                         }
 
@@ -1385,7 +1381,6 @@ namespace M1A1AMP
                             agsFovs.Add(2.716f);
                             agsFovs.Add(1.96f);
 
-                            var agsOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/").gameObject.transform;
                             CameraSlot agsPlus = agsOptic.GetComponent<CameraSlot>();
                             agsPlus.DefaultFov = 6.5f;//4.2f
                             agsPlus.OtherFovs = new float[] { 4.2f, 2.716f, 1.96f };
@@ -1526,30 +1521,35 @@ namespace M1A1AMP
                         mainGun.Feed.ReloadDuringMissileTracking = true;
                         mainGun.FireWhileGuidingMissile = true;
 
-
-                        //Novice Cadet Regular Veteran Ace
-
                         VehicleController m1VC = vic_go.GetComponent<VehicleController>();
                         NwhChassis m1Chassis = vic_go.GetComponent<NwhChassis>();
                         Rigidbody m1Rb = vic_go.GetComponent<Rigidbody>();
 
-                        //SA 62232
                         //Chonk quantifier
+                        int mass_A1 = 59057;//55338 - Value for default M1
+                        int mass_HA = 60599;
+                        int mass_HC = 61416;
+                        int mass_SA = 62232;
+                        int mass_HU = 72665;// 68038 - fully loaded SEPv3 as reference
+
                         if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
                         {
                             switch (m1a1Armor.Value)
                             {
                                 case "HA":
-                                    m1Rb.mass = 60599;
+                                    m1Rb.mass = mass_HA;
                                     break;
                                 case "HC":
-                                    m1Rb.mass = 61416;
+                                    m1Rb.mass = mass_HC;
+                                    break;
+                                case "SA":
+                                    m1Rb.mass = mass_SA;
                                     break;
                                 case "HU":
-                                    m1Rb.mass = uapWeight.Value ? 60599 : 72665;// 68038;
+                                    m1Rb.mass = uapWeight.Value ? mass_HA : mass_HU;
                                     break;
                                 default:
-                                    m1Rb.mass = 59057;//55338;
+                                    m1Rb.mass = mass_A1;
                                     break;
                             }
 
@@ -1624,6 +1624,7 @@ namespace M1A1AMP
                                     break;*/
                             }
 
+                            //Novice Cadet Regular Veteran Ace
                             switch (m1a1Loader.Value)
                             {
                                 case "Cadet":
@@ -1664,16 +1665,19 @@ namespace M1A1AMP
                             switch (m1e1Armor.Value)
                             {
                                 case "HA":
-                                    m1Rb.mass = 60599;
+                                    m1Rb.mass = mass_HA;
                                     break;
                                 case "HC":
-                                    m1Rb.mass = 61416;
+                                    m1Rb.mass = mass_HC;
+                                    break;
+                                case "SA":
+                                    m1Rb.mass = mass_SA;
                                     break;
                                 case "HU":
-                                    m1Rb.mass = uapWeight.Value ? 60599 : 72665;//68038;
+                                    m1Rb.mass = uapWeight.Value ? mass_HA : mass_HU;
                                     break;
                                 default:
-                                    m1Rb.mass = 59057;//55338;
+                                    m1Rb.mass = mass_A1;
                                     break;
                             }
 
