@@ -12,6 +12,8 @@ namespace M1A1AMP
 {
     public class Util
     {
+        public class AlreadyConverted : MonoBehaviour { }
+
         // https://snipplr.com/view/75285/clone-from-one-object-to-another-using-reflection
         public static void ShallowCopy(System.Object dest, System.Object src)
         {

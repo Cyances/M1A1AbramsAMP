@@ -127,7 +127,9 @@ namespace M1A1AMP
                 if (!__instance.gameObject.GetComponentInChildren<ProxyFuze>()) return true;
                 if (!__instance.gameObject.GetComponentInChildren<ProxyFuze>().detonated) return true;
 
-                for (int i = 0; i < 600; i++)
+                int fragCount = M1A1AbramsAMPMod.ampFragments.Value;
+
+                for (int i = 0; i < fragCount; i++)
                 {
                     GHPC.Weapons.LiveRound component;
                     component = LiveRoundMarshaller.Instance.GetRoundOfVisualType(LiveRoundMarshaller.LiveRoundVisualType.Invisible)

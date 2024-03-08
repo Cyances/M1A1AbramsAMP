@@ -51,7 +51,8 @@ namespace M1A1AMP
             camManager = gameManager.GetComponent<CameraManager>();
             playerManager = gameManager.GetComponent<PlayerInput>();
 
-            StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(GetVics), GameStatePriority.Low);
+            StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(GetVics), GameStatePriority.Medium);
+            CITV.Init();
             M1A1AbramsAMPMod.Init();
             ProxyFuze.Init();
         }

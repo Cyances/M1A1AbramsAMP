@@ -21,6 +21,8 @@ using HarmonyLib;
 using static NWH.WheelController3D.WheelController;
 using NWH.VehiclePhysics;
 using FMOD;
+using MelonLoader.Utils;
+using System.IO;
 
 namespace M1A1AMP
 {
@@ -53,14 +55,11 @@ namespace M1A1AMP
         static MelonPreferences_Entry<int> randomChanceNum;
         static MelonPreferences_Entry<bool> randomChance;
         static MelonPreferences_Entry<bool> m829spall;
-        static MelonPreferences_Entry<int> ampFragments;
-        static MelonPreferences_Entry<int> mpatFragments;
+        public static MelonPreferences_Entry<int> ampFragments, mpatFragments, heorFragments;
         static MelonPreferences_Entry<bool> ampFuze;
         static MelonPreferences_Entry<string> m1a1Armor;
         static MelonPreferences_Entry<string> m1e1Armor;
         static MelonPreferences_Entry<bool> demigodArmor;
-        static MelonPreferences_Entry<bool> agt2000mp;
-        static MelonPreferences_Entry<bool> agt2500mp;
         static MelonPreferences_Entry<string> m1a1Agt;
         static MelonPreferences_Entry<string> m1e1Agt;
         static MelonPreferences_Entry<bool> betterTransmission;
@@ -68,6 +67,12 @@ namespace M1A1AMP
         static MelonPreferences_Entry<bool> uapWeight;
         static MelonPreferences_Entry<string> m1a1Loader;
         static MelonPreferences_Entry<string> m1e1Loader;
+        static MelonPreferences_Entry<bool> citv;
+        static MelonPreferences_Entry<bool> alt_flir_colour;
+        public static MelonPreferences_Entry<bool> perfect_citv;
+        public static MelonPreferences_Entry<bool> citv_reticle;
+        public static MelonPreferences_Entry<bool> citv_smooth;
+        public static MelonPreferences_Entry<bool> perfect_override;
 
         static WeaponSystemCodexScriptable gun_m256;
 
@@ -307,6 +312,8 @@ namespace M1A1AMP
         static ReticleSO reticleSO_m1e1secondRound;
         static ReticleMesh.CachedReticle reticle_cached_m1e1secondRound;
 
+        static GameObject citv_obj;
+
         public static void Config(MelonPreferences_Category cfg)
         {
             m1a1firstAmmo = cfg.CreateEntry<string>("M1A1 1st Round Type", "M829A4");
@@ -347,21 +354,37 @@ namespace M1A1AMP
             m829spall.Description = "Enhanced spalling for all M829s.";
 
             ampFragments = cfg.CreateEntry<int>("AMP Fragments", 600);
-            ampFragments.Description = "How many fragments are generated when the AMP round explodes (in point-detonate/airburst mode). NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
+            ampFragments.Description = "How many fragments are generated when the below round explodes. NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
 
             mpatFragments = cfg.CreateEntry<int>("MPAT Fragments", 600);
-            mpatFragments.Description = "How many fragments are generated when the MPAT round explodes (in point-detonate mode). NOTE: Higher number, means higher performance hit. Be careful in using higher number.";
+
+            heorFragments = cfg.CreateEntry<int>("HEOR Fragments", 300);
 
             ampFuze = cfg.CreateEntry<bool>("AMP TD Fuze", false);
             ampFuze.Description = "Switches AMP fuze to time-delay instead of proximity.";
 
-            rotateAzimuth = cfg.CreateEntry<bool>("RotateAzimuth", false);
+            rotateAzimuth = cfg.CreateEntry<bool>("RotateAzimuth", true);
             rotateAzimuth.Description = "Horizontal stabilization of M1A1 sights when applying lead.";
 
             betterDaysight = cfg.CreateEntry<bool>("Daysight+", false);
-            betterDaysight.Description = "More zoom levels/clearer image for optics.";
+            betterDaysight.Description = "More zoom levels/clearer image for gunner optics.";
             betterFlir = cfg.CreateEntry<bool>("FLIR+", false);
             betterAgs = cfg.CreateEntry<bool>("AGS+", false);
+
+            citv = cfg.CreateEntry<bool>("CITV", false);
+            citv.Description = "Replaces commander's NVGs with variable-zoom thermals.";
+
+            perfect_citv = cfg.CreateEntry<bool>("No Blur CITV", false);
+            citv_reticle = cfg.CreateEntry<bool>("CITV Reticle", true);
+
+            perfect_override = cfg.CreateEntry<bool>("Perfect CITV Override", false);
+            perfect_override.Comment = "Basically lets you point-n-shoot with the CITV.";
+
+            citv_smooth = cfg.CreateEntry<bool>("Smooth CITV Panning", true);
+            citv_smooth.Comment = "Makes CITV feel more like a camera.";
+
+            alt_flir_colour = cfg.CreateEntry<bool>("Alternate GPS FLIR Colour", false);
+            alt_flir_colour.Description = "[Requires CITV to be enabled] Gives the gunner's sight FLIR the same colour palette as the CITV.";
 
             m1e1Convert = cfg.CreateEntry<bool>("M1E1", true);
             m1e1Convert.Description = "Convert M1s to M1E1s (i.e: they get the 120mm gun and enables armor upgrades).";
@@ -370,11 +393,11 @@ namespace M1A1AMP
             randomChance.Description = "M1IPs/M1s will have a random chance of being converted to M1A1s/M1E1s.";
             randomChanceNum = cfg.CreateEntry<int>("ConversionChance", 100);
 
-            m1a1Armor = cfg.CreateEntry<string>("M1A1 Armor", "HU");
+            m1a1Armor = cfg.CreateEntry<string>("M1A1 Armor", "HC");
             m1a1Armor.Description = "Armor used by M1A1 and M1E1: 'HA', 'HC', 'HU' or blank for base M1/IP armor";
-            m1e1Armor = cfg.CreateEntry<string>("M1E1 Armor", "HU");
+            m1e1Armor = cfg.CreateEntry<string>("M1E1 Armor", "HA");
 
-            uapWeight = cfg.CreateEntry<bool>("UAP", true);
+            uapWeight = cfg.CreateEntry<bool>("UAP", false);
             uapWeight.Description = "Unobtanium armor package for HU that gives it HA weight";
 
             demigodArmor = cfg.CreateEntry<bool>("Demigod Armor", false);
@@ -382,6 +405,7 @@ namespace M1A1AMP
 
             m1a1Agt = cfg.CreateEntry<string>("M1A1 Engine", "AGT1500");
             m1a1Agt.Description = "SPEEEED AND POWWAAAAH!";
+            m1a1Agt.Comment = "AGT1500/AGT2000/AGT2500/AGT3000/T64";
             m1e1Agt = cfg.CreateEntry<string>("M1E1 Engine", "AGT1500");
 
             betterTransmission = cfg.CreateEntry<bool>("Transmission+", false);
@@ -1308,9 +1332,11 @@ namespace M1A1AMP
                 Vehicle vic = vic_go.GetComponent<Vehicle>();
 
                 if (vic == null) continue;
+                //if (vic_go.GetComponent<Util.AlreadyConverted>() != null) continue;
 
                 //if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
                 if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
+                    //vic_go.AddComponent<Util.AlreadyConverted>();
                 {
                     int rand = (randomChance.Value) ? UnityEngine.Random.Range(1, 100) : 0;
 
@@ -1387,6 +1413,33 @@ namespace M1A1AMP
                             agsPlus.VibrationBlurScale = 0.1f;//0.2
                             agsPlus.VibrationShakeMultiplier = 0.2f;//0.5
                         }
+
+                        if (citv.Value)
+                        {
+                            GameObject c = GameObject.Instantiate(citv_obj, vic.transform.Find("IPM1_rig/HULL/TURRET"));
+                            c.transform.localPosition = new Vector3(-0.6794f, 0.9341f, 0.4348f);
+                            c.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+
+                            CITV citv_component = vic.DesignatedCameraSlots[0].LinkedNightSight.gameObject.AddComponent<CITV>();
+                            citv_component.model = c;
+
+                            c.transform.Find("assembly").GetComponent<VariableArmor>().Unit = vic;
+                            c.transform.Find("glass").GetComponent<VariableArmor>().Unit = vic;
+
+                            if (alt_flir_colour.Value)
+                                optic.slot.LinkedNightSight.PairedOptic.post.profile.settings[2] = vic.DesignatedCameraSlots[0].LinkedNightSight.gameObject.
+                                    GetComponent<SimpleNightVision>()._postVolume.profile.settings[1];
+                            //ChromaticAberration s = optic.post.profile.AddSettings<ChromaticAberration>();
+                            //s.active = true; 
+                            //s.intensity.overrideState = true;
+                            //s.intensity.value = 0.35f;
+
+                            //vic._friendlyName += "+";
+                        }
+
+                        CameraSlot commanderzoom = vic.DesignatedCameraSlots[0].gameObject.GetComponent<CameraSlot>();
+                        commanderzoom.DefaultFov = 60;//60
+                        commanderzoom.OtherFovs = new float[] { 30f, 20f, 10f };//??? Uknown default
 
                         ////GAS stuff
                         if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
@@ -1636,26 +1689,26 @@ namespace M1A1AMP
                                 case "Regular":
                                     mainGun.Feed._totalReloadTime = 6;//6
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;//5
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;//5
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4.5f;//5
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4.5f;//5
                                     break;
                                 case "Veteran":
                                     mainGun.Feed._totalReloadTime = 5;
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4;
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4;
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 3.5f;
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 3.5f;
                                     break;
                                 case "Ace":
                                     mainGun.Feed._totalReloadTime = 4;
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 3;
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 3;
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 2.5f;
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 2.5f;
                                     break;
                                 default:
                                     mainGun.Feed._totalReloadTime = 6;//6
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;//5
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;//5
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4.5f;//5
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4.5f;//5
                                     break;
                             }
                         }
@@ -1923,6 +1976,25 @@ namespace M1A1AMP
         }
         public static void Init()
         {
+            if (citv_obj == null)
+            {
+                var bundle = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1CITV/", "citv"));
+                citv_obj = bundle.LoadAsset<GameObject>("citv.prefab");
+                citv_obj.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                citv_obj.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+                GameObject assem = citv_obj.transform.Find("assembly").gameObject;
+                GameObject glass = citv_obj.transform.Find("glass").gameObject;
+
+                assem.tag = "Penetrable";
+                glass.tag = "Penetrable";
+
+                VariableArmor assem_armour = assem.AddComponent<VariableArmor>();
+                VariableArmor glass_armour = glass.AddComponent<VariableArmor>();
+                assem_armour.AverageRha = 40f;
+                assem_armour._name = "CITV";
+                glass_armour._name = "CITV glass";
+            }
+
             if (gun_m256 == null)
             {
                 ////Borrow existing ammo and armor attributes
@@ -2276,6 +2348,7 @@ namespace M1A1AMP
                 ammo_xm1147 = new AmmoType();
                 Util.ShallowCopy(ammo_xm1147, ammo_m456);
                 ammo_xm1147.Caliber = 120;
+                ammo_xm1147.Category = AmmoType.AmmoCategory.Explosive;
                 ammo_xm1147.CertainRicochetAngle = 0.0f;
                 ammo_xm1147.DetonateSpallCount = ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
                 ammo_xm1147.Mass = 11.4f;
@@ -2283,10 +2356,10 @@ namespace M1A1AMP
                 ammo_xm1147.MinSpallRha = 50f;
                 ammo_xm1147.MuzzleVelocity = 1410f;
                 ammo_xm1147.Name = "XM1147 AMP-T";
-                ammo_xm1147.RhaPenetration = 480;
+                ammo_xm1147.RhaPenetration = 250;
                 ammo_xm1147.ShatterOnRicochet = false;
                 ammo_xm1147.SpallMultiplier = 2f;
-                ammo_xm1147.TntEquivalentKg = 3.45f; //50% more power than equivalent load
+                ammo_xm1147.TntEquivalentKg = 4.14f; //2.3Kg PAX-3, but treated 80% more power than equivalent TNT load
 
                 ammo_codex_xm1147 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
                 ammo_codex_xm1147.AmmoType = ammo_xm1147;
@@ -2363,14 +2436,14 @@ namespace M1A1AMP
                 Util.ShallowCopy(ammo_m908, ammo_3of26);
                 ammo_m908.Caliber = 120;
                 ammo_m908.CertainRicochetAngle = 13f;//0.0f;
-                ammo_m908.DetonateSpallCount = 600; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
+                ammo_m908.DetonateSpallCount = heorFragments.Value; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
                 ammo_m908.ImpactFuseTime = 0.000357143f; //0.5 meters after impact //delay removed since it negatively affects armor penetration
                 ammo_m908.Mass = 11.4f;
                 ammo_m908.MaxSpallRha = 75f;
                 ammo_m908.MinSpallRha = 1f;
                 ammo_m908.MuzzleVelocity = 1410f;
                 ammo_m908.Name = "M908 HE-OR-T";
-                ammo_m908.RhaPenetration = 300;
+                ammo_m908.RhaPenetration = 250;
                 ammo_m908.ShatterOnRicochet = false;
                 ammo_m908.ShotVisual = ammo_m456.ShotVisual;
                 ammo_m908.TntEquivalentKg = 4.8f;//3.2Kg Comp A3 IRL but apparently RDX is 50% stronger than TNT so 4.8
