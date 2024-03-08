@@ -29,50 +29,24 @@ namespace M1A1AMP
     public static class M1A1AbramsAMPMod
     {
         ////MelonPreferences.cfg variables
-        static MelonPreferences_Entry<int> m1a1firstammoCount;
-        static MelonPreferences_Entry<int> m1a1secondammoCount;
-        static MelonPreferences_Entry<int> m1a1thirdammoCount;
-        static MelonPreferences_Entry<int> m1a1fourthammoCount;
-        static MelonPreferences_Entry<int> m1e1firstammoCount;
-        static MelonPreferences_Entry<int> m1e1secondammoCount;
-        static MelonPreferences_Entry<int> m1e1thirdammoCount;
-        static MelonPreferences_Entry<int> m1e1fourthammoCount;
-        static MelonPreferences_Entry<string> m1a1firstAmmo;
-        static MelonPreferences_Entry<string> m1a1secondAmmo;
-        static MelonPreferences_Entry<string> m1a1thirdAmmo;
-        static MelonPreferences_Entry<string> m1a1fourthAmmo;
-        static MelonPreferences_Entry<string> m1e1firstAmmo;
-        static MelonPreferences_Entry<string> m1e1secondAmmo;
-        static MelonPreferences_Entry<string> m1e1thirdAmmo;
-        static MelonPreferences_Entry<string> m1e1fourthAmmo;
-        static MelonPreferences_Entry<bool> m2Coax;
-        static MelonPreferences_Entry<bool> m2Slap;
-        static MelonPreferences_Entry<bool> rotateAzimuth;
-        static MelonPreferences_Entry<bool> betterDaysight;
-        static MelonPreferences_Entry<bool> betterFlir;
-        static MelonPreferences_Entry<bool> betterAgs;
-        static MelonPreferences_Entry<bool> m1e1Convert;
+        static MelonPreferences_Entry<int> m1a1firstammoCount, m1a1secondammoCount, m1a1thirdammoCount, m1a1fourthammoCount;
+        static MelonPreferences_Entry<int> m1e1firstammoCount, m1e1secondammoCount, m1e1thirdammoCount, m1e1fourthammoCount;
+        static MelonPreferences_Entry<string> m1a1firstAmmo, m1a1secondAmmo, m1a1thirdAmmo, m1a1fourthAmmo;
+        static MelonPreferences_Entry<string> m1e1firstAmmo, m1e1secondAmmo, m1e1thirdAmmo, m1e1fourthAmmo;
+        static MelonPreferences_Entry<bool> m2Coax, m2Slap;
+        static MelonPreferences_Entry<bool> rotateAzimuth, betterDaysight, betterFlir, betterAgs;
+        static MelonPreferences_Entry<bool> m1e1Convert, randomChance;
         static MelonPreferences_Entry<int> randomChanceNum;
-        static MelonPreferences_Entry<bool> randomChance;
-        static MelonPreferences_Entry<bool> m829spall;
-        public static MelonPreferences_Entry<int> ampFragments, mpatFragments, heorFragments;
-        static MelonPreferences_Entry<bool> ampFuze;
-        static MelonPreferences_Entry<string> m1a1Armor;
-        static MelonPreferences_Entry<string> m1e1Armor;
+        static MelonPreferences_Entry<bool> m829spall, ampFuze;
+        static MelonPreferences_Entry<string> m1a1Armor, m1e1Armor;
         static MelonPreferences_Entry<bool> demigodArmor;
-        static MelonPreferences_Entry<string> m1a1Agt;
-        static MelonPreferences_Entry<string> m1e1Agt;
-        static MelonPreferences_Entry<bool> betterTransmission;
-        static MelonPreferences_Entry<bool> governorDelete;
-        static MelonPreferences_Entry<bool> uapWeight;
-        static MelonPreferences_Entry<string> m1a1Loader;
-        static MelonPreferences_Entry<string> m1e1Loader;
+        static MelonPreferences_Entry<string> m1a1Agt, m1e1Agt;
+        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight;
+        static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader;
         static MelonPreferences_Entry<bool> citv;
         static MelonPreferences_Entry<bool> alt_flir_colour;
-        public static MelonPreferences_Entry<bool> perfect_citv;
-        public static MelonPreferences_Entry<bool> citv_reticle;
-        public static MelonPreferences_Entry<bool> citv_smooth;
-        public static MelonPreferences_Entry<bool> perfect_override;
+        public static MelonPreferences_Entry<int> ampFragments, mpatFragments, heorFragments;
+        public static MelonPreferences_Entry<bool> perfect_citv, citv_reticle, citv_smooth, perfect_override;
 
         static WeaponSystemCodexScriptable gun_m256;
 
@@ -108,9 +82,10 @@ namespace M1A1AMP
         static AmmoType ammo_m830;
 
         static AmmoClipCodexScriptable clip_codex_m830a1;
-        static AmmoType.AmmoClip clip_m830a1;
+        public static AmmoType.AmmoClip clip_m830a1;
         static AmmoCodexScriptable ammo_codex_m830a1;
-        static AmmoType ammo_m830a1;
+        public static AmmoType ammo_m830a1;
+        public static AmmoType m830a1_forward_frag = new AmmoType();
 
         static AmmoClipCodexScriptable clip_codex_m830a2;
         static AmmoType.AmmoClip clip_m830a2;
@@ -166,18 +141,11 @@ namespace M1A1AMP
         static GameObject ammo_lahat_vis = null;
         static GameObject ammo_m908_vis = null;
 
-        static AmmoType ammo_m833;
-        static AmmoType ammo_m456;
-        static AmmoType ammo_3of26;
-        static AmmoType ammo_bgm71;
-        static AmmoType ammo_m8vnl;
+        static AmmoType ammo_m833, ammo_m456, ammo_3of26, ammo_bgm71, ammo_m8vnl;
 
         ////Armor variables
         ////Variables for copying existing ArmorType
-        static ArmorType armor_compositeskirt_VNL;
-        static ArmorType armor_specialarmor_VNL;
-        static ArmorType armor_tracks_VNL;
-        static ArmorType armor_gunsteel_VNL;
+        static ArmorType armor_compositeskirt_VNL, armor_specialarmor_VNL, armor_tracks_VNL, armor_gunsteel_VNL;
 
         ////HU Variant
         static ArmorCodexScriptable armor_codex_superCompositeskirt_HU;
@@ -300,17 +268,12 @@ namespace M1A1AMP
         static ArmorType armor_turretsidesDUarmor_HA;
 
         ////GAS variables
-        static ReticleSO reticleSO_m1a1firstRound;
-        static ReticleMesh.CachedReticle reticle_cached_m1a1firstRound;
+        static ReticleSO reticleSO_m1a1firstRound, reticleSO_m1a1secondRound;
+        static ReticleMesh.CachedReticle reticle_cached_m1a1firstRound, reticle_cached_m1a1secondRound;
 
-        static ReticleSO reticleSO_m1a1secondRound;
-        static ReticleMesh.CachedReticle reticle_cached_m1a1secondRound;
 
-        static ReticleSO reticleSO_m1e1firstRound;
-        static ReticleMesh.CachedReticle reticle_cached_m1e1firstRound;
-
-        static ReticleSO reticleSO_m1e1secondRound;
-        static ReticleMesh.CachedReticle reticle_cached_m1e1secondRound;
+        static ReticleSO reticleSO_m1e1firstRound, reticleSO_m1e1secondRound;
+        static ReticleMesh.CachedReticle reticle_cached_m1e1firstRound, reticle_cached_m1e1secondRound;
 
         static GameObject citv_obj;
 
@@ -447,884 +410,884 @@ namespace M1A1AMP
                 ["M908"] = ammo_codex_m908,
             };
 
-            ////Assign modified armor to M1A1HU
-            if (m1a1Armor.Value == "HU")
+            switch (m1a1Armor.Value)
             {
-                foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-                {
-                    if (armour == null) continue;
-
-                    VariableArmor m1a1VA_HU = armour.GetComponent<VariableArmor>();
-                    if (m1a1VA_HU == null) continue;
-                    if (m1a1VA_HU.Unit == null) continue;
-                    if (m1a1VA_HU.Unit.FriendlyName == "M1IP")
+                ////Assign modified armor to M1A1HU
+                case "HU":
+                    foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
                     {
-                        if (m1a1VA_HU.Name == "composite side skirt")
-                        {
-                            FieldInfo armorskirtComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorskirtComposite_HU.SetValue(m1a1VA_HU, armor_codex_superCompositeskirt_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                        if (armour == null) continue;
 
-                        if (m1a1VA_HU.Name == "turret cheek special armor array")
+                        VariableArmor m1a1VA_HU = armour.GetComponent<VariableArmor>();
+                        if (m1a1VA_HU == null) continue;
+                        if (m1a1VA_HU.Unit == null) continue;
+                        if (m1a1VA_HU.Unit.FriendlyName == "M1IP")
                         {
-                            FieldInfo armorcheeksDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorcheeksDU_HU.SetValue(m1a1VA_HU, armor_codex_cheeksDUarmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "composite side skirt")
+                            {
+                                FieldInfo armorskirtComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorskirtComposite_HU.SetValue(m1a1VA_HU, armor_codex_superCompositeskirt_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "hull front special armor array")
-                        {
-                            FieldInfo armorhullfrontDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorhullfrontDU_HU.SetValue(m1a1VA_HU, armor_codex_fronthullDUarmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "turret cheek special armor array")
+                            {
+                                FieldInfo armorcheeksDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorcheeksDU_HU.SetValue(m1a1VA_HU, armor_codex_cheeksDUarmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "gun mantlet special armor array")
-                        {
-                            FieldInfo armormantletDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armormantletDU_HU.SetValue(m1a1VA_HU, armor_codex_mantletDUarmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "hull front special armor array")
+                            {
+                                FieldInfo armorhullfrontDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorhullfrontDU_HU.SetValue(m1a1VA_HU, armor_codex_fronthullDUarmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "turret side special armor array")
-                        {
-                            FieldInfo armorturretsidesDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorturretsidesDU_HU.SetValue(m1a1VA_HU, armor_codex_turretsidesDUarmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "gun mantlet special armor array")
+                            {
+                                FieldInfo armormantletDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armormantletDU_HU.SetValue(m1a1VA_HU, armor_codex_mantletDUarmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "turret roof")
-                        {
-                            FieldInfo armorturretroofComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorturretroofComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretroofCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "turret side special armor array")
+                            {
+                                FieldInfo armorturretsidesDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretsidesDU_HU.SetValue(m1a1VA_HU, armor_codex_turretsidesDUarmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "upper glacis")
-                        {
-                            FieldInfo armorupperglacisComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorupperglacisComposite_HU.SetValue(m1a1VA_HU, armor_codex_upperglacisCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "turret roof")
+                            {
+                                FieldInfo armorturretroofComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretroofComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretroofCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "commander's hatch")
-                        {
-                            FieldInfo armorcommandershatchComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorcommandershatchComposite_HU.SetValue(m1a1VA_HU, armor_codex_commmandershatchCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "upper glacis")
+                            {
+                                FieldInfo armorupperglacisComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorupperglacisComposite_HU.SetValue(m1a1VA_HU, armor_codex_upperglacisCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "loader's hatch")
-                        {
-                            FieldInfo armorloadershatchComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorloadershatchComposite_HU.SetValue(m1a1VA_HU, armor_codex_loadershatchCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "commander's hatch")
+                            {
+                                FieldInfo armorcommandershatchComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorcommandershatchComposite_HU.SetValue(m1a1VA_HU, armor_codex_commmandershatchCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "driver's hatch")
-                        {
-                            FieldInfo armordrivershatchDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armordrivershatchDU_HU.SetValue(m1a1VA_HU, armor_codex_drivershatchCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "loader's hatch")
+                            {
+                                FieldInfo armorloadershatchComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorloadershatchComposite_HU.SetValue(m1a1VA_HU, armor_codex_loadershatchCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "turret ring")
-                        {
-                            FieldInfo armorturretringComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorturretringComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretringCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "driver's hatch")
+                            {
+                                FieldInfo armordrivershatchDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armordrivershatchDU_HU.SetValue(m1a1VA_HU, armor_codex_drivershatchCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "gun mantlet face")
-                        {
-                            FieldInfo gunmantletfaceDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            gunmantletfaceDU_HU.SetValue(m1a1VA_HU, armor_codex_gunmantletfaceCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "turret ring")
+                            {
+                                FieldInfo armorturretringComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretringComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretringCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "left track")
-                        {
-                            FieldInfo armortrackSpecialL_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armortrackSpecialL_HU.SetValue(m1a1VA_HU, armor_codex_trackSpecialarmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "gun mantlet face")
+                            {
+                                FieldInfo gunmantletfaceDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                gunmantletfaceDU_HU.SetValue(m1a1VA_HU, armor_codex_gunmantletfaceCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "right track")
-                        {
-                            FieldInfo armortrackSpecialR_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armortrackSpecialR_HU.SetValue(m1a1VA_HU, armor_codex_trackSpecialarmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "left track")
+                            {
+                                FieldInfo armortrackSpecialL_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armortrackSpecialL_HU.SetValue(m1a1VA_HU, armor_codex_trackSpecialarmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "main gun barrel")
-                        {
-                            FieldInfo gunbarrelImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            gunbarrelImproved_HU.SetValue(m1a1VA_HU, armor_codex_gunbarrelImprovedarmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "right track")
+                            {
+                                FieldInfo armortrackSpecialR_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armortrackSpecialR_HU.SetValue(m1a1VA_HU, armor_codex_trackSpecialarmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "bustle racks firewall")
-                        {
-                            FieldInfo bustlefirewallImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            bustlefirewallImproved_HU.SetValue(m1a1VA_HU, armor_codex_bustleImprovedfirewall_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "main gun barrel")
+                            {
+                                FieldInfo gunbarrelImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                gunbarrelImproved_HU.SetValue(m1a1VA_HU, armor_codex_gunbarrelImprovedarmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "center blowout panel")
-                        {
-                            FieldInfo blowoutpanelCompositeC_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            blowoutpanelCompositeC_HU.SetValue(m1a1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "bustle racks firewall")
+                            {
+                                FieldInfo bustlefirewallImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                bustlefirewallImproved_HU.SetValue(m1a1VA_HU, armor_codex_bustleImprovedfirewall_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "left blowout panel")
-                        {
-                            FieldInfo blowoutpanelCompositeL_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            blowoutpanelCompositeL_HU.SetValue(m1a1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "center blowout panel")
+                            {
+                                FieldInfo blowoutpanelCompositeC_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                blowoutpanelCompositeC_HU.SetValue(m1a1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
+
+                            if (m1a1VA_HU.Name == "left blowout panel")
+                            {
+                                FieldInfo blowoutpanelCompositeL_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                blowoutpanelCompositeL_HU.SetValue(m1a1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
 
-                        if (m1a1VA_HU.Name == "right blowout panel")
-                        {
-                            FieldInfo blowoutpanelCompositeR_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            blowoutpanelCompositeR_HU.SetValue(m1a1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "right blowout panel")
+                            {
+                                FieldInfo blowoutpanelCompositeR_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                blowoutpanelCompositeR_HU.SetValue(m1a1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "turret rear face")
-                        {
-                            FieldInfo turretrearSpecial_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretrearSpecial_HU.SetValue(m1a1VA_HU, armor_codex_turretrearSpecialarray_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "turret rear face")
+                            {
+                                FieldInfo turretrearSpecial_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretrearSpecial_HU.SetValue(m1a1VA_HU, armor_codex_turretrearSpecialarray_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "GPS doghouse")
-                        {
-                            FieldInfo GPShousingImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            GPShousingImproved_HU.SetValue(m1a1VA_HU, armor_codex_GPSImprovedhousing_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "GPS doghouse")
+                            {
+                                FieldInfo GPShousingImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                GPShousingImproved_HU.SetValue(m1a1VA_HU, armor_codex_GPSImprovedhousing_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "GPS doghouse door")
-                        {
-                            FieldInfo GPShousingdoorImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            GPShousingdoorImproved_HU.SetValue(m1a1VA_HU, armor_codex_GPSImproveddoor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "GPS doghouse door")
+                            {
+                                FieldInfo GPShousingdoorImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                GPShousingdoorImproved_HU.SetValue(m1a1VA_HU, armor_codex_GPSImproveddoor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "turret bottom")
-                        {
-                            FieldInfo turretbottomComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretbottomComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretbottomCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "turret bottom")
+                            {
+                                FieldInfo turretbottomComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretbottomComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretbottomCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "trunnion")
-                        {
-                            FieldInfo trunnionComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            trunnionComposite_HU.SetValue(m1a1VA_HU, armor_codex_trunnionCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "trunnion")
+                            {
+                                FieldInfo trunnionComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                trunnionComposite_HU.SetValue(m1a1VA_HU, armor_codex_trunnionCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "semi-ready rack door")
-                        {
-                            FieldInfo semireadyComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            semireadyComposite_HU.SetValue(m1a1VA_HU, armor_codex_semireadyrackdoorCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "semi-ready rack door")
+                            {
+                                FieldInfo semireadyComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                semireadyComposite_HU.SetValue(m1a1VA_HU, armor_codex_semireadyrackdoorCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "ready rack door")
-                        {
-                            FieldInfo readyComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            readyComposite_HU.SetValue(m1a1VA_HU, armor_codex_readyrackdoorCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "ready rack door")
+                            {
+                                FieldInfo readyComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                readyComposite_HU.SetValue(m1a1VA_HU, armor_codex_readyrackdoorCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "lower front plate")
-                        {
-                            FieldInfo lfpComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            lfpComposite_HU.SetValue(m1a1VA_HU, armor_codex_lowerfrontplateCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "lower front plate")
+                            {
+                                FieldInfo lfpComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                lfpComposite_HU.SetValue(m1a1VA_HU, armor_codex_lowerfrontplateCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "hull front backing plate")
-                        {
-                            FieldInfo hullfrontbackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            hullfrontbackingComposite_HU.SetValue(m1a1VA_HU, armor_codex_hullfrontbackingplateCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "hull front backing plate")
+                            {
+                                FieldInfo hullfrontbackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                hullfrontbackingComposite_HU.SetValue(m1a1VA_HU, armor_codex_hullfrontbackingplateCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "turret cheek face")
-                        {
-                            FieldInfo turretcheekfaceComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretcheekfaceComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretcheekfaceCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "turret cheek face")
+                            {
+                                FieldInfo turretcheekfaceComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretcheekfaceComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretcheekfaceCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "turret cheek backing plate")
-                        {
-                            FieldInfo turretcheekbackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretcheekbackingComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretcheekbackingplateCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "turret cheek backing plate")
+                            {
+                                FieldInfo turretcheekbackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretcheekbackingComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretcheekbackingplateCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "turret side backing plate")
-                        {
-                            FieldInfo turretsidebackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretsidebackingComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretsidebackingplateCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
-                        }
+                            if (m1a1VA_HU.Name == "turret side backing plate")
+                            {
+                                FieldInfo turretsidebackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretsidebackingComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretsidebackingplateCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
 
-                        if (m1a1VA_HU.Name == "turret side face")
-                        {
-                            FieldInfo turretsidefaceComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretsidefaceComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretsidefaceCompositearmor_HU);
-                            MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            if (m1a1VA_HU.Name == "turret side face")
+                            {
+                                FieldInfo turretsidefaceComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretsidefaceComposite_HU.SetValue(m1a1VA_HU, armor_codex_turretsidefaceCompositearmor_HU);
+                                MelonLogger.Msg("M1A1HU: " + m1a1VA_HU.ArmorType);
+                            }
                         }
                     }
-                }
 
-                ////M1A1HU UniformArmor pieces
-                foreach (GameObject uarmour in GameObject.FindGameObjectsWithTag("Penetrable"))
-                {
-                    if (uarmour == null) continue;
-
-                    UniformArmor m1a1UA_HU = uarmour.GetComponent<UniformArmor>();
-                    if (m1a1UA_HU == null) continue;
-                    if (m1a1UA_HU.Unit == null) continue;
-                    if (m1a1UA_HU.Unit.FriendlyName == "M1IP")
+                    ////M1A1HU UniformArmor pieces
+                    foreach (GameObject uarmour in GameObject.FindGameObjectsWithTag("Penetrable"))
                     {
-                        if (m1a1UA_HU.Name == "hull side")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
-                        }
+                        if (uarmour == null) continue;
 
-                        if (m1a1UA_HU.Name == "hull rear")
+                        UniformArmor m1a1UA_HU = uarmour.GetComponent<UniformArmor>();
+                        if (m1a1UA_HU == null) continue;
+                        if (m1a1UA_HU.Unit == null) continue;
+                        if (m1a1UA_HU.Unit.FriendlyName == "M1IP")
                         {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
-                        }
+                            if (m1a1UA_HU.Name == "hull side")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
+                            }
 
-                        if (m1a1UA_HU.Name == "hull floor")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
-                        }
+                            if (m1a1UA_HU.Name == "hull rear")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
+                            }
 
-                        if (m1a1UA_HU.Name == "hull floor rear")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
-                        }
+                            if (m1a1UA_HU.Name == "hull floor")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
+                            }
 
-                        if (m1a1UA_HU.Name == "hull roof")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
-                        }
+                            if (m1a1UA_HU.Name == "hull floor rear")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
+                            }
 
-                        if (m1a1UA_HU.Name == "firewall")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 80f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 80f;
-                        }
+                            if (m1a1UA_HU.Name == "hull roof")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
+                            }
 
-                        if (m1a1UA_HU.Name == "hull ammo rack door")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
-                        }
+                            if (m1a1UA_HU.Name == "firewall")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 80f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 80f;
+                            }
 
-                        if (m1a1UA_HU.Name == "engine deck")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 350f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
-                        }
+                            if (m1a1UA_HU.Name == "hull ammo rack door")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
+                            }
 
-                        if (m1a1UA_HU.Name == "fender")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
-                        }
+                            if (m1a1UA_HU.Name == "engine deck")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 350f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
+                            }
 
-                        if (m1a1UA_HU.Name == "side skirt")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 550f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 300f;
-                        }
+                            if (m1a1UA_HU.Name == "fender")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
+                            }
 
-                        if (m1a1UA_HU.Name == "gunner's primary sight")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
-                        }
+                            if (m1a1UA_HU.Name == "side skirt")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 550f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 300f;
+                            }
 
-                        if (m1a1UA_HU.Name == "sprocket wheel")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
-                        }
+                            if (m1a1UA_HU.Name == "gunner's primary sight")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
+                            }
 
-                        if (m1a1UA_HU.Name == "road wheel")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
-                        }
+                            if (m1a1UA_HU.Name == "sprocket wheel")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
+                            }
 
-                        if (m1a1UA_HU.Name == "engine")
-                        {
-                            m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
-                            m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 150f;
+                            if (m1a1UA_HU.Name == "road wheel")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
+                            }
+
+                            if (m1a1UA_HU.Name == "engine")
+                            {
+                                m1a1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
+                                m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 150f;
+                            }
+                            //MelonLogger.Msg("M1A1HU UniformArmor: Modified");
                         }
-                        //MelonLogger.Msg("M1A1HU UniformArmor: Modified");
                     }
-                }
+                    break;
+
+                ////Assign modified armor to M1A1HC
+                case "HC":
+                    foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+                    {
+                        if (armour == null) continue;
+
+                        VariableArmor m1a1VA_HC = armour.GetComponent<VariableArmor>();
+                        if (m1a1VA_HC == null) continue;
+                        if (m1a1VA_HC.Unit == null) continue;
+                        if (m1a1VA_HC.Unit.FriendlyName == "M1IP")
+                        {
+                            if (m1a1VA_HC.Name == "composite side skirt")
+                            {
+                                FieldInfo armorskirtComposite_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorskirtComposite_HC.SetValue(m1a1VA_HC, armor_codex_superCompositeskirt_HC);
+                                MelonLogger.Msg(m1a1VA_HC.ArmorType);
+                            }
+
+                            if (m1a1VA_HC.Name == "turret cheek special armor array")
+                            {
+                                FieldInfo armorcheeksDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorcheeksDU_HC.SetValue(m1a1VA_HC, armor_codex_cheeksDUarmor_HC);
+
+                                MelonLogger.Msg(m1a1VA_HC.ArmorType);
+                            }
+
+
+                            if (m1a1VA_HC.Name == "hull front special armor array")
+                            {
+                                FieldInfo armorhullfrontDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorhullfrontDU_HC.SetValue(m1a1VA_HC, armor_codex_fronthullDUarmor_HC);
+                                MelonLogger.Msg(m1a1VA_HC.ArmorType);
+                            }
+
+                            if (m1a1VA_HC.Name == "gun mantlet special armor array")
+                            {
+                                FieldInfo armormantletDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armormantletDU_HC.SetValue(m1a1VA_HC, armor_codex_mantletDUarmor_HC);
+                                MelonLogger.Msg(m1a1VA_HC.ArmorType);
+                            }
+
+                            if (m1a1VA_HC.Name == "turret side special armor array")
+                            {
+                                FieldInfo armorturretsidesDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretsidesDU_HC.SetValue(m1a1VA_HC, armor_codex_turretsidesDUarmor_HC);
+                                MelonLogger.Msg(m1a1VA_HC.ArmorType);
+                            }
+                        }
+                    }
+                    break;
+
+                ////Assign modified armor to M1A1HA
+                case "HA":
+                    foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+                    {
+                        if (armour == null) continue;
+
+                        VariableArmor m1a1VA_HA = armour.GetComponent<VariableArmor>();
+                        if (m1a1VA_HA == null) continue;
+                        if (m1a1VA_HA.Unit == null) continue;
+                        if (m1a1VA_HA.Unit.FriendlyName == "M1IP")
+                        {
+                            if (m1a1VA_HA.Name == "composite side skirt")
+                            {
+                                FieldInfo armorskirtComposite_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorskirtComposite_HA.SetValue(m1a1VA_HA, armor_codex_superCompositeskirt_HA);
+                                MelonLogger.Msg(m1a1VA_HA.ArmorType);
+                            }
+
+                            if (m1a1VA_HA.Name == "turret cheek special armor array")
+                            {
+                                FieldInfo armorcheeksDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorcheeksDU_HA.SetValue(m1a1VA_HA, armor_codex_cheeksDUarmor_HA);
+                                MelonLogger.Msg(m1a1VA_HA.ArmorType);
+                            }
+
+                            if (m1a1VA_HA.Name == "hull front special armor array")
+                            {
+                                FieldInfo armorhullfrontDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorhullfrontDU_HA.SetValue(m1a1VA_HA, armor_codex_fronthullDUarmor_HA);
+                                MelonLogger.Msg(m1a1VA_HA.ArmorType);
+                            }
+
+                            if (m1a1VA_HA.Name == "gun mantlet special armor array")
+                            {
+                                FieldInfo armormantletDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armormantletDU_HA.SetValue(m1a1VA_HA, armor_codex_mantletDUarmor_HA);
+                                MelonLogger.Msg(m1a1VA_HA.ArmorType);
+                            }
+
+
+                            if (m1a1VA_HA.Name == "turret side special armor array")
+                            {
+                                FieldInfo armorturretsidesDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretsidesDU_HA.SetValue(m1a1VA_HA, armor_codex_turretsidesDUarmor_HA);
+                                MelonLogger.Msg(m1a1VA_HA.ArmorType);
+                            }
+                        }
+                    }
+                    break;
             }
 
-            ////Assign modified armor to M1E1HU
-            if (m1e1Armor.Value == "HU")
+            switch (m1e1Armor.Value)
             {
-                foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-                {
-                    if (armour == null) continue;
-
-                    VariableArmor m1e1VA_HU = armour.GetComponent<VariableArmor>();
-                    if (m1e1VA_HU == null) continue;
-                    if (m1e1VA_HU.Unit == null) continue;
-                    if (m1e1VA_HU.Unit.FriendlyName == "M1" && m1e1Convert.Value == true)
+                ////Assign modified armor to M1E1HU
+                case "HU":
+                    foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
                     {
-                        if (m1e1VA_HU.Name == "composite side skirt")
-                        {
-                            FieldInfo armorskirtComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorskirtComposite_HU.SetValue(m1e1VA_HU, armor_codex_superCompositeskirt_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                        if (armour == null) continue;
 
-                        if (m1e1VA_HU.Name == "turret cheek special armor array")
+                        VariableArmor m1e1VA_HU = armour.GetComponent<VariableArmor>();
+                        if (m1e1VA_HU == null) continue;
+                        if (m1e1VA_HU.Unit == null) continue;
+                        if (m1e1VA_HU.Unit.FriendlyName == "M1" && m1e1Convert.Value == true)
                         {
-                            FieldInfo armorcheeksDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorcheeksDU_HU.SetValue(m1e1VA_HU, armor_codex_cheeksDUarmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "composite side skirt")
+                            {
+                                FieldInfo armorskirtComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorskirtComposite_HU.SetValue(m1e1VA_HU, armor_codex_superCompositeskirt_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "hull front special armor array")
-                        {
-                            FieldInfo armorhullfrontDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorhullfrontDU_HU.SetValue(m1e1VA_HU, armor_codex_fronthullDUarmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "turret cheek special armor array")
+                            {
+                                FieldInfo armorcheeksDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorcheeksDU_HU.SetValue(m1e1VA_HU, armor_codex_cheeksDUarmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "gun mantlet special armor array")
-                        {
-                            FieldInfo armormantletDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armormantletDU_HU.SetValue(m1e1VA_HU, armor_codex_mantletDUarmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "hull front special armor array")
+                            {
+                                FieldInfo armorhullfrontDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorhullfrontDU_HU.SetValue(m1e1VA_HU, armor_codex_fronthullDUarmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "turret side special armor array")
-                        {
-                            FieldInfo armorturretsidesDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorturretsidesDU_HU.SetValue(m1e1VA_HU, armor_codex_turretsidesDUarmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "gun mantlet special armor array")
+                            {
+                                FieldInfo armormantletDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armormantletDU_HU.SetValue(m1e1VA_HU, armor_codex_mantletDUarmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "turret roof")
-                        {
-                            FieldInfo armorturretroofComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorturretroofComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretroofCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "turret side special armor array")
+                            {
+                                FieldInfo armorturretsidesDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretsidesDU_HU.SetValue(m1e1VA_HU, armor_codex_turretsidesDUarmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "upper glacis")
-                        {
-                            FieldInfo armorupperglacisComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorupperglacisComposite_HU.SetValue(m1e1VA_HU, armor_codex_upperglacisCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "turret roof")
+                            {
+                                FieldInfo armorturretroofComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretroofComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretroofCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "commander's hatch")
-                        {
-                            FieldInfo armorcommandershatchComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorcommandershatchComposite_HU.SetValue(m1e1VA_HU, armor_codex_commmandershatchCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "upper glacis")
+                            {
+                                FieldInfo armorupperglacisComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorupperglacisComposite_HU.SetValue(m1e1VA_HU, armor_codex_upperglacisCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "loader's hatch")
-                        {
-                            FieldInfo armorloadershatchComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorloadershatchComposite_HU.SetValue(m1e1VA_HU, armor_codex_loadershatchCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "commander's hatch")
+                            {
+                                FieldInfo armorcommandershatchComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorcommandershatchComposite_HU.SetValue(m1e1VA_HU, armor_codex_commmandershatchCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "driver's hatch")
-                        {
-                            FieldInfo armordrivershatchDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armordrivershatchDU_HU.SetValue(m1e1VA_HU, armor_codex_drivershatchCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "loader's hatch")
+                            {
+                                FieldInfo armorloadershatchComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorloadershatchComposite_HU.SetValue(m1e1VA_HU, armor_codex_loadershatchCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "turret ring")
-                        {
-                            FieldInfo armorturretringComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorturretringComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretringCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "driver's hatch")
+                            {
+                                FieldInfo armordrivershatchDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armordrivershatchDU_HU.SetValue(m1e1VA_HU, armor_codex_drivershatchCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "gun mantlet face")
-                        {
-                            FieldInfo gunmantletfaceDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            gunmantletfaceDU_HU.SetValue(m1e1VA_HU, armor_codex_gunmantletfaceCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "turret ring")
+                            {
+                                FieldInfo armorturretringComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretringComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretringCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "left track")
-                        {
-                            FieldInfo armortrackSpecialL_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armortrackSpecialL_HU.SetValue(m1e1VA_HU, armor_codex_trackSpecialarmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "gun mantlet face")
+                            {
+                                FieldInfo gunmantletfaceDU_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                gunmantletfaceDU_HU.SetValue(m1e1VA_HU, armor_codex_gunmantletfaceCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "right track")
-                        {
-                            FieldInfo armortrackSpecialR_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armortrackSpecialR_HU.SetValue(m1e1VA_HU, armor_codex_trackSpecialarmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "left track")
+                            {
+                                FieldInfo armortrackSpecialL_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armortrackSpecialL_HU.SetValue(m1e1VA_HU, armor_codex_trackSpecialarmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "main gun barrel")
-                        {
-                            FieldInfo gunbarrelImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            gunbarrelImproved_HU.SetValue(m1e1VA_HU, armor_codex_gunbarrelImprovedarmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "right track")
+                            {
+                                FieldInfo armortrackSpecialR_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armortrackSpecialR_HU.SetValue(m1e1VA_HU, armor_codex_trackSpecialarmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "bustle racks firewall")
-                        {
-                            FieldInfo bustlefirewallImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            bustlefirewallImproved_HU.SetValue(m1e1VA_HU, armor_codex_bustleImprovedfirewall_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "main gun barrel")
+                            {
+                                FieldInfo gunbarrelImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                gunbarrelImproved_HU.SetValue(m1e1VA_HU, armor_codex_gunbarrelImprovedarmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "center blowout panel")
-                        {
-                            FieldInfo blowoutpanelCompositeC_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            blowoutpanelCompositeC_HU.SetValue(m1e1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "bustle racks firewall")
+                            {
+                                FieldInfo bustlefirewallImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                bustlefirewallImproved_HU.SetValue(m1e1VA_HU, armor_codex_bustleImprovedfirewall_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "left blowout panel")
-                        {
-                            FieldInfo blowoutpanelCompositeL_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            blowoutpanelCompositeL_HU.SetValue(m1e1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "center blowout panel")
+                            {
+                                FieldInfo blowoutpanelCompositeC_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                blowoutpanelCompositeC_HU.SetValue(m1e1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
+
+                            if (m1e1VA_HU.Name == "left blowout panel")
+                            {
+                                FieldInfo blowoutpanelCompositeL_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                blowoutpanelCompositeL_HU.SetValue(m1e1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
 
-                        if (m1e1VA_HU.Name == "right blowout panel")
-                        {
-                            FieldInfo blowoutpanelCompositeR_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            blowoutpanelCompositeR_HU.SetValue(m1e1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "right blowout panel")
+                            {
+                                FieldInfo blowoutpanelCompositeR_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                blowoutpanelCompositeR_HU.SetValue(m1e1VA_HU, armor_codex_blowoutpanelCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "turret rear face")
-                        {
-                            FieldInfo turretrearSpecial_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretrearSpecial_HU.SetValue(m1e1VA_HU, armor_codex_turretrearSpecialarray_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "turret rear face")
+                            {
+                                FieldInfo turretrearSpecial_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretrearSpecial_HU.SetValue(m1e1VA_HU, armor_codex_turretrearSpecialarray_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "GPS doghouse")
-                        {
-                            FieldInfo GPShousingImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            GPShousingImproved_HU.SetValue(m1e1VA_HU, armor_codex_GPSImprovedhousing_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "GPS doghouse")
+                            {
+                                FieldInfo GPShousingImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                GPShousingImproved_HU.SetValue(m1e1VA_HU, armor_codex_GPSImprovedhousing_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "GPS doghouse door")
-                        {
-                            FieldInfo GPShousingdoorImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            GPShousingdoorImproved_HU.SetValue(m1e1VA_HU, armor_codex_GPSImproveddoor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "GPS doghouse door")
+                            {
+                                FieldInfo GPShousingdoorImproved_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                GPShousingdoorImproved_HU.SetValue(m1e1VA_HU, armor_codex_GPSImproveddoor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "turret bottom")
-                        {
-                            FieldInfo turretbottomComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretbottomComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretbottomCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "turret bottom")
+                            {
+                                FieldInfo turretbottomComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretbottomComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretbottomCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "trunnion")
-                        {
-                            FieldInfo trunnionComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            trunnionComposite_HU.SetValue(m1e1VA_HU, armor_codex_trunnionCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "trunnion")
+                            {
+                                FieldInfo trunnionComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                trunnionComposite_HU.SetValue(m1e1VA_HU, armor_codex_trunnionCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "semi-ready rack door")
-                        {
-                            FieldInfo semireadyComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            semireadyComposite_HU.SetValue(m1e1VA_HU, armor_codex_semireadyrackdoorCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "semi-ready rack door")
+                            {
+                                FieldInfo semireadyComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                semireadyComposite_HU.SetValue(m1e1VA_HU, armor_codex_semireadyrackdoorCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "ready rack door")
-                        {
-                            FieldInfo readyComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            readyComposite_HU.SetValue(m1e1VA_HU, armor_codex_readyrackdoorCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "ready rack door")
+                            {
+                                FieldInfo readyComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                readyComposite_HU.SetValue(m1e1VA_HU, armor_codex_readyrackdoorCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "lower front plate")
-                        {
-                            FieldInfo lfpComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            lfpComposite_HU.SetValue(m1e1VA_HU, armor_codex_lowerfrontplateCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "lower front plate")
+                            {
+                                FieldInfo lfpComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                lfpComposite_HU.SetValue(m1e1VA_HU, armor_codex_lowerfrontplateCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "hull front backing plate")
-                        {
-                            FieldInfo hullfrontbackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            hullfrontbackingComposite_HU.SetValue(m1e1VA_HU, armor_codex_hullfrontbackingplateCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "hull front backing plate")
+                            {
+                                FieldInfo hullfrontbackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                hullfrontbackingComposite_HU.SetValue(m1e1VA_HU, armor_codex_hullfrontbackingplateCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "turret cheek face")
-                        {
-                            FieldInfo turretcheekfaceComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretcheekfaceComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretcheekfaceCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "turret cheek face")
+                            {
+                                FieldInfo turretcheekfaceComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretcheekfaceComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretcheekfaceCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "turret cheek backing plate")
-                        {
-                            FieldInfo turretcheekbackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretcheekbackingComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretcheekbackingplateCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "turret cheek backing plate")
+                            {
+                                FieldInfo turretcheekbackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretcheekbackingComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretcheekbackingplateCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "turret side backing plate")
-                        {
-                            FieldInfo turretsidebackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretsidebackingComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretsidebackingplateCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
-                        }
+                            if (m1e1VA_HU.Name == "turret side backing plate")
+                            {
+                                FieldInfo turretsidebackingComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretsidebackingComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretsidebackingplateCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
 
-                        if (m1e1VA_HU.Name == "turret side face")
-                        {
-                            FieldInfo turretsidefaceComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            turretsidefaceComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretsidefaceCompositearmor_HU);
-                            MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            if (m1e1VA_HU.Name == "turret side face")
+                            {
+                                FieldInfo turretsidefaceComposite_HU = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                turretsidefaceComposite_HU.SetValue(m1e1VA_HU, armor_codex_turretsidefaceCompositearmor_HU);
+                                MelonLogger.Msg("M1E1HU: " + m1e1VA_HU.ArmorType);
+                            }
                         }
                     }
-                }
 
-                ////M1E1HU UniformArmor pieces
-                foreach (GameObject uarmour in GameObject.FindGameObjectsWithTag("Penetrable"))
-                {
-                    if (uarmour == null) continue;
-
-                    UniformArmor m1e1UA_HU = uarmour.GetComponent<UniformArmor>();
-                    if (m1e1UA_HU == null) continue;
-                    if (m1e1UA_HU.Unit == null) continue;
-                    if (m1e1UA_HU.Unit.FriendlyName == "M1" && m1e1Convert.Value == true)
+                    ////M1E1HU UniformArmor pieces
+                    foreach (GameObject uarmour in GameObject.FindGameObjectsWithTag("Penetrable"))
                     {
-                        if (m1e1UA_HU.Name == "hull side")
+                        if (uarmour == null) continue;
+
+                        UniformArmor m1e1UA_HU = uarmour.GetComponent<UniformArmor>();
+                        if (m1e1UA_HU == null) continue;
+                        if (m1e1UA_HU.Unit == null) continue;
+                        if (m1e1UA_HU.Unit.FriendlyName == "M1" && m1e1Convert.Value == true)
                         {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
-                        }
+                            if (m1e1UA_HU.Name == "hull side")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
+                            }
 
-                        if (m1e1UA_HU.Name == "hull rear")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
-                        }
+                            if (m1e1UA_HU.Name == "hull rear")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
+                            }
 
-                        if (m1e1UA_HU.Name == "hull floor")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
-                        }
+                            if (m1e1UA_HU.Name == "hull floor")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
+                            }
 
-                        if (m1e1UA_HU.Name == "hull floor rear")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
-                        }
+                            if (m1e1UA_HU.Name == "hull floor rear")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
+                            }
 
-                        if (m1e1UA_HU.Name == "hull roof")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
-                        }
-
-
-                        if (m1e1UA_HU.Name == "firewall")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 80f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 80f;
-                        }
-
-                        if (m1e1UA_HU.Name == "hull ammo rack door")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
-                        }
-
-                        if (m1e1UA_HU.Name == "engine deck")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 350f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
-                        }
-
-                        if (m1e1UA_HU.Name == "fender")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
-                        }
-
-                        if (m1e1UA_HU.Name == "side skirt")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 550f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 300f;
-                        }
-
-                        if (m1e1UA_HU.Name == "gunner's primary sight")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
-                        }
-
-                        if (m1e1UA_HU.Name == "sprocket wheel")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
-                        }
-
-                        if (m1e1UA_HU.Name == "road wheel")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
-                        }
-
-                        if (m1e1UA_HU.Name == "engine")
-                        {
-                            m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
-                            m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 150f;
-                        }
-                        //MelonLogger.Msg("M1E1HU UniformArmor: Modified");
-                    }
-                }
-            }
-
-            ////Assign modified armor to M1A1HC
-            if (m1a1Armor.Value == "HC")
-            {
-                foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-                {
-                    if (armour == null) continue;
-
-                    VariableArmor m1a1VA_HC = armour.GetComponent<VariableArmor>();
-                    if (m1a1VA_HC == null) continue;
-                    if (m1a1VA_HC.Unit == null) continue;
-                    if (m1a1VA_HC.Unit.FriendlyName == "M1IP")
-                    {
-                        if (m1a1VA_HC.Name == "composite side skirt")
-                        {
-                            FieldInfo armorskirtComposite_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorskirtComposite_HC.SetValue(m1a1VA_HC, armor_codex_superCompositeskirt_HC);
-                            MelonLogger.Msg(m1a1VA_HC.ArmorType);
-                        }
-
-                        if (m1a1VA_HC.Name == "turret cheek special armor array")
-                        {
-                            FieldInfo armorcheeksDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorcheeksDU_HC.SetValue(m1a1VA_HC, armor_codex_cheeksDUarmor_HC);
-
-                            MelonLogger.Msg(m1a1VA_HC.ArmorType);
-                        }
+                            if (m1e1UA_HU.Name == "hull roof")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
+                            }
 
 
-                        if (m1a1VA_HC.Name == "hull front special armor array")
-                        {
-                            FieldInfo armorhullfrontDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorhullfrontDU_HC.SetValue(m1a1VA_HC, armor_codex_fronthullDUarmor_HC);
-                            MelonLogger.Msg(m1a1VA_HC.ArmorType);
-                        }
+                            if (m1e1UA_HU.Name == "firewall")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 80f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 80f;
+                            }
 
-                        if (m1a1VA_HC.Name == "gun mantlet special armor array")
-                        {
-                            FieldInfo armormantletDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armormantletDU_HC.SetValue(m1a1VA_HC, armor_codex_mantletDUarmor_HC);
-                            MelonLogger.Msg(m1a1VA_HC.ArmorType);
-                        }
+                            if (m1e1UA_HU.Name == "hull ammo rack door")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 100f;
+                            }
 
-                        if (m1a1VA_HC.Name == "turret side special armor array")
-                        {
-                            FieldInfo armorturretsidesDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorturretsidesDU_HC.SetValue(m1a1VA_HC, armor_codex_turretsidesDUarmor_HC);
-                            MelonLogger.Msg(m1a1VA_HC.ArmorType);
+                            if (m1e1UA_HU.Name == "engine deck")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 350f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 250f;
+                            }
+
+                            if (m1e1UA_HU.Name == "fender")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 100f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
+                            }
+
+                            if (m1e1UA_HU.Name == "side skirt")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 550f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 300f;
+                            }
+
+                            if (m1e1UA_HU.Name == "gunner's primary sight")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
+                            }
+
+                            if (m1e1UA_HU.Name == "sprocket wheel")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
+                            }
+
+                            if (m1e1UA_HU.Name == "road wheel")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 50f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 50f;
+                            }
+
+                            if (m1e1UA_HU.Name == "engine")
+                            {
+                                m1e1UA_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 150f;
+                                m1e1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 150f;
+                            }
+                            //MelonLogger.Msg("M1E1HU UniformArmor: Modified");
                         }
                     }
-                }
-            }
+                    break;
 
-            ////Assign modified armor to M1E1HC
-            if (m1e1Armor.Value == "HC")
-            {
-                foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-                {
-                    if (armour == null) continue;
-
-                    VariableArmor m1e1VA_HC = armour.GetComponent<VariableArmor>();
-                    if (m1e1VA_HC == null) continue;
-                    if (m1e1VA_HC.Unit == null) continue;
-                    if (m1e1VA_HC.Unit.FriendlyName == "M1" && m1e1Convert.Value == true)
+                ////Assign modified armor to M1E1HC
+                case "HC":
+                    foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
                     {
-                        if (m1e1VA_HC.Name == "composite side skirt")
-                        {
-                            FieldInfo armorskirtComposite_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorskirtComposite_HC.SetValue(m1e1VA_HC, armor_codex_superCompositeskirt_HC);
-                            MelonLogger.Msg(m1e1VA_HC.ArmorType);
-                        }
+                        if (armour == null) continue;
 
-                        if (m1e1VA_HC.Name == "turret cheek special armor array")
+                        VariableArmor m1e1VA_HC = armour.GetComponent<VariableArmor>();
+                        if (m1e1VA_HC == null) continue;
+                        if (m1e1VA_HC.Unit == null) continue;
+                        if (m1e1VA_HC.Unit.FriendlyName == "M1" && m1e1Convert.Value == true)
                         {
-                            FieldInfo armorcheeksDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorcheeksDU_HC.SetValue(m1e1VA_HC, armor_codex_cheeksDUarmor_HC);
-                            MelonLogger.Msg(m1e1VA_HC.ArmorType);
-                        }
+                            if (m1e1VA_HC.Name == "composite side skirt")
+                            {
+                                FieldInfo armorskirtComposite_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorskirtComposite_HC.SetValue(m1e1VA_HC, armor_codex_superCompositeskirt_HC);
+                                MelonLogger.Msg(m1e1VA_HC.ArmorType);
+                            }
 
-                        if (m1e1VA_HC.Name == "hull front special armor array")
-                        {
-                            FieldInfo armorhullfrontDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorhullfrontDU_HC.SetValue(m1e1VA_HC, armor_codex_fronthullDUarmor_HC);
-                            MelonLogger.Msg(m1e1VA_HC.ArmorType);
-                        }
+                            if (m1e1VA_HC.Name == "turret cheek special armor array")
+                            {
+                                FieldInfo armorcheeksDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorcheeksDU_HC.SetValue(m1e1VA_HC, armor_codex_cheeksDUarmor_HC);
+                                MelonLogger.Msg(m1e1VA_HC.ArmorType);
+                            }
 
-                        if (m1e1VA_HC.Name == "gun mantlet special armor array")
-                        {
-                            FieldInfo armormantletDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armormantletDU_HC.SetValue(m1e1VA_HC, armor_codex_mantletDUarmor_HC);
-                            MelonLogger.Msg(m1e1VA_HC.ArmorType);
-                        }
+                            if (m1e1VA_HC.Name == "hull front special armor array")
+                            {
+                                FieldInfo armorhullfrontDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorhullfrontDU_HC.SetValue(m1e1VA_HC, armor_codex_fronthullDUarmor_HC);
+                                MelonLogger.Msg(m1e1VA_HC.ArmorType);
+                            }
+
+                            if (m1e1VA_HC.Name == "gun mantlet special armor array")
+                            {
+                                FieldInfo armormantletDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armormantletDU_HC.SetValue(m1e1VA_HC, armor_codex_mantletDUarmor_HC);
+                                MelonLogger.Msg(m1e1VA_HC.ArmorType);
+                            }
 
 
-                        if (m1e1VA_HC.Name == "turret side special armor array")
-                        {
-                            FieldInfo armorturretsidesDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorturretsidesDU_HC.SetValue(m1e1VA_HC, armor_codex_turretsidesDUarmor_HC);
-                            MelonLogger.Msg(m1e1VA_HC.ArmorType);
+                            if (m1e1VA_HC.Name == "turret side special armor array")
+                            {
+                                FieldInfo armorturretsidesDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretsidesDU_HC.SetValue(m1e1VA_HC, armor_codex_turretsidesDUarmor_HC);
+                                MelonLogger.Msg(m1e1VA_HC.ArmorType);
+                            }
                         }
                     }
-                }
-            }
+                    break;
 
-            ////Assign modified armor to M1A1HA
-            if (m1a1Armor.Value == "HA")
-            {
-                foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-                {
-                    if (armour == null) continue;
-
-                    VariableArmor m1a1VA_HA = armour.GetComponent<VariableArmor>();
-                    if (m1a1VA_HA == null) continue;
-                    if (m1a1VA_HA.Unit == null) continue;
-                    if (m1a1VA_HA.Unit.FriendlyName == "M1IP")
+                ////Assign modified armor to M1E1HA
+                case "HA":
+                    foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
                     {
-                        if (m1a1VA_HA.Name == "composite side skirt")
-                        {
-                            FieldInfo armorskirtComposite_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorskirtComposite_HA.SetValue(m1a1VA_HA, armor_codex_superCompositeskirt_HA);
-                            MelonLogger.Msg(m1a1VA_HA.ArmorType);
-                        }
+                        if (armour == null) continue;
 
-                        if (m1a1VA_HA.Name == "turret cheek special armor array")
+                        VariableArmor m1e1VA_HA = armour.GetComponent<VariableArmor>();
+                        if (m1e1VA_HA == null) continue;
+                        if (m1e1VA_HA.Unit == null) continue;
+                        if (m1e1VA_HA.Unit.FriendlyName == "M1" && m1e1Convert.Value == true)
                         {
-                            FieldInfo armorcheeksDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorcheeksDU_HA.SetValue(m1a1VA_HA, armor_codex_cheeksDUarmor_HA);
-                            MelonLogger.Msg(m1a1VA_HA.ArmorType);
-                        }
+                            if (m1e1VA_HA.Name == "composite side skirt")
+                            {
+                                FieldInfo armorskirtComposite_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorskirtComposite_HA.SetValue(m1e1VA_HA, armor_codex_superCompositeskirt_HA);
+                                MelonLogger.Msg(m1e1VA_HA.ArmorType);
+                            }
 
-                        if (m1a1VA_HA.Name == "hull front special armor array")
-                        {
-                            FieldInfo armorhullfrontDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorhullfrontDU_HA.SetValue(m1a1VA_HA, armor_codex_fronthullDUarmor_HA);
-                            MelonLogger.Msg(m1a1VA_HA.ArmorType);
-                        }
+                            if (m1e1VA_HA.Name == "turret cheek special armor array")
+                            {
+                                FieldInfo armorcheeksDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorcheeksDU_HA.SetValue(m1e1VA_HA, armor_codex_cheeksDUarmor_HA);
+                                MelonLogger.Msg(m1e1VA_HA.ArmorType);
+                            }
 
-                        if (m1a1VA_HA.Name == "gun mantlet special armor array")
-                        {
-                            FieldInfo armormantletDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armormantletDU_HA.SetValue(m1a1VA_HA, armor_codex_mantletDUarmor_HA);
-                            MelonLogger.Msg(m1a1VA_HA.ArmorType);
-                        }
+                            if (m1e1VA_HA.Name == "hull front special armor array")
+                            {
+                                FieldInfo armorhullfrontDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorhullfrontDU_HA.SetValue(m1e1VA_HA, armor_codex_fronthullDUarmor_HA);
+                                MelonLogger.Msg(m1e1VA_HA.ArmorType);
+                            }
+
+                            if (m1e1VA_HA.Name == "gun mantlet special armor array")
+                            {
+                                FieldInfo armormantletDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armormantletDU_HA.SetValue(m1e1VA_HA, armor_codex_mantletDUarmor_HA);
+                                MelonLogger.Msg(m1e1VA_HA.ArmorType);
+                            }
 
 
-                        if (m1a1VA_HA.Name == "turret side special armor array")
-                        {
-                            FieldInfo armorturretsidesDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorturretsidesDU_HA.SetValue(m1a1VA_HA, armor_codex_turretsidesDUarmor_HA);
-                            MelonLogger.Msg(m1a1VA_HA.ArmorType);
+                            if (m1e1VA_HA.Name == "turret side special armor array")
+                            {
+                                FieldInfo armorturretsidesDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretsidesDU_HA.SetValue(m1e1VA_HA, armor_codex_turretsidesDUarmor_HA);
+                                MelonLogger.Msg(m1e1VA_HA.ArmorType);
+                            }
                         }
                     }
-                }
-            }
-
-            ////Assign modified armor to M1E1HA
-            if (m1e1Armor.Value == "HA")
-            {
-                foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
-                {
-                    if (armour == null) continue;
-
-                    VariableArmor m1e1VA_HA = armour.GetComponent<VariableArmor>();
-                    if (m1e1VA_HA == null) continue;
-                    if (m1e1VA_HA.Unit == null) continue;
-                    if (m1e1VA_HA.Unit.FriendlyName == "M1" && m1e1Convert.Value == true)
-                    {
-                        if (m1e1VA_HA.Name == "composite side skirt")
-                        {
-                            FieldInfo armorskirtComposite_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorskirtComposite_HA.SetValue(m1e1VA_HA, armor_codex_superCompositeskirt_HA);
-                            MelonLogger.Msg(m1e1VA_HA.ArmorType);
-                        }
-
-                        if (m1e1VA_HA.Name == "turret cheek special armor array")
-                        {
-                            FieldInfo armorcheeksDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorcheeksDU_HA.SetValue(m1e1VA_HA, armor_codex_cheeksDUarmor_HA);
-                            MelonLogger.Msg(m1e1VA_HA.ArmorType);
-                        }
-
-                        if (m1e1VA_HA.Name == "hull front special armor array")
-                        {
-                            FieldInfo armorhullfrontDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorhullfrontDU_HA.SetValue(m1e1VA_HA, armor_codex_fronthullDUarmor_HA);
-                            MelonLogger.Msg(m1e1VA_HA.ArmorType);
-                        }
-
-                        if (m1e1VA_HA.Name == "gun mantlet special armor array")
-                        {
-                            FieldInfo armormantletDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armormantletDU_HA.SetValue(m1e1VA_HA, armor_codex_mantletDUarmor_HA);
-                            MelonLogger.Msg(m1e1VA_HA.ArmorType);
-                        }
-
-
-                        if (m1e1VA_HA.Name == "turret side special armor array")
-                        {
-                            FieldInfo armorturretsidesDU_HA = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
-                            armorturretsidesDU_HA.SetValue(m1e1VA_HA, armor_codex_turretsidesDUarmor_HA);
-                            MelonLogger.Msg(m1e1VA_HA.ArmorType);
-                        }
-                    }
-                }
+                    break;
             }
 
             foreach (GameObject vic_go in AbramsAMPMod.vic_gos)
@@ -1332,11 +1295,8 @@ namespace M1A1AMP
                 Vehicle vic = vic_go.GetComponent<Vehicle>();
 
                 if (vic == null) continue;
-                //if (vic_go.GetComponent<Util.AlreadyConverted>() != null) continue;
 
-                //if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
                 if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
-                    //vic_go.AddComponent<Util.AlreadyConverted>();
                 {
                     int rand = (randomChance.Value) ? UnityEngine.Random.Range(1, 100) : 0;
 
@@ -1583,7 +1543,7 @@ namespace M1A1AMP
                         int mass_HA = 60599;
                         int mass_HC = 61416;
                         int mass_SA = 62232;
-                        int mass_HU = 72665;// 68038 - fully loaded SEPv3 as reference
+                        int mass_HU = 72665;//fully loaded SEPv3 as reference - was 68038
 
                         if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
                         {
@@ -1833,19 +1793,19 @@ namespace M1A1AMP
                             Gears.Add(1.36f);
                             Gears.Add(1.16f);
 
-                            //abramsPowerpack.transmission.adjustedShiftDownRpm = 720f;// 720f;
-                            //abramsPowerpack.transmission.adjustedShiftUpRpm = 3500f;//2900f;
+                            //m1VC.transmission.adjustedShiftDownRpm = 720f;// 720f;
+                            //m1VC.transmission.adjustedShiftUpRpm = 3500f;//2900f;
                             m1VC.transmission.forwardGears = fwGears;//5.81 2.98 1.86 1.26
                             m1VC.transmission.gearMultiplier = 9.28f;//9.28f
                             m1VC.transmission.gears = Gears;//-2.32 -8.19 0 5.81 2.98 1.86 1.26
                             m1VC.transmission.reverseGears = rvGears;//-2.32 -8.19
-                            //abramsPowerpack.transmission.targetClutchRPM = 3000f;//2300f;
-                            //abramsPowerpack.transmission.targetShiftDownRPM = 750f;//750;
-                            //abramsPowerpack.transmission.targetShiftUpRPM = 3500f;//2900;
+                            //m1VC.transmission.targetClutchRPM = 2400f;//2300f;
+                            //m1VC.transmission.targetShiftDownRPM = 750f;//750;
+                            //m1VC.transmission.targetShiftUpRPM = 3000f;//2900;
                             m1VC.transmission.shiftDuration = 0.1f;//.309
-                            m1VC.transmission.shiftDurationRandomness = 0.2f;//.2
+                            m1VC.transmission.shiftDurationRandomness = 0.1f;//.2
                             m1VC.transmission.shiftPointRandomness = 0.05f;//.05
-                            //abramsVC.transmission.differentialType = Transmission.DifferentialType.LimitedSlip;
+                            //m1VC.transmission.differentialType = Transmission.DifferentialType.LimitedSlip;
                         }
 
                         if (governorDelete.Value)
@@ -1893,23 +1853,26 @@ namespace M1A1AMP
                             Util.EmptyRack(m256rack);
                         }
 
+
+                        WeaponSystemInfo coaxGunInfo = weaponsManager.Weapons[1];
+                        WeaponSystem coaxGun = coaxGunInfo.Weapon;
+
                         if (m2Coax.Value)
                         {
-                            WeaponSystemInfo coaxHeavyInfo = weaponsManager.Weapons[1];
-                            WeaponSystem coaxHeavy = coaxHeavyInfo.Weapon;
-                            coaxHeavyInfo.Name = "M2HB Coaxial Gun";
+                            coaxGunInfo.Name = "M2HB Coaxial Gun";
                             //coaxGun.WeaponSound.LoopEventPath = null;
-                            coaxHeavy.WeaponSound.LoopEventPath = "event:/Weapons/MG_m85_400rmp";
+                            coaxGun.WeaponSound.LoopEventPath = "event:/Weapons/MG_m85_400rmp";
                             //coaxGun.WeaponSound.LoopEvent.eventBuffer
 
                             //coaxGun.WeaponSound.SingleShotByDefault = true;
                             //coaxGun.WeaponSound.SingleShotEventPaths[0] = "event:/Weapons/MG_m85_400rmp";
-                            coaxHeavy.SetCycleTime(0.133f);
+                            coaxGun.SetCycleTime(0.133f);
+                            coaxGun.BaseDeviationAngle = 0.025f;// 0.05
 
-                            coaxHeavy.Feed.AmmoTypeInBreech = null;
-                            coaxHeavy.Feed.ReadyRack.ClipTypes[0] = m2Slap.Value ? clip_m962slapt : clip_m8api;
-                            coaxHeavy.Feed.ReadyRack.Awake();
-                            coaxHeavy.Feed.Start();
+                            coaxGun.Feed.AmmoTypeInBreech = null;
+                            coaxGun.Feed.ReadyRack.ClipTypes[0] = m2Slap.Value ? clip_m962slapt : clip_m8api;
+                            coaxGun.Feed.ReadyRack.Awake();
+                            coaxGun.Feed.Start();
                         }
 
                         loadoutManager.SpawnCurrentLoadout();
@@ -2499,7 +2462,7 @@ namespace M1A1AMP
                 ammo_m8api.MaxSpallRha = 8f;
                 ammo_m8api.MinSpallRha = 2f;
                 ammo_m8api.MuzzleVelocity = 887;
-                ammo_m8api.Name = "M8 AP-I";
+                ammo_m8api.Name = "12.7x99mm M8 AP-I";
                 ammo_m8api.NutationPenaltyDistance = 0f;
                 ammo_m8api.MaxNutationPenalty = 0f;
                 ammo_m8api.RhaPenetration = 29f;
@@ -2544,7 +2507,7 @@ namespace M1A1AMP
 
                 clip_m962slapt = new AmmoType.AmmoClip();
                 clip_m962slapt.Capacity = 2000;
-                clip_m962slapt.Name = "M962 SLAP-T";
+                clip_m962slapt.Name = "12.7x99mm M962 SLAP-T";
                 clip_m962slapt.MinimalPattern = new AmmoCodexScriptable[1];
                 clip_m962slapt.MinimalPattern[0] = ammo_codex_m962slapt;
 
