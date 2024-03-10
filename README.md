@@ -43,16 +43,16 @@
 | HA | 60,599 |  | 
 | HC | 61,416 |  | 
 | SA | 62,232 |  | 
-| HU | 70,000 | Has optional Unobtanium armor package that lets it weigh the same as the HA | 
+| HU | 72,665 | Has optional Unobtanium armor package that lets it weigh the same as the HA | 
 
 ### Powertrain
 | Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | 
-| AGT1500 | 1500 |  | 3100 | Default engine. | 
-| AGT2000 | 2000 |  | 3100 | Fictional. | 
-| AGT2500 | 2500 |  | 4000 | Fictional. | 
-| AGT3000 | 3000 |  | 4000 | Fictional. | 
-| T64 | 4430 |  | 4000 | Fictional but it's the T64-GE-100. | 
+| AGT1500 | 1500 | 5741 | 3100 | Default engine. | 
+| AGT2000 | 2000 | 7655 | 3100 | Fictional. | 
+| AGT2500 | 2500 | 7415 | 4000 | Fictional. | 
+| AGT3000 | 3000 | 8899 | 4000 | Fictional. | 
+| T64 | 4430 | 12845 | 4000 | Fictional but it's the T64-GE-100. | 
 
 
 ### Transmission
