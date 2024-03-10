@@ -29,8 +29,8 @@
 | M829A1 | - | - | - | Toggleable +25% spalling chance |
 | M829A2 | - | - | - | Toggleable +50% spalling chance |
 | M829A3 | - | - | - | Toggleable +75% spalling chance |
-| M2/M8 AP-T/I | 29 | 887 | M2 Coax |
-| M962 SLAP-T | 36 | 1200 | M2 Coax. Has slightly less drag than M2/M8. |
+| M2/M8 AP-T/I | 29 | - | 887 | M2 Coax |
+| M962 SLAP-T | 36 | - | 1200 | M2 Coax. Has slightly less drag than M2/M8. |
 
 <p>
 	<ul> 
