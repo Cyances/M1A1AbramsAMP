@@ -10,7 +10,7 @@
 		<li>Configurable enhanced optics for the GPS, FLIR and AGS</li>
 		<li>Configurable loader proficiency</li>
 		<li>M2 Coaxial upgrade (replaces M240 and has two ammo types)</li>
-		<li>XM1147 AMP-T proximity fuze update/li>
+		<li>XM1147 AMP-T proximity fuze update</li>
 		<li>Updated tank weight depending on the armor type used</li>
 		<li>Configurable powertrain options and removable governor</li>
 		<li>Toggleable Auxilliary Power Unit (APU)</li>
@@ -21,20 +21,21 @@
 </p>
 
 ### Round Changes
-| Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
+| Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- |
-| M908 HE-OR-T | 250* | 1410 | New! Has impact-delay fuze |
-| XM1147 AMP-T | 250* | - | Changed behavior to HE instead of HEAT. Has proximity fuze now but still be able to retain the old time-delay fuze in config. |
+| M908 HE-OR-T | 250* | 75** | 1410 | New! Has impact-delay fuze |
+| XM1147 AMP-T | 250* | 100** | - | Changed behavior to HE instead of HEAT. Has proximity fuze now but still be able to retain the old time-delay fuze in config. |
 | M829 | - | - | Toggleable +25% spalling chance |
-| M829A1 | - | - | Toggleable +25% spalling chance |
-| M829A2 | - | - | Toggleable +50% spalling chance |
-| M829A3 | - | - | Toggleable +75% spalling chance |
+| M829A1 | - | - | - | Toggleable +25% spalling chance |
+| M829A2 | - | - | - | Toggleable +50% spalling chance |
+| M829A3 | - | - | - | Toggleable +75% spalling chance |
 | M2/M8 AP-T/I | 29 | 887 | M2 Coax |
 | M962 SLAP-T | 36 | 1200 | M2 Coax. Has slightly less drag than M2/M8. |
 
 <p>
 	<ul> 
 		<li>*These are HE rounds so actual penetration is not 250mm</li>
+		<li>**These are <i>up to</i> values so not every fragment will reach perform the same</li>
 		<li>M830A1, XM1147, M908 have slightly less drag now</li>
 	</ul>
 </p>
