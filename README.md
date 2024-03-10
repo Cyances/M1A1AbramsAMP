@@ -35,7 +35,7 @@
 <p>
 	<ul> 
 		<li>*These are HE rounds so actual penetration is not 250mm</li>
-		<li>**These are <i>up to</i> values so not every fragment will reach perform the same</li>
+		<li>**These are <i>up to</i> values so not every fragment will perform the same</li>
 		<li>M830A1, XM1147, M908 have slightly less drag now</li>
 	</ul>
 </p>
