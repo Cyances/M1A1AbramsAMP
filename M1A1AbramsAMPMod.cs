@@ -2979,7 +2979,7 @@ namespace M1A1AMP
                 ammo_m2apt.Name = "12.7x99mm M2 AP-T";
                 ammo_m2apt.NutationPenaltyDistance = 0f;
                 ammo_m2apt.MaxNutationPenalty = 0f;
-                ammo_m2apt.RhaPenetration = 28f;
+                ammo_m2apt.RhaPenetration = 29f;
                 ammo_m2apt.SpallMultiplier = 10f;
                 ammo_m2apt.UseTracer = true;
 
@@ -3037,7 +3037,7 @@ namespace M1A1AMP
                 ammo_m962slapt.MaxSpallRha = 12f;
                 ammo_m962slapt.MinSpallRha = 4f;
                 ammo_m962slapt.MuzzleVelocity = 1200f;
-                ammo_m962slapt.Name = "M962 SLAP-T";
+                ammo_m962slapt.Name = "12.7x99mm M962 SLAP-T";
                 ammo_m962slapt.NutationPenaltyDistance = 0f;
                 ammo_m962slapt.MaxNutationPenalty = 0f;
                 ammo_m962slapt.RhaPenetration = 36f;
