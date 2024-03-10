@@ -23,6 +23,9 @@ using NWH.VehiclePhysics;
 using FMOD;
 using MelonLoader.Utils;
 using System.IO;
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
+using GHPC.Weaponry;
+using static GHPC.Equipment.VehicleSmokeManager;
 
 namespace M1A1AMP
 {
@@ -39,12 +42,11 @@ namespace M1A1AMP
         static MelonPreferences_Entry<int> randomChanceNum;
         static MelonPreferences_Entry<bool> m829spall, ampFuze;
         static MelonPreferences_Entry<string> m1a1Armor, m1e1Armor;
-        static MelonPreferences_Entry<bool> demigodArmor;
+        static MelonPreferences_Entry<bool> demigodArmor, m1a1Smoke, m1e1Smoke;
         static MelonPreferences_Entry<string> m1a1Agt, m1e1Agt;
-        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight;
+        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, noLuggage;
         static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader;
-        static MelonPreferences_Entry<bool> citv;
-        static MelonPreferences_Entry<bool> alt_flir_colour;
+        static MelonPreferences_Entry<bool> citv, alt_flir_colour;
         public static MelonPreferences_Entry<int> ampFragments, mpatFragments, heorFragments;
         public static MelonPreferences_Entry<bool> perfect_citv, citv_reticle, citv_smooth, perfect_override;
 
@@ -235,6 +237,13 @@ namespace M1A1AMP
         static ArmorCodexScriptable armor_codex_turretsidefaceCompositearmor_HU;
         static ArmorType armor_turretsidefaceCompositearmor_HU;
 
+        ////SA Variant
+        static ArmorCodexScriptable armor_codex_cheeksDUarmor_SA;
+        static ArmorType armor_cheeksDUarmor_SA;
+
+        static ArmorCodexScriptable armor_codex_fronthullDUarmor_SA;
+        static ArmorType armor_fronthullDUarmor_SA;
+
         ////HC Variant
         static ArmorCodexScriptable armor_codex_superCompositeskirt_HC;
         static ArmorType armor_superCompositeskirt_HC;
@@ -356,15 +365,19 @@ namespace M1A1AMP
             randomChance.Description = "M1IPs/M1s will have a random chance of being converted to M1A1s/M1E1s.";
             randomChanceNum = cfg.CreateEntry<int>("ConversionChance", 100);
 
-            m1a1Armor = cfg.CreateEntry<string>("M1A1 Armor", "HC");
-            m1a1Armor.Description = "Armor used by M1A1 and M1E1: 'HA', 'HC', 'HU' or blank for base M1/IP armor";
-            m1e1Armor = cfg.CreateEntry<string>("M1E1 Armor", "HA");
+            m1a1Armor = cfg.CreateEntry<string>("M1A1 Armor", "SA");
+            m1a1Armor.Description = "Armor used by M1A1 and M1E1: 'HA', 'HC', 'SA', 'HU' or blank for base M1/IP armor";
+            m1e1Armor = cfg.CreateEntry<string>("M1E1 Armor", "HC");
 
             uapWeight = cfg.CreateEntry<bool>("UAP", false);
             uapWeight.Description = "Unobtanium armor package for HU that gives it HA weight";
 
             demigodArmor = cfg.CreateEntry<bool>("Demigod Armor", false);
             demigodArmor.Description = "Almost deathproof Abrooms (HU variant only)";
+
+            m1a1Smoke = cfg.CreateEntry<bool>("M1A1 Smoke+", false);
+            m1a1Smoke.Description = "More smoke grenades and further throw distance.";
+            m1e1Smoke = cfg.CreateEntry<bool>("M1E1 Smoke+", false);
 
             m1a1Agt = cfg.CreateEntry<string>("M1A1 Engine", "AGT1500");
             m1a1Agt.Description = "SPEEEED AND POWWAAAAH!";
@@ -374,6 +387,12 @@ namespace M1A1AMP
             betterTransmission = cfg.CreateEntry<bool>("Transmission+", false);
 
             governorDelete = cfg.CreateEntry<bool>("GovernorDelete", false);
+
+            m1a1Apu = cfg.CreateEntry<bool>("M1A1 APU", false);
+            m1e1Apu = cfg.CreateEntry<bool>("M1E1 APU", false);
+
+            noLuggage = cfg.CreateEntry<bool>("No Luggage", false);
+            noLuggage.Description = "Remove items attached to turret like ALICE packs or MRE boxes";
         }
         public static IEnumerator Convert(GameState _)
         {
@@ -744,6 +763,57 @@ namespace M1A1AMP
                                 m1a1UA_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 150f;
                             }
                             //MelonLogger.Msg("M1A1HU UniformArmor: Modified");
+                        }
+                    }
+                    break;
+
+                ////Assign modified armor to M1A1SA
+                case "SA":
+                    foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+                    {
+                        if (armour == null) continue;
+
+                        VariableArmor m1a1VA_HC = armour.GetComponent<VariableArmor>();
+                        if (m1a1VA_HC == null) continue;
+                        if (m1a1VA_HC.Unit == null) continue;
+                        if (m1a1VA_HC.Unit.FriendlyName == "M1IP")
+                        {
+                            if (m1a1VA_HC.Name == "composite side skirt")
+                            {
+                                FieldInfo armorskirtComposite_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorskirtComposite_HC.SetValue(m1a1VA_HC, armor_codex_superCompositeskirt_HC);
+                                MelonLogger.Msg(m1a1VA_HC.ArmorType);
+                            }
+
+                            if (m1a1VA_HC.Name == "turret cheek special armor array")
+                            {
+                                FieldInfo armorcheeksDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorcheeksDU_HC.SetValue(m1a1VA_HC, armor_codex_cheeksDUarmor_SA);
+
+                                MelonLogger.Msg(m1a1VA_HC.ArmorType);
+                            }
+
+
+                            if (m1a1VA_HC.Name == "hull front special armor array")
+                            {
+                                FieldInfo armorhullfrontDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorhullfrontDU_HC.SetValue(m1a1VA_HC, armor_codex_fronthullDUarmor_SA);
+                                MelonLogger.Msg(m1a1VA_HC.ArmorType);
+                            }
+
+                            if (m1a1VA_HC.Name == "gun mantlet special armor array")
+                            {
+                                FieldInfo armormantletDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armormantletDU_HC.SetValue(m1a1VA_HC, armor_codex_mantletDUarmor_HC);
+                                MelonLogger.Msg(m1a1VA_HC.ArmorType);
+                            }
+
+                            if (m1a1VA_HC.Name == "turret side special armor array")
+                            {
+                                FieldInfo armorturretsidesDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretsidesDU_HC.SetValue(m1a1VA_HC, armor_codex_turretsidesDUarmor_HC);
+                                MelonLogger.Msg(m1a1VA_HC.ArmorType);
+                            }
                         }
                     }
                     break;
@@ -1190,6 +1260,56 @@ namespace M1A1AMP
                     break;
 
                 ////Assign modified armor to M1E1HC
+                case "SA":
+                    foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+                    {
+                        if (armour == null) continue;
+
+                        VariableArmor m1e1VA_HC = armour.GetComponent<VariableArmor>();
+                        if (m1e1VA_HC == null) continue;
+                        if (m1e1VA_HC.Unit == null) continue;
+                        if (m1e1VA_HC.Unit.FriendlyName == "M1" && m1e1Convert.Value == true)
+                        {
+                            if (m1e1VA_HC.Name == "composite side skirt")
+                            {
+                                FieldInfo armorskirtComposite_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorskirtComposite_HC.SetValue(m1e1VA_HC, armor_codex_superCompositeskirt_HC);
+                                MelonLogger.Msg(m1e1VA_HC.ArmorType);
+                            }
+
+                            if (m1e1VA_HC.Name == "turret cheek special armor array")
+                            {
+                                FieldInfo armorcheeksDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorcheeksDU_HC.SetValue(m1e1VA_HC, armor_codex_cheeksDUarmor_SA);
+                                MelonLogger.Msg(m1e1VA_HC.ArmorType);
+                            }
+
+                            if (m1e1VA_HC.Name == "hull front special armor array")
+                            {
+                                FieldInfo armorhullfrontDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorhullfrontDU_HC.SetValue(m1e1VA_HC, armor_codex_fronthullDUarmor_SA);
+                                MelonLogger.Msg(m1e1VA_HC.ArmorType);
+                            }
+
+                            if (m1e1VA_HC.Name == "gun mantlet special armor array")
+                            {
+                                FieldInfo armormantletDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armormantletDU_HC.SetValue(m1e1VA_HC, armor_codex_mantletDUarmor_HC);
+                                MelonLogger.Msg(m1e1VA_HC.ArmorType);
+                            }
+
+
+                            if (m1e1VA_HC.Name == "turret side special armor array")
+                            {
+                                FieldInfo armorturretsidesDU_HC = typeof(VariableArmor).GetField("_armorType", BindingFlags.NonPublic | BindingFlags.Instance);
+                                armorturretsidesDU_HC.SetValue(m1e1VA_HC, armor_codex_turretsidesDUarmor_HC);
+                                MelonLogger.Msg(m1e1VA_HC.ArmorType);
+                            }
+                        }
+                    }
+                    break;
+
+                ////Assign modified armor to M1E1HC
                 case "HC":
                     foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
                     {
@@ -1323,15 +1443,28 @@ namespace M1A1AMP
                         var gpsOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/Optic/").gameObject.transform;
                         var flirOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/FLIR/").gameObject.transform;
                         var agsOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/").gameObject.transform;
+                        var TurretScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/").gameObject.transform;
+                        var m1ipLuggageScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/").gameObject.transform;// /luggage/ for M1IP
+                        var m1LuggageScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/").gameObject.transform;
+
+                        //US Vehicles/M1/IPM1_rig/HULL/TURRET/turret decorations parent/ for M1
+
+
+                        UsableOptic horizontalGps = gpsOptic.GetComponent<UsableOptic>();
+                        UsableOptic horizontalFlir = flirOptic.GetComponent<UsableOptic>();
+
+                        CameraSlot daysightPlus = gpsOptic.GetComponent<CameraSlot>();
+                        CameraSlot flirPlus = flirOptic.GetComponent<CameraSlot>();
+                        CameraSlot agsPlus = agsOptic.GetComponent<CameraSlot>();
+
+                        AimablePlatform m1Turret = TurretScripts.GetComponent<AimablePlatform>();
+                        //DecorationsManager m1Luggage= m1TurretSCripts.GetComponent<DecorationsManager>();
 
                         ////Better optics stuff
                         UsableOptic optic = Util.GetDayOptic(mainGun.FCS);
                         if (rotateAzimuth.Value)
                         {
-                            UsableOptic horizontalGps = gpsOptic.GetComponent<UsableOptic>();
                             horizontalGps.RotateAzimuth = true;
-
-                            UsableOptic horizontalFlir = flirOptic.GetComponent<UsableOptic>();
                             horizontalFlir.RotateAzimuth = true;
                         }
 
@@ -1343,7 +1476,6 @@ namespace M1A1AMP
 
                         if (betterDaysight.Value)
                         {
-                            CameraSlot daysightPlus = gpsOptic.GetComponent<CameraSlot>();
                             daysightPlus.DefaultFov = 12.5f;
                             daysightPlus.OtherFovs = gpsFovs.ToArray<float>();
                         }
@@ -1353,23 +1485,15 @@ namespace M1A1AMP
                             //Scanline FOV change
                             GameObject.Destroy(flirOptic.transform.Find("Canvas Scanlines").gameObject);
 
-                            CameraSlot flirPlus = flirOptic.GetComponent<CameraSlot>();
                             flirPlus.DefaultFov = 12.5f;
                             flirPlus.OtherFovs = gpsFovs.ToArray<float>();
                             flirPlus.BaseBlur = 0;
-
                         }
 
                         if (betterAgs.Value)
                         {
-                            List<float> agsFovs = new List<float>();
-                            agsFovs.Add(4.2f);
-                            agsFovs.Add(2.716f);
-                            agsFovs.Add(1.96f);
-
-                            CameraSlot agsPlus = agsOptic.GetComponent<CameraSlot>();
                             agsPlus.DefaultFov = 6.5f;//4.2f
-                            agsPlus.OtherFovs = new float[] { 4.2f, 2.716f, 1.96f };
+                            agsPlus.OtherFovs = new float[] { 4.2f, 2.716f, 1.716f };
                             agsPlus.VibrationBlurScale = 0.1f;//0.2
                             agsPlus.VibrationShakeMultiplier = 0.2f;//0.5
                         }
@@ -1397,9 +1521,9 @@ namespace M1A1AMP
                             //vic._friendlyName += "+";
                         }
 
-                        CameraSlot commanderzoom = vic.DesignatedCameraSlots[0].gameObject.GetComponent<CameraSlot>();
+                        /*CameraSlot commanderzoom = vic.DesignatedCameraSlots[0].gameObject.GetComponent<CameraSlot>();
                         commanderzoom.DefaultFov = 60;//60
-                        commanderzoom.OtherFovs = new float[] { 30f, 20f, 10f };//??? Uknown default
+                        commanderzoom.OtherFovs = new float[] { 30f, 20f, 10f };//??? Uknown default*/
 
                         ////GAS stuff
                         if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
@@ -1537,6 +1661,7 @@ namespace M1A1AMP
                         VehicleController m1VC = vic_go.GetComponent<VehicleController>();
                         NwhChassis m1Chassis = vic_go.GetComponent<NwhChassis>();
                         Rigidbody m1Rb = vic_go.GetComponent<Rigidbody>();
+                        VehicleSmokeManager m1Smoke = vic_go.GetComponentInChildren<VehicleSmokeManager>();
 
                         //Chonk quantifier
                         int mass_A1 = 59057;//55338 - Value for default M1
@@ -1544,6 +1669,26 @@ namespace M1A1AMP
                         int mass_HC = 61416;
                         int mass_SA = 62232;
                         int mass_HU = 72665;//fully loaded SEPv3 as reference - was 68038
+
+                        float engine_Agt1500 = 1132.38f;//1518.55f;
+                        float engine_Agt2000 = 1494.75f;// 2004.49f;
+                        float engine_Agt2500 = 1868.33f;//2505.61f;
+                        float engine_Agt3000 = 2264.77f;// 3037.1f;
+                        float engine_T64 = 3303.45f;// 4330f;
+                        /*float engine_Agt1500 = 1518.55f;//1518.55f;
+                        float engine_Agt2000 = 2004.49f;// 2004.49f;
+                        float engine_Agt2500 = 2505.61f;//2505.61f;
+                        float engine_Agt3000 = 3037.1f;// 3037.1f;
+                        float engine_T64 = 4330f;// 4330f;*/
+                        float engine_Maxrpm = 4000f;//3100f
+                        float engine_Minrpm = 600f;//600
+                        float engine_Maxrpmchange = 4000f;
+
+                        int brakes_Agt2000 = 74820;//69600 vanilla
+                        int brakes_Agt2500 = 80040;
+                        int brakes_Agt3000 = 85260;
+                        int brakes_T64 = 90480;
+
 
                         if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
                         {
@@ -1569,72 +1714,46 @@ namespace M1A1AMP
                             switch (m1a1Agt.Value)
                             {
                                 case "AGT2000":
-                                    m1VC.engine.maxPower = 1491.4f;// 2004.49f;
+                                    m1VC.engine.maxPower = engine_Agt2000;
                                     m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt2000;
                                     break;
 
                                 case "AGT2500":
-                                    m1VC.engine.maxPower = 1864.25f;//2505.61f;
-                                    m1VC.engine.maxRPM = 4000;//3100
-                                    m1VC.engine.maxRpmChange = 3000;//2000
-                                    m1VC.engine.minRPM = 600;//600
+                                    m1VC.engine.maxPower = engine_Agt2500;
+                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
 
                                     m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt2500;
                                     break;
 
                                 case "AGT3000":
-                                    m1VC.engine.maxPower = 2237.1f;// 3037.1f;
-                                    m1VC.engine.maxRPM = 4000;//3100
-                                    m1VC.engine.maxRpmChange = 3000;//2000
-                                    m1VC.engine.minRPM = 600;//600
+                                    m1VC.engine.maxPower = engine_Agt3000;
+                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt3000;
                                     break;
 
                                 case "T64":
-                                    m1VC.engine.maxPower = 3228.88f;// 4330f;
-                                    m1VC.engine.maxRPM = 4000;//3100
-                                    m1VC.engine.maxRpmChange = 3000;//2000
-                                    m1VC.engine.minRPM = 600;//600
+                                    m1VC.engine.maxPower = engine_T64;
+                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
 
                                     m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_T64;
                                     break;
 
                                 default:
-                                    m1VC.engine.maxPower = 1118.55f;//1518.55f;
+                                    m1VC.engine.maxPower = engine_Agt1500;
                                     break;
-                                    /*
-                                case "AGT2000":
-                                    m1VC.engine.maxPower = 2004.49f;
-                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
-                                    break;
-
-                                case "AGT2500":
-                                    m1VC.engine.maxPower = 2505.61f;
-                                    m1VC.engine.maxRPM = 4000;//3100
-                                    m1VC.engine.maxRpmChange = 3000;//2000
-                                    m1VC.engine.minRPM = 600;//600
-
-                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
-                                    break;
-
-                                case "AGT3000":
-                                    m1VC.engine.maxPower = 3037.1f;
-                                    m1VC.engine.maxRPM = 4000;//3100
-                                    m1VC.engine.maxRpmChange = 3000;//2000
-                                    m1VC.engine.minRPM = 600;//600
-                                    break;
-
-                                case "T64":
-                                    m1VC.engine.maxPower = 4330f;
-                                    m1VC.engine.maxRPM = 4000;//3100
-                                    m1VC.engine.maxRpmChange = 3000;//2000
-                                    m1VC.engine.minRPM = 600;//600
-
-                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
-                                    break;
-
-                                default:
-                                    m1VC.engine.maxPower = 1518.55f;
-                                    break;*/
                             }
 
                             //Novice Cadet Regular Veteran Ace
@@ -1671,6 +1790,80 @@ namespace M1A1AMP
                                     mainGun.Feed.ReadyRack._storageDelaySeconds = 4.5f;//5
                                     break;
                             }
+
+                            if (m1a1Apu.Value)
+                            {
+                                mainGun.FCS.ComputerNeedsPower = false;
+                                m1Turret.SpeedUnpowered = 40;//5;
+
+                                if (m1VC.engine.maxPower > 1800f)
+                                {
+                                    m1Turret.SpeedPowered = 52;//40;
+                                }
+                            }
+
+                            if (noLuggage.Value)
+                            {
+                                GameObject.Destroy(m1ipLuggageScripts.transform.Find("luggage").gameObject);
+                            }
+
+                            if (m1a1Smoke.Value)
+                            {
+                                m1Smoke._launchAngle = 20;//25
+                                m1Smoke._distanceRange = new Vector2(60, 60);//25, 35
+                                for (int i = 0; i < 12; i++)
+                                {
+                                    m1Smoke._smokeSlots[i].Rounds = 300;
+                                }
+
+                                //Use this to test
+                                var launcher12 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
+                                SmokeSlot slot12 = new SmokeSlot();
+                                Util.ShallowCopy(slot12, m1Smoke._smokeSlots[2]);
+                                slot12.Rounds = 300;
+                                slot12.Angle = -120;
+                                launcher12.Add(slot12);
+
+                                m1Smoke._smokeSlots = launcher12.ToArray<SmokeSlot>();
+
+                                var launcher13 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
+                                SmokeSlot slot13 = new SmokeSlot();
+                                Util.ShallowCopy(slot13, m1Smoke._smokeSlots[10]);
+                                slot13.Rounds = 300;
+                                slot13.Angle = 120;
+                                launcher13.Add(slot13);
+
+                                m1Smoke._smokeSlots = launcher13.ToArray<SmokeSlot>();
+
+                                //GOATLAS
+                                /*var launcher12 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
+                                SmokeSlot slot12 = new SmokeSlot();
+                                Util.ShallowCopy(slot12, m1Smoke._smokeSlots[2]);
+                                slot12.Rounds = 300;
+                                slot12.Angle = -120;
+                                launcher12.Add(slot12);
+
+                                m1Smoke._smokeSlots = launcher12.ToArray<SmokeSlot>();*/
+
+                                //Launcher angles and groupings
+                                /*
+                                0 -5 G2
+                                1 -25 G2
+                                4 -45 G2
+
+                                2 -55 G1
+                                3 -15 G1
+                                5 -35 G1
+
+                                6 5 G1
+                                7 25 G1
+                                10 45 G1
+
+                                8 55 G2
+                                9 15 G2
+                                11 35 G2                                 
+                                 */
+                            }
                         }
 
                         if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
@@ -1697,37 +1890,45 @@ namespace M1A1AMP
                             switch (m1e1Agt.Value)
                             {
                                 case "AGT2000":
-                                    m1VC.engine.maxPower = 1491.4f;// 2004.49f;
+                                    m1VC.engine.maxPower = engine_Agt2000;
                                     m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt2000;
                                     break;
 
                                 case "AGT2500":
-                                    m1VC.engine.maxPower = 1864.25f;//2505.61f;
-                                    m1VC.engine.maxRPM = 4000;//3100
-                                    m1VC.engine.maxRpmChange = 3000;//2000
-                                    m1VC.engine.minRPM = 600;//600
+                                    m1VC.engine.maxPower = engine_Agt2500;
+                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
 
                                     m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt2500;
                                     break;
 
                                 case "AGT3000":
-                                    m1VC.engine.maxPower = 2237.1f;// 3037.1f;
-                                    m1VC.engine.maxRPM = 4000;//3100
-                                    m1VC.engine.maxRpmChange = 3000;//2000
-                                    m1VC.engine.minRPM = 600;//600
+                                    m1VC.engine.maxPower = engine_Agt3000;
+                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt3000;
                                     break;
 
                                 case "T64":
-                                    m1VC.engine.maxPower = 3228.88f;// 4330f;
-                                    m1VC.engine.maxRPM = 4000;//3100
-                                    m1VC.engine.maxRpmChange = 3000;//2000
-                                    m1VC.engine.minRPM = 600;//600
+                                    m1VC.engine.maxPower = engine_T64;
+                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
 
                                     m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_T64;
                                     break;
 
                                 default:
-                                    m1VC.engine.maxPower = 1118.55f;//1518.55f;
+                                    m1VC.engine.maxPower = engine_Agt1500;
                                     break;
                             }
 
@@ -1742,27 +1943,53 @@ namespace M1A1AMP
                                 case "Regular":
                                     mainGun.Feed._totalReloadTime = 6;//6
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;//5
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;//5
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4.5f;//5
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4.5f;//5
                                     break;
                                 case "Veteran":
                                     mainGun.Feed._totalReloadTime = 5;
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4;
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4;
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 3.5f;
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 3.5f;
                                     break;
                                 case "Ace":
                                     mainGun.Feed._totalReloadTime = 4;
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 3;
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 3;
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 2.5f;
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 2.5f;
                                     break;
                                 default:
                                     mainGun.Feed._totalReloadTime = 6;//6
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;//5
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;//5
+                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4.5f;//5
+                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4.5f;//5
                                     break;
+                            }
+
+                            if (m1e1Apu.Value)
+                            {
+                                mainGun.FCS.ComputerNeedsPower = false;
+                                m1Turret.SpeedUnpowered = 40;//5;
+
+                                if (m1VC.engine.maxPower > 1800f)
+                                {
+                                    m1Turret.SpeedPowered = 52;//40;
+                                }
+                            }
+
+                            if (noLuggage.Value)
+                            {
+                                GameObject.Destroy(m1LuggageScripts.transform.Find("turret decorations parent").gameObject);
+                            }
+
+                            if (m1e1Smoke.Value)
+                            {
+                                m1Smoke._launchAngle = 20;//25
+                                m1Smoke._distanceRange = new Vector2(60, 60);//25, 35
+                                for (int i = 0; i < 12; i++)
+                                {
+                                    m1Smoke._smokeSlots[i].Rounds = 3;
+                                }    
                             }
                         }
 
@@ -1852,7 +2079,6 @@ namespace M1A1AMP
                             m256rack.ClipTypes = m256_ammo_clip_types;
                             Util.EmptyRack(m256rack);
                         }
-
 
                         WeaponSystemInfo coaxGunInfo = weaponsManager.Weapons[1];
                         WeaponSystem coaxGun = coaxGunInfo.Weapon;
@@ -2213,6 +2439,7 @@ namespace M1A1AMP
                 Util.ShallowCopy(ammo_m830a1, ammo_m456);
                 ammo_m830a1.Caliber = 120;
                 ammo_m830a1.CertainRicochetAngle = 13f;//0.0f;
+                ammo_m830a1.Coeff = 0.16f;
                 ammo_m830a1.DetonateSpallCount = mpatFragments.Value; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
                 //ammo_m830a1.ImpactFuseTime = 0.000357143f; //0.5 meters after impact //delay removed since it negatively affects armor penetration
                 ammo_m830a1.Mass = 11.4f;
@@ -2247,6 +2474,7 @@ namespace M1A1AMP
                 ammo_m830a2.ArmorOptimizations = era_optimizations_m830a2.ToArray<AmmoType.ArmorOptimization>();
                 ammo_m830a2.Caliber = 120;
                 ammo_m830a2.CertainRicochetAngle = 0.0f;
+                ammo_m830a2.Coeff = 0.16f;
                 ammo_m830a2.DetonateSpallCount = 200;
                 ammo_m830a2.Mass = 13.5f;
                 ammo_m830a2.MaxSpallRha = 35f;
@@ -2280,6 +2508,7 @@ namespace M1A1AMP
                 ammo_m830a3.ArmorOptimizations = era_optimizations_m830a2.ToArray<AmmoType.ArmorOptimization>();
                 ammo_m830a3.Caliber = 120;
                 ammo_m830a3.CertainRicochetAngle = 0.0f;
+                ammo_m830a3.Coeff = 0.16f;
                 ammo_m830a3.DetonateSpallCount = 100;
                 ammo_m830a3.Mass = 13.5f;
                 ammo_m830a3.MaxSpallRha = 25f;
@@ -2313,9 +2542,10 @@ namespace M1A1AMP
                 ammo_xm1147.Caliber = 120;
                 ammo_xm1147.Category = AmmoType.AmmoCategory.Explosive;
                 ammo_xm1147.CertainRicochetAngle = 0.0f;
-                ammo_xm1147.DetonateSpallCount = ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
+                ammo_xm1147.Coeff = 0.16f;
+                ammo_xm1147.DetonateSpallCount = ampFragments.Value / 2; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
                 ammo_xm1147.Mass = 11.4f;
-                ammo_xm1147.MaxSpallRha = 100f;
+                ammo_xm1147.MaxSpallRha = 120f;
                 ammo_xm1147.MinSpallRha = 50f;
                 ammo_xm1147.MuzzleVelocity = 1410f;
                 ammo_xm1147.Name = "XM1147 AMP-T";
@@ -2378,6 +2608,7 @@ namespace M1A1AMP
                 ammo_lahat.RangedFuseTime = 20f;
                 ammo_lahat.Tandem = true;
                 ammo_lahat.TntEquivalentKg = 4.5f;
+                ammo_lahat.UseErrorCorrection = false;
                 ammo_lahat.UseTracer = true;
 
                 ammo_codex_lahat = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
@@ -2399,8 +2630,9 @@ namespace M1A1AMP
                 Util.ShallowCopy(ammo_m908, ammo_3of26);
                 ammo_m908.Caliber = 120;
                 ammo_m908.CertainRicochetAngle = 13f;//0.0f;
+                ammo_m908.Coeff = 0.16f;
                 ammo_m908.DetonateSpallCount = heorFragments.Value; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
-                ammo_m908.ImpactFuseTime = 0.000357143f; //0.5 meters after impact //delay removed since it negatively affects armor penetration
+                ammo_m908.ImpactFuseTime = 0.000357143f; //0.5 meters after impact
                 ammo_m908.Mass = 11.4f;
                 ammo_m908.MaxSpallRha = 75f;
                 ammo_m908.MinSpallRha = 1f;
@@ -2408,7 +2640,7 @@ namespace M1A1AMP
                 ammo_m908.Name = "M908 HE-OR-T";
                 ammo_m908.RhaPenetration = 250;
                 ammo_m908.ShatterOnRicochet = false;
-                ammo_m908.ShotVisual = ammo_m456.ShotVisual;
+                ammo_m908.ShotVisual = ammo_3of26.ShotVisual;
                 ammo_m908.TntEquivalentKg = 4.8f;//3.2Kg Comp A3 IRL but apparently RDX is 50% stronger than TNT so 4.8
 
                 ammo_codex_m908 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
@@ -2434,7 +2666,7 @@ namespace M1A1AMP
                 ammo_m2apt.MaxSpallRha = 8f;
                 ammo_m2apt.MinSpallRha = 2f;
                 ammo_m2apt.MuzzleVelocity = 887;
-                ammo_m2apt.Name = "M2 AP-T";
+                ammo_m2apt.Name = "12.7x99mm M2 AP-T";
                 ammo_m2apt.NutationPenaltyDistance = 0f;
                 ammo_m2apt.MaxNutationPenalty = 0f;
                 ammo_m2apt.RhaPenetration = 28f;
@@ -2491,6 +2723,7 @@ namespace M1A1AMP
                 ammo_m962slapt = new AmmoType();
                 Util.ShallowCopy(ammo_m962slapt, ammo_m8vnl);
                 ammo_m962slapt.CertainRicochetAngle = 15f;//5f;
+                ammo_m962slapt.Coeff = 1.615f;//1.9f
                 ammo_m962slapt.MaxSpallRha = 12f;
                 ammo_m962slapt.MinSpallRha = 4f;
                 ammo_m962slapt.MuzzleVelocity = 1200f;
@@ -2836,6 +3069,29 @@ namespace M1A1AMP
                 armor_codex_turretsidefaceCompositearmor_HU.ArmorType = armor_turretsidefaceCompositearmor_HU;
                 armor_turretsidefaceCompositearmor_HU = new ArmorType();
                 ////End
+                
+                ////SA armor modifiers (85% increase)
+                armor_cheeksDUarmor_SA = new ArmorType();
+                Util.ShallowCopy(armor_cheeksDUarmor_SA, armor_specialarmor_VNL);
+                armor_cheeksDUarmor_SA.RhaeMultiplierCe = 1.885f; //default 1.3
+                armor_cheeksDUarmor_SA.RhaeMultiplierKe = 1.0175f; //default 0.55
+                armor_cheeksDUarmor_SA.Name = "Abrams SA DU armor turret cheeks";
+
+                armor_codex_cheeksDUarmor_SA = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_cheeksDUarmor_SA.name = "Abrams SA DU armor turret cheeks";
+                armor_codex_cheeksDUarmor_SA.ArmorType = armor_cheeksDUarmor_SA;
+                armor_cheeksDUarmor_SA = new ArmorType();
+
+                armor_fronthullDUarmor_SA = new ArmorType();
+                Util.ShallowCopy(armor_fronthullDUarmor_SA, armor_specialarmor_VNL);
+                armor_fronthullDUarmor_SA.RhaeMultiplierCe = 1.885f; //default 1.3
+                armor_fronthullDUarmor_SA.RhaeMultiplierKe = 0.925f; //default 0.45
+                armor_fronthullDUarmor_SA.Name = "Abrams SA DU armor hull front";
+
+                armor_codex_fronthullDUarmor_SA = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
+                armor_codex_fronthullDUarmor_SA.name = "Abrams SA DU armor hull front";
+                armor_codex_fronthullDUarmor_SA.ArmorType = armor_fronthullDUarmor_SA;
+                armor_fronthullDUarmor_SA = new ArmorType();
 
                 ////HC armor modifiers (45% increase)
                 armor_superCompositeskirt_HC = new ArmorType();
@@ -3041,6 +3297,7 @@ namespace M1A1AMP
 
                     FireControlSystem FCS = __instance.Shooter.WeaponsManager.Weapons[0].FCS;
                     BallisticComputerRepository bc = ballisticsComputerField.GetValue(FCS) as BallisticComputerRepository;
+
                     float range = FCS.CurrentRange;
                     float fallOff = bc.GetFallOfShot(ammo_xm1147, range);
                     float extra_distance = range > 2000 ? 19f + 3.5f : 17f;
