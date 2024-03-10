@@ -22,7 +22,7 @@
 
 ### Round Changes
 | Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
-| ------------- | ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
 | M908 HE-OR-T | 250* | 75** | 1410 | New! Has impact-delay fuze |
 | XM1147 AMP-T | 250* | 100** | - | Changed behavior to HE instead of HEAT. Has proximity fuze now but still be able to retain the old time-delay fuze in config. |
 | M829 | - | - | Toggleable +25% spalling chance |
