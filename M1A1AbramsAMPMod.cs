@@ -42,7 +42,7 @@ namespace M1A1AMP
         static MelonPreferences_Entry<int> randomChanceNum;
         static MelonPreferences_Entry<bool> m829spall, ampFuze;
         static MelonPreferences_Entry<string> m1a1Armor, m1e1Armor;
-        static MelonPreferences_Entry<bool> demigodArmor, m1a1Smoke, m1e1Smoke;
+        static MelonPreferences_Entry<bool> demigodArmor, m1a1Smoke, m1e1Smoke, m1a1Rosy, m1e1Rosy;
         static MelonPreferences_Entry<string> m1a1Agt, m1e1Agt;
         static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, noLuggage;
         static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader;
@@ -376,8 +376,12 @@ namespace M1A1AMP
             demigodArmor.Description = "Almost deathproof Abrooms (HU variant only)";
 
             m1a1Smoke = cfg.CreateEntry<bool>("M1A1 Smoke+", false);
-            m1a1Smoke.Description = "More smoke grenades and further throw distance.";
+            m1a1Smoke.Description = "Twice the ammo and throw distance.";
             m1e1Smoke = cfg.CreateEntry<bool>("M1E1 Smoke+", false);
+
+            m1a1Rosy = cfg.CreateEntry<bool>("M1A1 ROSY", false);
+            m1a1Rosy.Description = "Replaces M250 with Rapid Obscuring Sytem (Smoke+ required)";
+            m1e1Rosy= cfg.CreateEntry<bool>("M1E1 ROSY", false);
 
             m1a1Agt = cfg.CreateEntry<string>("M1A1 Engine", "AGT1500");
             m1a1Agt.Description = "SPEEEED AND POWWAAAAH!";
@@ -1446,9 +1450,7 @@ namespace M1A1AMP
                         var TurretScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/").gameObject.transform;
                         var m1ipLuggageScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/").gameObject.transform;// /luggage/ for M1IP
                         var m1LuggageScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/").gameObject.transform;
-
                         //US Vehicles/M1/IPM1_rig/HULL/TURRET/turret decorations parent/ for M1
-
 
                         UsableOptic horizontalGps = gpsOptic.GetComponent<UsableOptic>();
                         UsableOptic horizontalFlir = flirOptic.GetComponent<UsableOptic>();
@@ -1458,7 +1460,6 @@ namespace M1A1AMP
                         CameraSlot agsPlus = agsOptic.GetComponent<CameraSlot>();
 
                         AimablePlatform m1Turret = TurretScripts.GetComponent<AimablePlatform>();
-                        //DecorationsManager m1Luggage= m1TurretSCripts.GetComponent<DecorationsManager>();
 
                         ////Better optics stuff
                         UsableOptic optic = Util.GetDayOptic(mainGun.FCS);
@@ -1692,6 +1693,22 @@ namespace M1A1AMP
 
                         if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
                         {
+                            for (int i = 0; i < 14; i++)
+                            {
+                                m1VC.wheels[i].wheelController.damper.force = -3.2616f;//-3.2616
+                                m1VC.wheels[i].wheelController.damper.maxForce = 19000;//19000
+                                m1VC.wheels[i].wheelController.damper.unitBumpForce = 10000;//10000
+                                m1VC.wheels[i].wheelController.damper.unitReboundForce = 19000;//19000
+
+                                m1VC.wheels[i].wheelController.spring.bottomOutForce = -314031.9f;//-314031.9
+                                m1VC.wheels[i].wheelController.spring.compressionPercent = 0.2674f;//0.2674
+                                m1VC.wheels[i].wheelController.spring.force = 45940.98f;//45940.98
+                                m1VC.wheels[i].wheelController.spring.length = 0.3443f;//0.3443
+                                m1VC.wheels[i].wheelController.spring.maxForce = 39000;//39000
+                                m1VC.wheels[i].wheelController.spring.maxLength = 0.47f;//0.47
+                                m1VC.wheels[i].wheelController.spring.overExtended = false;//false
+                            }
+
                             switch (m1a1Armor.Value)
                             {
                                 case "HA":
@@ -1810,59 +1827,208 @@ namespace M1A1AMP
                             if (m1a1Smoke.Value)
                             {
                                 m1Smoke._launchAngle = 20;//25
-                                m1Smoke._distanceRange = new Vector2(60, 60);//25, 35
+                                m1Smoke._distanceRange = new Vector2(50, 50);//25, 35
                                 for (int i = 0; i < 12; i++)
                                 {
-                                    m1Smoke._smokeSlots[i].Rounds = 300;
+                                    m1Smoke._smokeSlots[i].Rounds = 400;
                                 }
 
-                                //Use this to test
-                                var launcher12 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
-                                SmokeSlot slot12 = new SmokeSlot();
-                                Util.ShallowCopy(slot12, m1Smoke._smokeSlots[2]);
-                                slot12.Rounds = 300;
-                                slot12.Angle = -120;
-                                launcher12.Add(slot12);
+                                if (m1a1Rosy.Value)
+                                {
+                                    m1Smoke._distanceRange = new Vector2(80, 80);
+                                    /*//Left launchers
+                                    m1Smoke._smokeSlots[2].Angle = -95;
+                                    m1Smoke._smokeSlots[4].Angle = -77;
+                                    m1Smoke._smokeSlots[5].Angle = -59;
+                                    m1Smoke._smokeSlots[1].Angle = -41;
+                                    m1Smoke._smokeSlots[3].Angle = -23;
+                                    m1Smoke._smokeSlots[0].Angle = -5;
 
-                                m1Smoke._smokeSlots = launcher12.ToArray<SmokeSlot>();
+                                    //Right Launchers
+                                    m1Smoke._smokeSlots[6].Angle = 5;
+                                    m1Smoke._smokeSlots[9].Angle = 23;
+                                    m1Smoke._smokeSlots[7].Angle = 41;
+                                    m1Smoke._smokeSlots[11].Angle = 59;
+                                    m1Smoke._smokeSlots[10].Angle = 77;
+                                    m1Smoke._smokeSlots[8].Angle = 95;*/
 
-                                var launcher13 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
-                                SmokeSlot slot13 = new SmokeSlot();
-                                Util.ShallowCopy(slot13, m1Smoke._smokeSlots[10]);
-                                slot13.Rounds = 300;
-                                slot13.Angle = 120;
-                                launcher13.Add(slot13);
+                                    //Left launchers
+                                    m1Smoke._smokeSlots[2].Angle = -100;
+                                    m1Smoke._smokeSlots[4].Angle = -82;
+                                    m1Smoke._smokeSlots[5].Angle = -64;
+                                    m1Smoke._smokeSlots[1].Angle = -46;
+                                    m1Smoke._smokeSlots[3].Angle = -28;
+                                    m1Smoke._smokeSlots[0].Angle = -10;
 
-                                m1Smoke._smokeSlots = launcher13.ToArray<SmokeSlot>();
+                                    //Right Launchers
+                                    m1Smoke._smokeSlots[6].Angle = 10;
+                                    m1Smoke._smokeSlots[9].Angle = 28;
+                                    m1Smoke._smokeSlots[7].Angle = 46;
+                                    m1Smoke._smokeSlots[11].Angle = 64;
+                                    m1Smoke._smokeSlots[10].Angle = 82;
+                                    m1Smoke._smokeSlots[8].Angle = 100;
 
-                                //GOATLAS
-                                /*var launcher12 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
-                                SmokeSlot slot12 = new SmokeSlot();
-                                Util.ShallowCopy(slot12, m1Smoke._smokeSlots[2]);
-                                slot12.Rounds = 300;
-                                slot12.Angle = -120;
-                                launcher12.Add(slot12);
+                                    //Salvo 1
+                                    //S1 Left Pattern
+                                    m1Smoke._smokeGroups[0].SmokePatternData[0].SmokeSlotIndex = 2;
+                                    m1Smoke._smokeGroups[0].SmokePatternData[1].SmokeSlotIndex = 4;
+                                    m1Smoke._smokeGroups[0].SmokePatternData[2].SmokeSlotIndex = 5;
+                                    m1Smoke._smokeGroups[0].SmokePatternData[3].SmokeSlotIndex = 1;
+                                    m1Smoke._smokeGroups[0].SmokePatternData[4].SmokeSlotIndex = 3;
+                                    m1Smoke._smokeGroups[0].SmokePatternData[5].SmokeSlotIndex = 0;
 
-                                m1Smoke._smokeSlots = launcher12.ToArray<SmokeSlot>();*/
+                                    //S1 Right Pattern
+                                    var sg1_smokePattern7 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData7 = new SmokePatternData();
+                                    smokePatternData7.SmokeSlotIndex = 6;
+                                    sg1_smokePattern7.Add(smokePatternData7);
 
-                                //Launcher angles and groupings
-                                /*
-                                0 -5 G2
-                                1 -25 G2
-                                4 -45 G2
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern7.ToArray<SmokePatternData>();
 
-                                2 -55 G1
-                                3 -15 G1
-                                5 -35 G1
+                                    var sg1_smokePattern8 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData8 = new SmokePatternData();
+                                    smokePatternData8.SmokeSlotIndex = 9;
+                                    sg1_smokePattern8.Add(smokePatternData8);
 
-                                6 5 G1
-                                7 25 G1
-                                10 45 G1
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern8.ToArray<SmokePatternData>();
 
-                                8 55 G2
-                                9 15 G2
-                                11 35 G2                                 
-                                 */
+                                    var sg1_smokePattern9 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData9 = new SmokePatternData();
+                                    smokePatternData9.SmokeSlotIndex = 7;
+                                    sg1_smokePattern9.Add(smokePatternData9);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern9.ToArray<SmokePatternData>();
+
+                                    var sg1_smokePattern10 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData10 = new SmokePatternData();
+                                    smokePatternData10.SmokeSlotIndex = 11;
+                                    sg1_smokePattern10.Add(smokePatternData10);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern10.ToArray<SmokePatternData>();
+
+                                    var sg1_smokePattern11 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData11 = new SmokePatternData();
+                                    smokePatternData11.SmokeSlotIndex = 10;
+                                    sg1_smokePattern11.Add(smokePatternData11);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern11.ToArray<SmokePatternData>();
+
+                                    var sg1_smokePattern12 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData12 = new SmokePatternData();
+                                    smokePatternData12.SmokeSlotIndex = 8;
+                                    sg1_smokePattern12.Add(smokePatternData12);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern12.ToArray<SmokePatternData>();
+
+                                    //Salvo 2
+                                    //S2 Left Pattern
+                                    m1Smoke._smokeGroups[1].SmokePatternData[0].SmokeSlotIndex = 2;
+                                    m1Smoke._smokeGroups[1].SmokePatternData[1].SmokeSlotIndex = 4;
+                                    m1Smoke._smokeGroups[1].SmokePatternData[2].SmokeSlotIndex = 5;
+                                    m1Smoke._smokeGroups[1].SmokePatternData[3].SmokeSlotIndex = 1;
+                                    m1Smoke._smokeGroups[1].SmokePatternData[4].SmokeSlotIndex = 3;
+                                    m1Smoke._smokeGroups[1].SmokePatternData[5].SmokeSlotIndex = 0;
+
+                                    //S2 Right Pattern
+                                    var sg2_smokePattern7 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData7 = new SmokePatternData();
+                                    sg2smokePatternData7.SmokeSlotIndex = 6;
+                                    sg2_smokePattern7.Add(sg2smokePatternData7);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern7.ToArray<SmokePatternData>();
+
+                                    var sg2_smokePattern8 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData8 = new SmokePatternData();
+                                    sg2smokePatternData8.SmokeSlotIndex = 9;
+                                    sg2_smokePattern8.Add(sg2smokePatternData8);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern8.ToArray<SmokePatternData>();
+
+                                    var sg2_smokePattern9 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData9 = new SmokePatternData();
+                                    sg2smokePatternData9.SmokeSlotIndex = 7;
+                                    sg2_smokePattern9.Add(sg2smokePatternData9);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern9.ToArray<SmokePatternData>();
+
+                                    var sg2_smokePattern10 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData10 = new SmokePatternData();
+                                    sg2smokePatternData10.SmokeSlotIndex = 11;
+                                    sg2_smokePattern10.Add(sg2smokePatternData10);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern10.ToArray<SmokePatternData>();
+
+                                    var sg2_smokePattern11 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData11 = new SmokePatternData();
+                                    sg2smokePatternData11.SmokeSlotIndex = 10;
+                                    sg2_smokePattern11.Add(sg2smokePatternData11);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern11.ToArray<SmokePatternData>();
+
+                                    var sg2_smokePattern12 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData12 = new SmokePatternData();
+                                    sg2smokePatternData12.SmokeSlotIndex = 8;
+                                    sg2_smokePattern12.Add(sg2smokePatternData12);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern12.ToArray<SmokePatternData>();
+
+                                    //More smoke slots
+                                    var launcher12 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
+                                    SmokeSlot slot12 = new SmokeSlot();
+                                    Util.ShallowCopy(slot12, m1Smoke._smokeSlots[2]);
+                                    slot12.Rounds = 300;
+                                    slot12.Angle = -120;
+                                    launcher12.Add(slot12);
+
+                                    m1Smoke._smokeSlots = launcher12.ToArray<SmokeSlot>();
+
+                                    var launcher13 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
+                                    SmokeSlot slot13 = new SmokeSlot();
+                                    Util.ShallowCopy(slot13, m1Smoke._smokeSlots[10]);
+                                    slot13.Rounds = 300;
+                                    slot13.Angle = 120;
+                                    launcher13.Add(slot13);
+
+                                    m1Smoke._smokeSlots = launcher13.ToArray<SmokeSlot>();
+
+                                    //More smoke patterns
+                                    /*var sg1_smokePattern7 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData7 = new SmokePatternData();
+                                    smokePatternData7.SmokeSlotIndex = 12;
+                                    sg1_smokePattern7.Add(smokePatternData7);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern7.ToArray<SmokePatternData>();
+
+                                    var sg1_smokePattern8 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData8 = new SmokePatternData();
+                                    smokePatternData8.SmokeSlotIndex = 13;
+                                    sg1_smokePattern8.Add(smokePatternData8);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern8.ToArray<SmokePatternData>();
+
+
+                                    //More Smoke Groups
+                                    var smokeGroup3 = m1Smoke._smokeGroups.ToList<SmokePattern>();
+                                    SmokePattern smokePattern3 = new SmokePattern();
+                                    smokeGroup3.Add(smokePattern3);
+
+                                    m1Smoke._smokeGroups = smokeGroup3.ToArray<SmokePattern>();
+
+                                    m1Smoke._smokeGroups[2].SmokePatternData = sg1_smokePattern7.ToArray<SmokePatternData>();
+                                    m1Smoke._smokeGroups[2].SmokePatternData = sg1_smokePattern8.ToArray<SmokePatternData>();*/
+
+
+
+                                    //GOATLAS
+                                    /*var launcher12 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
+                                    SmokeSlot slot12 = new SmokeSlot();
+                                    Util.ShallowCopy(slot12, m1Smoke._smokeSlots[2]);
+                                    slot12.Rounds = 300;
+                                    slot12.Angle = -120;
+                                    launcher12.Add(slot12);
+
+                                    m1Smoke._smokeSlots = launcher12.ToArray<SmokeSlot>();*/
+                                }
                             }
                         }
 
@@ -1985,11 +2151,155 @@ namespace M1A1AMP
                             if (m1e1Smoke.Value)
                             {
                                 m1Smoke._launchAngle = 20;//25
-                                m1Smoke._distanceRange = new Vector2(60, 60);//25, 35
+                                m1Smoke._distanceRange = new Vector2(50, 50);//25, 35
                                 for (int i = 0; i < 12; i++)
                                 {
-                                    m1Smoke._smokeSlots[i].Rounds = 3;
-                                }    
+                                    m1Smoke._smokeSlots[i].Rounds = 400;
+                                }
+
+                                if (m1e1Rosy.Value)
+                                {
+                                    m1Smoke._distanceRange = new Vector2(80, 80);
+
+                                    //Left launchers
+                                    m1Smoke._smokeSlots[2].Angle = -100;
+                                    m1Smoke._smokeSlots[4].Angle = -82;
+                                    m1Smoke._smokeSlots[5].Angle = -64;
+                                    m1Smoke._smokeSlots[1].Angle = -46;
+                                    m1Smoke._smokeSlots[3].Angle = -28;
+                                    m1Smoke._smokeSlots[0].Angle = -10;
+
+                                    //Right Launchers
+                                    m1Smoke._smokeSlots[6].Angle = 10;
+                                    m1Smoke._smokeSlots[9].Angle = 28;
+                                    m1Smoke._smokeSlots[7].Angle = 46;
+                                    m1Smoke._smokeSlots[11].Angle = 64;
+                                    m1Smoke._smokeSlots[10].Angle = 82;
+                                    m1Smoke._smokeSlots[8].Angle = 100;
+
+                                    //Salvo 1
+                                    //S1 Left Pattern
+                                    m1Smoke._smokeGroups[0].SmokePatternData[0].SmokeSlotIndex = 2;
+                                    m1Smoke._smokeGroups[0].SmokePatternData[1].SmokeSlotIndex = 4;
+                                    m1Smoke._smokeGroups[0].SmokePatternData[2].SmokeSlotIndex = 5;
+                                    m1Smoke._smokeGroups[0].SmokePatternData[3].SmokeSlotIndex = 1;
+                                    m1Smoke._smokeGroups[0].SmokePatternData[4].SmokeSlotIndex = 3;
+                                    m1Smoke._smokeGroups[0].SmokePatternData[5].SmokeSlotIndex = 0;
+
+                                    //S1 Right Pattern
+                                    var sg1_smokePattern7 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData7 = new SmokePatternData();
+                                    smokePatternData7.SmokeSlotIndex = 6;
+                                    sg1_smokePattern7.Add(smokePatternData7);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern7.ToArray<SmokePatternData>();
+
+                                    var sg1_smokePattern8 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData8 = new SmokePatternData();
+                                    smokePatternData8.SmokeSlotIndex = 9;
+                                    sg1_smokePattern8.Add(smokePatternData8);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern8.ToArray<SmokePatternData>();
+
+                                    var sg1_smokePattern9 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData9 = new SmokePatternData();
+                                    smokePatternData9.SmokeSlotIndex = 7;
+                                    sg1_smokePattern9.Add(smokePatternData9);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern9.ToArray<SmokePatternData>();
+
+                                    var sg1_smokePattern10 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData10 = new SmokePatternData();
+                                    smokePatternData10.SmokeSlotIndex = 11;
+                                    sg1_smokePattern10.Add(smokePatternData10);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern10.ToArray<SmokePatternData>();
+
+                                    var sg1_smokePattern11 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData11 = new SmokePatternData();
+                                    smokePatternData11.SmokeSlotIndex = 10;
+                                    sg1_smokePattern11.Add(smokePatternData11);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern11.ToArray<SmokePatternData>();
+
+                                    var sg1_smokePattern12 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData smokePatternData12 = new SmokePatternData();
+                                    smokePatternData12.SmokeSlotIndex = 8;
+                                    sg1_smokePattern12.Add(smokePatternData12);
+
+                                    m1Smoke._smokeGroups[0].SmokePatternData = sg1_smokePattern12.ToArray<SmokePatternData>();
+
+                                    //Salvo 2
+                                    //S2 Left Pattern
+                                    m1Smoke._smokeGroups[1].SmokePatternData[0].SmokeSlotIndex = 2;
+                                    m1Smoke._smokeGroups[1].SmokePatternData[1].SmokeSlotIndex = 4;
+                                    m1Smoke._smokeGroups[1].SmokePatternData[2].SmokeSlotIndex = 5;
+                                    m1Smoke._smokeGroups[1].SmokePatternData[3].SmokeSlotIndex = 1;
+                                    m1Smoke._smokeGroups[1].SmokePatternData[4].SmokeSlotIndex = 3;
+                                    m1Smoke._smokeGroups[1].SmokePatternData[5].SmokeSlotIndex = 0;
+
+                                    //S2 Right Pattern
+                                    var sg2_smokePattern7 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData7 = new SmokePatternData();
+                                    sg2smokePatternData7.SmokeSlotIndex = 6;
+                                    sg2_smokePattern7.Add(sg2smokePatternData7);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern7.ToArray<SmokePatternData>();
+
+                                    var sg2_smokePattern8 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData8 = new SmokePatternData();
+                                    sg2smokePatternData8.SmokeSlotIndex = 9;
+                                    sg2_smokePattern8.Add(sg2smokePatternData8);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern8.ToArray<SmokePatternData>();
+
+                                    var sg2_smokePattern9 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData9 = new SmokePatternData();
+                                    sg2smokePatternData9.SmokeSlotIndex = 7;
+                                    sg2_smokePattern9.Add(sg2smokePatternData9);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern9.ToArray<SmokePatternData>();
+
+                                    var sg2_smokePattern10 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData10 = new SmokePatternData();
+                                    sg2smokePatternData10.SmokeSlotIndex = 11;
+                                    sg2_smokePattern10.Add(sg2smokePatternData10);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern10.ToArray<SmokePatternData>();
+
+                                    var sg2_smokePattern11 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData11 = new SmokePatternData();
+                                    sg2smokePatternData11.SmokeSlotIndex = 10;
+                                    sg2_smokePattern11.Add(sg2smokePatternData11);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern11.ToArray<SmokePatternData>();
+
+                                    var sg2_smokePattern12 = m1Smoke._smokeGroups[1].SmokePatternData.ToList<SmokePatternData>();
+                                    SmokePatternData sg2smokePatternData12 = new SmokePatternData();
+                                    sg2smokePatternData12.SmokeSlotIndex = 8;
+                                    sg2_smokePattern12.Add(sg2smokePatternData12);
+
+                                    m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern12.ToArray<SmokePatternData>();
+
+                                    //More smoke slots
+                                    var launcher12 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
+                                    SmokeSlot slot12 = new SmokeSlot();
+                                    Util.ShallowCopy(slot12, m1Smoke._smokeSlots[2]);
+                                    slot12.Rounds = 300;
+                                    slot12.Angle = -120;
+                                    launcher12.Add(slot12);
+
+                                    m1Smoke._smokeSlots = launcher12.ToArray<SmokeSlot>();
+
+                                    var launcher13 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
+                                    SmokeSlot slot13 = new SmokeSlot();
+                                    Util.ShallowCopy(slot13, m1Smoke._smokeSlots[10]);
+                                    slot13.Rounds = 300;
+                                    slot13.Angle = 120;
+                                    launcher13.Add(slot13);
+
+                                    m1Smoke._smokeSlots = launcher13.ToArray<SmokeSlot>();
+                                }
                             }
                         }
 
@@ -2474,7 +2784,7 @@ namespace M1A1AMP
                 ammo_m830a2.ArmorOptimizations = era_optimizations_m830a2.ToArray<AmmoType.ArmorOptimization>();
                 ammo_m830a2.Caliber = 120;
                 ammo_m830a2.CertainRicochetAngle = 0.0f;
-                ammo_m830a2.Coeff = 0.16f;
+                //ammo_m830a2.Coeff = 0.16f;
                 ammo_m830a2.DetonateSpallCount = 200;
                 ammo_m830a2.Mass = 13.5f;
                 ammo_m830a2.MaxSpallRha = 35f;
@@ -2508,7 +2818,7 @@ namespace M1A1AMP
                 ammo_m830a3.ArmorOptimizations = era_optimizations_m830a2.ToArray<AmmoType.ArmorOptimization>();
                 ammo_m830a3.Caliber = 120;
                 ammo_m830a3.CertainRicochetAngle = 0.0f;
-                ammo_m830a3.Coeff = 0.16f;
+                //ammo_m830a3.Coeff = 0.16f;
                 ammo_m830a3.DetonateSpallCount = 100;
                 ammo_m830a3.Mass = 13.5f;
                 ammo_m830a3.MaxSpallRha = 25f;
