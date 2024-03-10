@@ -3,18 +3,19 @@
 ## Branch release notes:
 <p>
 	<ul> 
-		<li>Enhanced optics for the GPS, FLIR and AGS</li>
-		<li>M2 Coaxial (replaced M240 and has two ammo types)</li>
-		<li>XM1147 AMP-T update, using proximity fuze now</li>
-		<li>Updated tank weight depending on the armor type used</li>
-		<li>Upgradeable powertrain options and removable governor</li>
+		<li>New armor package: Situational Awareness (SA)</li>
 		<li>New round: M908 HE-OR-T</li>
+		<li>Certain rounds are less draggy (refer to table)</li>
+		<li>Configurable CITV upgrade</li>
+		<li>Configurable enhanced optics for the GPS, FLIR and AGS</li>
 		<li>Configurable loader proficiency</li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
-		<li></li>
+		<li>M2 Coaxial upgrade (replaces M240 and has two ammo types)</li>
+		<li>XM1147 AMP-T update, with option proximity fuze (new) or retain time-delay fuze in config</li>
+		<li>Updated tank weight depending on the armor type used</li>
+		<li>Configurable powertrain options and removable governor</li>
+		<li>Toggleable Auxilliary Power Unit (APU)</li>
+		<li>Configurable enhanced smoke launcher system</li>
+		<li>Toggleable clean turret look (no attachments like ALICE packs or MREs)</li>
 		<li></li>
 	</ul>
 </p>
@@ -70,6 +71,6 @@
 ### Governor
 <p>
 	<ul> 
-		<li>Goveror delete option which raises potential top speed to 115 km/h forwards and 57 km/h backwards (compared to 72 km/h and 40 km/h with governor)</li>
+		<li>Governor delete option which raises potential top speed to 115 km/h forwards and 57 km/h backwards (compared to 72 km/h and 40 km/h with governor)</li>
 	</ul>
 </p>
