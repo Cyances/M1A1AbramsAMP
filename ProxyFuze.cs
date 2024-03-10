@@ -127,7 +127,7 @@ namespace M1A1AMP
                 if (!__instance.gameObject.GetComponentInChildren<ProxyFuze>()) return true;
                 if (!__instance.gameObject.GetComponentInChildren<ProxyFuze>().detonated) return true;
 
-                int fragCount = M1A1AbramsAMPMod.ampFragments.Value;
+                int fragCount = M1A1AbramsAMPMod.ampFragments.Value / 2;
 
                 for (int i = 0; i < fragCount; i++)
                 {
