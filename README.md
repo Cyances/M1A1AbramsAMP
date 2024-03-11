@@ -24,8 +24,8 @@
 | Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | M908 HE-OR-T | 250* | 75** | 1410 | New! Has impact-delay fuze |
-| XM1147 AMP-T | 250* | 100** | - | Changed behavior to HE instead of HEAT. Has proximity fuze now but still be able to retain the old time-delay fuze in config. |
-| M829 | - | - | Toggleable +25% spalling chance |
+| XM1147 AMP-T | 250* | 120** | - | Changed behavior to HE instead of HEAT. Has proximity fuze now but still be able to retain the old time-delay fuze in config. |
+| M829 | - | - | - | Toggleable +25% spalling chance |
 | M829A1 | - | - | - | Toggleable +25% spalling chance |
 | M829A2 | - | - | - | Toggleable +50% spalling chance |
 | M829A3 | - | - | - | Toggleable +75% spalling chance |
@@ -69,7 +69,7 @@
 | T64 | 4430 | 12845 | 4000 | +30% | Fictional but it's the T64-GE-100. | 
 
 
-### Transmission
+#### Transmission
 <p>
 	<ul> 
 		<li>Upgradeable transmission with 6 forward gears and 3 reverse gears (compared to 4/2 of default)</li>
