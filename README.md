@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.3.3
+# M1A1 Abrams AMP v2.4
 Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. I also would like to thank Swiss/SovGrenadier for the GLATGM implementation. Be sure to checkout their mods because they are great!
 
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
@@ -92,7 +92,7 @@ If you get an error launching through Steam you will need to run the game execut
 	</ul>
 </p>
 
-## How to use the XM1147 AMP-T:
+## How to use the XM1147 AMP-T or M830A1 HEAT-MP-T:
 <p>
 	<ul> 
 		<li>To use airburst mode, lase the target and aim slightly above it so that the shell will not impact the target. The airburst fuzing is not perfect since it might explode in front or behind the target instead of somewhere in the middle, so multiple shots might be required. Or to help compensate for the deviation, increase the fragment count but this can impact game performance.</li>
