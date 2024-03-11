@@ -207,6 +207,15 @@ If you get an error launching through Steam you will need to run the game execut
 </p>
 
 ## Other Features
+### Enhanced optics
+<p>
+	<ul> 
+		<li>GPS has 4 zoom levels</li>
+		<li>Thermals have 4 zoom levels, clearer image and removed scanlines</li>
+		<li>AGS has 3 zoom levels and its less blurry when moving</li>
+	</ul>
+</p>
+
 ### Auxilliary Power Unit (APU)
 <p>
 	<ul> 
