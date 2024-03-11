@@ -20,7 +20,7 @@
 	</ul>
 </p>
 
-### Round Changes
+## Round Changes
 | Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | M908 HE-OR-T | 250* | 75** | 1410 | New! Has impact-delay fuze |
@@ -40,37 +40,61 @@
 	</ul>
 </p>
 
-### Situational Awareness (SA) - roughly #% increase in protection
+## Armor variants list:
+#### Situational Awareness (SA) - roughly 85% increase in KE protection
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) 
 | ------------- | ------------- | ------------- | 
-| Hull front |  |  |
-| Turret cheek |  |  | 
-| Turret side |  |  | 
-| Composite side skirt |  |  | 
-| Gun mantlet |  |  | 
+| Hull front | 590  | 1200  |
+| Turret cheek | 880 | 1510 | 
+| Turret side | 510 | 560 | 
+| Composite side skirt | 105 | 145 | 
+| Gun mantlet | 540 | 820 | 
+<p>
+	<ul> 
+		<li>Only the turret cheeks and hull front had a KE protection upgrade for the SA variant</li>
+		<li>The other areas have the same values as the HC variant</li>
+	</ul>
+</p>
 
 
-### Weight
+#### Heavy Ultra (HU) - Custom protection values
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
+| ------------- | ------------- | ------------- | ------------- | 
+| Hull front* | 810  | 1280  |  |
+| Turret cheek* | 910 | 1580 |  |
+| Turret side* | 510 | 1020 |  |
+<p>
+	<ul> 
+		<li>*These areas have thicker face and backing plates that were added in AMPv2.3 but not listed</li>
+	</ul>
+</p>
+
+## Weight
 | Armor Type | Weight (KG) | Note |
 | ------------- | ------------- | ------------- |
 | Base | 59,057 | Base M1A1/E1 weight | 
 | HA | 60,599 |  | 
 | HC | 61,416 |  | 
 | SA | 62,232 |  | 
-| HU | 72,665 | Fully loaded SEPv3 used as reference. Has optional Unobtanium armor package that lets it weigh the same as the HA. | 
+| HU* | 72,665 | Fully loaded SEPv3 used as reference.  | 
+<p>
+	<ul> 
+		<li>*HU variant has optional Unobtanium armor package (UAP) that lets it weigh the same as the HA.</li>
+	</ul>
+</p>
 
-### Powertrain
-#### Engines
+## Powertrain
+### Engines
 | Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Braking Power | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
 | AGT1500 | 1500 | 5741 | 3100 |  | Default engine. | 
-| AGT2000 | 2000 | 7655 | 3100 | +7.5% | Fictional. | 
-| AGT2500 | 2500 | 7415 | 4000 | +15% | Fictional. | 
-| AGT3000 | 3000 | 8899 | 4000 | +22.5% | Fictional. | 
-| T64 | 4430 | 12845 | 4000 | +30% | Fictional but it's the T64-GE-100. | 
+| AGT2000 | 2000 | 7655 | 3100 | +10% | Fictional. | 
+| AGT2500 | 2500 | 7415 | 4000 | +20% | Fictional. | 
+| AGT3000 | 3000 | 8899 | 4000 | +30% | Fictional. | 
+| T64 | 4430 | 12845 | 4000 | +40% | Fictional but it's the T64-GE-100. | 
 
 
-#### Transmission
+### Transmission
 <p>
 	<ul> 
 		<li>Upgradeable transmission with 6 forward gears and 3 reverse gears (compared to 4/2 of default)</li>
@@ -78,15 +102,15 @@
 </p>
 
 
-#### Governor
+### Governor
 <p>
 	<ul> 
 		<li>Governor delete option which raises potential top speed to 115 km/h forwards and 57 km/h backwards (compared to 72 km/h and 40 km/h with governor)</li>
 	</ul>
 </p>
 
-### Other Features
-#### Auxilliary Power Unit (APU)
+## Other Features
+### Auxilliary Power Unit (APU)
 <p>
 	<ul> 
 		<li>Retain full turret traversal and lazing functionality even with destroyed engine</li>
@@ -94,7 +118,7 @@
 	</ul>
 </p>
 
-#### Smoke Launcher Upgrade
+### Smoke Launcher Upgrade
 <p>
 	<ul> 
 		<li>Smoke+ upgrade, doubling the amount of salvos that could be fired and the throw distace of smoke grenades</li>
@@ -103,7 +127,7 @@
 </p>
 
 
-#### Loading Proficiency
+### Loading Proficiency
 <p>
 	<ul> 
 		<li>4 skill levels, with slowest loading time of 7 seconds (min qualification) and 1 second reduction as you go up</li>
