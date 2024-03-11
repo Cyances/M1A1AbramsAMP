@@ -96,13 +96,11 @@ If you get an error launching through Steam you will need to run the game execut
 
 ## How to use the XM1147 AMP-T or M830A1 HEAT-MP-T:
 ### Point-detonate + Time-delay Fuze (AMP only)
-<p>
-	<ul> 
+
 		<li>Default fuzing type for AMP</li>
 		<li>To use airburst mode, lase the target and aim slightly above it so that the shell will not impact the target. The airburst fuzing is not perfect since it might explode in front or behind the target instead of somewhere in the middle, so multiple shots might be required. Or to help compensate for the deviation, increase the fragment count but this can impact game performance.</li>
 		<li>To use point-detonate mode, make sure the range setting is at least 10 meters more than the target to ensure it would not be in airburst mode. As long as the shell directly hits the target, it will use the point-detonate fuze.</li>
-	</ul>
-</p>
+
 
 ### Point-detonate + Proxmity Fuze
 <p>
