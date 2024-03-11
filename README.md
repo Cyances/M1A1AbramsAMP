@@ -24,8 +24,8 @@
 | Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | M908 HE-OR-T | 250* | 75** | 1410 | New! Has impact-delay fuze |
-| XM1147 AMP-T | 250* | 100** | - | Changed behavior to HE instead of HEAT. Has proximity fuze now but still be able to retain the old time-delay fuze in config. |
-| M829 | - | - | Toggleable +25% spalling chance |
+| XM1147 AMP-T | 250* | 120** | - | Changed behavior to HE instead of HEAT. Has proximity fuze now but still be able to retain the old time-delay fuze in config. |
+| M829 | - | - | - | Toggleable +25% spalling chance |
 | M829A1 | - | - | - | Toggleable +25% spalling chance |
 | M829A2 | - | - | - | Toggleable +50% spalling chance |
 | M829A3 | - | - | - | Toggleable +75% spalling chance |
@@ -60,6 +60,7 @@
 | HU | 72,665 | Fully loaded SEPv3 used as reference. Has optional Unobtanium armor package that lets it weigh the same as the HA. | 
 
 ### Powertrain
+#### Engines
 | Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Braking Power | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
 | AGT1500 | 1500 | 5741 | 3100 |  | Default engine. | 
@@ -69,7 +70,7 @@
 | T64 | 4430 | 12845 | 4000 | +30% | Fictional but it's the T64-GE-100. | 
 
 
-### Transmission
+#### Transmission
 <p>
 	<ul> 
 		<li>Upgradeable transmission with 6 forward gears and 3 reverse gears (compared to 4/2 of default)</li>
@@ -77,9 +78,35 @@
 </p>
 
 
-### Governor
+#### Governor
 <p>
 	<ul> 
 		<li>Governor delete option which raises potential top speed to 115 km/h forwards and 57 km/h backwards (compared to 72 km/h and 40 km/h with governor)</li>
+	</ul>
+</p>
+
+### Other Features
+#### Auxilliary Power Unit (APU)
+<p>
+	<ul> 
+		<li>Retain full turret traversal and lazing functionality even with destroyed engine</li>
+		<li>A slightly faster turret traversal speed if the engine is AGT2500 or better and if it's still running</li>
+	</ul>
+</p>
+
+#### Smoke Launcher Upgrade
+<p>
+	<ul> 
+		<li>Smoke+ upgrade, doubling the amount of salvos that could be fired and the throw distace of smoke grenades</li>
+		<li>ROSY upgrade, featuring 4 salvos and 12 smoke grenades fired per salvo covering a +/- 82° sector in front of the turret</li>
+	</ul>
+</p>
+
+
+#### Loading Proficiency
+<p>
+	<ul> 
+		<li>4 skill levels, with slowest loading time of 7 seconds (min qualification) and 1 second reduction as you go up</li>
+		<li>Out of action loader and ready rack loading times are also affected</li>
 	</ul>
 </p>
