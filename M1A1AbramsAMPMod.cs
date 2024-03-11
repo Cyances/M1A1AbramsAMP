@@ -1850,7 +1850,7 @@ namespace M1A1AMP
                                         m1Smoke._smokeSlots[i].Rounds = 4;
                                     }
 
-                                    m1Smoke._distanceRange = new Vector2(80, 80);
+                                    m1Smoke._distanceRange = new Vector2(60, 60);
                                     /*//Left launchers
                                     m1Smoke._smokeSlots[2].Angle = -95;
                                     m1Smoke._smokeSlots[4].Angle = -77;
@@ -2168,7 +2168,7 @@ namespace M1A1AMP
                                         m1Smoke._smokeSlots[i].Rounds = 4;
                                     }
 
-                                    m1Smoke._distanceRange = new Vector2(80, 80);
+                                    m1Smoke._distanceRange = new Vector2(60, 60);
 
                                     //Left launchers
                                     m1Smoke._smokeSlots[2].Angle = -82;
