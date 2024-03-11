@@ -45,11 +45,11 @@
 #### Situational Awareness (SA) - roughly 85% increase in KE protection
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
 | ------------- | ------------- | ------------- | ------------- |
-| Hull front | 590  | 1200  |
-| Turret cheek | 880 | 1510 | 
-| Turret side | 510 | 560 | 
-| Composite side skirt | 105 | 145 | 
-| Gun mantlet | 540 | 820 | 
+| Hull front | 750  | 1200  |  |
+| Turret cheek | 910 | 1510 |   |
+| Turret side | 510 | 560 |   |
+| Composite side skirt | 105 | 145 |   |
+| Gun mantlet | 540 | 820 |   |
 <p>
 	<ul> 
 		<li>Only the turret cheeks and hull front had a KE protection upgrade for the SA variant</li>
