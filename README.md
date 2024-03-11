@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.4
+![AMP vs Mi-24](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/217c4962-74e8-4e5d-8c2d-d161b16fa97a)# M1A1 Abrams AMP v2.4
 Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. I also would like to thank Swiss/SovGrenadier for the GLATGM implementation. Be sure to checkout their mods because they are great!
 
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
@@ -9,6 +9,7 @@ If you get an error launching through Steam you will need to run the game execut
 ![Screenshot_2](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20SPW-60B%20XRay.png)
 ![Screenshot_3](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A.png)
 ![Screenshot_4](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A%20XRay.png)
+![AMP vs Mi-24](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/2727aa85-097b-41c6-8a31-6a6c8dd7af12)
 
 ## AMP 2.4 Update:
 <p>
@@ -44,11 +45,12 @@ If you get an error launching through Steam you will need to run the game execut
 
 2.) Download the latest version from the [release page](https://github.com/Cyances/M1A1AbramsAMP/releases).
 
-3.) Place zzM1A1AbramsAMP.dll file in the mods folder:
+3.) Place zzM1A1AbramsAMP.dll and the m1a1CITV folder in the mods folder:
+![AMP Installation](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/e3fe58f6-8968-4e89-8b98-37d94d6effe4)
 
 4.) Launch the game directly (not from Steam).
    
-5.) On first time running this mod, the entries in MelonPreferences.cfg will only appear after launching the game then closing it.
+5.) On first time running this mod, the entries in MelonPreferences.cfg will only appear after launching the game then normally closing it.
 
 
 ## NOTE!
@@ -93,10 +95,22 @@ If you get an error launching through Steam you will need to run the game execut
 </p>
 
 ## How to use the XM1147 AMP-T or M830A1 HEAT-MP-T:
+### Point-detonate + Time-delay Fuze (AMP only)
 <p>
 	<ul> 
+		<li>Default fuzing type for AMP</li>
 		<li>To use airburst mode, lase the target and aim slightly above it so that the shell will not impact the target. The airburst fuzing is not perfect since it might explode in front or behind the target instead of somewhere in the middle, so multiple shots might be required. Or to help compensate for the deviation, increase the fragment count but this can impact game performance.</li>
 		<li>To use point-detonate mode, make sure the range setting is at least 10 meters more than the target to ensure it would not be in airburst mode. As long as the shell directly hits the target, it will use the point-detonate fuze.</li>
+	</ul>
+</p>
+
+### Point-detonate + Proxmity Fuze
+<p>
+	<ul> 
+		<li>Proximity fuze option automatically enabled for the MPAT, but needs to be enabled in the config for the AMP </li>
+		<li>To use proximity mode, press middle mouse button and the round should have [Proximity] postfix to its name in the lower left part of the UI</li>
+		<li>To use point-detonate mode, press the middle mouse again to remove the [Proximity]</li>
+		![AMP Proximity Mode](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/e665ec03-62bd-44fe-9276-4f1d7ab12035)		
 	</ul>
 </p>
 
