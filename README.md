@@ -255,7 +255,7 @@ If you get an error launching through Steam you will need to run the game execut
 	<ul> 
 		<li>Selectable round types for four slots for M1A1 and M1E1. You can even go with a pure APFSDS or HEAT loadout. <b>Be careful when typing the round you want </b> because the mod will default to vanilla rounds (M833/M456A2) if there is a typo or if a field is left blank. The listed rounds are case-sensitive (just make sure it is all caps when entering the designated round).</li>
 		<li>Customize how many rounds per type are carried by the M1A1 and M1E1 (total max of 50).</li>
-		<li>Customize the crew loading skill per tank</li>
+		<li>Customize the crew loading skill per tank (Regular by default)</li>
 		<li>Upgrade the M240 coax to M2 coax with two ammo options (disabled by default)</li>
 		<li>Enhanced M829 spalling (disabled by default)</li>
 		<li>XM1147 fuze type betweeen point-detonate + time-delay (default) or point-detonate + proximity</li>
