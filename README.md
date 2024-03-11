@@ -107,19 +107,20 @@ If you get an error launching through Steam you will need to run the game execut
 </p>
 
 ## Round types list:
-| Name  | Penetration (mm) | Muzzle Velocity (m/s) | Note |
+| Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- |
-| M829 APFSDS-T | 600 | 1670  | - |
-| M829A1 APFSDS-T  | 700 | 1575 | - |
-| M829A2 APFSDS-T | 750 | 1680 | - |
-| M829A3 APFSDS-T | 840 | 1555 | ERA is only 20% effective. |
-| M829A4 APFSDS-T | 1000 | 1700 | Hypothethical round. +100% spalling chance and performance. ERA is only 15% effective.  |
-| M830 HEAT-FS-T | 600 | 1140 | +50% spalling chance |
-| M830A1 HEAT-MP-T | 480 | 1400 | Point-detonate fuze only. 600 fragments (configurable count). |
-| M830A2 IHEAT-FS-T | 700 | 1400 | Hypothethical round. +100% spalling chance. ERA is only 15% effective. |
-| M830A3 IHEAT-FS-T | 1000 | 1300 | Hypothethical round. +100% spalling chance. ERA is only 15% effective. |
-| XM1147 AMP-T | 480 | 1410 | Point-detonate and airburst fuze. 600 fragments (configurable count). |
-| LAHAT | 800 | 300 | Gun-launched ATGM with SALH guidance. ERA is only 20% effective.|
+| M829 APFSDS-T | 600 |  | 1670  | Toggleable +25% spalling chance |
+| M829A1 APFSDS-T  | 700 |  | 1575 | Toggleable +25% spalling chance |
+| M829A2 APFSDS-T | 750 |  | 1680 | Toggleable +50% spalling chance |
+| M829A3 APFSDS-T | 840 |  | 1555 | ERA is only 20% effective. Toggleable +75% spalling chance. |
+| M829A4 APFSDS-T | 1000 |  | 1700 | Hypothethical round. +100% spalling chance and performance. ERA is only 15% effective.  |
+| M830 HEAT-FS-T | 600 |  | 1140 | +50% spalling chance |
+| M830A1 HEAT-MP-T | 480 | 50** | 1410 | Point-detonate fuze only. 600 fragments (configurable count). |
+| M830A2 IHEAT-FS-T | 700 | 35** | 1410 | Fictional round. +100% spalling chance. ERA is only 15% effective. |
+| M830A3 IHEAT-FS-T | 1000  | 25** | 1310 | Fictional round. +100% spalling chance. ERA is only 15% effective. |
+| M908 HE-OR-T | 250* | 75** | 1410 | Has impact-delay fuze. 300 fragments (configurable count). |
+| XM1147 AMP-T | 250* | 120** | 1410 | Point-detonate and airburst fuze or proximity fuze. 600 fragments (configurable count). |
+| LAHAT | 800 | 300 |  | Gun-launched ATGM with SALH guidance. ERA is only 20% effective.|
 
 <p>
 	<ul> 
