@@ -10,22 +10,32 @@ If you get an error launching through Steam you will need to run the game execut
 ![Screenshot_3](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A.png)
 ![Screenshot_4](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A%20XRay.png)
 
-## AMP 2.3 Update:
+## AMP 2.4 Update:
 <p>
 	<ul>
 	<li>120mm M256 Gun</li>
 	<li>M1IP automatically converted to M1A1</li>
 	<li>Tank upgrades based on real life developments (but guesstimated values) and hypothetical thinking</li>
-    	<li>Selectable Abrams armor variants: base armor, Heavy Armor (+30% protection), Heavy Common (+45% protection) and Heavy Ultra (custom)</li>
-    	<li>Selectable rounds (up to four slots and 50 max total rounds)</li>
+    	<li>Configurable Abrams armor variants: base armor, Heavy Armor (+30% protection), Heavy Common (+45% protection), Situational Awareness (+85%) and Heavy Ultra (custom)</li>
+    	<li>Configurable rounds (up to four slots and 50 max total rounds)</li>
 	<li>Default M1A1 loadout: 20x M829A4, 12x M830A2, 12x XM1147, 6x LAHAT</li>
 	<li>Default M1E1 loadout: 20x M829, 15x M830, 15x M830A1 (press key 2/3 to select M830/A1 [key 4 is just an empty rack of M830A1])</li>
 	<li>APFSDS: M829, M829A1, M829A2, M829A3, M829A4</li>
     	<li>HEAT: M830, M830A1, M830A2, M830A3, XM1147</li>
+    	<li>HE: XM1147, M908</li>
     	<li>GLATGM: LAHAT</li>
-    	<li>XM1147 AMP-T multifuze round (airburst or point-detonate)</li>
+    	<li>XM1147 AMP-T multifuze round (point-detonate + time-delay or proximity)</li>
 	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT), requires at least NATO ERA v1.1.1b and/or Pact Increased Lethality v1.2.5)</li>
 	<li>"TUSK" postfix when ERA is detected (NATO ERA mod)</li>
+	<li>Configurable CITV upgrade</li>
+	<li>Configurable enhanced optics for the GPS, FLIR and AGS</li>
+	<li>Configurable loader proficiency</li>
+	<li>M2 Coaxial upgrade (replaces M240 and has two ammo types)</li>
+	<li>Updated tank weight depending on the armor type used</li>
+	<li>Configurable powertrain options and removable governor</li>
+	<li>Toggleable Auxilliary Power Unit (APU)</li>
+	<li>Configurable enhanced smoke launcher system</li>
+	<li>Toggleable clean turret look (no attachments like ALICE packs or MREs)</li>
  	</ul>
 </p>
 
@@ -53,6 +63,37 @@ If you get an error launching through Steam you will need to run the game execut
 	</ul>
 </p>
 
+## Round types list:
+| Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| M829 APFSDS-T | 600 |  | 1670  | Toggleable +25% spalling chance |
+| M829A1 APFSDS-T  | 700 |  | 1575 | Toggleable +25% spalling chance |
+| M829A2 APFSDS-T | 750 |  | 1680 | Toggleable +50% spalling chance |
+| M829A3 APFSDS-T | 840 |  | 1555 | ERA is only 20% effective. Toggleable +75% spalling chance. |
+| M829A4 APFSDS-T | 1000 |  | 1700 | Hypothethical round. +100% spalling chance and performance. ERA is only 15% effective.  |
+| M830 HEAT-FS-T | 600 |  | 1140 | +50% spalling chance |
+| M830A1 HEAT-MP-T | 480 | 50** | 1410 | Point-detonate fuze only. 600 fragments (configurable count). |
+| M830A2 IHEAT-FS-T | 700 | 35** | 1410 | Fictional round. +100% spalling chance. ERA is only 15% effective. |
+| M830A3 IHEAT-FS-T | 1000  | 25** | 1310 | Fictional round. +100% spalling chance. ERA is only 15% effective. |
+| M908 HE-OR-T | 250* | 75** | 1410 | Has impact-delay fuze. 300 fragments (configurable count). |
+| XM1147 AMP-T | 250* | 120** | 1410 | Point-detonate + airburst fuze or proximity fuze. 600 fragments (configurable count). |
+| LAHAT | 800 | 300 |  | Gun-launched ATGM with SALH guidance. ERA is only 20% effective.|
+
+<p>
+	<ul> 
+		<li>The penetration values chosen are relative to the existing penetrators in the game and on assumptions/guesstimations based on open source information.</li>
+		<li>Steel Beasts used as reference for M829 penetration values, except for the M829A4 which has completely made up stats</li>
+		<li>Values for Anti-ERA effects are a total guess</li>
+	</ul>
+</p>
+
+## How to use the XM1147 AMP-T:
+<p>
+	<ul> 
+		<li>To use airburst mode, lase the target and aim slightly above it so that the shell will not impact the target. The airburst fuzing is not perfect since it might explode in front or behind the target instead of somewhere in the middle, so multiple shots might be required. Or to help compensate for the deviation, increase the fragment count but this can impact game performance.</li>
+		<li>To use point-detonate mode, make sure the range setting is at least 10 meters more than the target to ensure it would not be in airburst mode. As long as the shell directly hits the target, it will use the point-detonate fuze.</li>
+	</ul>
+</p>
 
 ## Armor variants list:
 ### Heavy Armor (HA) - roughly 30% increase in protection
@@ -73,15 +114,30 @@ If you get an error launching through Steam you will need to run the game execut
 | Composite side skirt | 105 | 145 | 
 | Gun mantlet | 540 | 820 | 
 
+#### Situational Awareness (SA) - roughly 85% increase in KE protection
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
+| ------------- | ------------- | ------------- | ------------- |
+| Hull front | 750  | 1200  |  |
+| Turret cheek | 910 | 1510 |   |
+| Turret side | 510 | 560 |   |
+| Composite side skirt | 105 | 145 |   |
+| Gun mantlet | 540 | 820 |   |
+<p>
+	<ul> 
+		<li>Only the turret cheeks and hull front had a KE protection upgrade for the SA variant</li>
+		<li>The other areas have the same values as the HC variant</li>
+	</ul>
+</p>
+
 ### Heavy Ultra (HU) - Custom protection values
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
 | ------------- | ------------- | ------------- | ------------- | 
-| Hull front | 810  | 1280  | |
+| Hull front | 1030  | 1500  |  |
 | Hull side/roof/bottom/rear | 200 | 300 | |
 | Hull firewall | 30 | 30 | Acts as spall liner |
 | Engine deck | 250 | 350 | |
-| Turret cheek | 910 | 1580 | |
-| Turret side | 510 | 1020 | |
+| Turret cheek | 1130 | 1800 |  |
+| Turret side | 730 | 1240 |  |
 | Turret rear | 500 | 1000 | |
 | Turret firewall | 30 | 30 | Acts as spall liner |
 | Composite side skirt | 300 | 550 | |
@@ -95,7 +151,6 @@ If you get an error launching through Steam you will need to run the game execut
 | Loader's hatch | 140 | 175 | |
 | Driver's hatch | 140 | 175 | |
 | Hull ammo rack door | 45 | 45 | |
-
 <p>
 	<ul> 
 		<li>Armor testing done in game which can result in inconsistency between the area shot at, and the angle and distance from it. However, I did my best to shoot at less than 100 meters and as close to 0 degrees for the perpendicular shot to the armor face.</li>
@@ -106,35 +161,68 @@ If you get an error launching through Steam you will need to run the game execut
 	</ul>
 </p>
 
-## Round types list:
-| Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
-| ------------- | ------------- | ------------- | ------------- | ------------- |
-| M829 APFSDS-T | 600 |  | 1670  | Toggleable +25% spalling chance |
-| M829A1 APFSDS-T  | 700 |  | 1575 | Toggleable +25% spalling chance |
-| M829A2 APFSDS-T | 750 |  | 1680 | Toggleable +50% spalling chance |
-| M829A3 APFSDS-T | 840 |  | 1555 | ERA is only 20% effective. Toggleable +75% spalling chance. |
-| M829A4 APFSDS-T | 1000 |  | 1700 | Hypothethical round. +100% spalling chance and performance. ERA is only 15% effective.  |
-| M830 HEAT-FS-T | 600 |  | 1140 | +50% spalling chance |
-| M830A1 HEAT-MP-T | 480 | 50** | 1410 | Point-detonate fuze only. 600 fragments (configurable count). |
-| M830A2 IHEAT-FS-T | 700 | 35** | 1410 | Fictional round. +100% spalling chance. ERA is only 15% effective. |
-| M830A3 IHEAT-FS-T | 1000  | 25** | 1310 | Fictional round. +100% spalling chance. ERA is only 15% effective. |
-| M908 HE-OR-T | 250* | 75** | 1410 | Has impact-delay fuze. 300 fragments (configurable count). |
-| XM1147 AMP-T | 250* | 120** | 1410 | Point-detonate and airburst fuze or proximity fuze. 600 fragments (configurable count). |
-| LAHAT | 800 | 300 |  | Gun-launched ATGM with SALH guidance. ERA is only 20% effective.|
-
+## Weight
+| Armor Type | Weight (KG) | Note |
+| ------------- | ------------- | ------------- |
+| Base | 59,057 | Base M1A1/E1 weight | 
+| HA | 60,599 |  | 
+| HC | 61,416 |  | 
+| SA | 62,232 |  | 
+| HU* | 72,665 | Fully loaded SEPv3 used as reference | 
 <p>
 	<ul> 
-		<li>The penetration values chosen are relative to the existing penetrators in the game and on assumptions/guesstimations based on open source information.</li>
-		<li>Steel Beasts used as reference for M829 penetration values, except for the M829A4 which has completely made up stats</li>
-		<li>Values for Anti-ERA effects are a total guess</li>
+		<li>*HU variant has optional Unobtanium armor package (UAP) that lets it weigh the same as the HA</li>
 	</ul>
 </p>
 
-## How to use the XM1147 AMP-T:
+## Powertrain
+### Engines
+| Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Braking Power | Note |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
+| AGT1500 | 1500 | 5741 | 3100 |  | Default engine. | 
+| AGT2000 | 2000 | 7655 | 3100 | +10% | Fictional. | 
+| AGT2500 | 2500 | 7415 | 4000 | +20% | Fictional. | 
+| AGT3000 | 3000 | 8899 | 4000 | +30% | Fictional. | 
+| T64 | 4430 | 12845 | 4000 | +40% | Fictional but it's the T64-GE-100. | 
+
+
+### Transmission
 <p>
 	<ul> 
-		<li>To use airburst mode, lase the target and aim slightly above it so that the shell will not impact the target. The airburst fuzing is not perfect since it might explode in front or behind the target instead of somewhere in the middle, so multiple shots might be required. Or to help compensate for the deviation, increase the fragment count but this can impact game performance.</li>
-		<li>To use point-detonate mode, make sure the range setting is at least 10 meters more than the target to ensure it would not be in airburst mode. As long as the shell directly hits the target, it will use the point-detonate fuze.</li>
+		<li>Upgradeable transmission with 6 forward gears and 3 reverse gears (compared to 4/2 of default)</li>
+	</ul>
+</p>
+
+
+### Governor
+<p>
+	<ul> 
+		<li>Governor delete option which raises potential top speed to 115 km/h forwards and 57 km/h backwards (compared to 72 km/h and 40 km/h with governor)</li>
+	</ul>
+</p>
+
+## Other Features
+### Auxilliary Power Unit (APU)
+<p>
+	<ul> 
+		<li>Retain vanilla turret traversal speed and lazing functionality even with destroyed engine</li>
+		<li>Has slightly faster turret traversal speed if the engine is AGT2500 or better and if it's still running</li>
+	</ul>
+</p>
+
+### Smoke Launcher Upgrade
+<p>
+	<ul> 
+		<li>Smoke+ upgrade, doubling the amount of salvos that could be fired and the throw distace of smoke grenades</li>
+		<li>ROSY upgrade, featuring 4 salvos and 12 smoke grenades fired per salvo covering a +/- 82° sector in front of the turret</li>
+	</ul>
+</p>
+
+### Loading Proficiency
+<p>
+	<ul> 
+		<li>4 skill levels, with slowest loading time of 7 seconds (min qualification) and 1 second reduction as you go up</li>
+		<li>Out of action loader and ready rack loading times are also affected</li>
 	</ul>
 </p>
 
