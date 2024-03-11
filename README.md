@@ -16,6 +16,8 @@
 		<li>Toggleable Auxilliary Power Unit (APU)</li>
 		<li>Configurable enhanced smoke launcher system</li>
 		<li>Toggleable clean turret look (no attachments like ALICE packs or MREs)</li>
+		<li>Fixed horizontal stabilizer not working in campaign</li>
+		<li>Fixed issue with enhanced optics not working in campaign (from AMP 2.4 Preview 1)</li>
 	</ul>
 </p>
 
