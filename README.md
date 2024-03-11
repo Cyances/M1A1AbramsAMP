@@ -23,7 +23,9 @@
 | Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | M908 HE-OR-T | 250* | 75** | 1410 | New! Has impact-delay fuze |
-| M830A1 HEAT-MP-T | - | 50** | 1410 | Has toggleable proximity fuze option in-game |
+| M830A1 HEAT-MP-T | - | 50** | 1410 | Has toggleable proximity fuze option in-game now |
+| M830A2 IHEAT-FS-T | - | 35** | 1410 |  |
+| M830A3 IHEAT-FS-T | - | 25** | 1310 |  |
 | XM1147 AMP-T | 250* | 120** | - | Changed behavior to HE instead of HEAT. Has toggleable proximity fuze now but disabled in config. The time-delay fuze is still enabled by default. |
 | M829 APFSDS-T | - | - | - | Toggleable +25% spalling chance |
 | M829A1 APFSDS-T | - | - | - | Toggleable +25% spalling chance |
