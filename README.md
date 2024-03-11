@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.4 WIP
+# M1A1 Abrams AMP v2.4
 
 ## Branch release notes:
 <p>
@@ -16,19 +16,19 @@
 		<li>Toggleable Auxilliary Power Unit (APU)</li>
 		<li>Configurable enhanced smoke launcher system</li>
 		<li>Toggleable clean turret look (no attachments like ALICE packs or MREs)</li>
-		<li></li>
 	</ul>
 </p>
 
-### Round Changes
+## Round Changes
 | Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | M908 HE-OR-T | 250* | 75** | 1410 | New! Has impact-delay fuze |
-| XM1147 AMP-T | 250* | 120** | - | Changed behavior to HE instead of HEAT. Has proximity fuze now but still be able to retain the old time-delay fuze in config. |
-| M829 | - | - | - | Toggleable +25% spalling chance |
-| M829A1 | - | - | - | Toggleable +25% spalling chance |
-| M829A2 | - | - | - | Toggleable +50% spalling chance |
-| M829A3 | - | - | - | Toggleable +75% spalling chance |
+| M830A1 HEAT-MP-T | - | 50** | 1410 | Has toggleable proximity fuze option in-game |
+| XM1147 AMP-T | 250* | 120** | - | Changed behavior to HE instead of HEAT. Has toggleable proximity fuze now but disabled in config. The time-delay fuze is still enabled by default. |
+| M829 APFSDS-T | - | - | - | Toggleable +25% spalling chance |
+| M829A1 APFSDS-T | - | - | - | Toggleable +25% spalling chance |
+| M829A2 APFSDS-T | - | - | - | Toggleable +50% spalling chance |
+| M829A3 APFSDS-T | - | - | - | Toggleable +75% spalling chance |
 | M2/M8 AP-T/I | 29 | - | 887 | M2 Coax |
 | M962 SLAP-T | 36 | - | 1200 | M2 Coax. Has slightly less drag than M2/M8. |
 
@@ -40,37 +40,61 @@
 	</ul>
 </p>
 
-### Situational Awareness (SA) - roughly #% increase in protection
-| Area  | Protection vs KE (mm) | Protection vs CE (mm) 
-| ------------- | ------------- | ------------- | 
-| Hull front |  |  |
-| Turret cheek |  |  | 
-| Turret side |  |  | 
-| Composite side skirt |  |  | 
-| Gun mantlet |  |  | 
+## Armor variants list:
+#### Situational Awareness (SA) - roughly 85% increase in KE protection
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
+| ------------- | ------------- | ------------- | ------------- |
+| Hull front | 750  | 1200  |  |
+| Turret cheek | 910 | 1510 |   |
+| Turret side | 510 | 560 |   |
+| Composite side skirt | 105 | 145 |   |
+| Gun mantlet | 540 | 820 |   |
+<p>
+	<ul> 
+		<li>Only the turret cheeks and hull front had a KE protection upgrade for the SA variant</li>
+		<li>The other areas have the same values as the HC variant</li>
+	</ul>
+</p>
 
 
-### Weight
+#### Heavy Ultra (HU) - Custom protection values
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
+| ------------- | ------------- | ------------- | ------------- | 
+| Hull front* | 1030  | 1500  |  |
+| Turret cheek* | 1130 | 1800 |  |
+| Turret side* | 730 | 1240 |  |
+<p>
+	<ul> 
+		<li>*These areas have thicker face and backing plates that were added in AMPv2.3 but not listed before</li>
+	</ul>
+</p>
+
+## Weight
 | Armor Type | Weight (KG) | Note |
 | ------------- | ------------- | ------------- |
 | Base | 59,057 | Base M1A1/E1 weight | 
 | HA | 60,599 |  | 
 | HC | 61,416 |  | 
 | SA | 62,232 |  | 
-| HU | 72,665 | Fully loaded SEPv3 used as reference. Has optional Unobtanium armor package that lets it weigh the same as the HA. | 
+| HU* | 72,665 | Fully loaded SEPv3 used as reference | 
+<p>
+	<ul> 
+		<li>*HU variant has optional Unobtanium armor package (UAP) that lets it weigh the same as the HA</li>
+	</ul>
+</p>
 
-### Powertrain
-#### Engines
+## Powertrain
+### Engines
 | Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Braking Power | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
 | AGT1500 | 1500 | 5741 | 3100 |  | Default engine. | 
-| AGT2000 | 2000 | 7655 | 3100 | +7.5% | Fictional. | 
-| AGT2500 | 2500 | 7415 | 4000 | +15% | Fictional. | 
-| AGT3000 | 3000 | 8899 | 4000 | +22.5% | Fictional. | 
-| T64 | 4430 | 12845 | 4000 | +30% | Fictional but it's the T64-GE-100. | 
+| AGT2000 | 2000 | 7655 | 3100 | +10% | Fictional. | 
+| AGT2500 | 2500 | 7415 | 4000 | +20% | Fictional. | 
+| AGT3000 | 3000 | 8899 | 4000 | +30% | Fictional. | 
+| T64 | 4430 | 12845 | 4000 | +40% | Fictional but it's the T64-GE-100. | 
 
 
-#### Transmission
+### Transmission
 <p>
 	<ul> 
 		<li>Upgradeable transmission with 6 forward gears and 3 reverse gears (compared to 4/2 of default)</li>
@@ -78,23 +102,23 @@
 </p>
 
 
-#### Governor
+### Governor
 <p>
 	<ul> 
 		<li>Governor delete option which raises potential top speed to 115 km/h forwards and 57 km/h backwards (compared to 72 km/h and 40 km/h with governor)</li>
 	</ul>
 </p>
 
-### Other Features
-#### Auxilliary Power Unit (APU)
+## Other Features
+### Auxilliary Power Unit (APU)
 <p>
 	<ul> 
-		<li>Retain full turret traversal and lazing functionality even with destroyed engine</li>
-		<li>A slightly faster turret traversal speed if the engine is AGT2500 or better and if it's still running</li>
+		<li>Retain vanilla turret traversal speed and lazing functionality even with destroyed engine</li>
+		<li>Has slightly faster turret traversal speed if the engine is AGT2500 or better and if it's still running</li>
 	</ul>
 </p>
 
-#### Smoke Launcher Upgrade
+### Smoke Launcher Upgrade
 <p>
 	<ul> 
 		<li>Smoke+ upgrade, doubling the amount of salvos that could be fired and the throw distace of smoke grenades</li>
@@ -102,8 +126,7 @@
 	</ul>
 </p>
 
-
-#### Loading Proficiency
+### Loading Proficiency
 <p>
 	<ul> 
 		<li>4 skill levels, with slowest loading time of 7 seconds (min qualification) and 1 second reduction as you go up</li>
