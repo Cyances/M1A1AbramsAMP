@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.4 WIP
+# M1A1 Abrams AMP v2.4
 
 ## Branch release notes:
 <p>
