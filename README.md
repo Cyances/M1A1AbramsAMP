@@ -72,7 +72,7 @@
 </p>
 
 ## Vehicle Dynamics
-## Weight
+### Weight
 | Armor Type | Weight (KG) | Note |
 | ------------- | ------------- | ------------- |
 | Base | 59,057 | Base M1A1/E1 weight | 
