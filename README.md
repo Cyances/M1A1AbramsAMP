@@ -71,6 +71,7 @@
 	</ul>
 </p>
 
+## Vehicle Dynamics
 ## Weight
 | Armor Type | Weight (KG) | Note |
 | ------------- | ------------- | ------------- |
@@ -85,7 +86,6 @@
 	</ul>
 </p>
 
-## Vehicle Dynamics
 ### Engines
 | Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Braking Power | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
