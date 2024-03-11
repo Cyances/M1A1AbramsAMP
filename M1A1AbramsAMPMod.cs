@@ -333,8 +333,8 @@ namespace M1A1AMP
 
             heorFragments = cfg.CreateEntry<int>("HEOR Fragments", 300);
 
-            ampFuze = cfg.CreateEntry<bool>("AMP TD Fuze", false);
-            ampFuze.Description = "Switches AMP fuze to time-delay instead of proximity.";
+            ampFuze = cfg.CreateEntry<bool>("AMP Proxy Fuze", false);
+            ampFuze.Description = "Switch AMP fuze to proximity instead of time-delay.";
 
             rotateAzimuth = cfg.CreateEntry<bool>("RotateAzimuth", true);
             rotateAzimuth.Description = "Horizontal stabilization of M1A1 sights when applying lead.";
@@ -1439,7 +1439,8 @@ namespace M1A1AMP
                             vic._friendlyName = "M1E1" + m1e1Armor.Value;
                         }
 
-                        if (!ampFuze.Value) vic_go.AddComponent<ProxySwitch>();
+                        if (ampFuze.Value) vic_go.AddComponent<ProxySwitchAMP>();
+                        vic_go.AddComponent<ProxySwitchMPAT>();
 
                         ////Weapons management
                         WeaponsManager weaponsManager = vic.GetComponent<WeaponsManager>();
@@ -1451,8 +1452,7 @@ namespace M1A1AMP
                         var agsOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/").gameObject.transform;
                         var TurretScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/").gameObject.transform;
                         var m1ipLuggageScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/").gameObject.transform;// /luggage/ for M1IP
-                        var m1LuggageScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/").gameObject.transform;
-                        //US Vehicles/M1/IPM1_rig/HULL/TURRET/turret decorations parent/ for M1
+                        var m1LuggageScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/").gameObject.transform;// /turret decorations parent/ for M1
 
                         UsableOptic horizontalGps = gpsOptic.GetComponent<UsableOptic>();
                         UsableOptic horizontalFlir = flirOptic.GetComponent<UsableOptic>();
@@ -1869,20 +1869,20 @@ namespace M1A1AMP
                                     m1Smoke._smokeSlots[8].Angle = 95;*/
 
                                     //Left launchers
-                                    m1Smoke._smokeSlots[2].Angle = -80;
-                                    m1Smoke._smokeSlots[4].Angle = -65;
-                                    m1Smoke._smokeSlots[5].Angle = -50;
-                                    m1Smoke._smokeSlots[1].Angle = -35;
-                                    m1Smoke._smokeSlots[3].Angle = -20;
-                                    m1Smoke._smokeSlots[0].Angle = -5;
+                                    m1Smoke._smokeSlots[2].Angle = -82;
+                                    m1Smoke._smokeSlots[4].Angle = -67;
+                                    m1Smoke._smokeSlots[5].Angle = -52;
+                                    m1Smoke._smokeSlots[1].Angle = -37;
+                                    m1Smoke._smokeSlots[3].Angle = -22;
+                                    m1Smoke._smokeSlots[0].Angle = -7;
 
                                     //Right Launchers
-                                    m1Smoke._smokeSlots[6].Angle = 5;
-                                    m1Smoke._smokeSlots[9].Angle = 20;
-                                    m1Smoke._smokeSlots[7].Angle = 35;
-                                    m1Smoke._smokeSlots[11].Angle = 50;
-                                    m1Smoke._smokeSlots[10].Angle = 65;
-                                    m1Smoke._smokeSlots[8].Angle = 80;
+                                    m1Smoke._smokeSlots[6].Angle = 7;
+                                    m1Smoke._smokeSlots[9].Angle = 22;
+                                    m1Smoke._smokeSlots[7].Angle = 37;
+                                    m1Smoke._smokeSlots[11].Angle = 52;
+                                    m1Smoke._smokeSlots[10].Angle = 67;
+                                    m1Smoke._smokeSlots[8].Angle = 82;
 
                                     //Salvo 1
                                     //S1 Left Pattern
@@ -2183,20 +2183,20 @@ namespace M1A1AMP
                                     m1Smoke._distanceRange = new Vector2(80, 80);
 
                                     //Left launchers
-                                    m1Smoke._smokeSlots[2].Angle = -100;
-                                    m1Smoke._smokeSlots[4].Angle = -82;
-                                    m1Smoke._smokeSlots[5].Angle = -64;
-                                    m1Smoke._smokeSlots[1].Angle = -46;
-                                    m1Smoke._smokeSlots[3].Angle = -28;
-                                    m1Smoke._smokeSlots[0].Angle = -10;
+                                    m1Smoke._smokeSlots[2].Angle = -82;
+                                    m1Smoke._smokeSlots[4].Angle = -67;
+                                    m1Smoke._smokeSlots[5].Angle = -52;
+                                    m1Smoke._smokeSlots[1].Angle = -37;
+                                    m1Smoke._smokeSlots[3].Angle = -22;
+                                    m1Smoke._smokeSlots[0].Angle = -7;
 
                                     //Right Launchers
-                                    m1Smoke._smokeSlots[6].Angle = 10;
-                                    m1Smoke._smokeSlots[9].Angle = 28;
-                                    m1Smoke._smokeSlots[7].Angle = 46;
-                                    m1Smoke._smokeSlots[11].Angle = 64;
-                                    m1Smoke._smokeSlots[10].Angle = 82;
-                                    m1Smoke._smokeSlots[8].Angle = 100;
+                                    m1Smoke._smokeSlots[6].Angle = 7;
+                                    m1Smoke._smokeSlots[9].Angle = 22;
+                                    m1Smoke._smokeSlots[7].Angle = 37;
+                                    m1Smoke._smokeSlots[11].Angle = 52;
+                                    m1Smoke._smokeSlots[10].Angle = 67;
+                                    m1Smoke._smokeSlots[8].Angle = 82;
 
                                     //Salvo 1
                                     //S1 Left Pattern
@@ -2765,6 +2765,7 @@ namespace M1A1AMP
                 ammo_m830a1.RhaPenetration = 480;
                 ammo_m830a1.ShatterOnRicochet = false;
                 ammo_m830a1.SpallMultiplier = 0.5f;
+                ammo_m830a1.ShotVisual = ammo_3of26.ShotVisual;
                 ammo_m830a1.TntEquivalentKg = 2.721f;
 
                 ammo_codex_m830a1 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
@@ -2784,8 +2785,8 @@ namespace M1A1AMP
                 clip_codex_m830a1.ClipType = clip_m830a1;
 
                 m830a1_forward_frag.Name = "MPAT forward frag";
-                m830a1_forward_frag.RhaPenetration = 100f;
-                m830a1_forward_frag.MuzzleVelocity = 700f;
+                m830a1_forward_frag.RhaPenetration = 120f;
+                m830a1_forward_frag.MuzzleVelocity = 600f;
                 m830a1_forward_frag.Category = AmmoType.AmmoCategory.Penetrator;
                 m830a1_forward_frag.Mass = 0.005f;
                 m830a1_forward_frag.SectionalArea = 0.03f;
@@ -2796,6 +2797,8 @@ namespace M1A1AMP
                 m830a1_forward_frag.Caliber = 3f;
                 m830a1_forward_frag.ImpactTypeUnfuzed = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpact;
                 m830a1_forward_frag.ImpactTypeUnfuzedTerrain = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpactTerrain;
+
+                ProxyFuzeMPAT.AddFuzeMPAT(ammo_m830a1);
 
                 //m830a2
                 ammo_m830a2 = new AmmoType();
@@ -2872,7 +2875,7 @@ namespace M1A1AMP
                 ammo_xm1147.Category = AmmoType.AmmoCategory.Explosive;
                 ammo_xm1147.CertainRicochetAngle = 0.0f;
                 ammo_xm1147.Coeff = 0.16f;
-                ammo_xm1147.DetonateSpallCount = ampFragments.Value / 2; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
+                ammo_xm1147.DetonateSpallCount = ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
                 ammo_xm1147.Mass = 11.4f;
                 ammo_xm1147.MaxSpallRha = 120f;
                 ammo_xm1147.MinSpallRha = 50f;
@@ -2880,6 +2883,7 @@ namespace M1A1AMP
                 ammo_xm1147.Name = "XM1147 AMP-T";
                 ammo_xm1147.RhaPenetration = 250;
                 ammo_xm1147.ShatterOnRicochet = false;
+                ammo_xm1147.ShotVisual = ammo_3of26.ShotVisual;
                 ammo_xm1147.SpallMultiplier = 2f;
                 ammo_xm1147.TntEquivalentKg = 4.14f; //2.3Kg PAX-3, but treated 80% more power than equivalent TNT load
 
@@ -2913,7 +2917,7 @@ namespace M1A1AMP
                 xm1147_forward_frag.ImpactTypeUnfuzed = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpact;
                 xm1147_forward_frag.ImpactTypeUnfuzedTerrain = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpactTerrain;
 
-                if (!ampFuze.Value) ProxyFuze.AddAmpFuze(ammo_xm1147);
+                if (ampFuze.Value) ProxyFuzeAMP.AddFuzeAMP(ammo_xm1147);
 
                 //lahat
                 ammo_lahat = new AmmoType();
@@ -3615,7 +3619,7 @@ namespace M1A1AMP
         {
             private static void Postfix(GHPC.Weapons.LiveRound __instance)
             {
-                if (ampFuze.Value)
+                if (!ampFuze.Value)
                 {
                     if (__instance.Info.Name != "XM1147 AMP-T") return;
 

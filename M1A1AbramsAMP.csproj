@@ -110,7 +110,8 @@
     <Compile Include="M1A1AbramsAMPMod.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyFuze.cs" />
+    <Compile Include="ProxyFuzeMPAT.cs" />
+    <Compile Include="ProxyFuzeAMP.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>

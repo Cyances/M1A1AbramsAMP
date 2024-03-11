@@ -16,7 +16,7 @@ using M1A1AMP;
 
 namespace M1A1AMP
 {
-    public class ProxySwitch : MonoBehaviour
+    public class ProxySwitchAMP : MonoBehaviour
     {
         public bool activated = false;
         private float cd = 0f;
@@ -46,7 +46,7 @@ namespace M1A1AMP
         }
     }
 
-    public class ProxyFuze : MonoBehaviour
+    public class ProxyFuzeAMP : MonoBehaviour
     {
         private GHPC.Weapons.LiveRound live_round;
         private static GameObject prox_fuse;
@@ -60,10 +60,10 @@ namespace M1A1AMP
             prox_fuse = new GameObject("amp prox fuse");
             prox_fuse.layer = 8;
             prox_fuse.SetActive(false);
-            prox_fuse.AddComponent<ProxyFuze>();
+            prox_fuse.AddComponent<ProxyFuzeAMP>();
         }
 
-        public static void AddAmpFuze(AmmoType ammo_type)
+        public static void AddFuzeAMP(AmmoType ammo_type)
         {
             if (prox_ammos.Contains(ammo_type.Name)) return;
             prox_ammos.Add(ammo_type.Name);
@@ -108,8 +108,8 @@ namespace M1A1AMP
                 if (prox_ammos.Contains(__instance.Info.Name) && __instance.gameObject.transform.Find("amp prox fuse(Clone)") == null)
                 {
                     GameObject p = GameObject.Instantiate(prox_fuse, __instance.transform);
-                    p.GetComponent<ProxyFuze>().live_round = __instance;
-                    p.SetActive(__instance.Shooter.gameObject.GetComponent<ProxySwitch>().activated);
+                    p.GetComponent<ProxyFuzeAMP>().live_round = __instance;
+                    p.SetActive(__instance.Shooter.gameObject.GetComponent<ProxySwitchAMP>().activated);
                 }
                 else if (__instance.gameObject.transform.Find("amp prox fuse(Clone)"))
                 {
@@ -124,10 +124,10 @@ namespace M1A1AMP
             private static bool Prefix(GHPC.Weapons.LiveRound __instance)
             {
                 if (__instance.Info.Name != "XM1147 AMP-T") return true;
-                if (!__instance.gameObject.GetComponentInChildren<ProxyFuze>()) return true;
-                if (!__instance.gameObject.GetComponentInChildren<ProxyFuze>().detonated) return true;
+                if (!__instance.gameObject.GetComponentInChildren<ProxyFuzeAMP>()) return true;
+                if (!__instance.gameObject.GetComponentInChildren<ProxyFuzeAMP>().detonated) return true;
 
-                int fragCount = M1A1AbramsAMPMod.ampFragments.Value / 2;
+                int fragCount = M1A1AbramsAMPMod.ampFragments.Value / 6;
 
                 for (int i = 0; i < fragCount; i++)
                 {
@@ -136,8 +136,8 @@ namespace M1A1AMP
                         .GetComponent<GHPC.Weapons.LiveRound>();
 
                     component.Info = M1A1AbramsAMPMod.xm1147_forward_frag;
-                    component.CurrentSpeed = 700f;
-                    component.MaxSpeed = 700f;
+                    component.CurrentSpeed = 600f;
+                    component.MaxSpeed = 600f;
                     component.IsSpall = false;
                     component.Shooter = __instance.Shooter;
                     component.transform.position = __instance.transform.position;

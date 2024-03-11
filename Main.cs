@@ -54,7 +54,8 @@ namespace M1A1AMP
             StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(GetVics), GameStatePriority.Medium);
             CITV.Init();
             M1A1AbramsAMPMod.Init();
-            ProxyFuze.Init();
+            ProxyFuzeAMP.Init();
+            ProxyFuzeMPAT.Init();
         }
     }
 }
