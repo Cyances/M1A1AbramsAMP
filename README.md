@@ -167,7 +167,7 @@ If you get an error launching through Steam you will need to run the game execut
 </p>
 
 ## Vehicle Dynamics
-## Weight
+### Weight
 | Armor Type | Weight (KG) | Note |
 | ------------- | ------------- | ------------- |
 | Base | 59,057 | Base M1A1/E1 weight | 
