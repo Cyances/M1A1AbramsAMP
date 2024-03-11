@@ -26,6 +26,7 @@ using System.IO;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using GHPC.Weaponry;
 using static GHPC.Equipment.VehicleSmokeManager;
+using Thermals;
 
 namespace M1A1AMP
 {
@@ -380,7 +381,7 @@ namespace M1A1AMP
             m1e1Smoke = cfg.CreateEntry<bool>("M1E1 Smoke+", false);
 
             m1a1Rosy = cfg.CreateEntry<bool>("M1A1 ROSY", false);
-            m1a1Rosy.Description = "Replaces M250 with Rapid Obscuring Sytem (Smoke+ required)";
+            m1a1Rosy.Description = "Replaces M250 with 4 charges of Rapid Obscuring Sytem (Smoke+ required)";
             m1e1Rosy= cfg.CreateEntry<bool>("M1E1 ROSY", false);
 
             m1a1Agt = cfg.CreateEntry<string>("M1A1 Engine", "AGT1500");
@@ -395,7 +396,7 @@ namespace M1A1AMP
             m1a1Apu = cfg.CreateEntry<bool>("M1A1 APU", false);
             m1e1Apu = cfg.CreateEntry<bool>("M1E1 APU", false);
 
-            noLuggage = cfg.CreateEntry<bool>("No Luggage", false);
+            noLuggage = cfg.CreateEntry<bool>("Clean Turret", false);
             noLuggage.Description = "Remove items attached to turret like ALICE packs or MRE boxes";
         }
         public static IEnumerator Convert(GameState _)
@@ -1414,6 +1415,7 @@ namespace M1A1AMP
                     break;
             }
 
+
             foreach (GameObject vic_go in AbramsAMPMod.vic_gos)
             {
                 Vehicle vic = vic_go.GetComponent<Vehicle>();
@@ -1687,15 +1689,22 @@ namespace M1A1AMP
                         float engine_Minrpm = 600f;//600
                         float engine_Maxrpmchange = 4000f;
 
-                        int brakes_Agt2000 = 74820;//69600 vanilla
+                        //7.5% intervals
+                        /*int brakes_Agt2000 = 74820;//69600 vanilla
                         int brakes_Agt2500 = 80040;
                         int brakes_Agt3000 = 85260;
-                        int brakes_T64 = 90480;
+                        int brakes_T64 = 90480;*/
+
+                        //10%
+                        int brakes_Agt2000 = 76560;//69600 vanilla
+                        int brakes_Agt2500 = 83520;
+                        int brakes_Agt3000 = 90480;
+                        int brakes_T64 = 97440;
 
 
                         if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
                         {
-                            for (int i = 0; i < 14; i++)
+                            /*for (int i = 0; i < 14; i++)
                             {
                                 m1VC.wheels[i].wheelController.damper.force = -3.2616f;//-3.2616
                                 m1VC.wheels[i].wheelController.damper.maxForce = 39000;//19000
@@ -1709,7 +1718,7 @@ namespace M1A1AMP
                                 m1VC.wheels[i].wheelController.spring.maxForce = 39000;//39000
                                 m1VC.wheels[i].wheelController.spring.maxLength = 0.52f;//0.47
                                 //m1VC.wheels[i].wheelController.spring.overExtended = false;//false
-                            }
+                            }*/
 
                             switch (m1a1Armor.Value)
                             {
@@ -1832,11 +1841,16 @@ namespace M1A1AMP
                                 m1Smoke._distanceRange = new Vector2(50, 50);//25, 35
                                 for (int i = 0; i < 12; i++)
                                 {
-                                    m1Smoke._smokeSlots[i].Rounds = 400;
+                                    m1Smoke._smokeSlots[i].Rounds = 2;
                                 }
 
                                 if (m1a1Rosy.Value)
                                 {
+                                    for (int i = 0; i < 12; i++)
+                                    {
+                                        m1Smoke._smokeSlots[i].Rounds = 4;
+                                    }
+
                                     m1Smoke._distanceRange = new Vector2(80, 80);
                                     /*//Left launchers
                                     m1Smoke._smokeSlots[2].Angle = -95;
@@ -1855,20 +1869,20 @@ namespace M1A1AMP
                                     m1Smoke._smokeSlots[8].Angle = 95;*/
 
                                     //Left launchers
-                                    m1Smoke._smokeSlots[2].Angle = -100;
-                                    m1Smoke._smokeSlots[4].Angle = -82;
-                                    m1Smoke._smokeSlots[5].Angle = -64;
-                                    m1Smoke._smokeSlots[1].Angle = -46;
-                                    m1Smoke._smokeSlots[3].Angle = -28;
-                                    m1Smoke._smokeSlots[0].Angle = -10;
+                                    m1Smoke._smokeSlots[2].Angle = -80;
+                                    m1Smoke._smokeSlots[4].Angle = -65;
+                                    m1Smoke._smokeSlots[5].Angle = -50;
+                                    m1Smoke._smokeSlots[1].Angle = -35;
+                                    m1Smoke._smokeSlots[3].Angle = -20;
+                                    m1Smoke._smokeSlots[0].Angle = -5;
 
                                     //Right Launchers
-                                    m1Smoke._smokeSlots[6].Angle = 10;
-                                    m1Smoke._smokeSlots[9].Angle = 28;
-                                    m1Smoke._smokeSlots[7].Angle = 46;
-                                    m1Smoke._smokeSlots[11].Angle = 64;
-                                    m1Smoke._smokeSlots[10].Angle = 82;
-                                    m1Smoke._smokeSlots[8].Angle = 100;
+                                    m1Smoke._smokeSlots[6].Angle = 5;
+                                    m1Smoke._smokeSlots[9].Angle = 20;
+                                    m1Smoke._smokeSlots[7].Angle = 35;
+                                    m1Smoke._smokeSlots[11].Angle = 50;
+                                    m1Smoke._smokeSlots[10].Angle = 65;
+                                    m1Smoke._smokeSlots[8].Angle = 80;
 
                                     //Salvo 1
                                     //S1 Left Pattern
@@ -2156,11 +2170,16 @@ namespace M1A1AMP
                                 m1Smoke._distanceRange = new Vector2(50, 50);//25, 35
                                 for (int i = 0; i < 12; i++)
                                 {
-                                    m1Smoke._smokeSlots[i].Rounds = 400;
+                                    m1Smoke._smokeSlots[i].Rounds = 2;
                                 }
 
                                 if (m1e1Rosy.Value)
                                 {
+                                    for (int i = 0; i < 12; i++)
+                                    {
+                                        m1Smoke._smokeSlots[i].Rounds = 4;
+                                    }
+
                                     m1Smoke._distanceRange = new Vector2(80, 80);
 
                                     //Left launchers
@@ -2282,25 +2301,6 @@ namespace M1A1AMP
                                     sg2_smokePattern12.Add(sg2smokePatternData12);
 
                                     m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern12.ToArray<SmokePatternData>();
-
-                                    //More smoke slots
-                                    var launcher12 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
-                                    SmokeSlot slot12 = new SmokeSlot();
-                                    Util.ShallowCopy(slot12, m1Smoke._smokeSlots[2]);
-                                    slot12.Rounds = 300;
-                                    slot12.Angle = -120;
-                                    launcher12.Add(slot12);
-
-                                    m1Smoke._smokeSlots = launcher12.ToArray<SmokeSlot>();
-
-                                    var launcher13 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
-                                    SmokeSlot slot13 = new SmokeSlot();
-                                    Util.ShallowCopy(slot13, m1Smoke._smokeSlots[10]);
-                                    slot13.Rounds = 300;
-                                    slot13.Angle = 120;
-                                    launcher13.Add(slot13);
-
-                                    m1Smoke._smokeSlots = launcher13.ToArray<SmokeSlot>();
                                 }
                             }
                         }
@@ -2491,6 +2491,8 @@ namespace M1A1AMP
 
                 VariableArmor assem_armour = assem.AddComponent<VariableArmor>();
                 VariableArmor glass_armour = glass.AddComponent<VariableArmor>();
+                //HeatSource assem_armour_Ts = assem.AddComponent<HeatSource>();
+                //HeatSource glass_armour_Ts = glass.AddComponent<HeatSource>();
                 assem_armour.AverageRha = 40f;
                 assem_armour._name = "CITV";
                 glass_armour._name = "CITV glass";
@@ -2498,6 +2500,7 @@ namespace M1A1AMP
 
             if (gun_m256 == null)
             {
+
                 ////Borrow existing ammo and armor attributes
                 foreach (AmmoCodexScriptable s in Resources.FindObjectsOfTypeAll(typeof(AmmoCodexScriptable)))
                 {
