@@ -108,7 +108,7 @@ If you get an error launching through Steam you will need to run the game execut
 
 ## Round types list:
 | Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
-| ------------- | ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
 | M829 APFSDS-T | 600 |  | 1670  | Toggleable +25% spalling chance |
 | M829A1 APFSDS-T  | 700 |  | 1575 | Toggleable +25% spalling chance |
 | M829A2 APFSDS-T | 750 |  | 1680 | Toggleable +50% spalling chance |
