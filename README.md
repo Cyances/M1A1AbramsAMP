@@ -24,11 +24,12 @@
 | Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | M908 HE-OR-T | 250* | 75** | 1410 | New! Has impact-delay fuze |
-| XM1147 AMP-T | 250* | 120** | - | Changed behavior to HE instead of HEAT. Has proximity fuze now but still be able to retain the old time-delay fuze in config. |
-| M829 | - | - | - | Toggleable +25% spalling chance |
-| M829A1 | - | - | - | Toggleable +25% spalling chance |
-| M829A2 | - | - | - | Toggleable +50% spalling chance |
-| M829A3 | - | - | - | Toggleable +75% spalling chance |
+| M830A1 HEAT-MP-T | - | 50** | 1410 | Has toggleable proximity fuze option in-game |
+| XM1147 AMP-T | 250* | 120** | - | Changed behavior to HE instead of HEAT. Has proximity fuze now but disabled in config. The time-delay fuze is still enabled by default. |
+| M829 APFSDS-T | - | - | - | Toggleable +25% spalling chance |
+| M829A1 APFSDS-T | - | - | - | Toggleable +25% spalling chance |
+| M829A2 APFSDS-T | - | - | - | Toggleable +50% spalling chance |
+| M829A3 APFSDS-T | - | - | - | Toggleable +75% spalling chance |
 | M2/M8 AP-T/I | 29 | - | 887 | M2 Coax |
 | M962 SLAP-T | 36 | - | 1200 | M2 Coax. Has slightly less drag than M2/M8. |
 
@@ -42,8 +43,8 @@
 
 ## Armor variants list:
 #### Situational Awareness (SA) - roughly 85% increase in KE protection
-| Area  | Protection vs KE (mm) | Protection vs CE (mm) 
-| ------------- | ------------- | ------------- | 
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
+| ------------- | ------------- | ------------- | ------------- |
 | Hull front | 590  | 1200  |
 | Turret cheek | 880 | 1510 | 
 | Turret side | 510 | 560 | 
@@ -60,9 +61,9 @@
 #### Heavy Ultra (HU) - Custom protection values
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
 | ------------- | ------------- | ------------- | ------------- | 
-| Hull front* | 810  | 1280  |  |
-| Turret cheek* | 910 | 1580 |  |
-| Turret side* | 510 | 1020 |  |
+| Hull front* | 1030  | 1500  |  |
+| Turret cheek* | 1130 | 1800 |  |
+| Turret side* | 730 | 1240 |  |
 <p>
 	<ul> 
 		<li>*These areas have thicker face and backing plates that were added in AMPv2.3 but not listed</li>
