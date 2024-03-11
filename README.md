@@ -106,6 +106,7 @@ If you get an error launching through Steam you will need to run the game execut
 - Proximity fuze option automatically enabled for the MPAT, but needs to be enabled in the config for the AMP 
 - To use proximity mode, press middle mouse button and the round should have [Proximity] postfix to its name in the lower left part of the UI
 - To use point-detonate mode, press the middle mouse again to remove the [Proximity]
+
 ![AMP Proximity Mode](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/e665ec03-62bd-44fe-9276-4f1d7ab12035)		
 
 ## Armor variants list:
