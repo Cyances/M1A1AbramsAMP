@@ -97,20 +97,16 @@ If you get an error launching through Steam you will need to run the game execut
 ## How to use the XM1147 AMP-T or M830A1 HEAT-MP-T:
 ### Point-detonate + Time-delay Fuze (AMP only)
 
-		- Default fuzing type for AMP
-		- To use airburst mode, lase the target and aim slightly above it so that the shell will not impact the target. The airburst fuzing is not perfect since it might explode in front or behind the target instead of somewhere in the middle, so multiple shots might be required. Or to help compensate for the deviation, increase the fragment count but this can impact game performance.
-		- To use point-detonate mode, make sure the range setting is at least 10 meters more than the target to ensure it would not be in airburst mode. As long as the shell directly hits the target, it will use the point-detonate fuze.
+- Default fuzing type for AMP
+- To use airburst mode, lase the target and aim slightly above it so that the shell will not impact the target. The airburst fuzing is not perfect since it might explode in front or behind the target instead of somewhere in the middle, so multiple shots might be required. Or to help compensate for the deviation, increase the fragment count but this can impact game performance.
+- To use point-detonate mode, make sure the range setting is at least 10 meters more than the target to ensure it would not be in airburst mode. As long as the shell directly hits the target, it will use the point-detonate fuze.
 
 
 ### Point-detonate + Proxmity Fuze
-<p>
-	<ul> 
-		<li>Proximity fuze option automatically enabled for the MPAT, but needs to be enabled in the config for the AMP </li>
-		<li>To use proximity mode, press middle mouse button and the round should have [Proximity] postfix to its name in the lower left part of the UI</li>
-		<li>To use point-detonate mode, press the middle mouse again to remove the [Proximity]</li>
-		![AMP Proximity Mode](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/e665ec03-62bd-44fe-9276-4f1d7ab12035)		
-	</ul>
-</p>
+- Proximity fuze option automatically enabled for the MPAT, but needs to be enabled in the config for the AMP 
+- To use proximity mode, press middle mouse button and the round should have [Proximity] postfix to its name in the lower left part of the UI
+- To use point-detonate mode, press the middle mouse again to remove the [Proximity]
+![AMP Proximity Mode](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/e665ec03-62bd-44fe-9276-4f1d7ab12035)		
 
 ## Armor variants list:
 ### Heavy Armor (HA) - roughly 30% increase in protection
