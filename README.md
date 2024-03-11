@@ -180,7 +180,7 @@ If you get an error launching through Steam you will need to run the game execut
 	</ul>
 </p>
 
-## Powertrain
+## Vehicle Dynamics
 ### Engines
 | Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Braking Power | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
