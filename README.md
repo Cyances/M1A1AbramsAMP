@@ -6,10 +6,11 @@ A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/M
 If you get an error launching through Steam you will need to run the game executable directly.
 
 ![Screenshot_1](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20SPW-60B.png)
-![Screenshot_2](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20SPW-60B%20XRay.png)
 ![Screenshot_3](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A.png)
 ![Screenshot_4](https://raw.githubusercontent.com/Cyances/M1A1AbramsAMP/master/Images/AMP%20vs%20T-55A%20XRay.png)
 ![AMP vs Mi-24](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/2727aa85-097b-41c6-8a31-6a6c8dd7af12)
+![AMP Enhanced Optics v2](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/c538fba0-c967-429f-b91a-e6d338ec7a4e)
+
 
 ## AMP 2.4 Update:
 <p>
