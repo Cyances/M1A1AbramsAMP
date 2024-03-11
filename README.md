@@ -25,7 +25,7 @@
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | M908 HE-OR-T | 250* | 75** | 1410 | New! Has impact-delay fuze |
 | M830A1 HEAT-MP-T | - | 50** | 1410 | Has toggleable proximity fuze option in-game |
-| XM1147 AMP-T | 250* | 120** | - | Changed behavior to HE instead of HEAT. Has proximity fuze now but disabled in config. The time-delay fuze is still enabled by default. |
+| XM1147 AMP-T | 250* | 120** | - | Changed behavior to HE instead of HEAT. Has toggleable proximity fuze now but disabled in config. The time-delay fuze is still enabled by default. |
 | M829 APFSDS-T | - | - | - | Toggleable +25% spalling chance |
 | M829A1 APFSDS-T | - | - | - | Toggleable +25% spalling chance |
 | M829A2 APFSDS-T | - | - | - | Toggleable +50% spalling chance |
