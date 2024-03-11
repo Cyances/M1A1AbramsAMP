@@ -1666,8 +1666,6 @@ namespace M1A1AMP
                         Rigidbody m1Rb = vic_go.GetComponent<Rigidbody>();
                         VehicleSmokeManager m1Smoke = vic_go.GetComponentInChildren<VehicleSmokeManager>();
 
-                        DecorationsManager turretLuggage = vic_go.GetComponentInChildren<DecorationsManager>();
-
                         //Chonk quantifier
                         int mass_A1 = 59057;//55338 - Value for default M1
                         int mass_HA = 60599;
@@ -1704,6 +1702,7 @@ namespace M1A1AMP
 
                         if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
                         {
+                            //Suspension testing
                             /*for (int i = 0; i < 14; i++)
                             {
                                 m1VC.wheels[i].wheelController.damper.force = -3.2616f;//-3.2616
@@ -1989,7 +1988,8 @@ namespace M1A1AMP
                                     m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern12.ToArray<SmokePatternData>();
 
                                     //More smoke slots
-                                    var launcher12 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
+                                    //GOATLAS
+                                    /*var launcher12 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
                                     SmokeSlot slot12 = new SmokeSlot();
                                     Util.ShallowCopy(slot12, m1Smoke._smokeSlots[2]);
                                     slot12.Rounds = 300;
@@ -2005,7 +2005,7 @@ namespace M1A1AMP
                                     slot13.Angle = 120;
                                     launcher13.Add(slot13);
 
-                                    m1Smoke._smokeSlots = launcher13.ToArray<SmokeSlot>();
+                                    m1Smoke._smokeSlots = launcher13.ToArray<SmokeSlot>();/*
 
                                     //More smoke patterns
                                     /*var sg1_smokePattern7 = m1Smoke._smokeGroups[0].SmokePatternData.ToList<SmokePatternData>();
@@ -2032,18 +2032,6 @@ namespace M1A1AMP
 
                                     m1Smoke._smokeGroups[2].SmokePatternData = sg1_smokePattern7.ToArray<SmokePatternData>();
                                     m1Smoke._smokeGroups[2].SmokePatternData = sg1_smokePattern8.ToArray<SmokePatternData>();*/
-
-
-
-                                    //GOATLAS
-                                    /*var launcher12 = m1Smoke._smokeSlots.ToList<SmokeSlot>();
-                                    SmokeSlot slot12 = new SmokeSlot();
-                                    Util.ShallowCopy(slot12, m1Smoke._smokeSlots[2]);
-                                    slot12.Rounds = 300;
-                                    slot12.Angle = -120;
-                                    launcher12.Add(slot12);
-
-                                    m1Smoke._smokeSlots = launcher12.ToArray<SmokeSlot>();*/
                                 }
                             }
                         }
@@ -3406,7 +3394,7 @@ namespace M1A1AMP
                 armor_cheeksDUarmor_SA = new ArmorType();
                 Util.ShallowCopy(armor_cheeksDUarmor_SA, armor_specialarmor_VNL);
                 armor_cheeksDUarmor_SA.RhaeMultiplierCe = 1.885f; //default 1.3
-                armor_cheeksDUarmor_SA.RhaeMultiplierKe = 1.0175f; //default 0.55
+                armor_cheeksDUarmor_SA.RhaeMultiplierKe = 1.045f; //default 0.55
                 armor_cheeksDUarmor_SA.Name = "Abrams SA DU armor turret cheeks";
 
                 armor_codex_cheeksDUarmor_SA = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
