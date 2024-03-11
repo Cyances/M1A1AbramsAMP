@@ -1,4 +1,4 @@
-![AMP MelonPreferences v3-2](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/59b0a109-b009-40d3-a503-b8ee0b5e85f9)# M1A1 Abrams AMP v2.4
+# M1A1 Abrams AMP v2.4
 Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. I also would like to thank Swiss/SovGrenadier for the GLATGM implementation. Be sure to checkout their mods because they are great!
 
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
