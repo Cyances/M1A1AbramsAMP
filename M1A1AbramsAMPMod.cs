@@ -1664,6 +1664,8 @@ namespace M1A1AMP
                         Rigidbody m1Rb = vic_go.GetComponent<Rigidbody>();
                         VehicleSmokeManager m1Smoke = vic_go.GetComponentInChildren<VehicleSmokeManager>();
 
+                        DecorationsManager turretLuggage = vic_go.GetComponentInChildren<DecorationsManager>();
+
                         //Chonk quantifier
                         int mass_A1 = 59057;//55338 - Value for default M1
                         int mass_HA = 60599;
@@ -1696,17 +1698,17 @@ namespace M1A1AMP
                             for (int i = 0; i < 14; i++)
                             {
                                 m1VC.wheels[i].wheelController.damper.force = -3.2616f;//-3.2616
-                                m1VC.wheels[i].wheelController.damper.maxForce = 19000;//19000
+                                m1VC.wheels[i].wheelController.damper.maxForce = 39000;//19000
                                 m1VC.wheels[i].wheelController.damper.unitBumpForce = 10000;//10000
-                                m1VC.wheels[i].wheelController.damper.unitReboundForce = 19000;//19000
+                                m1VC.wheels[i].wheelController.damper.unitReboundForce = 39000;//19000
 
                                 m1VC.wheels[i].wheelController.spring.bottomOutForce = -314031.9f;//-314031.9
-                                m1VC.wheels[i].wheelController.spring.compressionPercent = 0.2674f;//0.2674
+                                //m1VC.wheels[i].wheelController.spring.compressionPercent = 0.2674f;//0.2674
                                 m1VC.wheels[i].wheelController.spring.force = 45940.98f;//45940.98
                                 m1VC.wheels[i].wheelController.spring.length = 0.3443f;//0.3443
                                 m1VC.wheels[i].wheelController.spring.maxForce = 39000;//39000
-                                m1VC.wheels[i].wheelController.spring.maxLength = 0.47f;//0.47
-                                m1VC.wheels[i].wheelController.spring.overExtended = false;//false
+                                m1VC.wheels[i].wheelController.spring.maxLength = 0.52f;//0.47
+                                //m1VC.wheels[i].wheelController.spring.overExtended = false;//false
                             }
 
                             switch (m1a1Armor.Value)
@@ -1821,7 +1823,7 @@ namespace M1A1AMP
 
                             if (noLuggage.Value)
                             {
-                                GameObject.Destroy(m1ipLuggageScripts.transform.Find("luggage").gameObject);
+                                GameObject.Find("luggage").SetActive(false);
                             }
 
                             if (m1a1Smoke.Value)
@@ -2145,7 +2147,7 @@ namespace M1A1AMP
 
                             if (noLuggage.Value)
                             {
-                                GameObject.Destroy(m1LuggageScripts.transform.Find("turret decorations parent").gameObject);
+                                GameObject.Find("turret decorations parent").SetActive(false);
                             }
 
                             if (m1e1Smoke.Value)
@@ -2778,6 +2780,20 @@ namespace M1A1AMP
                 clip_codex_m830a1.CompatibleWeaponSystems[0] = gun_m256;
                 clip_codex_m830a1.ClipType = clip_m830a1;
 
+                m830a1_forward_frag.Name = "MPAT forward frag";
+                m830a1_forward_frag.RhaPenetration = 100f;
+                m830a1_forward_frag.MuzzleVelocity = 700f;
+                m830a1_forward_frag.Category = AmmoType.AmmoCategory.Penetrator;
+                m830a1_forward_frag.Mass = 0.005f;
+                m830a1_forward_frag.SectionalArea = 0.03f;
+                m830a1_forward_frag.Coeff = 1f;
+                m830a1_forward_frag.UseTracer = false;
+                m830a1_forward_frag.CertainRicochetAngle = 10f;
+                m830a1_forward_frag.SpallMultiplier = 0.2f;
+                m830a1_forward_frag.Caliber = 3f;
+                m830a1_forward_frag.ImpactTypeUnfuzed = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpact;
+                m830a1_forward_frag.ImpactTypeUnfuzedTerrain = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpactTerrain;
+
                 //m830a2
                 ammo_m830a2 = new AmmoType();
                 Util.ShallowCopy(ammo_m830a2, ammo_m456);
@@ -2880,7 +2896,6 @@ namespace M1A1AMP
                 clip_codex_xm1147.CompatibleWeaponSystems[0] = gun_m256;
                 clip_codex_xm1147.ClipType = clip_xm1147;
 
-
                 xm1147_forward_frag.Name = "AMP forward frag";
                 xm1147_forward_frag.RhaPenetration = 100f;
                 xm1147_forward_frag.MuzzleVelocity = 700f;
@@ -2945,7 +2960,7 @@ namespace M1A1AMP
                 ammo_m908.ImpactFuseTime = 0.000357143f; //0.5 meters after impact
                 ammo_m908.Mass = 11.4f;
                 ammo_m908.MaxSpallRha = 75f;
-                ammo_m908.MinSpallRha = 1f;
+                ammo_m908.MinSpallRha = 25f;
                 ammo_m908.MuzzleVelocity = 1410f;
                 ammo_m908.Name = "M908 HE-OR-T";
                 ammo_m908.RhaPenetration = 250;
@@ -2988,7 +3003,7 @@ namespace M1A1AMP
                 ammo_codex_m2apt.name = "ammo_m2apt";
 
                 clip_m2apt = new AmmoType.AmmoClip();
-                clip_m2apt.Capacity = 2000;
+                clip_m2apt.Capacity = 3000;
                 clip_m2apt.Name = "M2 AP-T";
                 clip_m2apt.MinimalPattern = new AmmoCodexScriptable[1];
                 clip_m2apt.MinimalPattern[0] = ammo_codex_m2apt;
@@ -3015,7 +3030,7 @@ namespace M1A1AMP
                 ammo_codex_m8api.name = "ammo_m8api";
 
                 clip_m8api = new AmmoType.AmmoClip();
-                clip_m8api.Capacity = 2000;
+                clip_m8api.Capacity = 3000;
                 clip_m8api.Name = "M8 AP-I/T Mix";
                 clip_m8api.MinimalPattern = new AmmoCodexScriptable[]
                     {
@@ -3049,7 +3064,7 @@ namespace M1A1AMP
                 ammo_codex_m962slapt.name = "ammo_m962slapt";
 
                 clip_m962slapt = new AmmoType.AmmoClip();
-                clip_m962slapt.Capacity = 2000;
+                clip_m962slapt.Capacity = 3000;
                 clip_m962slapt.Name = "12.7x99mm M962 SLAP-T";
                 clip_m962slapt.MinimalPattern = new AmmoCodexScriptable[1];
                 clip_m962slapt.MinimalPattern[0] = ammo_codex_m962slapt;
