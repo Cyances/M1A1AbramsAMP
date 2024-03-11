@@ -119,7 +119,7 @@ If you get an error launching through Steam you will need to run the game execut
 | Composite side skirt | 105 | 145 | 
 | Gun mantlet | 540 | 820 | 
 
-#### Situational Awareness (SA) - roughly 85% increase in KE protection
+### Situational Awareness (SA) - roughly 85% increase in KE protection
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
 | ------------- | ------------- | ------------- | ------------- |
 | Hull front | 750  | 1200  |  |
