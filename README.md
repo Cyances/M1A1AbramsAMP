@@ -16,7 +16,6 @@
 		<li>Toggleable Auxilliary Power Unit (APU)</li>
 		<li>Configurable enhanced smoke launcher system</li>
 		<li>Toggleable clean turret look (no attachments like ALICE packs or MREs)</li>
-		<li></li>
 	</ul>
 </p>
 
@@ -66,7 +65,7 @@
 | Turret side* | 730 | 1240 |  |
 <p>
 	<ul> 
-		<li>*These areas have thicker face and backing plates that were added in AMPv2.3 but not listed</li>
+		<li>*These areas have thicker face and backing plates that were added in AMPv2.3 but not listed before</li>
 	</ul>
 </p>
 
@@ -77,10 +76,10 @@
 | HA | 60,599 |  | 
 | HC | 61,416 |  | 
 | SA | 62,232 |  | 
-| HU* | 72,665 | Fully loaded SEPv3 used as reference.  | 
+| HU* | 72,665 | Fully loaded SEPv3 used as reference | 
 <p>
 	<ul> 
-		<li>*HU variant has optional Unobtanium armor package (UAP) that lets it weigh the same as the HA.</li>
+		<li>*HU variant has optional Unobtanium armor package (UAP) that lets it weigh the same as the HA</li>
 	</ul>
 </p>
 
@@ -114,8 +113,8 @@
 ### Auxilliary Power Unit (APU)
 <p>
 	<ul> 
-		<li>Retain full turret traversal and lazing functionality even with destroyed engine</li>
-		<li>A slightly faster turret traversal speed if the engine is AGT2500 or better and if it's still running</li>
+		<li>Retain vanilla turret traversal speed and lazing functionality even with destroyed engine</li>
+		<li>Has slightly faster turret traversal speed if the engine is AGT2500 or better and if it's still running</li>
 	</ul>
 </p>
 
@@ -126,7 +125,6 @@
 		<li>ROSY upgrade, featuring 4 salvos and 12 smoke grenades fired per salvo covering a +/- 82° sector in front of the turret</li>
 	</ul>
 </p>
-
 
 ### Loading Proficiency
 <p>
