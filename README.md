@@ -7,7 +7,7 @@
 		<li>New round: M908 HE-OR-T</li>
 		<li>Round changes (refer to table)</li>
 		<li>Configurable CITV upgrade</li>
-		<li>Configurable enhanced optics for the GPS, FLIR and AGS</li>
+		<li>Configurable enhanced optics for the GPS, Thermals and AGS</li>
 		<li>Configurable loader proficiency</li>
 		<li>M2 Coaxial upgrade (replaces M240 and has two ammo types)</li>
 		<li>XM1147 AMP-T proximity fuze update</li>
@@ -112,6 +112,14 @@
 </p>
 
 ## Other Features
+### Enhanced optics
+<p>
+	<ul> 
+		<li>GPS has 4 zoom levels</li>
+		<li>Thermals have 4 zoom levels, clearer image and removed scanlines</li>
+		<li>AGS has 3 zoom levels and its less blurry when moving</li>
+	</ul>
+</p>
 ### Auxilliary Power Unit (APU)
 <p>
 	<ul> 
