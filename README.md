@@ -117,9 +117,9 @@
 ### Enhanced optics
 <p>
 	<ul> 
-		<li>GPS has 4 zoom levels</li>
-		<li>Thermals have 4 zoom levels, clearer image and removed scanlines</li>
-		<li>AGS has 3 zoom levels and its less blurry when moving</li>
+		<li>GPS has 5 zoom levels (vs 2 for vanilla)</li>
+		<li>Thermals have 5 zoom levels (vs 2 for vanilla), clearer image and removed scanlines</li>
+		<li>AGS has 3 zoom levels (vs 1 for vanilla) and its less blurry when moving</li>
 	</ul>
 </p>
 
@@ -128,6 +128,7 @@
 	<ul> 
 		<li>Retain vanilla turret traversal speed and lazing functionality even with destroyed engine</li>
 		<li>Has slightly faster turret traversal speed if the engine is AGT2500 or better and if it's still running</li>
+		<li>The APU itself has no model at the moment so it's indestructible</li>
 	</ul>
 </p>
 
