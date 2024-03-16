@@ -27,6 +27,11 @@ using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using GHPC.Weaponry;
 using static GHPC.Equipment.VehicleSmokeManager;
 using Thermals;
+using GHPC.AI;
+using TMPro;
+using Rewired.Utils;
+using GHPC.UI.Tips;
+using UnityEngine.UI;
 
 namespace M1A1AMP
 {
@@ -143,6 +148,7 @@ namespace M1A1AMP
         static GameObject ammo_xm1147_vis = null;
         static GameObject ammo_lahat_vis = null;
         static GameObject ammo_m908_vis = null;
+        static GameObject ammo_test_vis = null;
 
         static AmmoType ammo_m833, ammo_m456, ammo_3of26, ammo_bgm71, ammo_m8vnl;
 
@@ -287,6 +293,15 @@ namespace M1A1AMP
 
         static GameObject citv_obj;
 
+        static GameObject m82Object;
+        static GameObject m82ObjectCopy;
+        static GameObject m82ObjectCopy2;
+        static GameObject RosyObject;
+
+        static GameObject m82SmokeEffect;
+
+        static GameObject RosySmokeEffect;
+
         public static void Config(MelonPreferences_Category cfg)
         {
             m1a1firstAmmo = cfg.CreateEntry<string>("M1A1 1st Round Type", "M829A4");
@@ -401,6 +416,7 @@ namespace M1A1AMP
         }
         public static IEnumerator Convert(GameState _)
         {
+
             ////Abrams round list
             var abrams_clipcodex = new Dictionary<string, AmmoClipCodexScriptable>()
             {
@@ -770,6 +786,27 @@ namespace M1A1AMP
                             //MelonLogger.Msg("M1A1HU UniformArmor: Modified");
                         }
                     }
+
+                    ////M1A1HU DestructibleComponent pieces
+                    /*foreach (GameObject dcomponent in GameObject.FindGameObjectsWithTag("Penetrable"))
+                    {
+                        if (dcomponent == null) continue;
+
+                        //GHPC.Equipment.DestructibleComponent m1a1DC_HU = dcomponent.GetComponent<DestructibleComponent>();
+                        DestructibleComponent m1a1DC_HU = dcomponent.GetComponent<DestructibleComponent>();
+                        if (m1a1DC_HU == null) continue;
+                        if (m1a1DC_HU.Unit == null) continue;
+                        if (m1a1DC_HU.Unit.FriendlyName == "M1IP")
+                        {
+                            if (m1a1DC_HU.Name == "hull side")
+                            {
+                                m1a1DC_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
+                                m1a1DC_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
+                            }
+                            //MelonLogger.Msg("M1A1HU UniformArmor: Modified");
+                        }
+                    }*/
+
                     break;
 
                 ////Assign modified armor to M1A1SA
@@ -1264,7 +1301,7 @@ namespace M1A1AMP
                     }
                     break;
 
-                ////Assign modified armor to M1E1HC
+                ////Assign modified armor to M1E1SA
                 case "SA":
                     foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
                     {
@@ -1524,9 +1561,10 @@ namespace M1A1AMP
                             //vic._friendlyName += "+";
                         }
 
-                        /*CameraSlot commanderzoom = vic.DesignatedCameraSlots[0].gameObject.GetComponent<CameraSlot>();
+                        CameraSlot commanderzoom = vic.DesignatedCameraSlots[0].gameObject.GetComponent<CameraSlot>();
+                        commanderzoom.AllowFreeZoom = true;
                         commanderzoom.DefaultFov = 60;//60
-                        commanderzoom.OtherFovs = new float[] { 30f, 20f, 10f };//??? Uknown default*/
+                        //commanderzoom.OtherFovs = new float[] {60f, 30f, 20f, 10f };//??? Unknown default*/
 
                         ////GAS stuff
                         if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
@@ -1665,6 +1703,9 @@ namespace M1A1AMP
                         NwhChassis m1Chassis = vic_go.GetComponent<NwhChassis>();
                         Rigidbody m1Rb = vic_go.GetComponent<Rigidbody>();
                         VehicleSmokeManager m1Smoke = vic_go.GetComponentInChildren<VehicleSmokeManager>();
+                        LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
+                        UnitAI m1Ai = vic.GetComponentInChildren<UnitAI>();
+                        DriverAIController m1dAic = vic.GetComponent<DriverAIController>();
 
                         //Chonk quantifier
                         int mass_A1 = 59057;//55338 - Value for default M1
@@ -1699,9 +1740,33 @@ namespace M1A1AMP
                         int brakes_Agt3000 = 90480;
                         int brakes_T64 = 97440;
 
+                        m1Ai.FireDelay = 1;//1.5229
+                        m1Ai.SpotTimeMaxDistance = 5000;//3000
+
+                        m1Ai.GunnerAI._delayFireTimer = 2.0325f;//2.0325
+                        m1Ai.GunnerAI._sweepAngle = 120;//120
+                        m1Ai.GunnerAI._sweepDirectionShiftSpeed = 0.25f;//.25
+                        m1Ai.GunnerAI._sweepSpeed = 1200;//20
+                        m1Ai.GunnerAI._pauseLength = 5;//1
+                        m1Ai.GunnerAI._pauseTime = 8;//2
+
+                        m1Ai.TargetSensor._spotTimeMax = 1;//4
+                        m1Ai.TargetSensor._spotTimeMaxDistance = 500;//500
+                        m1Ai.TargetSensor._spotTimeMaxVelocity = 16;//4
+                        m1Ai.TargetSensor._spotTimeMin = 1;//1
+                        m1Ai.TargetSensor._spotTimeMinDistance = 1;//50
+                        m1Ai.TargetSensor._targetCooldownTime = 0.5f;//2
+
+                        m1Ai.CommanderAI._identifyTargetDurationRange = new Vector2(0.5f, 0.5f);//2,3
+                        m1Ai.CommanderAI._sweepCommsCheckDuration = 5;//5
+
+                        m1dAic.maxSpeed = 32;//20
 
                         if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
                         {
+
+
+
                             //Suspension testing
                             /*for (int i = 0; i < 14; i++)
                             {
@@ -1789,32 +1854,36 @@ namespace M1A1AMP
                                 case "Cadet":
                                     mainGun.Feed._totalReloadTime = 7;
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 5;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 5;
                                     break;
                                 case "Regular":
                                     mainGun.Feed._totalReloadTime = 6;//6
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
                                     break;
                                 case "Veteran":
                                     mainGun.Feed._totalReloadTime = 5;
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 3.5f;
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 3.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 3.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 3.5f;
+                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 7f;//8
+                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 7f;//8
                                     break;
                                 case "Ace":
                                     mainGun.Feed._totalReloadTime = 4;
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 2.5f;
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 2.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 2.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 2.5f;
+                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 6f;//8
+                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 6f;//8
                                     break;
                                 default:
                                     mainGun.Feed._totalReloadTime = 6;//6
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
                                     break;
                             }
 
@@ -1845,6 +1914,12 @@ namespace M1A1AMP
 
                                 if (m1a1Rosy.Value)
                                 {
+                                    //Smoke - M82 66mm
+                                    //Smoke - 3D6 81mm
+
+                                    //US Vehicles/M1IP/IPM1_rig/HULL/TURRET/SmokeGrenadesSetup
+                                    //m1Smoke._smokePrefab = RosyObject;//GameObject.Instantiate(m82Object, vic.transform.Find("IPM1_rig/HULL/TURRET/SmokeGrenadesSetup"));
+
                                     for (int i = 0; i < 12; i++)
                                     {
                                         m1Smoke._smokeSlots[i].Rounds = 4;
@@ -2107,32 +2182,36 @@ namespace M1A1AMP
                                 case "Cadet":
                                     mainGun.Feed._totalReloadTime = 7;
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 5;
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 5;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 5;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 5;
                                     break;
                                 case "Regular":
                                     mainGun.Feed._totalReloadTime = 6;//6
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
                                     break;
                                 case "Veteran":
                                     mainGun.Feed._totalReloadTime = 5;
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 3.5f;
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 3.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 3.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 3.5f;
+                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 7f;//8
+                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 7f;//8
                                     break;
                                 case "Ace":
                                     mainGun.Feed._totalReloadTime = 4;
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 2.5f;
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 2.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 2.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 2.5f;
+                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 6f;
+                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 6f;
                                     break;
                                 default:
                                     mainGun.Feed._totalReloadTime = 6;//6
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._retrievalDelaySeconds = 4.5f;//5
-                                    mainGun.Feed.ReadyRack._storageDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
                                     break;
                             }
 
@@ -2342,7 +2421,6 @@ namespace M1A1AMP
                         }
 
                         //// Abrams loadout management
-                        LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
                         AmmoType.AmmoClip[] m256_ammo_clip_types = new AmmoType.AmmoClip[] { };
 
                         if (vic.FriendlyName == "M1A1" + m1a1Armor.Value || vic.FriendlyName == "M1E1" + m1e1Armor.Value)
@@ -2465,6 +2543,9 @@ namespace M1A1AMP
         }
         public static void Init()
         {
+
+            //m82Object = GameObject.Find("Smoke - 3D6 81mm");
+
             if (citv_obj == null)
             {
                 var bundle = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1CITV/", "citv"));
@@ -3597,9 +3678,58 @@ namespace M1A1AMP
                 ammo_m908.VisualModel = ammo_m908_vis;
                 ammo_m908.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m908;
                 ammo_m908.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m908;
+
+                ammo_test_vis = GameObject.Instantiate(ammo_m456.VisualModel);
+                ammo_test_vis.name = "Test visual";
+
+
+                if (m82Object == null)
+                {
+                    foreach (GameObject smokestuff in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+                    {
+                        if (smokestuff.name == "Smoke - 3D6 81mm")//Smoke - 3D6 81mm Smoke - M82 66mm
+                        {
+                            m82Object = smokestuff;
+                        }
+
+                        /*if (smokestuff.name == "Smoke White Single Normal")
+                        {
+                            m82SmokeEffect = smokestuff;
+                        }*/
+                    }
+
+                    RosyObject = GameObject.Instantiate(m82Object);
+                    RosyObject.name = "Smoke - ROSY 40mm";
+
+                    m82ObjectCopy = GameObject.Instantiate(m82Object);
+                    m82ObjectCopy2 = GameObject.Instantiate(m82ObjectCopy);
+
+                    //RosyObject.active = true;
+                    //m82ObjectCopy.SetActiveRecursively(true);
+
+                    /*m82ObjectCopy = new GameObject();
+                    Util.ShallowCopy(m82ObjectCopy, m82ObjectReal);
+                    m82ObjectCopy.name = "Smoke - ROSY 40mm";
+                    m82ObjectCopy.hideFlags = HideFlags.DontUnloadUnusedAsset;*/
+
+                    //m82ObjectCopy = new GameObject();
+                    //m82ObjectCopy.SetActive(true);
+                    //m82ObjectCopy.hideFlags = HideFlags.HideAndDontSave;
+
+                    //RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);
+                    //RosySmokeEffect.name = "Rosy Multispectral Single";
+
+
+                    MelonLogger.Msg("M82 Object: " + m82Object.name);
+                    MelonLogger.Msg("M82 Object Copy: " + m82Object.name);
+                    MelonLogger.Msg("M82 Object Copy of Copy: " + m82Object.name);
+                    MelonLogger.Msg("ROSY Object: " + RosyObject.name);
+                    //MelonLogger.Msg("M82 Smoke Effect: " + m82SmokeEffect.name);
+                    //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
+                }
             }
 
-            StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(Convert), GameStatePriority.Lowest);
+            StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(Convert), GameStatePriority.Medium);
         }
 
         [HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "Start")]
