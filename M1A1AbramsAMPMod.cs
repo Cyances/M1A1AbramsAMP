@@ -1503,7 +1503,7 @@ namespace M1A1AMP
                             agsPlus.VibrationShakeMultiplier = 0.2f;//0.5
                         }
 
-                        /*if (citv.Value)
+                        if (citv.Value)
                         {
                             GameObject c = GameObject.Instantiate(citv_obj, vic.transform.Find("IPM1_rig/HULL/TURRET"));
                             c.transform.localPosition = new Vector3(-0.6794f, 0.9341f, 0.4348f);
@@ -1524,7 +1524,7 @@ namespace M1A1AMP
                             //s.intensity.value = 0.35f;
 
                             //vic._friendlyName += "+";
-                        }*/
+                        }
 
                         /*CameraSlot commanderzoom = vic.DesignatedCameraSlots[0].gameObject.GetComponent<CameraSlot>();
                         commanderzoom.DefaultFov = 60;//60
@@ -2467,7 +2467,7 @@ namespace M1A1AMP
         }
         public static void Init()
         {
-            /*if (citv_obj == null)
+            if (citv_obj == null)
             {
                 var bundle = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1CITV/", "citv"));
                 citv_obj = bundle.LoadAsset<GameObject>("citv.prefab");
@@ -2486,7 +2486,7 @@ namespace M1A1AMP
                 assem_armour.AverageRha = 40f;
                 assem_armour._name = "CITV";
                 glass_armour._name = "CITV glass";
-            }*/
+            }
 
             if (gun_m256 == null)
             {
