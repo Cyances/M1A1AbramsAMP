@@ -118,8 +118,8 @@ namespace M1A1AMP
             }
         }
 
-        [HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "createExplosion")]
-        public class ForwardBurst
+        //[HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "createExplosion")]
+        /*public class ForwardBurst
         {
             private static bool Prefix(GHPC.Weapons.LiveRound __instance)
             {
@@ -142,15 +142,15 @@ namespace M1A1AMP
                     component.Shooter = __instance.Shooter;
                     component.transform.position = __instance.transform.position;
                     component.transform.forward = Quaternion.Euler(
-                        UnityEngine.Random.Range(-30f, 30f),
-                        UnityEngine.Random.Range(-30f, 30f),
-                        UnityEngine.Random.Range(-30f, 30f)) * __instance.transform.forward;
+                        UnityEngine.Random.Range(-15f, 15f),
+                        UnityEngine.Random.Range(-15f, 15f),
+                        UnityEngine.Random.Range(-15f, 15f)) * __instance.transform.forward;
                     component.Init(__instance, null);
                     component.name = "MPAT forward frag " + i;
                 }
 
                 return true;
             }
-        }
+        }*/
     }
 }

@@ -290,7 +290,7 @@ namespace M1A1AMP
         public static void Config(MelonPreferences_Category cfg)
         {
             m1a1firstAmmo = cfg.CreateEntry<string>("M1A1 1st Round Type", "M829A4");
-            m1a1firstAmmo.Description = "Round types carried by M1A1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'M908', 'XM1147', 'LAHAT' or 'XM1111'";
+            m1a1firstAmmo.Description = "Round types carried by M1A1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'M908', 'XM1147' or 'LAHAT'";
             m1a1secondAmmo = cfg.CreateEntry<string>("M1A1 2nd Round Type", "M830A2");
             m1a1thirdAmmo = cfg.CreateEntry<string>("M1A1 3rd Round Type", "XM1147");
             m1a1fourthAmmo = cfg.CreateEntry<string>("M1A1 4th Round Type", "LAHAT");
@@ -302,7 +302,7 @@ namespace M1A1AMP
             m1a1fourthammoCount = cfg.CreateEntry<int>("M1A1 4th Round Count", 6);
 
             m1e1firstAmmo = cfg.CreateEntry<string>("M1E1 1st Round Type", "M829");
-            m1e1firstAmmo.Description = "Round types carried by M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'M908', 'XM1147', 'LAHAT' or 'XM1111'";
+            m1e1firstAmmo.Description = "Round types carried by M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'M908', 'XM1147' or 'LAHAT'";
             m1e1secondAmmo = cfg.CreateEntry<string>("M1E1 2nd Round Type", "M830");
             m1e1thirdAmmo = cfg.CreateEntry<string>("M1E1 3rd Round Type", "M830A1");
             m1e1fourthAmmo = cfg.CreateEntry<string>("M1E1 4th Round Type", "M830A1");
@@ -1422,9 +1422,11 @@ namespace M1A1AMP
 
                 if (vic == null) continue;
 
-                if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
-                {
-                    int rand = (randomChance.Value) ? UnityEngine.Random.Range(1, 100) : 0;
+                if (vic_go.GetComponent<Util.AlreadyConverted>() != null) continue;
+                if (vic.FriendlyName != "M1IP" && !(m1e1Convert.Value && vic.FriendlyName == "M1")) continue;
+
+                vic_go.AddComponent<Util.AlreadyConverted>();
+                int rand = (randomChance.Value) ? UnityEngine.Random.Range(1, 100) : 0;
 
                     if (rand <= randomChanceNum.Value)
                     {
@@ -1501,7 +1503,7 @@ namespace M1A1AMP
                             agsPlus.VibrationShakeMultiplier = 0.2f;//0.5
                         }
 
-                        if (citv.Value)
+                        /*if (citv.Value)
                         {
                             GameObject c = GameObject.Instantiate(citv_obj, vic.transform.Find("IPM1_rig/HULL/TURRET"));
                             c.transform.localPosition = new Vector3(-0.6794f, 0.9341f, 0.4348f);
@@ -1522,7 +1524,7 @@ namespace M1A1AMP
                             //s.intensity.value = 0.35f;
 
                             //vic._friendlyName += "+";
-                        }
+                        }*/
 
                         /*CameraSlot commanderzoom = vic.DesignatedCameraSlots[0].gameObject.GetComponent<CameraSlot>();
                         commanderzoom.DefaultFov = 60;//60
@@ -2437,7 +2439,7 @@ namespace M1A1AMP
                             }
                         }
                     }
-                }
+                
             }
             yield break;
         }
@@ -2465,7 +2467,7 @@ namespace M1A1AMP
         }
         public static void Init()
         {
-            if (citv_obj == null)
+            /*if (citv_obj == null)
             {
                 var bundle = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1CITV/", "citv"));
                 citv_obj = bundle.LoadAsset<GameObject>("citv.prefab");
@@ -2484,7 +2486,7 @@ namespace M1A1AMP
                 assem_armour.AverageRha = 40f;
                 assem_armour._name = "CITV";
                 glass_armour._name = "CITV glass";
-            }
+            }*/
 
             if (gun_m256 == null)
             {

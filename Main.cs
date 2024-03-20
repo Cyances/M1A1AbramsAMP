@@ -10,8 +10,11 @@ using System.Collections;
 using UnityEngine;
 using GHPC.Camera;
 using GHPC.Player;
+using FMODUnity;
+using FMOD;
+using FMODUnityResonance;
 
-[assembly: MelonInfo(typeof(AbramsAMPMod), "ZZ M1A1 Abrams AMP", "2.4.0", "Cyance, ATLAS and Schweiz")]
+[assembly: MelonInfo(typeof(AbramsAMPMod), "ZZ M1A1 Abrams AMP NC", "2.4.1", "Cyance, ATLAS and Schweiz")]
 [assembly: MelonGame("Radian Simulations LLC", "GHPC")]
 
 namespace M1A1AMP
@@ -52,7 +55,7 @@ namespace M1A1AMP
             playerManager = gameManager.GetComponent<PlayerInput>();
 
             StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(GetVics), GameStatePriority.Medium);
-            CITV.Init();
+            //CITV.Init();
             M1A1AbramsAMPMod.Init();
             ProxyFuzeAMP.Init();
             ProxyFuzeMPAT.Init();
