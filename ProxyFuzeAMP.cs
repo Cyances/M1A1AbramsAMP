@@ -118,8 +118,8 @@ namespace M1A1AMP
             }
         }
 
-        [HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "createExplosion")]
-        public class ForwardBurst
+        //[HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "createExplosion")]
+        /*public class ForwardBurst
         {
             private static bool Prefix(GHPC.Weapons.LiveRound __instance)
             {
@@ -151,6 +151,6 @@ namespace M1A1AMP
 
                 return true;
             }
-        }
+        }*/
     }
 }
