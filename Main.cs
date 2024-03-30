@@ -45,7 +45,7 @@ namespace M1A1AMP
 
         public override void OnSceneWasLoaded(int idx, string scene_name)
         {
-            if (scene_name == "MainMenu2_Scene" || scene_name == "LOADER_MENU" || scene_name == "LOADER_INITIAL" || scene_name == "t64_menu") return;
+            if (scene_name == "MainMenu2_Scene" || scene_name == "LOADER_MENU" || scene_name == "LOADER_INITIAL" || scene_name == "t64_menu" || scene_name == "MainMenu2-1_Scene") return;
 
             gameManager = GameObject.Find("_APP_GHPC_");
             camManager = gameManager.GetComponent<CameraManager>();
