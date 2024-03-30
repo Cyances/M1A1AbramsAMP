@@ -83,7 +83,7 @@ namespace M1A1AMP
 
                 citv_crosshair_go = new GameObject("citv crosshair canvas");
                 citv_crosshair_go.AddComponent<CanvasRenderer>();
-                citv_crosshair_go.AddComponent<CITVCrosshair>();
+                //citv_crosshair_go.AddComponent<CITVCrosshair>();
                 UnityEngine.UI.Image s = citv_crosshair_go.AddComponent<UnityEngine.UI.Image>();
                 s.sprite = citv_crosshair;
             }
@@ -102,6 +102,7 @@ namespace M1A1AMP
             if (active_crosshair_instance == null && M1A1AbramsAMPMod.citv_reticle.Value)
             {
                 active_crosshair_instance = GameObject.Instantiate(citv_crosshair_go, canvas);
+                active_crosshair_instance.AddComponent<CITVCrosshair>();
                 active_crosshair_instance.transform.localPosition = new Vector3(0f, 0f, 572f);
                 active_crosshair_instance.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
                 active_crosshair_instance.transform.localScale = new Vector3(6f, 3.1f, 1f);
