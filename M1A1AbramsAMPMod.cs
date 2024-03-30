@@ -32,6 +32,7 @@ using TMPro;
 using Rewired.Utils;
 using GHPC.UI.Tips;
 using UnityEngine.UI;
+using System.Net;
 
 namespace M1A1AMP
 {
@@ -43,18 +44,19 @@ namespace M1A1AMP
         static MelonPreferences_Entry<string> m1a1firstAmmo, m1a1secondAmmo, m1a1thirdAmmo, m1a1fourthAmmo;
         static MelonPreferences_Entry<string> m1e1firstAmmo, m1e1secondAmmo, m1e1thirdAmmo, m1e1fourthAmmo;
         static MelonPreferences_Entry<bool> m2Coax, m2Slap;
-        static MelonPreferences_Entry<bool> rotateAzimuth, betterDaysight, betterFlir, betterAgs;
+        static MelonPreferences_Entry<bool> rotateAzimuth, betterDaysight, betterFlir, betterGas;
         static MelonPreferences_Entry<bool> m1e1Convert, randomChance;
         static MelonPreferences_Entry<int> randomChanceNum;
         static MelonPreferences_Entry<bool> m829spall, ampFuze;
         static MelonPreferences_Entry<string> m1a1Armor, m1e1Armor;
         static MelonPreferences_Entry<bool> demigodArmor, m1a1Smoke, m1e1Smoke, m1a1Rosy, m1e1Rosy;
         static MelonPreferences_Entry<string> m1a1Agt, m1e1Agt;
-        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, noLuggage;
-        static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader;
+        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, noLuggage, betterSuspension, betterTracks, m1ipModel;
+        static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader, m1a1Commander, m1e1Commander, m1a1Gunner, m1e1Gunner;
         static MelonPreferences_Entry<bool> citv, alt_flir_colour;
         public static MelonPreferences_Entry<int> ampFragments, mpatFragments, heorFragments;
         public static MelonPreferences_Entry<bool> perfect_citv, citv_reticle, citv_smooth, perfect_override;
+        public static MelonPreferences_Entry<float> proxyDistance;
 
         static WeaponSystemCodexScriptable gun_m256;
 
@@ -148,7 +150,6 @@ namespace M1A1AMP
         static GameObject ammo_xm1147_vis = null;
         static GameObject ammo_lahat_vis = null;
         static GameObject ammo_m908_vis = null;
-        static GameObject ammo_test_vis = null;
 
         static AmmoType ammo_m833, ammo_m456, ammo_3of26, ammo_bgm71, ammo_m8vnl;
 
@@ -302,10 +303,11 @@ namespace M1A1AMP
 
         static GameObject RosySmokeEffect;
 
+
         public static void Config(MelonPreferences_Category cfg)
         {
             m1a1firstAmmo = cfg.CreateEntry<string>("M1A1 1st Round Type", "M829A4");
-            m1a1firstAmmo.Description = "Round types carried by M1A1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'M908', 'XM1147', 'LAHAT' or 'XM1111'";
+            m1a1firstAmmo.Description = "Round types carried by M1A1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'M908', 'XM1147' or 'LAHAT'";
             m1a1secondAmmo = cfg.CreateEntry<string>("M1A1 2nd Round Type", "M830A2");
             m1a1thirdAmmo = cfg.CreateEntry<string>("M1A1 3rd Round Type", "XM1147");
             m1a1fourthAmmo = cfg.CreateEntry<string>("M1A1 4th Round Type", "LAHAT");
@@ -317,7 +319,7 @@ namespace M1A1AMP
             m1a1fourthammoCount = cfg.CreateEntry<int>("M1A1 4th Round Count", 6);
 
             m1e1firstAmmo = cfg.CreateEntry<string>("M1E1 1st Round Type", "M829");
-            m1e1firstAmmo.Description = "Round types carried by M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'M908', 'XM1147', 'LAHAT' or 'XM1111'";
+            m1e1firstAmmo.Description = "Round types carried by M1E1: 'M829', 'M829A1', 'M829A2', 'M829A3', 'M829A4', 'M830', 'M830A1', 'M830A2', 'M830A3', 'M908', 'XM1147' or 'LAHAT'";
             m1e1secondAmmo = cfg.CreateEntry<string>("M1E1 2nd Round Type", "M830");
             m1e1thirdAmmo = cfg.CreateEntry<string>("M1E1 3rd Round Type", "M830A1");
             m1e1fourthAmmo = cfg.CreateEntry<string>("M1E1 4th Round Type", "M830A1");
@@ -328,9 +330,15 @@ namespace M1A1AMP
             m1e1thirdammoCount = cfg.CreateEntry<int>("M1E1 3rd Round Count", 15);
             m1e1fourthammoCount = cfg.CreateEntry<int>("M1E1 4th Round Count", 0);
 
+            m1a1Gunner = cfg.CreateEntry<string>("M1A1 Gunner", "Regular");
+            m1a1Gunner.Description = "Crew proficiency: Cadet, Regular, Veteran or Ace";
+            m1e1Gunner = cfg.CreateEntry<string>("M1E1 Gunner", "Regular");
+
             m1a1Loader = cfg.CreateEntry<string>("M1A1 Loader", "Regular");
-            m1a1Loader.Description = "Crew loading skill: Cadet, Regular, Veteran or Ace";
             m1e1Loader = cfg.CreateEntry<string>("M1E1 Loader", "Regular");
+
+            m1a1Commander = cfg.CreateEntry<string>("M1A1 Commander", "Regular");
+            m1e1Commander = cfg.CreateEntry<string>("M1E1 Commander", "Regular");
 
             m2Coax = cfg.CreateEntry<bool>("M2 Coax", false);
             m2Coax.Description = "Replaces M240 coaxial gun with M2.";
@@ -351,13 +359,16 @@ namespace M1A1AMP
             ampFuze = cfg.CreateEntry<bool>("AMP Proxy Fuze", false);
             ampFuze.Description = "Switch AMP fuze to proximity instead of time-delay.";
 
-            rotateAzimuth = cfg.CreateEntry<bool>("RotateAzimuth", true);
-            rotateAzimuth.Description = "Horizontal stabilization of M1A1 sights when applying lead.";
+            proxyDistance = cfg.CreateEntry<float>("ProxyDistance", 3);
+            proxyDistance.Description = "Trigger distance of proximity fuze (in meters).";
 
             betterDaysight = cfg.CreateEntry<bool>("Daysight+", false);
             betterDaysight.Description = "More zoom levels/clearer image for gunner optics.";
             betterFlir = cfg.CreateEntry<bool>("FLIR+", false);
-            betterAgs = cfg.CreateEntry<bool>("AGS+", false);
+            betterGas = cfg.CreateEntry<bool>("GAS+", false);
+
+            rotateAzimuth = cfg.CreateEntry<bool>("RotateAzimuth", false);
+            rotateAzimuth.Description = "Horizontal stabilization of M1A1 sights when applying lead.";
 
             citv = cfg.CreateEntry<bool>("CITV", false);
             citv.Description = "Replaces commander's NVGs with variable-zoom thermals.";
@@ -408,11 +419,18 @@ namespace M1A1AMP
 
             governorDelete = cfg.CreateEntry<bool>("GovernorDelete", false);
 
+            betterSuspension = cfg.CreateEntry<bool>("Suspension+", false);
+
+            betterTracks = cfg.CreateEntry<bool>("Tracks+", false);
+
             m1a1Apu = cfg.CreateEntry<bool>("M1A1 APU", false);
             m1e1Apu = cfg.CreateEntry<bool>("M1E1 APU", false);
 
             noLuggage = cfg.CreateEntry<bool>("Clean Turret", false);
             noLuggage.Description = "Remove items attached to turret like ALICE packs or MRE boxes";
+
+            m1ipModel = cfg.CreateEntry<bool>("M1E1 IP Model", false);
+            m1ipModel.Description = "Gives the M1IP model to base M1";
         }
         public static IEnumerator Convert(GameState _)
         {
@@ -449,6 +467,9 @@ namespace M1A1AMP
                 ["LAHAT"] = ammo_codex_lahat,
                 ["M908"] = ammo_codex_m908,
             };
+
+
+            GameObject m1ip_go = Resources.FindObjectsOfTypeAll(typeof(GameObject)).Where(o => o.name == "M1IP").FirstOrDefault() as GameObject;
 
             switch (m1a1Armor.Value)
             {
@@ -790,23 +811,32 @@ namespace M1A1AMP
                     ////M1A1HU DestructibleComponent pieces
                     /*foreach (GameObject dcomponent in GameObject.FindGameObjectsWithTag("Penetrable"))
                     {
-                        if (dcomponent == null) continue;
-
-                        //GHPC.Equipment.DestructibleComponent m1a1DC_HU = dcomponent.GetComponent<DestructibleComponent>();
-                        DestructibleComponent m1a1DC_HU = dcomponent.GetComponent<DestructibleComponent>();
-                        if (m1a1DC_HU == null) continue;
-                        if (m1a1DC_HU.Unit == null) continue;
-                        if (m1a1DC_HU.Unit.FriendlyName == "M1IP")
-                        {
-                            if (m1a1DC_HU.Name == "hull side")
-                            {
-                                m1a1DC_HU.PrimaryHeatRha = demigodArmor.Value ? 10000f : 300f;
-                                m1a1DC_HU.PrimarySabotRha = demigodArmor.Value ? 10000f : 200f;
-                            }
+                       if (dcomponent == null) continue;
+                        GHPC.Equipment.DestructibleComponent m1a1DC_HU = dcomponent.GetComponent<GHPC.Equipment.DestructibleComponent>();
+                        if (m1a1DC_HU == null)
+                        //if (m1a1DC_HU.name == "main gun barrel")
+                        //if (m1a1DC_HU.Unit == m1ip_go) continue;
+                        if (m1a1DC_HU.Name == "main gun barrel")
+                         {
+                            m1a1DC_HU._fullHealth = -1;
+                            m1a1DC_HU._health = -1;
+                         }
                             //MelonLogger.Msg("M1A1HU UniformArmor: Modified");
-                        }
                     }*/
 
+
+                    ////M1A1HU UniformArmor pieces
+                    foreach (GameObject Trarmour in GameObject.FindGameObjectsWithTag("Penetrable"))
+                    {
+                        if (Trarmour == null) continue;
+
+                        Transform m1a1Tr_HU = Trarmour.GetComponent<Transform>();
+                        if (m1a1Tr_HU == null) continue;
+                        if (m1a1Tr_HU.name == "Fire wall.004")
+                        {
+                            m1a1Tr_HU.localPosition = new Vector3(0f, 1.0935f, 2.5294f);//y1.0935 z2.5294
+                        }
+                    }
                     break;
 
                 ////Assign modified armor to M1A1SA
@@ -1452,19 +1482,22 @@ namespace M1A1AMP
                     break;
             }
 
-
             foreach (GameObject vic_go in AbramsAMPMod.vic_gos)
             {
                 Vehicle vic = vic_go.GetComponent<Vehicle>();
 
                 if (vic == null) continue;
 
+                if (vic_go.GetComponent<Util.AlreadyConverted>() != null) continue;
                 if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
                 {
+                    vic_go.AddComponent<Util.AlreadyConverted>();
+
                     int rand = (randomChance.Value) ? UnityEngine.Random.Range(1, 100) : 0;
 
                     if (rand <= randomChanceNum.Value)
                     {
+                        vic_go.AddComponent<Util.AlreadyConverted>();
                         ////Rename Abrams
                         if (vic.FriendlyName == "M1IP")
                         {
@@ -1479,6 +1512,44 @@ namespace M1A1AMP
                         if (ampFuze.Value) vic_go.AddComponent<ProxySwitchAMP>();
                         vic_go.AddComponent<ProxySwitchMPAT>();
 
+                        HeatSource m1ip_HeatSourceCopy = vic_go.GetComponent<HeatSource>();
+                        
+                        ////Copy IP thermals signature
+                        if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
+                        {
+                            HeatSource m1ip_HeatSource = vic_go.GetComponent<HeatSource>();
+
+
+                            /*m1ip_HeatSource.heat = 1;
+                            m1ip_HeatSourceCopy.heat = m1ip_HeatSource.heat;
+                            m1ip_HeatSourceCopy._swapableMats = m1ip_HeatSource._swapableMats;*/
+                        }
+
+
+                        //M1_rig/M1_hull/
+                        //M1_rig/M1_skinned/
+                        ////IP model to base M1
+                        if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
+                        {
+                            GameObject m1_hull = vic_go.transform.Find("M1_rig/M1_hull/").gameObject;
+                            GameObject m1_skinned = vic_go.transform.Find("M1_rig/M1_skinned/").gameObject;
+                            m1_hull.SetActive(false);
+                            m1_skinned.SetActive(false);
+
+                            GameObject m1ip_hull = vic_go.transform.Find("IPM1_rig/M1IP_hull/").gameObject;
+                            GameObject m1ip_skinned = vic_go.transform.Find("IPM1_rig/M1IP_skinned/").gameObject;
+                            m1ip_hull.SetActive(true);
+                            m1ip_skinned.SetActive(true);
+
+                            HeatSource m1_HeatSource = vic_go.GetComponent<HeatSource>();
+
+
+                            GameObject.Destroy(m1_HeatSource);
+
+                            m1_HeatSource = m1ip_HeatSourceCopy;
+                        }
+
+
                         ////Weapons management
                         WeaponsManager weaponsManager = vic.GetComponent<WeaponsManager>();
                         WeaponSystemInfo mainGunInfo = weaponsManager.Weapons[0];
@@ -1486,7 +1557,7 @@ namespace M1A1AMP
 
                         var gpsOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/Optic/").gameObject.transform;
                         var flirOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/FLIR/").gameObject.transform;
-                        var agsOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/").gameObject.transform;
+                        var gasOptic = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)/").gameObject.transform;
                         var TurretScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/").gameObject.transform;
                         var m1ipLuggageScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/").gameObject.transform;// /luggage/ for M1IP
                         var m1LuggageScripts = vic_go.transform.Find("IPM1_rig/HULL/TURRET/").gameObject.transform;// /turret decorations parent/ for M1
@@ -1496,7 +1567,7 @@ namespace M1A1AMP
 
                         CameraSlot daysightPlus = gpsOptic.GetComponent<CameraSlot>();
                         CameraSlot flirPlus = flirOptic.GetComponent<CameraSlot>();
-                        CameraSlot agsPlus = agsOptic.GetComponent<CameraSlot>();
+                        CameraSlot gasPlus = gasOptic.GetComponent<CameraSlot>();
 
                         AimablePlatform m1Turret = TurretScripts.GetComponent<AimablePlatform>();
 
@@ -1530,12 +1601,12 @@ namespace M1A1AMP
                             flirPlus.BaseBlur = 0;
                         }
 
-                        if (betterAgs.Value)
+                        if (betterGas.Value)
                         {
-                            agsPlus.DefaultFov = 6.5f;//4.2f
-                            agsPlus.OtherFovs = new float[] { 4.2f, 2.716f, 1.716f };
-                            agsPlus.VibrationBlurScale = 0.1f;//0.2
-                            agsPlus.VibrationShakeMultiplier = 0.2f;//0.5
+                            gasPlus.DefaultFov = 6.5f;//4.2f
+                            gasPlus.OtherFovs = new float[] { 4.2f, 2.716f, 1.716f };
+                            gasPlus.VibrationBlurScale = 0.1f;//0.2
+                            gasPlus.VibrationShakeMultiplier = 0.2f;//0.5
                         }
 
                         if (citv.Value)
@@ -1706,33 +1777,35 @@ namespace M1A1AMP
                         LoadoutManager loadoutManager = vic.GetComponent<LoadoutManager>();
                         UnitAI m1Ai = vic.GetComponentInChildren<UnitAI>();
                         DriverAIController m1dAic = vic.GetComponent<DriverAIController>();
+                        
+                        m1dAic.maxSpeed = 32;//20
 
                         //Chonk quantifier
-                        int mass_A1 = 59057;//55338 - Value for default M1
-                        int mass_HA = 60599;
-                        int mass_HC = 61416;
-                        int mass_SA = 62232;
-                        int mass_HU = 72665;//fully loaded SEPv3 as reference - was 68038
+                        //Add weight instead of replace it
+                        int mass_A1 = 3719;//59057;//55338 - Value for default M1
+                        int mass_HA = 5261;//60599;
+                        int mass_HC = 6078;//61416;
+                        int mass_SA = 6894;//62232;
+                        int mass_HU = uapWeight.Value ? 5261: 17327;//72665;//fully loaded SEPv3 as reference - was 68038
 
+                        //kW Values
                         float engine_Agt1500 = 1132.38f;//1518.55f;
                         float engine_Agt2000 = 1494.75f;// 2004.49f;
                         float engine_Agt2500 = 1868.33f;//2505.61f;
                         float engine_Agt3000 = 2264.77f;// 3037.1f;
                         float engine_T64 = 3303.45f;// 4330f;
+
+                        //HP Values
                         /*float engine_Agt1500 = 1518.55f;//1518.55f;
                         float engine_Agt2000 = 2004.49f;// 2004.49f;
                         float engine_Agt2500 = 2505.61f;//2505.61f;
                         float engine_Agt3000 = 3037.1f;// 3037.1f;
                         float engine_T64 = 4330f;// 4330f;*/
-                        float engine_Maxrpm = 4000f;//3100f
+                        float agt2530_Maxrpm = 4000f;//3100f
+                        float t64_Maxrpm = 4300f;//3100f
                         float engine_Minrpm = 600f;//600
                         float engine_Maxrpmchange = 4000f;
 
-                        //7.5% intervals
-                        /*int brakes_Agt2000 = 74820;//69600 vanilla
-                        int brakes_Agt2500 = 80040;
-                        int brakes_Agt3000 = 85260;
-                        int brakes_T64 = 90480;*/
 
                         //10%
                         int brakes_Agt2000 = 76560;//69600 vanilla
@@ -1740,35 +1813,10 @@ namespace M1A1AMP
                         int brakes_Agt3000 = 90480;
                         int brakes_T64 = 97440;
 
-                        m1Ai.FireDelay = 1;//1.5229
-                        m1Ai.SpotTimeMaxDistance = 5000;//3000
-
-                        m1Ai.GunnerAI._delayFireTimer = 2.0325f;//2.0325
-                        m1Ai.GunnerAI._sweepAngle = 120;//120
-                        m1Ai.GunnerAI._sweepDirectionShiftSpeed = 0.25f;//.25
-                        m1Ai.GunnerAI._sweepSpeed = 1200;//20
-                        m1Ai.GunnerAI._pauseLength = 5;//1
-                        m1Ai.GunnerAI._pauseTime = 8;//2
-
-                        m1Ai.TargetSensor._spotTimeMax = 1;//4
-                        m1Ai.TargetSensor._spotTimeMaxDistance = 500;//500
-                        m1Ai.TargetSensor._spotTimeMaxVelocity = 16;//4
-                        m1Ai.TargetSensor._spotTimeMin = 1;//1
-                        m1Ai.TargetSensor._spotTimeMinDistance = 1;//50
-                        m1Ai.TargetSensor._targetCooldownTime = 0.5f;//2
-
-                        m1Ai.CommanderAI._identifyTargetDurationRange = new Vector2(0.5f, 0.5f);//2,3
-                        m1Ai.CommanderAI._sweepCommsCheckDuration = 5;//5
-
-                        m1dAic.maxSpeed = 32;//20
-
-                        if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
+                        //Suspension testing
+                        for (int i = 0; i < 14; i++)
                         {
-
-
-
-                            //Suspension testing
-                            /*for (int i = 0; i < 14; i++)
+                            if (betterSuspension.Value)
                             {
                                 m1VC.wheels[i].wheelController.damper.force = -3.2616f;//-3.2616
                                 m1VC.wheels[i].wheelController.damper.maxForce = 39000;//19000
@@ -1778,30 +1826,155 @@ namespace M1A1AMP
                                 m1VC.wheels[i].wheelController.spring.bottomOutForce = -314031.9f;//-314031.9
                                 //m1VC.wheels[i].wheelController.spring.compressionPercent = 0.2674f;//0.2674
                                 m1VC.wheels[i].wheelController.spring.force = 45940.98f;//45940.98
-                                m1VC.wheels[i].wheelController.spring.length = 0.3443f;//0.3443
+                                m1VC.wheels[i].wheelController.spring.length = 0.3643f;//0.3443
                                 m1VC.wheels[i].wheelController.spring.maxForce = 39000;//39000
-                                m1VC.wheels[i].wheelController.spring.maxLength = 0.52f;//0.47
-                                //m1VC.wheels[i].wheelController.spring.overExtended = false;//false
-                            }*/
+                                m1VC.wheels[i].wheelController.spring.maxLength = 0.54f;//0.47
+                                //m1VC.wheels[i].wheelController.spring.overExtended = false;//
+                            }
+
+                            if (betterTracks.Value)
+                            {
+                                m1VC.wheels[i].wheelController.fFriction.forceCoefficient = 1.25f;//1.2
+                                m1VC.wheels[i].wheelController.fFriction.slipCoefficient = 1f;//1
+
+                                m1VC.wheels[i].wheelController.sFriction.forceCoefficient = 0.85f;//0.8
+                                m1VC.wheels[i].wheelController.sFriction.slipCoefficient = 1f;//1
+
+                                m1VC.wheels[i].wheelController.TireWidth = 0.58f;//0.58
+                            }
+                        }
+
+                        if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
+                        {
+                            MelonLogger.Msg("Base M1A1 Mass: " + m1Rb.mass);
+                            switch (m1a1Commander.Value)
+                            {
+                                case "Cadet":
+                                    m1Ai.SpotTimeMaxDistance = 2500;
+                                    m1Ai.TargetSensor._spotTimeMax = 5;
+                                    m1Ai.TargetSensor._spotTimeMaxDistance = 500;
+                                    m1Ai.TargetSensor._spotTimeMaxVelocity = 2;
+                                    m1Ai.TargetSensor._spotTimeMin = 1;
+                                    m1Ai.TargetSensor._spotTimeMinDistance = 50;
+                                    m1Ai.TargetSensor._targetCooldownTime = 3f;
+
+                                    m1Ai.CommanderAI._identifyTargetDurationRange = new Vector2(3f, 4f);
+                                    m1Ai.CommanderAI._sweepCommsCheckDuration = 5;
+                                    break;
+                                case "Veteran":
+                                    m1Ai.SpotTimeMaxDistance = 3500;
+                                    m1Ai.TargetSensor._spotTimeMax = 3;
+                                    m1Ai.TargetSensor._spotTimeMaxDistance = 500;
+                                    m1Ai.TargetSensor._spotTimeMaxVelocity = 7f;
+                                    m1Ai.TargetSensor._spotTimeMin = 1;
+                                    m1Ai.TargetSensor._spotTimeMinDistance = 50;
+                                    m1Ai.TargetSensor._targetCooldownTime = 1.5f;
+
+                                    m1Ai.CommanderAI._identifyTargetDurationRange = new Vector2(1.5f, 2.5f);
+                                    m1Ai.CommanderAI._sweepCommsCheckDuration = 4;
+                                    break;
+                                case "Ace":
+                                    m1Ai.SpotTimeMaxDistance = 4000;
+                                    m1Ai.TargetSensor._spotTimeMax = 2;
+                                    m1Ai.TargetSensor._spotTimeMaxDistance = 500;
+                                    m1Ai.TargetSensor._spotTimeMaxVelocity = 10f;
+                                    m1Ai.TargetSensor._spotTimeMin = 1;
+                                    m1Ai.TargetSensor._spotTimeMinDistance = 50;
+                                    m1Ai.TargetSensor._targetCooldownTime = 1f;
+
+                                    m1Ai.CommanderAI._identifyTargetDurationRange = new Vector2(1f, 2f);
+                                    m1Ai.CommanderAI._sweepCommsCheckDuration = 3;
+                                    break;
+                                default:
+                                    m1Ai.SpotTimeMaxDistance = 3000;//3000
+                                    m1Ai.TargetSensor._spotTimeMax = 4;//4
+                                    m1Ai.TargetSensor._spotTimeMaxDistance = 500;//500
+                                    m1Ai.TargetSensor._spotTimeMaxVelocity = 4;//4
+                                    m1Ai.TargetSensor._spotTimeMin = 1;//1
+                                    m1Ai.TargetSensor._spotTimeMinDistance = 50;//50
+                                    m1Ai.TargetSensor._targetCooldownTime = 2f;//2
+
+                                    m1Ai.CommanderAI._identifyTargetDurationRange = new Vector2(2f, 3f);//2,3
+                                    m1Ai.CommanderAI._sweepCommsCheckDuration = 5;//5
+                                    break;
+                            }
+
+                            switch (m1a1Gunner.Value)
+                            {
+                                case "Cadet":
+                                    m1Ai.combatSpeedLimit = 10;
+                                    m1Ai.firingSpeedLimit = 7;
+
+                                    //m1Ai.AccuracyModifiers.Angle._radius = 3.9f;
+                                    m1Ai.AccuracyModifiers.Angle.MaxDistance = 2000;
+                                    m1Ai.AccuracyModifiers.Angle.MaxRadius = 4.5f;
+                                    m1Ai.AccuracyModifiers.Angle.MinRadius = 2.5f;
+                                    break;
+                                case "Veteran":
+                                    m1Ai.combatSpeedLimit = 20;
+                                    m1Ai.firingSpeedLimit = 15;
+
+                                    //m1Ai.AccuracyModifiers.Angle._radius = 2.9f;
+                                    m1Ai.AccuracyModifiers.Angle.MaxDistance = 2500;
+                                    m1Ai.AccuracyModifiers.Angle.MaxRadius = 2.5f;
+                                    m1Ai.AccuracyModifiers.Angle.MinRadius = 1.5f;
+                                    break;
+                                case "Ace":
+                                    m1Ai.combatSpeedLimit = 25;
+                                    m1Ai.firingSpeedLimit = 20;
+
+                                    //m1Ai.AccuracyModifiers.Angle._radius = 2.4f;
+                                    m1Ai.AccuracyModifiers.Angle.MaxDistance = 3000;
+                                    m1Ai.AccuracyModifiers.Angle.MaxRadius = 2f;
+                                    m1Ai.AccuracyModifiers.Angle.MinRadius = 1f;
+                                    m1Ai.AccuracyModifiers.Angle.IncreaseAccuracyPerShot = true;
+                                    break;
+                                default:
+                                    //m1Ai.FireDelay = 1;//1.5229
+
+                                    m1Ai.combatSpeedLimit = 15;//8.5
+                                    m1Ai.firingSpeedLimit = 10;//5.5
+
+                                    m1Ai.GunnerAI._delayFireTimer = 2.0325f;//2.0325
+                                    m1Ai.GunnerAI._sweepAngle = 120;//120
+                                    m1Ai.GunnerAI._sweepDirectionShiftSpeed = 0.25f;//.25
+                                    m1Ai.GunnerAI._sweepSpeed = 20;//20
+                                    m1Ai.GunnerAI._pauseLength = 1;//1
+                                    m1Ai.GunnerAI._pauseTime = 2;//2
+
+                                    //m1Ai.AccuracyModifiers.Angle._radius = 3.4f;//3.429
+                                    m1Ai.AccuracyModifiers.Angle.MaxDistance = 2000;//2000
+                                    m1Ai.AccuracyModifiers.Angle.MaxRadius = 4f;//4
+                                    m1Ai.AccuracyModifiers.Angle.MinRadius = 2f;//2
+                                    m1Ai.AccuracyModifiers.Angle.IncreaseAccuracyPerShot = false;//F
+
+                                    m1Ai.AccuracyModifiers.Velocity.Max = 1.02f;//1.02
+                                    m1Ai.AccuracyModifiers.Velocity.Min = 0.98f;//0.98
+                                    m1Ai.AccuracyModifiers.Velocity.Target = 1;//1
+                                    //m1Ai.AccuracyModifiers.Velocity.Value= 0.9998f;//0.9998
+                                    m1Ai.AccuracyModifiers.Velocity.IncreaseAccuracyPerShot = true;//T
+                                    break;
+                            }
 
                             switch (m1a1Armor.Value)
                             {
                                 case "HA":
-                                    m1Rb.mass = mass_HA;
+                                    m1Rb.mass += mass_HA;
                                     break;
                                 case "HC":
-                                    m1Rb.mass = mass_HC;
+                                    m1Rb.mass += mass_HC;
                                     break;
                                 case "SA":
-                                    m1Rb.mass = mass_SA;
+                                    m1Rb.mass += mass_SA;
                                     break;
                                 case "HU":
-                                    m1Rb.mass = uapWeight.Value ? mass_HA : mass_HU;
+                                    m1Rb.mass += mass_HU;
                                     break;
                                 default:
-                                    m1Rb.mass = mass_A1;
+                                    m1Rb.mass += mass_A1;
                                     break;
                             }
+                            MelonLogger.Msg("M1A1" + m1a1Armor.Value + " Mass: " + m1Rb.mass);
 
                             switch (m1a1Agt.Value)
                             {
@@ -1814,7 +1987,7 @@ namespace M1A1AMP
 
                                 case "AGT2500":
                                     m1VC.engine.maxPower = engine_Agt2500;
-                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
                                     m1VC.engine.maxRpmChange = engine_Maxrpmchange;
                                     m1VC.engine.minRPM = engine_Minrpm;
 
@@ -1825,7 +1998,7 @@ namespace M1A1AMP
 
                                 case "AGT3000":
                                     m1VC.engine.maxPower = engine_Agt3000;
-                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
                                     m1VC.engine.maxRpmChange = engine_Maxrpmchange;
                                     m1VC.engine.minRPM = engine_Minrpm;
 
@@ -1834,7 +2007,7 @@ namespace M1A1AMP
 
                                 case "T64":
                                     m1VC.engine.maxPower = engine_T64;
-                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRPM = t64_Maxrpm;
                                     m1VC.engine.maxRpmChange = engine_Maxrpmchange;
                                     m1VC.engine.minRPM = engine_Minrpm;
 
@@ -1848,9 +2021,9 @@ namespace M1A1AMP
                                     break;
                             }
 
-                            //Novice Cadet Regular Veteran Ace
                             switch (m1a1Loader.Value)
                             {
+                                //Novice Cadet Regular Veteran Ace
                                 case "Cadet":
                                     mainGun.Feed._totalReloadTime = 7;
                                     mainGun.Feed.SlowReloadMultiplier = 4.5f;
@@ -1892,9 +2065,9 @@ namespace M1A1AMP
                                 mainGun.FCS.ComputerNeedsPower = false;
                                 m1Turret.SpeedUnpowered = 40;//5;
 
-                                if (m1VC.engine.maxPower > 1800f)
+                                if (m1VC.engine.maxPower > 3300f)
                                 {
-                                    m1Turret.SpeedPowered = 52;//40;
+                                    m1Turret.SpeedPowered = 60;//40;
                                 }
                             }
 
@@ -1906,7 +2079,7 @@ namespace M1A1AMP
                             if (m1a1Smoke.Value)
                             {
                                 m1Smoke._launchAngle = 20;//25
-                                m1Smoke._distanceRange = new Vector2(50, 50);//25, 35
+                                m1Smoke._distanceRange = new Vector2(40, 40);//25, 35
                                 for (int i = 0; i < 12; i++)
                                 {
                                     m1Smoke._smokeSlots[i].Rounds = 2;
@@ -1925,7 +2098,7 @@ namespace M1A1AMP
                                         m1Smoke._smokeSlots[i].Rounds = 4;
                                     }
 
-                                    m1Smoke._distanceRange = new Vector2(60, 60);
+                                    m1Smoke._distanceRange = new Vector2(50, 50);
                                     /*//Left launchers
                                     m1Smoke._smokeSlots[2].Angle = -95;
                                     m1Smoke._smokeSlots[4].Angle = -77;
@@ -2113,22 +2286,131 @@ namespace M1A1AMP
 
                         if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
                         {
+                            switch (m1e1Commander.Value)
+                            {
+                                case "Cadet":
+                                    m1Ai.SpotTimeMaxDistance = 2500;
+                                    m1Ai.TargetSensor._spotTimeMax = 5;
+                                    m1Ai.TargetSensor._spotTimeMaxDistance = 500;
+                                    m1Ai.TargetSensor._spotTimeMaxVelocity = 2;
+                                    m1Ai.TargetSensor._spotTimeMin = 1;
+                                    m1Ai.TargetSensor._spotTimeMinDistance = 50;
+                                    m1Ai.TargetSensor._targetCooldownTime = 3f;
+
+                                    m1Ai.CommanderAI._identifyTargetDurationRange = new Vector2(3f, 4f);
+                                    m1Ai.CommanderAI._sweepCommsCheckDuration = 5;
+                                    break;
+                                case "Veteran":
+                                    m1Ai.SpotTimeMaxDistance = 3500;
+                                    m1Ai.TargetSensor._spotTimeMax = 3;
+                                    m1Ai.TargetSensor._spotTimeMaxDistance = 500;
+                                    m1Ai.TargetSensor._spotTimeMaxVelocity = 7f;
+                                    m1Ai.TargetSensor._spotTimeMin = 1;
+                                    m1Ai.TargetSensor._spotTimeMinDistance = 50;
+                                    m1Ai.TargetSensor._targetCooldownTime = 1.5f;
+
+                                    m1Ai.CommanderAI._identifyTargetDurationRange = new Vector2(1.5f, 2.5f);
+                                    m1Ai.CommanderAI._sweepCommsCheckDuration = 4;
+                                    break;
+                                case "Ace":
+                                    m1Ai.SpotTimeMaxDistance = 4000;
+                                    m1Ai.TargetSensor._spotTimeMax = 2;
+                                    m1Ai.TargetSensor._spotTimeMaxDistance = 500;
+                                    m1Ai.TargetSensor._spotTimeMaxVelocity = 10f;
+                                    m1Ai.TargetSensor._spotTimeMin = 1;
+                                    m1Ai.TargetSensor._spotTimeMinDistance = 50;
+                                    m1Ai.TargetSensor._targetCooldownTime = 1f;
+
+                                    m1Ai.CommanderAI._identifyTargetDurationRange = new Vector2(1f, 2f);
+                                    m1Ai.CommanderAI._sweepCommsCheckDuration = 3;
+                                    break;
+                                default:
+                                    m1Ai.SpotTimeMaxDistance = 3000;//3000
+                                    m1Ai.TargetSensor._spotTimeMax = 4;//4
+                                    m1Ai.TargetSensor._spotTimeMaxDistance = 500;//500
+                                    m1Ai.TargetSensor._spotTimeMaxVelocity = 4;//4
+                                    m1Ai.TargetSensor._spotTimeMin = 1;//1
+                                    m1Ai.TargetSensor._spotTimeMinDistance = 50;//50
+                                    m1Ai.TargetSensor._targetCooldownTime = 2f;//2
+
+                                    m1Ai.CommanderAI._identifyTargetDurationRange = new Vector2(2f, 3f);//2,3
+                                    m1Ai.CommanderAI._sweepCommsCheckDuration = 5;//5
+                                    break;
+                            }
+
+                            switch (m1e1Gunner.Value)
+                            {
+                                case "Cadet":
+                                    m1Ai.combatSpeedLimit = 10;
+                                    m1Ai.firingSpeedLimit = 7;
+
+                                    //m1Ai.AccuracyModifiers.Angle._radius = 3.9f;
+                                    m1Ai.AccuracyModifiers.Angle.MaxDistance = 2000;
+                                    m1Ai.AccuracyModifiers.Angle.MaxRadius = 4.5f;
+                                    m1Ai.AccuracyModifiers.Angle.MinRadius = 2.5f;
+                                    break;
+                                case "Veteran":
+                                    m1Ai.combatSpeedLimit = 20;
+                                    m1Ai.firingSpeedLimit = 15;
+
+                                    //m1Ai.AccuracyModifiers.Angle._radius = 2.9f;
+                                    m1Ai.AccuracyModifiers.Angle.MaxDistance = 2500;
+                                    m1Ai.AccuracyModifiers.Angle.MaxRadius = 2.5f;
+                                    m1Ai.AccuracyModifiers.Angle.MinRadius = 1.5f;
+                                    break;
+                                case "Ace":
+                                    m1Ai.combatSpeedLimit = 25;
+                                    m1Ai.firingSpeedLimit = 20;
+
+                                    //m1Ai.AccuracyModifiers.Angle._radius = 2.4f;
+                                    m1Ai.AccuracyModifiers.Angle.MaxDistance = 3000;
+                                    m1Ai.AccuracyModifiers.Angle.MaxRadius = 2f;
+                                    m1Ai.AccuracyModifiers.Angle.MinRadius = 1f;
+                                    m1Ai.AccuracyModifiers.Angle.IncreaseAccuracyPerShot = true;
+                                    break;
+                                default:
+                                    //m1Ai.FireDelay = 1;//1.5229
+
+                                    m1Ai.combatSpeedLimit = 15;//8.5
+                                    m1Ai.firingSpeedLimit = 10;//5.5
+
+                                    m1Ai.GunnerAI._delayFireTimer = 2.0325f;//2.0325
+                                    m1Ai.GunnerAI._sweepAngle = 120;//120
+                                    m1Ai.GunnerAI._sweepDirectionShiftSpeed = 0.25f;//.25
+                                    m1Ai.GunnerAI._sweepSpeed = 20;//20
+                                    m1Ai.GunnerAI._pauseLength = 1;//1
+                                    m1Ai.GunnerAI._pauseTime = 2;//2
+
+                                    //m1Ai.AccuracyModifiers.Angle._radius = 3.4f;//3.429
+                                    m1Ai.AccuracyModifiers.Angle.MaxDistance = 2000;//2000
+                                    m1Ai.AccuracyModifiers.Angle.MaxRadius = 4f;//4
+                                    m1Ai.AccuracyModifiers.Angle.MinRadius = 2f;//2
+                                    m1Ai.AccuracyModifiers.Angle.IncreaseAccuracyPerShot = false;//F
+
+                                    m1Ai.AccuracyModifiers.Velocity.Max = 1.02f;//1.02
+                                    m1Ai.AccuracyModifiers.Velocity.Min = 0.98f;//0.98
+                                    m1Ai.AccuracyModifiers.Velocity.Target = 1;//1
+                                    //m1Ai.AccuracyModifiers.Velocity.Value= 0.9998f;//0.9998
+                                    m1Ai.AccuracyModifiers.Velocity.IncreaseAccuracyPerShot = true;//T
+                                    break;
+                            }
+
                             switch (m1e1Armor.Value)
                             {
                                 case "HA":
-                                    m1Rb.mass = mass_HA;
+                                    m1Rb.mass += mass_HA;
                                     break;
                                 case "HC":
-                                    m1Rb.mass = mass_HC;
+                                    m1Rb.mass += mass_HC;
                                     break;
                                 case "SA":
-                                    m1Rb.mass = mass_SA;
+                                    m1Rb.mass += mass_SA;
                                     break;
                                 case "HU":
-                                    m1Rb.mass = uapWeight.Value ? mass_HA : mass_HU;
+                                    m1Rb.mass += mass_HU;
                                     break;
                                 default:
-                                    m1Rb.mass = mass_A1;
+                                    m1Rb.mass += mass_A1;
                                     break;
                             }
 
@@ -2143,7 +2425,7 @@ namespace M1A1AMP
 
                                 case "AGT2500":
                                     m1VC.engine.maxPower = engine_Agt2500;
-                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
                                     m1VC.engine.maxRpmChange = engine_Maxrpmchange;
                                     m1VC.engine.minRPM = engine_Minrpm;
 
@@ -2154,7 +2436,7 @@ namespace M1A1AMP
 
                                 case "AGT3000":
                                     m1VC.engine.maxPower = engine_Agt3000;
-                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
                                     m1VC.engine.maxRpmChange = engine_Maxrpmchange;
                                     m1VC.engine.minRPM = engine_Minrpm;
 
@@ -2163,7 +2445,7 @@ namespace M1A1AMP
 
                                 case "T64":
                                     m1VC.engine.maxPower = engine_T64;
-                                    m1VC.engine.maxRPM = engine_Maxrpm;
+                                    m1VC.engine.maxRPM = t64_Maxrpm;
                                     m1VC.engine.maxRpmChange = engine_Maxrpmchange;
                                     m1VC.engine.minRPM = engine_Minrpm;
 
@@ -2220,9 +2502,9 @@ namespace M1A1AMP
                                 mainGun.FCS.ComputerNeedsPower = false;
                                 m1Turret.SpeedUnpowered = 40;//5;
 
-                                if (m1VC.engine.maxPower > 1800f)
+                                if (m1VC.engine.maxPower > 3300f)
                                 {
-                                    m1Turret.SpeedPowered = 52;//40;
+                                    m1Turret.SpeedPowered = 60;//40;
                                 }
                             }
 
@@ -2234,7 +2516,7 @@ namespace M1A1AMP
                             if (m1e1Smoke.Value)
                             {
                                 m1Smoke._launchAngle = 20;//25
-                                m1Smoke._distanceRange = new Vector2(50, 50);//25, 35
+                                m1Smoke._distanceRange = new Vector2(40, 40);//25, 35
                                 for (int i = 0; i < 12; i++)
                                 {
                                     m1Smoke._smokeSlots[i].Rounds = 2;
@@ -2247,7 +2529,7 @@ namespace M1A1AMP
                                         m1Smoke._smokeSlots[i].Rounds = 4;
                                     }
 
-                                    m1Smoke._distanceRange = new Vector2(60, 60);
+                                    m1Smoke._distanceRange = new Vector2(50, 50);
 
                                     //Left launchers
                                     m1Smoke._smokeSlots[2].Angle = -82;
@@ -2505,8 +2787,10 @@ namespace M1A1AMP
                             if (!armor_go.transform.parent.GetComponent<LateFollow>()) continue;
 
                             string name = armor_go.transform.parent.GetComponent<LateFollow>().ParentUnit.FriendlyName;
+                            //string name = armor_go.transform.parent.GetComponent<LateFollow>().ParentUnit.UniqueName;
 
                             if (name == "M1A1" + m1a1Armor.Value || name == "M1E1" + m1e1Armor.Value)
+                            //if (name == "M1IP" || name == "M1")
                             {
                                 if (armor_go.transform.Find("Hull ERA Array(Clone)"))
                                 {
@@ -2519,7 +2803,6 @@ namespace M1A1AMP
             }
             yield break;
         }
-
         public static void LateUpdate()
         {
             if (AbramsAMPMod.gameManager == null) return;
@@ -2600,6 +2883,7 @@ namespace M1A1AMP
 
                 string[] era_names = new string[] {
                     "kontakt-1 armour",
+                    "kontakt-5 armour",
                     "ARAT-1 Armor Codex",
                     "BRAT-M3 Armor Codex",
                     "BRAT-M5 Armor Codex",
@@ -2792,7 +3076,7 @@ namespace M1A1AMP
                 ammo_m830 = new AmmoType();
                 Util.ShallowCopy(ammo_m830, ammo_m456);
                 ammo_m830.Caliber = 120;
-                ammo_m830.CertainRicochetAngle = 13f;//4.0f;
+                ammo_m830.CertainRicochetAngle = 5f;//4.0f;
                 ammo_m830.DetonateSpallCount = 50;
                 ammo_m830.Mass = 13.5f;
                 ammo_m830.MuzzleVelocity = 1140f;
@@ -2822,13 +3106,13 @@ namespace M1A1AMP
                 ammo_m830a1 = new AmmoType();
                 Util.ShallowCopy(ammo_m830a1, ammo_m456);
                 ammo_m830a1.Caliber = 120;
-                ammo_m830a1.CertainRicochetAngle = 13f;//0.0f;
+                ammo_m830a1.CertainRicochetAngle = 5f;//0.0f;
                 ammo_m830a1.Coeff = 0.16f;
                 ammo_m830a1.DetonateSpallCount = mpatFragments.Value; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
                 //ammo_m830a1.ImpactFuseTime = 0.000357143f; //0.5 meters after impact //delay removed since it negatively affects armor penetration
                 ammo_m830a1.Mass = 11.4f;
                 ammo_m830a1.MaxSpallRha = 50f;
-                ammo_m830a1.MinSpallRha = 1f;
+                ammo_m830a1.MinSpallRha = 15f;
                 ammo_m830a1.MuzzleVelocity = 1410f;
                 ammo_m830a1.Name = "M830A1 HEAT-MP-T";
                 ammo_m830a1.RhaPenetration = 480;
@@ -3156,6 +3440,7 @@ namespace M1A1AMP
                 Util.ShallowCopy(armor_superCompositeskirt_HU, armor_compositeskirt_VNL);
                 armor_superCompositeskirt_HU.RhaeMultiplierCe = demigodArmor.Value ? 100f : 11f; //default 1.5
                 armor_superCompositeskirt_HU.RhaeMultiplierKe = demigodArmor.Value ? 100f : 6f; //default 0.8
+                //armor_superCompositeskirt_HU.SpallPowerMultiplier = 10f; //default 0.8
                 armor_superCompositeskirt_HU.Name = "Abrams HU super special composite skirt";
 
                 armor_codex_superCompositeskirt_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
@@ -3679,54 +3964,51 @@ namespace M1A1AMP
                 ammo_m908.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m908;
                 ammo_m908.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m908;
 
-                ammo_test_vis = GameObject.Instantiate(ammo_m456.VisualModel);
-                ammo_test_vis.name = "Test visual";
+                //Attempt to copy vanilla smoke grenades to actually make ROSY be like ROSY
+                //if (m82Object == null)
+                //{
+                //    foreach (GameObject smokestuff in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+                //    {
+                //        if (smokestuff.name == "Smoke - 3D6 81mm")//Smoke - 3D6 81mm Smoke - M82 66mm
+                //        {
+                //            m82Object = smokestuff;
+                //        }
+
+                //        /*if (smokestuff.name == "Smoke White Single Normal")
+                //        {
+                //            m82SmokeEffect = smokestuff;
+                //        }*/
+                //    }
+
+                //    RosyObject = GameObject.Instantiate(m82Object);
+                //    RosyObject.name = "Smoke - ROSY 40mm";
+
+                //    m82ObjectCopy = GameObject.Instantiate(m82Object);
+                //    m82ObjectCopy2 = GameObject.Instantiate(m82ObjectCopy);
+
+                //    //RosyObject.active = true;
+                //    //m82ObjectCopy.SetActiveRecursively(true);
+
+                //    /*m82ObjectCopy = new GameObject();
+                //    Util.ShallowCopy(m82ObjectCopy, m82ObjectReal);
+                //    m82ObjectCopy.name = "Smoke - ROSY 40mm";
+                //    m82ObjectCopy.hideFlags = HideFlags.DontUnloadUnusedAsset;*/
+
+                //    //m82ObjectCopy = new GameObject();
+                //    //m82ObjectCopy.SetActive(true);
+                //    //m82ObjectCopy.hideFlags = HideFlags.HideAndDontSave;
+
+                //    //RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);
+                //    //RosySmokeEffect.name = "Rosy Multispectral Single";
 
 
-                if (m82Object == null)
-                {
-                    foreach (GameObject smokestuff in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
-                    {
-                        if (smokestuff.name == "Smoke - 3D6 81mm")//Smoke - 3D6 81mm Smoke - M82 66mm
-                        {
-                            m82Object = smokestuff;
-                        }
-
-                        /*if (smokestuff.name == "Smoke White Single Normal")
-                        {
-                            m82SmokeEffect = smokestuff;
-                        }*/
-                    }
-
-                    RosyObject = GameObject.Instantiate(m82Object);
-                    RosyObject.name = "Smoke - ROSY 40mm";
-
-                    m82ObjectCopy = GameObject.Instantiate(m82Object);
-                    m82ObjectCopy2 = GameObject.Instantiate(m82ObjectCopy);
-
-                    //RosyObject.active = true;
-                    //m82ObjectCopy.SetActiveRecursively(true);
-
-                    /*m82ObjectCopy = new GameObject();
-                    Util.ShallowCopy(m82ObjectCopy, m82ObjectReal);
-                    m82ObjectCopy.name = "Smoke - ROSY 40mm";
-                    m82ObjectCopy.hideFlags = HideFlags.DontUnloadUnusedAsset;*/
-
-                    //m82ObjectCopy = new GameObject();
-                    //m82ObjectCopy.SetActive(true);
-                    //m82ObjectCopy.hideFlags = HideFlags.HideAndDontSave;
-
-                    //RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);
-                    //RosySmokeEffect.name = "Rosy Multispectral Single";
-
-
-                    MelonLogger.Msg("M82 Object: " + m82Object.name);
-                    MelonLogger.Msg("M82 Object Copy: " + m82Object.name);
-                    MelonLogger.Msg("M82 Object Copy of Copy: " + m82Object.name);
-                    MelonLogger.Msg("ROSY Object: " + RosyObject.name);
-                    //MelonLogger.Msg("M82 Smoke Effect: " + m82SmokeEffect.name);
-                    //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
-                }
+                //    MelonLogger.Msg("M82 Object: " + m82Object.name);
+                //    MelonLogger.Msg("M82 Object Copy: " + m82Object.name);
+                //    MelonLogger.Msg("M82 Object Copy of Copy: " + m82Object.name);
+                //    MelonLogger.Msg("ROSY Object: " + RosyObject.name);
+                //    //MelonLogger.Msg("M82 Smoke Effect: " + m82SmokeEffect.name);
+                //    //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
+                //}
             }
 
             StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(Convert), GameStatePriority.Medium);
