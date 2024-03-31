@@ -5,6 +5,7 @@
 	<ul> 
 		<li>Fixed issue with the CITV causing unnecessary error entries in Player.log after a second mission was loaded</li>
 		<li>Fixed issue with the mod not working if the new Main Menu scene is unlocked</li>
+		<li>Added anti-ERA entry against PIL Kontakt-5 ERA</li>
 		<li>Added option to adjust trigger distance for proximity-enabled M830A1 and XM1147</li>
 		<li>Smoke launcher upgrade changes and more options</li>
 		<li>Added option for suspension and tracks upgrades</li>
