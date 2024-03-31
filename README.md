@@ -14,6 +14,8 @@
 		<li>Added skill options for Commander and Gunner</li>
 		<li>Increased certain ricochet angles of M830/A1 and M908 to 85°</li>
 		<li>Added thermal signatures for the CITV</li>
+		<li>Activation of smoke grenades/generator are not tied to a specific crew anymore</li>
+		<li>Increased the max driving speed of AI so it could better follow with unrestricted top speed</li>
 	</ul>
 </p>
 
