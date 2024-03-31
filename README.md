@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.4
+# M1A1 Abrams AMP v2.5
 Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. I also would like to thank Swiss/SovGrenadier for the GLATGM implementation. Be sure to checkout their mods because they are great!
 
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
@@ -12,7 +12,7 @@ If you get an error launching through Steam you will need to run the game execut
 ![AMP Enhanced Optics v2](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/c538fba0-c967-429f-b91a-e6d338ec7a4e)
 
 
-## AMP 2.4 Update:
+## AMP 2.5 Update:
 <p>
 	<ul>
 	<li>120mm M256 Gun</li>
@@ -27,17 +27,18 @@ If you get an error launching through Steam you will need to run the game execut
     	<li>HE: XM1147, M908</li>
     	<li>GLATGM: LAHAT</li>
     	<li>XM1147 AMP-T multifuze round (point-detonate + time-delay or proximity)</li>
-	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, ARAT and BRAT), requires at least NATO ERA v1.1.1b and/or Pact Increased Lethality v1.2.5)</li>
+	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, Kontakt-5, ARAT and BRAT), requires at least NATO ERA v1.1.1b and/or Pact Increased Lethality v1.2.5)</li>
 	<li>"TUSK" postfix when ERA is detected (NATO ERA mod)</li>
 	<li>Configurable CITV upgrade</li>
-	<li>Configurable enhanced optics for the GPS, FLIR and AGS</li>
-	<li>Configurable loader proficiency</li>
+	<li>Configurable enhanced optics for the GPS, FLIR and GAS</li>
+	<li>Configurable tank crew proficiency</li>
 	<li>M2 Coaxial upgrade (replaces M240 and has two ammo types)</li>
 	<li>Updated tank weight depending on the armor type used</li>
-	<li>Configurable powertrain options and removable governor</li>
+	<li>Configurable vehicle dynamics</li>
 	<li>Toggleable Auxilliary Power Unit (APU)</li>
 	<li>Configurable enhanced smoke launcher system</li>
 	<li>Toggleable clean turret look (no attachments like ALICE packs or MREs)</li>
+	<li>Toggleable IP model conversion for M1E1</li>
  	</ul>
 </p>
 
@@ -57,9 +58,8 @@ If you get an error launching through Steam you will need to run the game execut
 ## NOTE!
 <p>
 	<ul> 
-		<li>Only include ATLAS' Abrams mod .dll file in the mods folder or this one. Do not place both .dll files at the same time.</li>
+		<li>Only include ATLAS' Abrams mod .dll file in the mods folder or this one. **Do not place both .dll files at the same time.**</li>
 		<li>If you already have ATLAS' Abrams mod or have an older version of the Abrams AMP mod installed, either delete MelonPreferences.cfg in UserData folder or remove the lines pertaining to the [M1A1Config]/[M1A1AMPConfig] to make it easier to understand the custom config. Launch the game first then close it to update the contents of MelonPreferences.cfg</li>
-		<li>XM1111 is in the config file but it is not implemented yet. Listing that in your loadout will make the mod use vanilla loadout (M833/M456A2). I only included it so there is no need to manually cleanup the config file if I could make it work.</li>
 		<li>Mission loading might be longer if you are using the HU variant, potentially due to the extra armor configuration.</li>
 		<li>For compatibility with other mods for the TUSK upgrade and anti-ERA effects, ensure that the AMP mod is loaded after NATO ERA and Pact Increased Lethatlity mod.</li>
 		<li>On the Gunner Auxiliary Sight (GAS) behavior: Only the first two rounds are considered and only one type of APFSDS (M829 series) and HEAT (other rounds) are considered. This means if you carry an all APFSDS/HEAT loadout but with different types, only the first round is considered by the GAS.</li>
@@ -106,7 +106,7 @@ If you get an error launching through Steam you will need to run the game execut
 ### Point-detonate + Proxmity Fuze
 - Proximity fuze option automatically enabled for the MPAT, but needs to be enabled in the config for the AMP 
 - To use proximity mode, press middle mouse button and the round should have [Proximity] postfix to its name in the lower left part of the UI
-- To use point-detonate mode, press the middle mouse again to remove the [Proximity]
+- To use point-detonate mode, make sure the [Proximity] postfix is not present
 
 ![AMP Proximity Mode](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/e665ec03-62bd-44fe-9276-4f1d7ab12035)		
 
@@ -198,13 +198,28 @@ If you get an error launching through Steam you will need to run the game execut
 | AGT2000 | 2000 | 7655 | 3100 | +10% | Fictional. | 
 | AGT2500 | 2500 | 7415 | 4000 | +20% | Fictional. | 
 | AGT3000 | 3000 | 8899 | 4000 | +30% | Fictional. | 
-| T64 | 4430 | 12845 | 4000 | +40% | Fictional but it's the T64-GE-100. | 
+| T64 | 4430 | 12225 | 4300 | +40% | Fictional but it's the T64-GE-100. | 
 
 
 ### Transmission
 <p>
 	<ul> 
 		<li>Upgradeable transmission with 6 forward gears and 3 reverse gears (compared to 4/2 of default)</li>
+	</ul>
+</p>
+
+### Suspension
+<p>
+	<ul> 
+		<li>Added upgradeable suspension which slightly increases ride height, and increases suspension travel that has better performance on rough terrain </li>
+	</ul>
+</p>
+
+
+### Tracks
+<p>
+	<ul> 
+		<li>Added upgradeable tracks which increases grip to aid acceleration, braking and movement on steep terrain</li>
 	</ul>
 </p>
 
@@ -222,15 +237,15 @@ If you get an error launching through Steam you will need to run the game execut
 	<ul> 
 		<li>GPS has 5 zoom levels (vs 2 for vanilla)</li>
 		<li>Thermals have 5 zoom levels (vs 2 for vanilla), clearer image and removed scanlines</li>
-		<li>AGS has 3 zoom levels (vs 1 for vanilla) and its less blurry when moving</li>
+		<li>GAS has 4 zoom levels (vs 1 for vanilla) and its less blurry when moving</li>
 	</ul>
 </p>
 
 ### Auxilliary Power Unit (APU)
 <p>
 	<ul> 
-		<li>Retain vanilla turret traversal speed and lazing functionality even with destroyed engine</li>
-		<li>Has slightly faster turret traversal speed if the engine is AGT2500 or better and if it's still running</li>
+		<li>Retain nomral turret traversal speed (40°/s) and lazing functionality even with destroyed engine</li>
+		<li>Has faster turret traversal speed (60°/s) if the engine is T64 and if it's still running</li>
 		<li>The APU itself has no model at the moment so it's indestructible</li>
 	</ul>
 </p>
@@ -240,14 +255,19 @@ If you get an error launching through Steam you will need to run the game execut
 	<ul> 
 		<li>Smoke+ upgrade, doubling the amount of salvos that could be fired and the throw distace of smoke grenades</li>
 		<li>ROSY upgrade, featuring 4 salvos and 12 smoke grenades fired per salvo covering a +/- 82° sector in front of the turret</li>
+		<li>Option for improved ROSY* that has a faster deployment time and greater smoke generation, and even multispectrum capability</li>
+		<li>*Due to challenges in modding smoke grenades, the vanilla smoke grenade is directly modified which means the option above will also affect the smoke grenade behavior of the M60A1/3, M2, M113 and unupgraded M1 smoke system.</li>
+		<li>*FPS drops might occur from the enhanced smoke effects</li>
 	</ul>
 </p>
 
-### Loading Proficiency
+### Crew Proficiency
 <p>
 	<ul> 
-		<li>4 skill levels, with slowest loading time of 7 seconds (min qualification) and 1 second reduction as you go up</li>
+		<li>Commander and Gunner can have better (or worse) target spotting and gunnery skill</li>
+		<li>Loader skill can have a loading time of 7 seconds (min qualification) and there is 1 second reduction as you go up in skill</li>
 		<li>Out of action loader and ready rack loading times are also affected</li>
+		<li>Has 4 skill levels, with Regular being default and the same as vanilla behavior (or slightly better)</li>
 	</ul>
 </p>
 
@@ -257,14 +277,15 @@ If you get an error launching through Steam you will need to run the game execut
 		<li>I suggest getting Notepad++ so it would be easier to identify each category</li>
 		<li>Selectable round types for four slots for M1A1 and M1E1. You can even go with a pure APFSDS or HEAT loadout. <b>Be careful when typing the round you want </b> because the mod will default to vanilla rounds (M833/M456A2) if there is a typo or if a field is left blank. The listed rounds are case-sensitive (just make sure it is all caps when entering the designated round).</li>
 		<li>Customize how many rounds per type are carried by the M1A1 and M1E1 (total max of 50).</li>
-		<li>Customize the crew loading skill per tank (Regular by default)</li>
+		<li>Customize the tank gunner, commander and loader skill per tank (Regular by default)</li>
 		<li>Upgrade the M240 coax to M2 coax with two ammo options (false by default)</li>
 		<li>Enhanced M829 spalling (false by default)</li>
-		<li>XM1147 fuze type betweeen point-detonate + time-delay (default) or point-detonate + proximity</li>
 		<li>Customize the number of fragments generated by the M830A1 (600 by default). <b>Be careful when setting a higher number</b> because it can negatively affect game performance.</li>
 		<li>Customize the number of fragments generated by the XM1147 (600 by default). <b>Be careful when setting a higher number</b> because it can negatively affect game performance.</li>
 		<li>Customize the number of fragments generated by the M908 (300 by default). <b>Be careful when setting a higher number</b> because it can negatively affect game performance.</li>
-		<li>Enhanced gunner optics for Daysight, Thermals and AGS (false by default)</li>
+		<li>XM1147 fuze type betweeen point-detonate + time-delay (default) or point-detonate + proximity</li>
+		<li>Trigger distance for proximity-enabled rounds (3 by default)</li>
+		<li>Enhanced gunner optics for Daysight, Thermals and GAS (false by default)</li>
 		<li>Enable the CITV and customize its behavior (false by default)</li>
  		<li>Horizontal sight stabilization for M1A1/E1s when applying lead (false by default)</li>
 		<li>Convert non-IP M1s to M1E1s (true by default)</li>
@@ -273,11 +294,16 @@ If you get an error launching through Steam you will need to run the game execut
 		<li>UAP option to make the HU armor weigh the same as the HA (false by default)</li>
 		<li>Demigod armor for the HU variant if you want an almost unkillable Abrooms (false by default)</li>
 		<li>Enhanced smoke launching system (false by default)</li>
+		<li>ROSY upgrade (false by default)</li>
+		<li>Improved ROSY (false by default)</li>
 		<li>Cuztomize the engine per tank (AGT1500 by default)</li>
 		<li>Enhanced transmission (false by default)</li>
+		<li>Enhanced suspension (false by default)</li>
+		<li>Enhanced tracks (false by default)</li>
 		<li>Engine governor removal (false by default)</li>
 		<li>Enable APU per tank (false by default)</li>
 		<li>Remove turret decors like ALICE packs or MRE boxes (false by default)</li>
+		<li>M1E1 uses M1IP model (false by default)</li>
 	</ul>
 </p>
 
