@@ -4029,7 +4029,7 @@ namespace M1A1AMP
                 }
             }
 
-            StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(Convert), GameStatePriority.Medium);
+            StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(Convert), GameStatePriority.Lowest);
         }
 
         [HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "Start")]
