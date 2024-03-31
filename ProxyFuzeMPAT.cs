@@ -94,7 +94,8 @@ namespace M1A1AMP
                     Detonate();
 
             RaycastHit hit3;
-            if (Physics.SphereCast(pos, 3f, live_round.transform.forward, out hit3, 0.1f, 1 << 8))
+            if (Physics.SphereCast(pos, M1A1AbramsAMPMod.proxyDistance.Value, live_round.transform.forward, out hit3, 0.1f, 1 << 8))
+            //if (Physics.SphereCast(pos, 3f, live_round.transform.forward, out hit3, 0.1f, 1 << 8))
                 if (hit3.collider.CompareTag("Penetrable"))
                     Detonate();
 
@@ -118,8 +119,8 @@ namespace M1A1AMP
             }
         }
 
-        [HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "createExplosion")]
-        public class ForwardBurst
+        //[HarmonyPatch(typeof(GHPC.Weapons.LiveRound), "createExplosion")]
+        /*public class ForwardBurst
         {
             private static bool Prefix(GHPC.Weapons.LiveRound __instance)
             {
@@ -151,6 +152,6 @@ namespace M1A1AMP
 
                 return true;
             }
-        }
+        }*/
     }
 }
