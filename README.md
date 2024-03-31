@@ -12,6 +12,8 @@
 		<li>APU bonus upgrade changes</li>
 		<li>Added option to give M1E1 the M1IP model</li>
 		<li>Added skill options for Commander and Gunner</li>
+		<li>Increased certain ricochet angles of M830/A1 and M908 to 85°</li>
+		<li>Added thermal signatures for the CITV</li>
 	</ul>
 </p>
 
