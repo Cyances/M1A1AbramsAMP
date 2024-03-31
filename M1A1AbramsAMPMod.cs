@@ -33,6 +33,7 @@ using Rewired.Utils;
 using GHPC.UI.Tips;
 using UnityEngine.UI;
 using System.Net;
+using GHPC.Effects;
 
 namespace M1A1AMP
 {
@@ -49,7 +50,7 @@ namespace M1A1AMP
         static MelonPreferences_Entry<int> randomChanceNum;
         static MelonPreferences_Entry<bool> m829spall, ampFuze;
         static MelonPreferences_Entry<string> m1a1Armor, m1e1Armor;
-        static MelonPreferences_Entry<bool> demigodArmor, m1a1Smoke, m1e1Smoke, m1a1Rosy, m1e1Rosy;
+        static MelonPreferences_Entry<bool> demigodArmor, m1a1Smoke, m1e1Smoke, m1a1Rosy, m1e1Rosy, rosyPlus, rosyIR;
         static MelonPreferences_Entry<string> m1a1Agt, m1e1Agt;
         static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, noLuggage, betterSuspension, betterTracks, m1ipModel;
         static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader, m1a1Commander, m1e1Commander, m1a1Gunner, m1e1Gunner;
@@ -295,14 +296,12 @@ namespace M1A1AMP
         static GameObject citv_obj;
 
         static GameObject m82Object;
-        static GameObject m82ObjectCopy;
-        static GameObject m82ObjectCopy2;
-        static GameObject RosyObject;
-
         static GameObject m82SmokeEffect;
-
         static GameObject RosySmokeEffect;
 
+        static GameObject m1ip_cheeksface;
+        static GameObject m1ip_cheeksnera;
+        static GameObject m1ip_turretroof;
 
         public static void Config(MelonPreferences_Category cfg)
         {
@@ -403,12 +402,17 @@ namespace M1A1AMP
             demigodArmor.Description = "Almost deathproof Abrooms (HU variant only)";
 
             m1a1Smoke = cfg.CreateEntry<bool>("M1A1 Smoke+", false);
-            m1a1Smoke.Description = "Twice the ammo and throw distance.";
+            m1a1Smoke.Description = "Twice the ammo and better throw distance.";
             m1e1Smoke = cfg.CreateEntry<bool>("M1E1 Smoke+", false);
 
             m1a1Rosy = cfg.CreateEntry<bool>("M1A1 ROSY", false);
-            m1a1Rosy.Description = "Replaces M250 with 4 charges of Rapid Obscuring Sytem (Smoke+ required)";
+            m1a1Rosy.Description = "Replaces M250 with 4 charges of \"Rapid Obscuring Sytem\" (Smoke+ required)";
             m1e1Rosy= cfg.CreateEntry<bool>("M1E1 ROSY", false);
+
+            rosyPlus = cfg.CreateEntry<bool>("ROSY+", false);
+            rosyPlus.Description = "Faster/larger smoke effect and if thermals are blocked for ROSY";
+
+            rosyIR = cfg.CreateEntry<bool>("Multispectral", false);
 
             m1a1Agt = cfg.CreateEntry<string>("M1A1 Engine", "AGT1500");
             m1a1Agt.Description = "SPEEEED AND POWWAAAAH!";
@@ -1514,41 +1518,6 @@ namespace M1A1AMP
 
                         HeatSource m1ip_HeatSourceCopy = vic_go.GetComponent<HeatSource>();
                         
-                        ////Copy IP thermals signature
-                        if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
-                        {
-                            HeatSource m1ip_HeatSource = vic_go.GetComponent<HeatSource>();
-
-
-                            /*m1ip_HeatSource.heat = 1;
-                            m1ip_HeatSourceCopy.heat = m1ip_HeatSource.heat;
-                            m1ip_HeatSourceCopy._swapableMats = m1ip_HeatSource._swapableMats;*/
-                        }
-
-
-                        //M1_rig/M1_hull/
-                        //M1_rig/M1_skinned/
-                        ////IP model to base M1
-                        if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
-                        {
-                            GameObject m1_hull = vic_go.transform.Find("M1_rig/M1_hull/").gameObject;
-                            GameObject m1_skinned = vic_go.transform.Find("M1_rig/M1_skinned/").gameObject;
-                            m1_hull.SetActive(false);
-                            m1_skinned.SetActive(false);
-
-                            GameObject m1ip_hull = vic_go.transform.Find("IPM1_rig/M1IP_hull/").gameObject;
-                            GameObject m1ip_skinned = vic_go.transform.Find("IPM1_rig/M1IP_skinned/").gameObject;
-                            m1ip_hull.SetActive(true);
-                            m1ip_skinned.SetActive(true);
-
-                            HeatSource m1_HeatSource = vic_go.GetComponent<HeatSource>();
-
-
-                            GameObject.Destroy(m1_HeatSource);
-
-                            m1_HeatSource = m1ip_HeatSourceCopy;
-                        }
-
 
                         ////Weapons management
                         WeaponsManager weaponsManager = vic.GetComponent<WeaponsManager>();
@@ -2078,6 +2047,9 @@ namespace M1A1AMP
 
                             if (m1a1Smoke.Value)
                             {
+                                m1Smoke._smokeGrenadeRequiredCrewPositions = CrewBrainFlag.None;
+                                m1Smoke._smokeScreenRequiredCrewPositions = CrewBrainFlag.None;
+
                                 m1Smoke._launchAngle = 20;//25
                                 m1Smoke._distanceRange = new Vector2(40, 40);//25, 35
                                 for (int i = 0; i < 12; i++)
@@ -2087,18 +2059,16 @@ namespace M1A1AMP
 
                                 if (m1a1Rosy.Value)
                                 {
-                                    //Smoke - M82 66mm
-                                    //Smoke - 3D6 81mm
 
-                                    //US Vehicles/M1IP/IPM1_rig/HULL/TURRET/SmokeGrenadesSetup
-                                    //m1Smoke._smokePrefab = RosyObject;//GameObject.Instantiate(m82Object, vic.transform.Find("IPM1_rig/HULL/TURRET/SmokeGrenadesSetup"));
+                                    m1Smoke._launchAngle = 6;//25
+                                    m1Smoke._distanceRange = new Vector2(500, 500);//25, 35
+
+                                    m1Smoke._smokePrefab = m82Object;
 
                                     for (int i = 0; i < 12; i++)
                                     {
                                         m1Smoke._smokeSlots[i].Rounds = 4;
                                     }
-
-                                    m1Smoke._distanceRange = new Vector2(50, 50);
                                     /*//Left launchers
                                     m1Smoke._smokeSlots[2].Angle = -95;
                                     m1Smoke._smokeSlots[4].Angle = -77;
@@ -2515,6 +2485,9 @@ namespace M1A1AMP
 
                             if (m1e1Smoke.Value)
                             {
+                                m1Smoke._smokeGrenadeRequiredCrewPositions = CrewBrainFlag.None;
+                                m1Smoke._smokeScreenRequiredCrewPositions = CrewBrainFlag.None;
+
                                 m1Smoke._launchAngle = 20;//25
                                 m1Smoke._distanceRange = new Vector2(40, 40);//25, 35
                                 for (int i = 0; i < 12; i++)
@@ -2524,12 +2497,15 @@ namespace M1A1AMP
 
                                 if (m1e1Rosy.Value)
                                 {
+
+                                    m1Smoke._launchAngle = 6;//25
+                                    m1Smoke._distanceRange = new Vector2(500, 500);//25, 35
+
+                                    m1Smoke._smokePrefab = m82Object;
                                     for (int i = 0; i < 12; i++)
                                     {
                                         m1Smoke._smokeSlots[i].Rounds = 4;
                                     }
-
-                                    m1Smoke._distanceRange = new Vector2(50, 50);
 
                                     //Left launchers
                                     m1Smoke._smokeSlots[2].Angle = -82;
@@ -2651,6 +2627,41 @@ namespace M1A1AMP
 
                                     m1Smoke._smokeGroups[1].SmokePatternData = sg2_smokePattern12.ToArray<SmokePatternData>();
                                 }
+                            }
+
+                            if (m1ipModel.Value)
+                            {
+                                ////IP model to base M1
+                                GameObject m1_hull = vic_go.transform.Find("M1_rig/M1_hull/").gameObject;
+                                GameObject m1_skinned = vic_go.transform.Find("M1_rig/M1_skinned/").gameObject;
+                                m1_hull.SetActive(false);
+                                m1_skinned.SetActive(false);
+
+                                GameObject m1ip_hull = vic_go.transform.Find("IPM1_rig/M1IP_hull/").gameObject;
+                                GameObject m1ip_skinned = vic_go.transform.Find("IPM1_rig/M1IP_skinned/").gameObject;
+                                m1ip_hull.SetActive(true);
+                                m1ip_skinned.SetActive(true);
+
+
+                                //M1 TURRET FOLLOW/M1A0_turret_armour
+                                GameObject m1_turretcheeks = vic.transform.Find("IPM1_rig/HULL/TURRET").GetComponent<LateFollowTarget>()
+                                    ._lateFollowers[0].transform.Find("M1A0_turret_armour/CHEEKS NERA").gameObject;
+                                m1_turretcheeks.SetActive(false);
+
+                                GameObject m1_turretcheeksface = vic.transform.Find("IPM1_rig/HULL/TURRET").GetComponent<LateFollowTarget>()
+                                    ._lateFollowers[0].transform.Find("M1A0_turret_armour/CHEEKS OUTTER").gameObject;
+                                m1_turretcheeksface.SetActive(false);
+
+                                GameObject m1_turretroof = vic.transform.Find("IPM1_rig/HULL/TURRET").GetComponent<LateFollowTarget>()
+                                    ._lateFollowers[0].transform.Find("M1A0_turret_armour/ROOF").gameObject;
+                                m1_turretroof.SetActive(false);
+
+
+
+                                Transform turret = vic.transform.Find("IPM1_rig/HULL/TURRET");
+                                GameObject.Instantiate(m1ip_cheeksnera, turret.GetComponent<LateFollowTarget>()._lateFollowers[0].transform.Find("M1A0_turret_armour"));
+                                GameObject.Instantiate(m1ip_cheeksface, turret.GetComponent<LateFollowTarget>()._lateFollowers[0].transform.Find("M1A0_turret_armour"));
+                                GameObject.Instantiate(m1ip_turretroof, turret.GetComponent<LateFollowTarget>()._lateFollowers[0].transform.Find("M1A0_turret_armour"));
                             }
                         }
 
@@ -2827,8 +2838,6 @@ namespace M1A1AMP
         public static void Init()
         {
 
-            //m82Object = GameObject.Find("Smoke - 3D6 81mm");
-
             if (citv_obj == null)
             {
                 var bundle = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1CITV/", "citv"));
@@ -2903,10 +2912,10 @@ namespace M1A1AMP
                         optimization_m829a4.RhaRatio = 0.15f;
                         era_optimizations_m829a4.Add(optimization_m829a4);
 
-                        AmmoType.ArmorOptimization optimization_m830a2 = new AmmoType.ArmorOptimization();
-                        optimization_m830a2.Armor = s;
-                        optimization_m830a2.RhaRatio = 0.15f;
-                        era_optimizations_m830a2.Add(optimization_m830a2);
+                        AmmoType.ArmorOptimization optimization_m830a23 = new AmmoType.ArmorOptimization();
+                        optimization_m830a23.Armor = s;
+                        optimization_m830a23.RhaRatio = 0.15f;
+                        era_optimizations_m830a2.Add(optimization_m830a23);
 
                         AmmoType.ArmorOptimization optimization_lahat = new AmmoType.ArmorOptimization();
                         optimization_lahat.Armor = s;
@@ -3965,50 +3974,59 @@ namespace M1A1AMP
                 ammo_m908.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m908;
 
                 //Attempt to copy vanilla smoke grenades to actually make ROSY be like ROSY
-                //if (m82Object == null)
-                //{
-                //    foreach (GameObject smokestuff in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
-                //    {
-                //        if (smokestuff.name == "Smoke - 3D6 81mm")//Smoke - 3D6 81mm Smoke - M82 66mm
-                //        {
-                //            m82Object = smokestuff;
-                //        }
+                if (m82Object == null)
+                {
+                    foreach (GameObject m82Smoke in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
+                    {//Smoke - 3D6 81mm Smoke - M82 66mm
+                        if (m82Smoke.name == "Smoke - M82 66mm") m82Object = m82Smoke;
+                        if (m82Smoke.name == "Smoke White Single Normal") m82SmokeEffect = m82Smoke;
 
-                //        /*if (smokestuff.name == "Smoke White Single Normal")
-                //        {
-                //            m82SmokeEffect = smokestuff;
-                //        }*/
-                //    }
+                        /*if (smokestuff.name == "Smoke White Single Normal")
+                        {
+                            m82SmokeEffect = smokestuff;
+                        }*/
+                    }
+                    //Smoke White Single Normal/Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1
 
-                //    RosyObject = GameObject.Instantiate(m82Object);
-                //    RosyObject.name = "Smoke - ROSY 40mm";
+                    RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);
+                    RosySmokeEffect.name = "Rosy Multispectral Single Normal";
 
-                //    m82ObjectCopy = GameObject.Instantiate(m82Object);
-                //    m82ObjectCopy2 = GameObject.Instantiate(m82ObjectCopy);
+                    LightBandExclusiveItem RosyLB = RosySmokeEffect.GetComponent<LightBandExclusiveItem>();
 
-                //    //RosyObject.active = true;
-                //    //m82ObjectCopy.SetActiveRecursively(true);
+                    RosyLB.ShowInThermal = rosyIR.Value;
 
-                //    /*m82ObjectCopy = new GameObject();
-                //    Util.ShallowCopy(m82ObjectCopy, m82ObjectReal);
-                //    m82ObjectCopy.name = "Smoke - ROSY 40mm";
-                //    m82ObjectCopy.hideFlags = HideFlags.DontUnloadUnusedAsset;*/
+                    if (rosyPlus.Value)
+                    {
+                        var RosyEffect = RosySmokeEffect.transform.Find("Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1").gameObject.transform;
 
-                //    //m82ObjectCopy = new GameObject();
-                //    //m82ObjectCopy.SetActive(true);
-                //    //m82ObjectCopy.hideFlags = HideFlags.HideAndDontSave;
+                        ParticleSystem RosyCloud = RosyEffect.GetComponent<ParticleSystem>();
 
-                //    //RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);
-                //    //RosySmokeEffect.name = "Rosy Multispectral Single";
+                        RosyCloud.maxParticles = 12000;
+                        RosyCloud.startSize = 30;
+
+                        SmokeRound m82Plus = m82Object.GetComponent<SmokeRound>();
+                        m82Plus._fuseTimeRange = new Vector2(0.325f, 0.375f);//1.3 1.7
+                        m82Plus._effectPrefab = RosySmokeEffect;
+                    }
 
 
-                //    MelonLogger.Msg("M82 Object: " + m82Object.name);
-                //    MelonLogger.Msg("M82 Object Copy: " + m82Object.name);
-                //    MelonLogger.Msg("M82 Object Copy of Copy: " + m82Object.name);
-                //    MelonLogger.Msg("ROSY Object: " + RosyObject.name);
-                //    //MelonLogger.Msg("M82 Smoke Effect: " + m82SmokeEffect.name);
-                //    //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
-                //}
+                    //MelonLogger.Msg("M82 Object: " + m82Object.name);
+                    //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
+                }
+
+
+                if (m1ip_cheeksnera == null)
+                {
+                    foreach (Vehicle obj in Resources.FindObjectsOfTypeAll(typeof(Vehicle)))
+                    {
+                        if (obj.gameObject.name == "M1IP")
+                        {
+                            m1ip_cheeksnera = obj.transform.Find("M1IP TURRET FOLLOW/Turret_Armor/cheeks composite arrays").gameObject;
+                            m1ip_cheeksface = obj.transform.Find("M1IP TURRET FOLLOW/Turret_Armor/CHEEKS OUTTER").gameObject;
+                            m1ip_turretroof = obj.transform.Find("M1IP TURRET FOLLOW/Turret_Armor/ROOF.001").gameObject;
+                        }
+                    }
+                }
             }
 
             StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(Convert), GameStatePriority.Medium);
