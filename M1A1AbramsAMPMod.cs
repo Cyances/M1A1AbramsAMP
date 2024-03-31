@@ -293,15 +293,7 @@ namespace M1A1AMP
         static ReticleSO reticleSO_m1e1firstRound, reticleSO_m1e1secondRound;
         static ReticleMesh.CachedReticle reticle_cached_m1e1firstRound, reticle_cached_m1e1secondRound;
 
-        static GameObject citv_obj;
-
-        static GameObject m82Object;
-        static GameObject m82SmokeEffect;
-        static GameObject RosySmokeEffect;
-
-        static GameObject m1ip_cheeksface;
-        static GameObject m1ip_cheeksnera;
-        static GameObject m1ip_turretroof;
+        static GameObject citv_obj, m82Object, m82SmokeEffect, RosySmokeEffect, m1ip_cheeksface, m1ip_cheeksnera, m1ip_turretroof, m1_hull, m1_skinned, m1ip_hull, m1ip_skinned;
 
         public static void Config(MelonPreferences_Category cfg)
         {
@@ -412,7 +404,7 @@ namespace M1A1AMP
             rosyPlus = cfg.CreateEntry<bool>("ROSY+", false);
             rosyPlus.Description = "Faster/larger smoke effect and if thermals are blocked for ROSY";
 
-            rosyIR = cfg.CreateEntry<bool>("Multispectral", false);
+            rosyIR = cfg.CreateEntry<bool>("Multispectral ROSY", false);
 
             m1a1Agt = cfg.CreateEntry<string>("M1A1 Engine", "AGT1500");
             m1a1Agt.Description = "SPEEEED AND POWWAAAAH!";
@@ -1516,9 +1508,6 @@ namespace M1A1AMP
                         if (ampFuze.Value) vic_go.AddComponent<ProxySwitchAMP>();
                         vic_go.AddComponent<ProxySwitchMPAT>();
 
-                        HeatSource m1ip_HeatSourceCopy = vic_go.GetComponent<HeatSource>();
-                        
-
                         ////Weapons management
                         WeaponsManager weaponsManager = vic.GetComponent<WeaponsManager>();
                         WeaponSystemInfo mainGunInfo = weaponsManager.Weapons[0];
@@ -1815,7 +1804,6 @@ namespace M1A1AMP
 
                         if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
                         {
-                            MelonLogger.Msg("Base M1A1 Mass: " + m1Rb.mass);
                             switch (m1a1Commander.Value)
                             {
                                 case "Cadet":
@@ -1943,7 +1931,6 @@ namespace M1A1AMP
                                     m1Rb.mass += mass_A1;
                                     break;
                             }
-                            MelonLogger.Msg("M1A1" + m1a1Armor.Value + " Mass: " + m1Rb.mass);
 
                             switch (m1a1Agt.Value)
                             {
@@ -2632,16 +2619,18 @@ namespace M1A1AMP
                             if (m1ipModel.Value)
                             {
                                 ////IP model to base M1
-                                GameObject m1_hull = vic_go.transform.Find("M1_rig/M1_hull/").gameObject;
-                                GameObject m1_skinned = vic_go.transform.Find("M1_rig/M1_skinned/").gameObject;
+                                m1_hull = vic_go.transform.Find("M1_rig/M1_hull/").gameObject;
+                                m1_skinned = vic_go.transform.Find("M1_rig/M1_skinned/").gameObject;
                                 m1_hull.SetActive(false);
                                 m1_skinned.SetActive(false);
 
-                                GameObject m1ip_hull = vic_go.transform.Find("IPM1_rig/M1IP_hull/").gameObject;
-                                GameObject m1ip_skinned = vic_go.transform.Find("IPM1_rig/M1IP_skinned/").gameObject;
+                                m1ip_hull = vic_go.transform.Find("IPM1_rig/M1IP_hull/").gameObject;
+                                m1ip_skinned = vic_go.transform.Find("IPM1_rig/M1IP_skinned/").gameObject;
                                 m1ip_hull.SetActive(true);
                                 m1ip_skinned.SetActive(true);
 
+                                m1ip_hull.AddComponent<HeatSource>();
+                                m1ip_skinned.AddComponent<HeatSource>();
 
                                 //M1 TURRET FOLLOW/M1A0_turret_armour
                                 GameObject m1_turretcheeks = vic.transform.Find("IPM1_rig/HULL/TURRET").GetComponent<LateFollowTarget>()
@@ -2850,10 +2839,14 @@ namespace M1A1AMP
                 assem.tag = "Penetrable";
                 glass.tag = "Penetrable";
 
+
+                assem.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard (FLIR)");
+                glass.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard (FLIR)");
+                assem.AddComponent<HeatSource>();
+                glass.AddComponent<HeatSource>();
+
                 VariableArmor assem_armour = assem.AddComponent<VariableArmor>();
                 VariableArmor glass_armour = glass.AddComponent<VariableArmor>();
-                //HeatSource assem_armour_Ts = assem.AddComponent<HeatSource>();
-                //HeatSource glass_armour_Ts = glass.AddComponent<HeatSource>();
                 assem_armour.AverageRha = 40f;
                 assem_armour._name = "CITV";
                 glass_armour._name = "CITV glass";
@@ -4027,6 +4020,7 @@ namespace M1A1AMP
                         }
                     }
                 }
+
             }
 
             StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(Convert), GameStatePriority.Lowest);
