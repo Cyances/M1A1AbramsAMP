@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.4
+# M1A1 Abrams AMP v2.5
 
 ## Branch release notes:
 <p>
@@ -15,7 +15,7 @@
 	</ul>
 </p>
 
-### Engines
+### Engine
 | Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Braking Power | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
 | T64 | - | 12225 | 4300 | - |  | 
@@ -47,7 +47,6 @@
 <p>
 	<ul> 
 		<li>Gives the M1IP model to the M1E1 (bustle rack)</li>
-		<li>However the thermal signature of the remodelled tank is not fully functional</li>
 	</ul>
 </p>
 
@@ -65,7 +64,7 @@
 		<li>Added option for improved ROSY* that has a faster deployment time and greater smoke generation</li>
 		<li>Added IR smoke option for ROSY*</li>
 		<li>*Due to challenges in modding smoke grenades, the vanilla smoke grenade is directly modified which means the two options above will also affect the smoke grenade behavior of the M60A1/3, M2, M113 and unupgraded M1 smoke system.</li>
-		<li>FPS drops might occur from the enhanced smoked behavior</li>
+		<li>*FPS drops might occur from the enhanced smoked effects</li>
 	</ul>
 </p>
 
