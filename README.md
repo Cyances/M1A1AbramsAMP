@@ -11,7 +11,6 @@
 		<li>APU bonus upgrade changes</li>
 		<li>Added option to give M1E1 the M1IP model</li>
 		<li>Added skill options for Commander and Gunner</li>
-		<li></li>
 	</ul>
 </p>
 
