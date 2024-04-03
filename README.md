@@ -58,10 +58,10 @@ If you get an error launching through Steam you will need to run the game execut
 ## NOTE!
 <p>
 	<ul> 
-		<li>Only include ATLAS' Abrams mod .dll file in the mods folder or this one. **Do not place both .dll files at the same time.**</li>
+		<li>Only include ATLAS' Abrams mod .dll file in the mods folder or this one. <b>Do not place both .dll files at the same time.</b></li>
 		<li>If you already have ATLAS' Abrams mod or have an older version of the Abrams AMP mod installed, either delete MelonPreferences.cfg in UserData folder or remove the lines pertaining to the [M1A1Config]/[M1A1AMPConfig] to make it easier to understand the custom config. Launch the game first then close it to update the contents of MelonPreferences.cfg</li>
 		<li>Mission loading might be longer if you are using the HU variant, potentially due to the extra armor configuration.</li>
-		<li>For compatibility with other mods for the TUSK upgrade and anti-ERA effects, ensure that the AMP mod is loaded after NATO ERA and Pact Increased Lethatlity mod.</li>
+		<li>For compatibility with other mods for the TUSK upgrade and anti-ERA effects, ensure that the AMP mod is loaded after NATO ERA and Pact Increased Lethality mod.</li>
 		<li>On the Gunner Auxiliary Sight (GAS) behavior: Only the first two rounds are considered and only one type of APFSDS (M829 series) and HEAT (other rounds) are considered. This means if you carry an all APFSDS/HEAT loadout but with different types, only the first round is considered by the GAS.</li>
 	</ul>
 </p>
@@ -244,8 +244,8 @@ If you get an error launching through Steam you will need to run the game execut
 ### Auxilliary Power Unit (APU)
 <p>
 	<ul> 
-		<li>Retain nomral turret traversal speed (40°/s) and lazing functionality even with destroyed engine</li>
-		<li>Has faster turret traversal speed (60°/s) if the engine is T64 and if it's still running</li>
+		<li>Retain nomral turret traversal speed (40°/s) and lazing functionality when engine is destroyed</li>
+		<li>Bonus faster turret traversal speed (60°/s) if the engine is T64 and if it's still running</li>
 		<li>The APU itself has no model at the moment so it's indestructible</li>
 	</ul>
 </p>
@@ -253,10 +253,11 @@ If you get an error launching through Steam you will need to run the game execut
 ### Smoke Launcher Upgrade
 <p>
 	<ul> 
-		<li>Smoke+ upgrade, doubling the amount of salvos that could be fired and the throw distace of smoke grenades</li>
+		<li>Smoke+ upgrade, doubling the amount of salvos that could be fired and slightly increasing the throw distace of smoke grenades</li>
+		<li>Smoke+ upgrade also makes any crew member activate the smoke grenades/generator</li>
 		<li>ROSY upgrade, featuring 4 salvos and 12 smoke grenades fired per salvo covering a +/- 82° sector in front of the turret</li>
-		<li>Option for improved ROSY* that has a faster deployment time and greater smoke generation, and even multispectrum capability</li>
-		<li>*Due to challenges in modding smoke grenades, the vanilla smoke grenade is directly modified which means the option above will also affect the smoke grenade behavior of the M60A1/3, M2, M113 and unupgraded M1 smoke system.</li>
+		<li>Option for improved ROSY* that has a faster deployment time and greater smoke generation, and even multispectral capability</li>
+		<li>*Due to challenges in modding smoke grenades, the <b>vanilla smoke grenade is directly modified</b> which means the option above will also affect the smoke grenade behavior of the M60A1/3, M2, M113 and unupgraded M1 smoke system.</li>
 		<li>*FPS drops might occur from the enhanced smoke effects</li>
 	</ul>
 </p>
@@ -272,6 +273,7 @@ If you get an error launching through Steam you will need to run the game execut
 </p>
 
 ## Mod Configuration (in UserData/MelonPreferences.cfg):
+
 <p>
 	<ul> 
 		<li>I suggest getting Notepad++ so it would be easier to identify each category</li>
