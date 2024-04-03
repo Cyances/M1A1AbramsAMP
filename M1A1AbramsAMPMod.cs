@@ -2035,7 +2035,9 @@ namespace M1A1AMP
                             if (m1a1Smoke.Value)
                             {
                                 m1Smoke._smokeGrenadeRequiredCrewPositions = CrewBrainFlag.None;
+                                m1Smoke._smokeGrenadeRequiresCrewBrain = false;
                                 m1Smoke._smokeScreenRequiredCrewPositions = CrewBrainFlag.None;
+                                m1Smoke._smokeScreenRequiresCrewBrain = false;
 
                                 m1Smoke._launchAngle = 20;//25
                                 m1Smoke._distanceRange = new Vector2(40, 40);//25, 35
@@ -2046,9 +2048,8 @@ namespace M1A1AMP
 
                                 if (m1a1Rosy.Value)
                                 {
-
-                                    m1Smoke._launchAngle = 6;//25
-                                    m1Smoke._distanceRange = new Vector2(500, 500);//25, 35
+                                    m1Smoke._launchAngle = rosyPlus.Value ? 12 : 20;//25
+                                    m1Smoke._distanceRange = rosyPlus.Value ? new Vector2 (500,500) : new Vector2(50, 50);
 
                                     m1Smoke._smokePrefab = m82Object;
 
@@ -2473,7 +2474,9 @@ namespace M1A1AMP
                             if (m1e1Smoke.Value)
                             {
                                 m1Smoke._smokeGrenadeRequiredCrewPositions = CrewBrainFlag.None;
+                                m1Smoke._smokeGrenadeRequiresCrewBrain = false;
                                 m1Smoke._smokeScreenRequiredCrewPositions = CrewBrainFlag.None;
+                                m1Smoke._smokeScreenRequiresCrewBrain = false;
 
                                 m1Smoke._launchAngle = 20;//25
                                 m1Smoke._distanceRange = new Vector2(40, 40);//25, 35
@@ -2484,9 +2487,8 @@ namespace M1A1AMP
 
                                 if (m1e1Rosy.Value)
                                 {
-
-                                    m1Smoke._launchAngle = 6;//25
-                                    m1Smoke._distanceRange = new Vector2(500, 500);//25, 35
+                                    m1Smoke._launchAngle = rosyPlus.Value ? 12 : 20;//25
+                                    m1Smoke._distanceRange = rosyPlus.Value ? new Vector2(500, 500) : new Vector2(50, 50);
 
                                     m1Smoke._smokePrefab = m82Object;
                                     for (int i = 0; i < 12; i++)
