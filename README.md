@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.5
+# M1A1 Abrams AMP
 Big thanks to ATLAS/thebeninator for providing the Abrams and Bradley 50mm mod in the first place! All the required code was from his mods and I just figured out how to put the pieces together so that I could recreate the AMP round. I also would like to thank Swiss/SovGrenadier for the GLATGM implementation. Be sure to checkout their mods because they are great!
 
 A mod for Gunner, HEAT, PC! Requires [MelonLoader](https://github.com/LavaGang/MelonLoader/)
@@ -12,7 +12,7 @@ If you get an error launching through Steam you will need to run the game execut
 ![AMP Enhanced Optics v2](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/c538fba0-c967-429f-b91a-e6d338ec7a4e)
 
 
-## AMP 2.5 Update:
+## AMP 2.5.1 Update:
 <p>
 	<ul>
 	<li>120mm M256 Gun</li>
