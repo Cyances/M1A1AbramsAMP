@@ -821,8 +821,8 @@ namespace M1A1AMP
                     }*/
 
 
-                    ////M1A1HU UniformArmor pieces
-                    foreach (GameObject Trarmour in GameObject.FindGameObjectsWithTag("Penetrable"))
+                    ////Armor placement testing
+                    /*foreach (GameObject Trarmour in GameObject.FindGameObjectsWithTag("Penetrable"))
                     {
                         if (Trarmour == null) continue;
 
@@ -832,7 +832,8 @@ namespace M1A1AMP
                         {
                             m1a1Tr_HU.localPosition = new Vector3(0f, 1.0935f, 2.5294f);//y1.0935 z2.5294
                         }
-                    }
+                    }*/
+
                     break;
 
                 ////Assign modified armor to M1A1SA
@@ -1804,6 +1805,109 @@ namespace M1A1AMP
 
                         if (vic.FriendlyName == "M1A1" + m1a1Armor.Value)
                         {
+                            switch (m1a1Armor.Value)
+                            {
+                                case "HA":
+                                    m1Rb.mass += mass_HA;
+                                    break;
+                                case "HC":
+                                    m1Rb.mass += mass_HC;
+                                    break;
+                                case "SA":
+                                    m1Rb.mass += mass_SA;
+                                    break;
+                                case "HU":
+                                    m1Rb.mass += mass_HU;
+                                    break;
+                                default:
+                                    m1Rb.mass += mass_A1;
+                                    break;
+                            }
+
+                            switch (m1a1Agt.Value)
+                            {
+                                case "AGT2000":
+                                    m1VC.engine.maxPower = engine_Agt2000;
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt2000;
+                                    break;
+
+                                case "AGT2500":
+                                    m1VC.engine.maxPower = engine_Agt2500;
+                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
+
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt2500;
+                                    break;
+
+                                case "AGT3000":
+                                    m1VC.engine.maxPower = engine_Agt3000;
+                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt3000;
+                                    break;
+
+                                case "T64":
+                                    m1VC.engine.maxPower = engine_T64;
+                                    m1VC.engine.maxRPM = t64_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
+
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_T64;
+                                    break;
+
+                                default:
+                                    m1VC.engine.maxPower = engine_Agt1500;
+                                    break;
+                            }
+
+                            switch (m1a1Loader.Value)
+                            {
+                                //Novice Cadet Regular Veteran Ace
+                                case "Cadet":
+                                    mainGun.Feed._totalReloadTime = 7;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 5;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 5;
+                                    break;
+                                case "Regular":
+                                    mainGun.Feed._totalReloadTime = 6;//6
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
+                                    break;
+                                case "Veteran":
+                                    mainGun.Feed._totalReloadTime = 5;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 3.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 3.5f;
+                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 7f;//8
+                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 7f;//8
+                                    break;
+                                case "Ace":
+                                    mainGun.Feed._totalReloadTime = 4;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 2.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 2.5f;
+                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 6f;//8
+                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 6f;//8
+                                    break;
+                                default:
+                                    mainGun.Feed._totalReloadTime = 6;//6
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
+                                    break;
+                            }
+
                             switch (m1a1Commander.Value)
                             {
                                 case "Cadet":
@@ -1913,109 +2017,6 @@ namespace M1A1AMP
                                     break;
                             }
 
-                            switch (m1a1Armor.Value)
-                            {
-                                case "HA":
-                                    m1Rb.mass += mass_HA;
-                                    break;
-                                case "HC":
-                                    m1Rb.mass += mass_HC;
-                                    break;
-                                case "SA":
-                                    m1Rb.mass += mass_SA;
-                                    break;
-                                case "HU":
-                                    m1Rb.mass += mass_HU;
-                                    break;
-                                default:
-                                    m1Rb.mass += mass_A1;
-                                    break;
-                            }
-
-                            switch (m1a1Agt.Value)
-                            {
-                                case "AGT2000":
-                                    m1VC.engine.maxPower = engine_Agt2000;
-                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
-
-                                    m1VC.brakes.maxTorque = brakes_Agt2000;
-                                    break;
-
-                                case "AGT2500":
-                                    m1VC.engine.maxPower = engine_Agt2500;
-                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
-                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
-                                    m1VC.engine.minRPM = engine_Minrpm;
-
-                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
-
-                                    m1VC.brakes.maxTorque = brakes_Agt2500;
-                                    break;
-
-                                case "AGT3000":
-                                    m1VC.engine.maxPower = engine_Agt3000;
-                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
-                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
-                                    m1VC.engine.minRPM = engine_Minrpm;
-
-                                    m1VC.brakes.maxTorque = brakes_Agt3000;
-                                    break;
-
-                                case "T64":
-                                    m1VC.engine.maxPower = engine_T64;
-                                    m1VC.engine.maxRPM = t64_Maxrpm;
-                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
-                                    m1VC.engine.minRPM = engine_Minrpm;
-
-                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
-
-                                    m1VC.brakes.maxTorque = brakes_T64;
-                                    break;
-
-                                default:
-                                    m1VC.engine.maxPower = engine_Agt1500;
-                                    break;
-                            }
-
-                            switch (m1a1Loader.Value)
-                            {
-                                //Novice Cadet Regular Veteran Ace
-                                case "Cadet":
-                                    mainGun.Feed._totalReloadTime = 7;
-                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 5;
-                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 5;
-                                    break;
-                                case "Regular":
-                                    mainGun.Feed._totalReloadTime = 6;//6
-                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
-                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
-                                    break;
-                                case "Veteran":
-                                    mainGun.Feed._totalReloadTime = 5;
-                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 3.5f;
-                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 3.5f;
-                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 7f;//8
-                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 7f;//8
-                                    break;
-                                case "Ace":
-                                    mainGun.Feed._totalReloadTime = 4;
-                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 2.5f;
-                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 2.5f;
-                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 6f;//8
-                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 6f;//8
-                                    break;
-                                default:
-                                    mainGun.Feed._totalReloadTime = 6;//6
-                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
-                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
-                                    break;
-                            }
-
                             if (m1a1Apu.Value)
                             {
                                 mainGun.FCS.ComputerNeedsPower = false;
@@ -2055,7 +2056,7 @@ namespace M1A1AMP
 
                                     for (int i = 0; i < 12; i++)
                                     {
-                                        m1Smoke._smokeSlots[i].Rounds = 4;
+                                        m1Smoke._smokeSlots[i].Rounds = 400;
                                     }
                                     /*//Left launchers
                                     m1Smoke._smokeSlots[2].Angle = -95;
@@ -2244,6 +2245,107 @@ namespace M1A1AMP
 
                         if (vic.FriendlyName == "M1E1" + m1e1Armor.Value)
                         {
+                            switch (m1e1Armor.Value)
+                            {
+                                case "HA":
+                                    m1Rb.mass += mass_HA;
+                                    break;
+                                case "HC":
+                                    m1Rb.mass += mass_HC;
+                                    break;
+                                case "SA":
+                                    m1Rb.mass += mass_SA;
+                                    break;
+                                case "HU":
+                                    m1Rb.mass += mass_HU;
+                                    break;
+                                default:
+                                    m1Rb.mass += mass_A1;
+                                    break;
+                            }
+
+                            switch (m1e1Agt.Value)
+                            {
+                                case "AGT2000":
+                                    m1VC.engine.maxPower = engine_Agt2000;
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt2000;
+                                    break;
+
+                                case "AGT2500":
+                                    m1VC.engine.maxPower = engine_Agt2500;
+                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
+
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt2500;
+                                    break;
+
+                                case "AGT3000":
+                                    m1VC.engine.maxPower = engine_Agt3000;
+                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
+
+                                    m1VC.brakes.maxTorque = brakes_Agt3000;
+                                    break;
+
+                                case "T64":
+                                    m1VC.engine.maxPower = engine_T64;
+                                    m1VC.engine.maxRPM = t64_Maxrpm;
+                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
+                                    m1VC.engine.minRPM = engine_Minrpm;
+
+                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
+
+                                    m1VC.brakes.maxTorque = brakes_T64;
+                                    break;
+
+                                default:
+                                    m1VC.engine.maxPower = engine_Agt1500;
+                                    break;
+                            }
+
+                            switch (m1e1Loader.Value)
+                            {
+                                case "Cadet":
+                                    mainGun.Feed._totalReloadTime = 7;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 5;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 5;
+                                    break;
+                                case "Regular":
+                                    mainGun.Feed._totalReloadTime = 6;//6
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
+                                    break;
+                                case "Veteran":
+                                    mainGun.Feed._totalReloadTime = 5;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 3.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 3.5f;
+                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 7f;//8
+                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 7f;//8
+                                    break;
+                                case "Ace":
+                                    mainGun.Feed._totalReloadTime = 4;
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 2.5f;
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 2.5f;
+                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 6f;
+                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 6f;
+                                    break;
+                                default:
+                                    mainGun.Feed._totalReloadTime = 6;//6
+                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
+                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
+                                    break;
+                            }
                             switch (m1e1Commander.Value)
                             {
                                 case "Cadet":
@@ -2350,108 +2452,6 @@ namespace M1A1AMP
                                     m1Ai.AccuracyModifiers.Velocity.Target = 1;//1
                                     //m1Ai.AccuracyModifiers.Velocity.Value= 0.9998f;//0.9998
                                     m1Ai.AccuracyModifiers.Velocity.IncreaseAccuracyPerShot = true;//T
-                                    break;
-                            }
-
-                            switch (m1e1Armor.Value)
-                            {
-                                case "HA":
-                                    m1Rb.mass += mass_HA;
-                                    break;
-                                case "HC":
-                                    m1Rb.mass += mass_HC;
-                                    break;
-                                case "SA":
-                                    m1Rb.mass += mass_SA;
-                                    break;
-                                case "HU":
-                                    m1Rb.mass += mass_HU;
-                                    break;
-                                default:
-                                    m1Rb.mass += mass_A1;
-                                    break;
-                            }
-
-                            switch (m1e1Agt.Value)
-                            {
-                                case "AGT2000":
-                                    m1VC.engine.maxPower = engine_Agt2000;
-                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
-
-                                    m1VC.brakes.maxTorque = brakes_Agt2000;
-                                    break;
-
-                                case "AGT2500":
-                                    m1VC.engine.maxPower = engine_Agt2500;
-                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
-                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
-                                    m1VC.engine.minRPM = engine_Minrpm;
-
-                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
-
-                                    m1VC.brakes.maxTorque = brakes_Agt2500;
-                                    break;
-
-                                case "AGT3000":
-                                    m1VC.engine.maxPower = engine_Agt3000;
-                                    m1VC.engine.maxRPM = agt2530_Maxrpm;
-                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
-                                    m1VC.engine.minRPM = engine_Minrpm;
-
-                                    m1VC.brakes.maxTorque = brakes_Agt3000;
-                                    break;
-
-                                case "T64":
-                                    m1VC.engine.maxPower = engine_T64;
-                                    m1VC.engine.maxRPM = t64_Maxrpm;
-                                    m1VC.engine.maxRpmChange = engine_Maxrpmchange;
-                                    m1VC.engine.minRPM = engine_Minrpm;
-
-                                    m1Chassis._originalEnginePower = m1VC.engine.maxPower;
-
-                                    m1VC.brakes.maxTorque = brakes_T64;
-                                    break;
-
-                                default:
-                                    m1VC.engine.maxPower = engine_Agt1500;
-                                    break;
-                            }
-
-                            switch (m1e1Loader.Value)
-                            {
-                                case "Cadet":
-                                    mainGun.Feed._totalReloadTime = 7;
-                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 5;
-                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 5;
-                                    break;
-                                case "Regular":
-                                    mainGun.Feed._totalReloadTime = 6;//6
-                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
-                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
-                                    break;
-                                case "Veteran":
-                                    mainGun.Feed._totalReloadTime = 5;
-                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 3.5f;
-                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 3.5f;
-                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 7f;//8
-                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 7f;//8
-                                    break;
-                                case "Ace":
-                                    mainGun.Feed._totalReloadTime = 4;
-                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;
-                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 2.5f;
-                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 2.5f;
-                                    loadoutManager.RackLoadouts[2].Rack._retrievalDelaySeconds = 6f;
-                                    loadoutManager.RackLoadouts[2].Rack._storageDelaySeconds = 6f;
-                                    break;
-                                default:
-                                    mainGun.Feed._totalReloadTime = 6;//6
-                                    mainGun.Feed.SlowReloadMultiplier = 4.5f;//5
-                                    loadoutManager.RackLoadouts[0].Rack._retrievalDelaySeconds = 4.5f;//5
-                                    loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
                                     break;
                             }
 
@@ -3972,39 +3972,33 @@ namespace M1A1AMP
                 if (m82Object == null)
                 {
                     foreach (GameObject m82Smoke in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
-                    {//Smoke - 3D6 81mm Smoke - M82 66mm
+                    {
+                        //Smoke - 3D6 81mm Smoke - M82 66mm
                         if (m82Smoke.name == "Smoke - M82 66mm") m82Object = m82Smoke;
                         if (m82Smoke.name == "Smoke White Single Normal") m82SmokeEffect = m82Smoke;
-
-                        /*if (smokestuff.name == "Smoke White Single Normal")
-                        {
-                            m82SmokeEffect = smokestuff;
-                        }*/
                     }
-                    //Smoke White Single Normal/Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1
 
-                    RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);
-                    RosySmokeEffect.name = "Rosy Multispectral Single Normal";
+                    //RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);//Instantiated copy somehow doesn't make the smoke pop off when using thermals
+                    //RosySmokeEffect.name = "Rosy Multispectral Single Normal";
 
-                    LightBandExclusiveItem RosyLB = RosySmokeEffect.GetComponent<LightBandExclusiveItem>();
+                    LightBandExclusiveItem RosyLB = m82SmokeEffect.GetComponent<LightBandExclusiveItem>();
 
                     RosyLB.ShowInThermal = rosyIR.Value;
 
                     if (rosyPlus.Value)
                     {
-                        var RosyEffect = RosySmokeEffect.transform.Find("Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1").gameObject.transform;
+                        //Smoke White Single Normal/Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1
+                        var RosyEffect = m82SmokeEffect.transform.Find("Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1").gameObject.transform;
 
                         ParticleSystem RosyCloud = RosyEffect.GetComponent<ParticleSystem>();
 
-                        RosyCloud.maxParticles = 12000;
-                        RosyCloud.startSize = 30;
+                        RosyCloud.maxParticles = 12000;//1000
+                        RosyCloud.startSize = 30;//15
 
                         SmokeRound m82Plus = m82Object.GetComponent<SmokeRound>();
                         m82Plus._fuseTimeRange = new Vector2(0.325f, 0.375f);//1.3 1.7
-                        m82Plus._effectPrefab = RosySmokeEffect;
+                        m82Plus._effectPrefab = m82SmokeEffect;
                     }
-
-
                     //MelonLogger.Msg("M82 Object: " + m82Object.name);
                     //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
                 }
