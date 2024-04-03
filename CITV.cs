@@ -15,6 +15,7 @@ using System.IO;
 using GHPC.Weapons;
 using System.Reflection;
 using GHPC.Utility;
+using GHPC;
 
 namespace M1A1AMP
 {
@@ -24,6 +25,27 @@ namespace M1A1AMP
         private PlayerInput player_manager;
         private Transform canvas;
         private FieldInfo snapp;
+        private FieldInfo max_distance;
+
+        public Vector3 CITVCurrentAimPoint
+        {
+            get
+            {
+                var cam_follow = cam_manager.CameraFollow;
+                float _max_distance = (float)max_distance.GetValue(cam_follow.BufferedCamera);
+
+                Ray ray = new Ray(cam_follow.BufferedCamera.transform.position, cam_follow.CurrentAimVector);
+                RaycastHit raycastHit;
+
+                if (!Physics.Raycast(ray, out raycastHit, _max_distance, ConstantsAndInfoManager.Instance.LaserRangefinderLayerMask.value))
+                {
+                    return cam_follow.BufferedCamera.transform.position + ray.direction * _max_distance;
+                }
+
+                return raycastHit.point;
+            }
+        }
+
 
         void Awake()
         {
@@ -32,6 +54,8 @@ namespace M1A1AMP
             canvas = GameObject.Find("_APP_GHPC_").transform.Find("UIHUDCanvas");
 
             snapp = typeof(GHPC.Camera.BufferedCameraFollow).GetField("SNAPPINESS", BindingFlags.Static | BindingFlags.NonPublic);
+
+            max_distance = typeof(GHPC.Camera.BufferedCameraFollow).GetField("MAX_AIM_DISTANCE", BindingFlags.Static | BindingFlags.NonPublic);
         }
 
         void Update()
@@ -47,7 +71,7 @@ namespace M1A1AMP
                 if (M1A1AbramsAMPMod.perfect_override.Value && InputUtil.MainPlayer.GetButton("Smooth Aim"))
                 {
                     FireControlSystem fcs = player_manager.CurrentPlayerWeapon.Weapon.FCS;
-                    fcs.SetAimWorldPosition(cam_manager.CameraFollow.CurrentAimPoint);
+                    fcs.SetAimWorldPosition(this.CITVCurrentAimPoint);
                 }
             }
             else
