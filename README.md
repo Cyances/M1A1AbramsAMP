@@ -254,7 +254,7 @@ If you get an error launching through Steam you will need to run the game execut
 <p>
 	<ul> 
 		<li>Smoke+ upgrade, doubling the amount of salvos that could be fired and slightly increasing the throw distace of smoke grenades</li>
-		<li>Smoke+ upgrade also makes any crew member activate the smoke grenades/generator</li>
+		<li>Smoke+ upgrade also lets any crew activate the smoke grenades/generator instead of being tied to a specific member</li>
 		<li>ROSY upgrade, featuring 4 salvos and 12 smoke grenades fired per salvo covering a +/- 82° sector in front of the turret</li>
 		<li>Option for improved ROSY* that has a faster deployment time and greater smoke generation, and even multispectral capability</li>
 		<li>*Due to challenges in modding smoke grenades, the <b>vanilla smoke grenade is directly modified</b> which means the option above will also affect the smoke grenade behavior of the M60A1/3, M2, M113 and unupgraded M1 smoke system.</li>
