@@ -2056,7 +2056,7 @@ namespace M1A1AMP
 
                                     for (int i = 0; i < 12; i++)
                                     {
-                                        m1Smoke._smokeSlots[i].Rounds = 400;
+                                        m1Smoke._smokeSlots[i].Rounds = 4;
                                     }
                                     /*//Left launchers
                                     m1Smoke._smokeSlots[2].Angle = -95;
