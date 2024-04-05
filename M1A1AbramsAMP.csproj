@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CITV.cs" />
+    <Compile Include="AmmoArmor.cs" />
     <Compile Include="M1A1AbramsAMPMod.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
