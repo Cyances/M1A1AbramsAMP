@@ -104,6 +104,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\Program Files\SteamLibrary\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
+	  <Reference Include="1NatoERA">
+		  <HintPath>D:\Program Files\SteamLibrary\steamapps\common\Gunner HEAT PC\Bin\Mods\1NatoERA.dll</HintPath>
+	  </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CITV.cs" />

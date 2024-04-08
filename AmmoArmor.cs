@@ -305,7 +305,7 @@ namespace M1A1AbramsAMP
 
             // m256
             M1A1AbramsAMPMod.gun_m256 = ScriptableObject.CreateInstance<WeaponSystemCodexScriptable>();
-            M1A1AbramsAMPMod.gun_m256.name = "M1A1AbramsAMPMod.gun_m256";
+            M1A1AbramsAMPMod.gun_m256.name = "gun_m256";
             M1A1AbramsAMPMod.gun_m256.CaliberMm = 120;
             M1A1AbramsAMPMod.gun_m256.FriendlyName = "120mm Gun M256";
             M1A1AbramsAMPMod.gun_m256.Type = WeaponSystemCodexScriptable.WeaponType.LargeCannon;

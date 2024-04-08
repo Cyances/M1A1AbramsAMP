@@ -35,6 +35,7 @@ using UnityEngine.UI;
 using System.Net;
 using GHPC.Effects;
 using M1A1AbramsAMP;
+using static NatoEra.Util;
 
 namespace M1A1AMP
 {
@@ -1269,16 +1270,16 @@ namespace M1A1AMP
 
                 if (vic == null) continue;
 
-                if (vic_go.GetComponent<Util.AlreadyConverted>() != null) continue;
+                if (vic_go.GetComponent<Util.AlreadyConvertedAMP>() != null) continue;
                 if (vic.FriendlyName == "M1IP" || (m1e1Convert.Value && vic.FriendlyName == "M1"))
                 {
-                    vic_go.AddComponent<Util.AlreadyConverted>();
+                    vic_go.AddComponent<Util.AlreadyConvertedAMP>();
 
                     int rand = (randomChance.Value) ? UnityEngine.Random.Range(1, 100) : 0;
 
                     if (rand <= randomChanceNum.Value)
                     {
-                        vic_go.AddComponent<Util.AlreadyConverted>();
+                        vic_go.AddComponent<Util.AlreadyConvertedAMP>();
                         ////Rename Abrams
                         if (vic.UniqueName == "M1IP")
                         {
@@ -1337,20 +1338,20 @@ namespace M1A1AMP
                             flirPlus.DefaultFov = 12.5f;
                             flirPlus.OtherFovs = gpsFovs.ToArray<float>();
                             flirPlus.BaseBlur = 0;
+                        }
 
-                            if (betterDaysight.Value)
-                            {
-                                daysightPlus.DefaultFov = 12.5f;
-                                daysightPlus.OtherFovs = gpsFovs.ToArray<float>();
-                            }
+                        if (betterDaysight.Value)
+                        {
+                            daysightPlus.DefaultFov = 12.5f;
+                            daysightPlus.OtherFovs = gpsFovs.ToArray<float>();
+                        }
 
-                            if (betterGas.Value)
-                            {
-                                gasPlus.DefaultFov = 6.5f;//4.2f
-                                gasPlus.OtherFovs = new float[] { 4.2f, 2.716f, 1.46f };
-                                gasPlus.VibrationBlurScale = 0.1f;//0.2
-                                gasPlus.VibrationShakeMultiplier = 0.2f;//0.5
-                            }
+                        if (betterGas.Value)
+                        {
+                            gasPlus.DefaultFov = 6.5f;//4.2f
+                            gasPlus.OtherFovs = new float[] { 4.2f, 2.716f, 1.588f };
+                            gasPlus.VibrationBlurScale = 0.1f;//0.2
+                            gasPlus.VibrationShakeMultiplier = 0.2f;//0.5
                         }
 
                         if (citv.Value)
@@ -2568,62 +2569,77 @@ namespace M1A1AMP
                         computer.AimElement = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/GPS/laser/").gameObject.transform;
                         mainGun.GuidanceUnit = computer;
 
-                        if (vic.UniqueName == "M1IP" && m1a1Armor.Value == "HA" && (rotateAzimuth.Value && citv.Value))
+                        if (rotateAzimuth.Value && citv.Value)
                         {
-                            vic._friendlyName = "M1A1 AIM";
-                        }
+                            if (vic.UniqueName == "M1IP")
+                            {
+                                switch (m1a1Armor.Value)
+                                {
+                                    case "HA":
+                                        vic._friendlyName = "M1A1 AIM";
+                                        break;
+                                    case "HC":
+                                        vic._friendlyName = "M1A2";
+                                        break;
+                                    case "SA":
+                                        vic._friendlyName = "M1A2 SEP";
+                                        break;
+                                    case "HU":
+                                        vic._friendlyName = "M1A2E";
+                                        break;
+                                    default:
+                                        vic._friendlyName = "M1A1" + m1a1Armor.Value;
+                                        break;
+                                }
+                            }
 
-                        if (vic.UniqueName == "M1" && m1e1Armor.Value == "HA" && (rotateAzimuth.Value && citv.Value))
-                        {
-                            vic._friendlyName = "M1E1 AIM";
-
-                        }
-                        if (vic.UniqueName == "M1IP" && m1a1Armor.Value == "HC" && (rotateAzimuth.Value && citv.Value))
-                        {
-                            vic._friendlyName = "M1A2";
-                        }
-
-                        if (vic.UniqueName == "M1" && m1e1Armor.Value == "HC" && (rotateAzimuth.Value && citv.Value))
-                        {
-                            vic._friendlyName = "M1E2";
-                        }
-
-                        if (vic.UniqueName == "M1IP" && m1a1Armor.Value == "SA" && (rotateAzimuth.Value && citv.Value))
-                        {
-                            vic._friendlyName = "M1A2 SEP";
-                        }
-
-                        if (vic.UniqueName == "M1" && m1e1Armor.Value == "SA" && rotateAzimuth.Value && citv.Value)
-                        {
-                            vic._friendlyName = "M1E2 SEP";
-                        }
-
-                        if (vic.UniqueName == "M1IP" && m1a1Armor.Value == "HU" && (rotateAzimuth.Value && citv.Value))
-                        {
-                            vic._friendlyName = "M1A2D";
-                        }
-
-                        if (vic.UniqueName == "M1" && m1e1Armor.Value == "HU" && rotateAzimuth.Value && citv.Value)
-                        {
-                            vic._friendlyName = "M1E2D";
+                            if (vic.UniqueName == "M1")
+                            {
+                                switch (m1e1Armor.Value)
+                                {
+                                    case "HA":
+                                        vic._friendlyName = "M1E1 AIM";
+                                        break;
+                                    case "HC":
+                                        vic._friendlyName = "M1E2";
+                                        break;
+                                    case "SA":
+                                        vic._friendlyName = "M1E2 SEP";
+                                        break;
+                                    case "HU":
+                                        vic._friendlyName = "M1E2E";
+                                        break;
+                                    default:
+                                        vic._friendlyName = "M1E1" + m1e1Armor.Value;
+                                        break;
+                                }
+                            }
                         }
 
                         ////ERA detection for TUSK designation
-                        foreach (GameObject armor_go in GameObject.FindGameObjectsWithTag("Penetrable"))
+                        /*if (vic.UniqueName == "M1IP")
                         {
-                            if (armor_go.name != "HULLARMOR") continue;
-                            if (!armor_go.transform.parent.GetComponent<LateFollow>()) continue;
-
-                            string name = armor_go.transform.parent.GetComponent<LateFollow>().ParentUnit.FriendlyName;
-                            //string name = armor_go.transform.parent.GetComponent<LateFollow>().ParentUnit.UniqueName;
-
-                            if (name == "M1A1" + m1a1Armor.Value || name == "M1E1" + m1e1Armor.Value)
-                            //if (name == "M1IP" || name == "M1")
+                            GameObject m1ipEra = vic.GetComponent<LateFollowTarget>()._lateFollowers[0].transform.Find("HULLARMOR/Hull ERA Array(Clone)/").gameObject;
+                            if (m1ipEra != null)
                             {
-                                if (armor_go.transform.Find("Hull ERA Array(Clone)"))
-                                {
-                                    vic._friendlyName += " TUSK";
-                                }
+                                vic._friendlyName += " TUSK";
+                            }
+                        }
+
+                        if (vic.UniqueName == "M1")
+                        {
+                            GameObject m1Era = vic.GetComponent<LateFollowTarget>()._lateFollowers[0].transform.Find("HULLARMOR/Hull ERA Array(Clone)/").gameObject;
+                            if (m1Era != null)
+                            {
+                                vic._friendlyName += " TUSK";
+                            }
+                        }*/
+
+                        if (vic.GetComponent<HasARAT>() != null)
+                        {
+                            if (vic.UniqueName == "M1IP" || vic.UniqueName == "M1")
+                            {
+                                vic._friendlyName += " TUSK";
                             }
                         }
                     }
