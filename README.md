@@ -191,6 +191,22 @@ If you get an error launching through Steam you will need to run the game execut
 	</ul>
 </p>
 
+## Abrams Renaming 
+<p>
+	<ul> 
+		<li>Dependent on CITV installation only</li>
+		<li>M1E1 also gets same renaming scheme as the M1A1</li>
+	</ul>
+</p>
+
+| Standard | w/ CITV | Note |
+| ------------- | ------------- | ------------- |
+| M1A1HA | M1A1 AIM |  | 
+| M1A1HC | M1A2 |  | 
+| M1A1SA | M1A2 SEP |  | 
+| M1A1HU | M1A2U |  | 
+| M1A1L | M1A2L |  | 
+
 ## Vehicle Dynamics
 ### Weight
 | Armor Type | Weight (KG) | Note |
