@@ -50,7 +50,7 @@
 	<ul> 
 		<li>After discussions with other players and researching, the penetration values for the M829 series have been revamped except for M829A4</li>
 		<li>The M829 series are weaker but have increased spalling performance</li>
-		<li>There is still a config option to reuse old SB values if desired and  extra spalling chance</li>
+		<li>There is still a config option to reuse old SB values if desired and extra spalling chance</li>
 	</ul>
 </p>
 
