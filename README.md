@@ -15,7 +15,7 @@
 		<li>Updated TUSK detection code (requires NATO ERA v1.2.2)</li>
 		<li>Updated GAS+ and APU behavior</li>
 		<li>Updated Abrams designation if CITV is installed</li>
-		<li>Vehicle dynamics changes and additions/li>
+		<li>Vehicle dynamics changes and additions</li>
 	</ul>
 </p>
 
