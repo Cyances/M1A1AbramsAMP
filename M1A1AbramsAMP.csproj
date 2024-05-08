@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.10.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -65,9 +68,6 @@
     </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
       <HintPath>D:\Program Files\SteamLibrary\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp_publicized">
-      <HintPath>C:\Users\Cyance\Documents\Desktop Shortcuts\SDK\GHPC\M1A1AbramsAMP\Assembly-CSharp_publicized.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -104,13 +104,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\Program Files\SteamLibrary\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
-	  <Reference Include="1NatoERA">
-		  <HintPath>D:\Program Files\SteamLibrary\steamapps\common\Gunner HEAT PC\Bin\Mods\1NatoERA.dll</HintPath>
-	  </Reference>
+    <Reference Include="Assembly-CSharp_publicized">
+      <HintPath>C:\Users\Cyance\Documents\Desktop Shortcuts\SDK\GHPC\M1A1AbramsAMP\Assembly-CSharp_publicized.dll</HintPath>
+    </Reference>
+    <Reference Include="1NatoERA">
+      <HintPath>C:\Users\Cyance\Documents\Desktop Shortcuts\SDK\GHPC\M1A1AbramsAMP\1NatoERA.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CITV.cs" />
     <Compile Include="AmmoArmor.cs" />
+    <Compile Include="CROWS.cs" />
     <Compile Include="M1A1AbramsAMPMod.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

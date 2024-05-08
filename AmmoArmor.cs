@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GHPC;
+using GHPC.Effects;
 using GHPC.Equipment;
 using GHPC.Weapons;
 using M1A1AMP;
@@ -236,6 +237,9 @@ namespace M1A1AbramsAMP
 
         public static ArmorCodexScriptable armor_codex_turretsidesDUarmor_HA;
         public static ArmorType armor_turretsidesDUarmor_HA;
+
+
+        public static ArmorCodexScriptable armor_gen1_cheeks;
         public static void Init ()            
         {
 
@@ -255,6 +259,7 @@ namespace M1A1AbramsAMP
                 if (s.ArmorType.Name == "special armor") armor_specialarmor_VNL = s.ArmorType;
                 if (s.ArmorType.Name == "tracks") armor_tracks_VNL = s.ArmorType;
                 if (s.ArmorType.Name == "gun steel") armor_gunsteel_VNL = s.ArmorType;
+                if (s.name == "Abrams special armor gen 1 turret cheeks") armor_gen1_cheeks = s;
             }
 
             foreach (AmmoClipCodexScriptable s in Resources.FindObjectsOfTypeAll(typeof(AmmoClipCodexScriptable)))
@@ -262,6 +267,7 @@ namespace M1A1AbramsAMP
                 if (clip_codex_m2apt != null) break;
             }
 
+            var era_optimizations_m829a2 = new List<AmmoType.ArmorOptimization>() { };
             var era_optimizations_m829a3 = new List<AmmoType.ArmorOptimization>() { };
             var era_optimizations_m829a4 = new List<AmmoType.ArmorOptimization>() { };
             var era_optimizations_m830a2 = new List<AmmoType.ArmorOptimization>() { };
@@ -279,6 +285,11 @@ namespace M1A1AbramsAMP
             {
                 if (era_names.Contains(s.name))
                 {
+                    AmmoType.ArmorOptimization optimization_m829a2 = new AmmoType.ArmorOptimization();
+                    optimization_m829a2.Armor = s;
+                    optimization_m829a2.RhaRatio = 0.9f;
+                    era_optimizations_m829a2.Add(optimization_m829a2);
+
                     AmmoType.ArmorOptimization optimization_m829a3 = new AmmoType.ArmorOptimization();
                     optimization_m829a3.Armor = s;
                     optimization_m829a3.RhaRatio = 0.2f;
@@ -300,7 +311,7 @@ namespace M1A1AbramsAMP
                     era_optimizations_lahat.Add(optimization_lahat);
                 }
 
-                if (era_optimizations_m829a3.Count == era_names.Length) break;
+                if (era_optimizations_m829a2.Count == era_names.Length) break;
             }
 
             // m256
@@ -318,11 +329,11 @@ namespace M1A1AbramsAMP
             ammo_m829.CertainRicochetAngle = 9f;//5f;
             ammo_m829.Mass = 3.94f;
             ammo_m829.MaxNutationPenalty = 0f;
-            //ammo_m829.MaxSpallRha = 16f;
+            ammo_m829.MaxSpallRha = 15f;
             ammo_m829.MuzzleVelocity = 1670f;
             ammo_m829.Name = "M829 APFSDS-T";
-            ammo_m829.RhaPenetration = 600;
-            if (M1A1AbramsAMPMod.m829spall.Value) ammo_m829.SpallMultiplier = 1.25f;
+            ammo_m829.RhaPenetration = M1A1AbramsAMPMod.m829SB.Value ? 600 : 550;
+            ammo_m829.SpallMultiplier = M1A1AbramsAMPMod.m829Spall.Value ? 1.25f : 1.15f;
 
             ammo_codex_m829 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
             ammo_codex_m829.AmmoType = ammo_m829;
@@ -349,9 +360,9 @@ namespace M1A1AbramsAMP
             ammo_m829a1.MuzzleVelocity = 1575f;
             ammo_m829a1.Name = "M829A1 APFSDS-T";
             ammo_m829a1.MaxNutationPenalty = 0f;
-            //ammo_m829a1.MaxSpallRha = 20f;
-            ammo_m829a1.RhaPenetration = 700f;
-            if (M1A1AbramsAMPMod.m829spall.Value) ammo_m829a1.SpallMultiplier = 1.25f;
+            ammo_m829a1.MaxSpallRha = 18f;
+            ammo_m829a1.RhaPenetration = M1A1AbramsAMPMod.m829SB.Value ? 700 : 630;
+            ammo_m829a1.SpallMultiplier = M1A1AbramsAMPMod.m829Spall.Value ? 1.25f : 1.2f;
 
             ammo_codex_m829a1 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
             ammo_codex_m829a1.AmmoType = ammo_m829a1;
@@ -372,15 +383,16 @@ namespace M1A1AbramsAMP
             //m829a2
             ammo_m829a2 = new AmmoType();
             Util.ShallowCopy(ammo_m829a2, ammo_m833);
+            ammo_m829a2.ArmorOptimizations = era_optimizations_m829a2.ToArray<AmmoType.ArmorOptimization>();
             ammo_m829a2.Caliber = 120;
             ammo_m829a2.CertainRicochetAngle = 9f;// 4f;
             ammo_m829a2.Mass = 4.74f;
             ammo_m829a2.MaxNutationPenalty = 0f;
-            //ammo_m829a2.MaxSpallRha = 24f;
+            ammo_m829a2.MaxSpallRha = 24f;
             ammo_m829a2.MuzzleVelocity = 1680f;
             ammo_m829a2.Name = "M829A2 APFSDS-T";
-            ammo_m829a2.RhaPenetration = 750f;
-            if (M1A1AbramsAMPMod.m829spall.Value) ammo_m829a2.SpallMultiplier = 1.5f;
+            ammo_m829a2.RhaPenetration = M1A1AbramsAMPMod.m829SB.Value ? 750 : 680;
+            ammo_m829a2.SpallMultiplier = M1A1AbramsAMPMod.m829Spall.Value ? 1.5f : 1.25f;
 
             ammo_codex_m829a2 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
             ammo_codex_m829a2.AmmoType = ammo_m829a2;
@@ -406,11 +418,11 @@ namespace M1A1AbramsAMP
             ammo_m829a3.CertainRicochetAngle = 8f;//3f;
             ammo_m829a3.Mass = 4.84f;
             ammo_m829a3.MaxNutationPenalty = 0f;
-            //ammo_m829a3.MaxSpallRha = 28f;
+            ammo_m829a3.MaxSpallRha = 30f;
             ammo_m829a3.MuzzleVelocity = 1555f;
             ammo_m829a3.Name = "M829A3 APFSDS-T";
-            ammo_m829a3.RhaPenetration = 840f;
-            if (M1A1AbramsAMPMod.m829spall.Value) ammo_m829a3.SpallMultiplier = 1.75f;
+            ammo_m829a3.RhaPenetration = M1A1AbramsAMPMod.m829SB.Value ? 840 : 750;
+            ammo_m829a3.SpallMultiplier = M1A1AbramsAMPMod.m829Spall.Value ? 1.75f : 1.3f;
 
             ammo_codex_m829a3 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
             ammo_codex_m829a3.AmmoType = ammo_m829a3;
@@ -436,7 +448,7 @@ namespace M1A1AbramsAMP
             ammo_m829a4.CertainRicochetAngle = 6f;//2f;
             ammo_m829a4.Mass = 4.94f;
             ammo_m829a4.MaxNutationPenalty = 0f;
-            ammo_m829a4.MaxSpallRha = 25f;
+            ammo_m829a4.MaxSpallRha = 36f;
             ammo_m829a4.Name = "M829A4 APFSDS-T";
             ammo_m829a4.MuzzleVelocity = 1700f;
             ammo_m829a4.RhaPenetration = 1000f;
@@ -503,7 +515,7 @@ namespace M1A1AbramsAMP
             ammo_m830a1.Name = "M830A1 HEAT-MP-T";
             ammo_m830a1.RhaPenetration = 480;
             ammo_m830a1.ShatterOnRicochet = false;
-            ammo_m830a1.SpallMultiplier = 0.5f;
+            ammo_m830a1.SpallMultiplier = 2f;
             ammo_m830a1.ShotVisual = ammo_3of26.ShotVisual;
             ammo_m830a1.TntEquivalentKg = 2.721f;
 
@@ -523,7 +535,7 @@ namespace M1A1AbramsAMP
             clip_codex_m830a1.CompatibleWeaponSystems[0] = M1A1AbramsAMPMod.gun_m256;
             clip_codex_m830a1.ClipType = clip_m830a1;
 
-            m830a1_forward_frag.Name = "MPAT forward frag";
+            /*m830a1_forward_frag.Name = "MPAT forward frag";
             m830a1_forward_frag.RhaPenetration = 120f;
             m830a1_forward_frag.MuzzleVelocity = 600f;
             m830a1_forward_frag.Category = AmmoType.AmmoCategory.Penetrator;
@@ -535,7 +547,7 @@ namespace M1A1AbramsAMP
             m830a1_forward_frag.SpallMultiplier = 0.2f;
             m830a1_forward_frag.Caliber = 3f;
             m830a1_forward_frag.ImpactTypeUnfuzed = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpact;
-            m830a1_forward_frag.ImpactTypeUnfuzedTerrain = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpactTerrain;
+            m830a1_forward_frag.ImpactTypeUnfuzedTerrain = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpactTerrain;*/
 
             ProxyFuzeMPAT.AddFuzeMPAT(ammo_m830a1);
 
@@ -614,16 +626,22 @@ namespace M1A1AbramsAMP
             ammo_xm1147.Category = AmmoType.AmmoCategory.Explosive;
             ammo_xm1147.CertainRicochetAngle = 0.0f;
             ammo_xm1147.Coeff = 0.16f;
+            ammo_xm1147.DetonateEffect = ammo_3of26.DetonateEffect;
             ammo_xm1147.DetonateSpallCount = M1A1AbramsAMPMod.ampFragments.Value; //Number of fragments generated when detonated (PD/AB). Higher value means higher performance hit.
+            ammo_xm1147.ImpactAudio = ammo_3of26.ImpactAudio;
+            ammo_xm1147.ImpactFuseTime = 0.002f;
+            ammo_xm1147.ImpactEffectDescriptor = ammo_3of26.ImpactEffectDescriptor;
             ammo_xm1147.Mass = 11.4f;
             ammo_xm1147.MaxSpallRha = 120f;
             ammo_xm1147.MinSpallRha = 50f;
             ammo_xm1147.MuzzleVelocity = 1410f;
             ammo_xm1147.Name = "XM1147 AMP-T";
-            ammo_xm1147.RhaPenetration = 250;
+            ammo_xm1147.RhaPenetration = 100;
+            //ammo_xm1147.RhaToFuse = 15;
             ammo_xm1147.ShatterOnRicochet = false;
+            ammo_xm1147.ShortName = AmmoType.AmmoShortName.He;
             ammo_xm1147.ShotVisual = ammo_3of26.ShotVisual;
-            ammo_xm1147.SpallMultiplier = 2f;
+            ammo_xm1147.SpallMultiplier = 3f;
             ammo_xm1147.TntEquivalentKg = 4.14f; //2.3Kg PAX-3, but treated 80% more power than equivalent TNT load
 
             ammo_codex_xm1147 = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
@@ -642,7 +660,7 @@ namespace M1A1AbramsAMP
             clip_codex_xm1147.CompatibleWeaponSystems[0] = M1A1AbramsAMPMod.gun_m256;
             clip_codex_xm1147.ClipType = clip_xm1147;
 
-            xm1147_forward_frag.Name = "AMP forward frag";
+            /*xm1147_forward_frag.Name = "AMP forward frag";
             xm1147_forward_frag.RhaPenetration = 100f;
             xm1147_forward_frag.MuzzleVelocity = 700f;
             xm1147_forward_frag.Category = AmmoType.AmmoCategory.Penetrator;
@@ -654,7 +672,7 @@ namespace M1A1AbramsAMP
             xm1147_forward_frag.SpallMultiplier = 0.2f;
             xm1147_forward_frag.Caliber = 3f;
             xm1147_forward_frag.ImpactTypeUnfuzed = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpact;
-            xm1147_forward_frag.ImpactTypeUnfuzedTerrain = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpactTerrain;
+            xm1147_forward_frag.ImpactTypeUnfuzedTerrain = GHPC.Effects.ParticleEffectsManager.EffectVisualType.BulletImpactTerrain;*/
 
             if (M1A1AbramsAMPMod.ampFuze.Value) ProxyFuzeAMP.AddFuzeAMP(ammo_xm1147);
 
@@ -674,7 +692,7 @@ namespace M1A1AbramsAMP
             ammo_lahat.Name = "LAHAT";
             ammo_lahat.RhaPenetration = 800f;
             ammo_lahat.ShotVisual = ammo_bgm71.ShotVisual;
-            ammo_lahat.SpallMultiplier = 1.5f;
+            ammo_lahat.SpallMultiplier = 2f;
             ammo_lahat.TurnSpeed = 1.5f;
             ammo_lahat.RangedFuseTime = 20f;
             ammo_lahat.Tandem = true;
@@ -703,14 +721,16 @@ namespace M1A1AbramsAMP
             ammo_m908.CertainRicochetAngle = 13f;//0.0f;
             ammo_m908.Coeff = 0.16f;
             ammo_m908.DetonateSpallCount = M1A1AbramsAMPMod.heorFragments.Value; //Number of fragments generated when detonated (PD). Higher value means higher performance hit.
-            ammo_m908.ImpactFuseTime = 0.000357143f; //0.5 meters after impact
+            ammo_m908.ImpactFuseTime = 0.002f; //0.5 meters after impact
             ammo_m908.Mass = 11.4f;
             ammo_m908.MaxSpallRha = 75f;
             ammo_m908.MinSpallRha = 25f;
             ammo_m908.MuzzleVelocity = 1410f;
             ammo_m908.Name = "M908 HE-OR-T";
-            ammo_m908.RhaPenetration = 250;
+            ammo_m908.RhaPenetration = 100;
+            //ammo_m908.RhaToFuse = 20;
             ammo_m908.ShatterOnRicochet = false;
+            ammo_m908.ShortName = AmmoType.AmmoShortName.He;
             ammo_m908.ShotVisual = ammo_3of26.ShotVisual;
             ammo_m908.TntEquivalentKg = 4.8f;//3.2Kg Comp A3 IRL but apparently RDX is 50% stronger than TNT so 4.8
 
@@ -760,16 +780,10 @@ namespace M1A1AbramsAMP
 
             //m8
             ammo_m8api = new AmmoType();
-            Util.ShallowCopy(ammo_m8api, ammo_m8vnl);
-            ammo_m8api.CertainRicochetAngle = 15f;//5f;
-            ammo_m8api.MaxSpallRha = 8f;
-            ammo_m8api.MinSpallRha = 2f;
-            ammo_m8api.MuzzleVelocity = 887;
+            Util.ShallowCopy(ammo_m8api, ammo_m2apt);
             ammo_m8api.Name = "12.7x99mm M8 AP-I";
-            ammo_m8api.NutationPenaltyDistance = 0f;
-            ammo_m8api.MaxNutationPenalty = 0f;
-            ammo_m8api.RhaPenetration = 29f;
             ammo_m8api.SpallMultiplier = 20f;
+            ammo_m8api.UseTracer = false;
 
             ammo_codex_m8api = ScriptableObject.CreateInstance<AmmoCodexScriptable>();
             ammo_codex_m8api.AmmoType = ammo_m8api;
@@ -784,7 +798,7 @@ namespace M1A1AbramsAMP
                         ammo_codex_m8api,
                         ammo_codex_m8api,
                 };
-            clip_m8api.MinimalPattern[0] = ammo_codex_m8api;
+            //clip_m8api.MinimalPattern[0] = ammo_codex_m8api;
 
             clip_codex_m8api = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
             clip_codex_m8api.name = "clip_m8api";

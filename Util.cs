@@ -64,5 +64,17 @@ namespace M1A1AMP
                 }
             }
         }
+        public static T[] AppendToArray<T>(T[] array, T new_item)
+        {
+            List<T> values = new List<T>();
+            foreach (T old_item in array)
+            {
+                values.Add(old_item);
+            }
+
+            values.Add(new_item);
+
+            return values.ToArray();
+        }
     }
 }
