@@ -16,6 +16,7 @@
 		<li>Updated GAS+ and APU behavior</li>
 		<li>Updated Abrams designation if CITV is installed</li>
 		<li>Vehicle dynamics changes and additions</li>
+		<li>**Rebuild your AMP config!**</li>
 	</ul>
 </p>
 
