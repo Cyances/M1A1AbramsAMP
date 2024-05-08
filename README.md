@@ -23,6 +23,7 @@
 <p>
 	<ul> 
 		<li>Dependent on CITV installation</li>
+		<li>M1E1 also gets same renaming scheme as the M1A1</li>
 	</ul>
 </p>
 
