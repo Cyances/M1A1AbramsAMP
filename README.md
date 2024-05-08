@@ -4,20 +4,18 @@
 <p>
 	<ul> 
 		<li>Compatibility fix for GHPC Update 20250507</li>
-		<li>New round: M908 HE-OR-T</li>
+		<li>Code refactoring</li>
+		<li>New "armor" package: Lightweight (L)</li>
 		<li>Round changes (refer to table)</li>
-		<li>Configurable CITV upgrade</li>
-		<li>Configurable enhanced optics for the GPS, Thermals and AGS</li>
-		<li>Configurable loader proficiency</li>
-		<li>M2 Coaxial upgrade (replaces M240 and has two ammo types)</li>
-		<li>XM1147 AMP-T proximity fuze update</li>
-		<li>Updated tank weight depending on the armor type used</li>
-		<li>Configurable powertrain options and removable governor</li>
-		<li>Toggleable Auxilliary Power Unit (APU)</li>
-		<li>Configurable enhanced smoke launcher system</li>
-		<li>Toggleable clean turret look (no attachments like ALICE packs or MREs)</li>
-		<li>Fixed horizontal stabilizer not working in campaign</li>
-		<li>Fixed issue with enhanced optics not working in campaign (from AMP 2.4 Preview 1)</li>
+		<li>Updated M256 gun barrel model (thank Atlas!)</li>
+		<li>Disabled barrel camo net</li>
+		<li>Updated M1E1 cheek armor so it uses the IP cheek armor as the base</li>
+		<li>Fixed M1E1 IP model not considering the armor package upgrades</li>
+		<li>Updated M2 coaxial sound</li>
+		<li>Updated TUSK detection code (requires NATO ERA v1.2.2)</li>
+		<li>Updated GAS+ and APU behavior</li>
+		<li>Updated Abrams designation if CITV is installed</li>
+		<li>Vehicle dynamics changes and additions/li>
 	</ul>
 </p>
 
@@ -76,7 +74,7 @@
 ### Engines
 | Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Braking Power | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | 
-| T55 | 6000 | 14833 | 4800 | +50% | Fictional but it's the Honeywell T55-L-714C. | 
+| T55 | 6000 | 14833 | 4800 | +50% | New! Fictional but it's the Honeywell T55-L-714C. | 
 
 ### Governor
 <p>
@@ -97,5 +95,12 @@
 <p>
 	<ul> 
 		<li>Bonus turret traversal speed increase is made toggleable but still requires T64 engine or better and if it's still running</li>
+	</ul>
+</p>
+
+### Stability Control (SC)
+<p>
+	<ul> 
+		<li>Added stability control option which makes the tank more controllable at higher speeds</li>
 	</ul>
 </p>
