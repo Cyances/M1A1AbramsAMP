@@ -43,12 +43,12 @@
 | M829A1 APFSDS-T | 630 |  | - | +20% spalling chance and +50% spalling performance  |
 | M829A2 APFSDS-T | 380 |  | - | +25% spalling chance and +100% spalling performance. ERA is only 90% effective.  |
 | M829A3 APFSDS-T | 750 |  | - | +30% spalling chance and +150% spalling performance  |
-| M829A4 APFSDS-T | 750 |  | - | +200% spalling performance. |
+| M829A4 APFSDS-T | - |  | - | +200% spalling performance. |
 | XM1147 AMP-T | - | - | - | Added impact-delay fuze. |
 
 <p>
 	<ul> 
-		<li>After discussions with other players and researching, the  penetration values for the M829 series have been revamped except for M829A4</li>
+		<li>After discussions with other players and researching, the penetration values for the M829 series have been revamped except for M829A4</li>
 		<li>The M829 series are weaker but have increased spalling performance</li>
 		<li>There is still a config option to reuse old SB values if desired and  extra spalling chance</li>
 	</ul>
