@@ -71,7 +71,7 @@
 ### Weight
 | Armor Type | Weight (KG) | Note |
 | ------------- | ------------- | ------------- |
-| L | 44,838 | Base M1A1/E1 weight | 
+| L | 44,838 |  | 
 
 ### Engines
 | Engine type  | Peak power (HP) | Peak Torque (NM) | Max RPM | Braking Power | Note |
