@@ -12,10 +12,10 @@ If you get an error launching through Steam you will need to run the game execut
 ![AMP Enhanced Optics v2](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/c538fba0-c967-429f-b91a-e6d338ec7a4e)
 
 
-## AMP 2.5.1 Update:
+## AMP 2.6 Update:
 <p>
 	<ul>
-	<li>120mm M256 Gun</li>
+	<li>120mm M256 Gun (with new model!)</li>
 	<li>M1IP automatically converted to M1A1</li>
 	<li>Tank upgrades based on real life developments (but guesstimated values) and hypothetical thinking</li>
     	<li>Configurable Abrams armor variants: base armor, Heavy Armor (+30% protection), Heavy Common (+45% protection), Situational Awareness (+85%) and Heavy Ultra (custom)</li>
@@ -28,7 +28,8 @@ If you get an error launching through Steam you will need to run the game execut
     	<li>GLATGM: LAHAT</li>
     	<li>XM1147 AMP-T multifuze round (point-detonate + time-delay or proximity)</li>
 	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, Kontakt-5, ARAT and BRAT), requires at least NATO ERA v1.1.1b and/or Pact Increased Lethality v1.2.5)</li>
-	<li>"TUSK" postfix when ERA is detected (NATO ERA mod)</li>
+	<li>New Abrams designation if CITV is installed</li>
+	<li>"TUSK" postfix when ERA is detected (NATO ERA v1.2.2 required)</li>
 	<li>Configurable CITV upgrade</li>
 	<li>Configurable enhanced optics for the GPS, FLIR and GAS</li>
 	<li>Configurable tank crew proficiency</li>
@@ -69,25 +70,26 @@ If you get an error launching through Steam you will need to run the game execut
 ## Round types list:
 | Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| M829 APFSDS-T | 600 |  | 1670  | Toggleable +25% spalling chance |
-| M829A1 APFSDS-T  | 700 |  | 1575 | Toggleable +25% spalling chance |
-| M829A2 APFSDS-T | 750 |  | 1680 | Toggleable +50% spalling chance |
-| M829A3 APFSDS-T | 840 |  | 1555 | ERA is only 20% effective. Toggleable +75% spalling chance. |
-| M829A4 APFSDS-T | 1000 |  | 1700 | Hypothethical round. +100% spalling chance and performance. ERA is only 15% effective.  |
+| M829 APFSDS-T | 600 |  | 1670  | +15% spalling chance and +25% spalling performance. Optional +25% spalling chance instead. |
+| M829A1 APFSDS-T  | 700 |  | 1575 | +20% spalling chance and +50% spalling performance. Optional +25% spalling chance instead. |
+| M829A2 APFSDS-T | 750 |  | 1680 | +25% spalling chance and +100% spalling performance. ERA is only 90% effective. Optional +50% spalling chance instead. |
+| M829A3 APFSDS-T | 840 |  | 1555 | +30% spalling chance and +150% spalling performance. ERA is only 20% effective. Optional +75% spalling chance instead. |
+| M829A4 APFSDS-T | 1000 |  | 1700 | Hypothethical round. +100% spalling chance and ++200% spalling performance. ERA is only 15% effective.  |
 | M830 HEAT-FS-T | 600 |  | 1140 | +50% spalling chance |
 | M830A1 HEAT-MP-T | 480 | 50** | 1410 | Point-detonate fuze only. 600 fragments (configurable count). |
 | M830A2 IHEAT-FS-T | 700 | 35** | 1410 | Fictional round. +100% spalling chance. ERA is only 15% effective. |
 | M830A3 IHEAT-FS-T | 1000  | 25** | 1310 | Fictional round. +100% spalling chance. ERA is only 15% effective. |
 | M908 HE-OR-T | 250* | 75** | 1410 | Has impact-delay fuze. 300 fragments (configurable count). |
-| XM1147 AMP-T | 250* | 120** | 1410 | Point-detonate + airburst fuze or proximity fuze. 600 fragments (configurable count). |
-| LAHAT | 800 | 300 |  | Gun-launched ATGM with SALH guidance. ERA is only 20% effective.|
+| XM1147 AMP-T | 250* | 120** | 1410 | Point-detonate + airburst fuze or proximity fuze. 600 fragments (configurable count). Has impact-delay fuze.|
+| LAHAT | 800 | 300 |  | Gun-launched ATGM with SALH guidance. +100% spalling chance. ERA is only 20% effective. |
 | M2/M8 AP-T/I | 29 | - | 887 | M2 Coax |
 | M962 SLAP-T | 36 | - | 1200 | M2 Coax. Has slightly less drag than M2/M8. |
 
 <p>
 	<ul> 
-		<li>The penetration values chosen are relative to the existing penetrators in the game and on assumptions/guesstimations based on open source information.</li>
-		<li>Steel Beasts used as reference for M829 penetration values, except for the M829A4 which has completely made up stats</li>
+		<li>After discussions with other players and researching, the penetration values for the M829 series have been revamped except for M829A4</li>
+		<li>M829A4 simply has made up stats</li>
+		<li>There is still a config option to reuse old Steel Beasts values if desired and extra spalling chance</li>
 		<li>Values for Anti-ERA effects are a total guess</li>
 		<li>*These are HE rounds so actual penetration is not 250mm</li>
 		<li>**These are <i>up to</i> values so not every fragment will perform the same</li>
@@ -144,6 +146,19 @@ If you get an error launching through Steam you will need to run the game execut
 	</ul>
 </p>
 
+#### Lightweight (L)
+| Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
+| ------------- | ------------- | ------------- | ------------- |
+| Turret cheek | 480 | 1040 |   |
+| Composite side skirt | 47 | 75 |   |
+| Gun mantlet | 455 | 735 |   |
+
+<p>
+	<ul> 
+		<li>Base M1A1 protection but no hull or turret side special armor array</li>
+	</ul>
+</p>
+
 ### Heavy Ultra (HU) - Custom protection values
 | Area  | Protection vs KE (mm) | Protection vs CE (mm) | Note
 | ------------- | ------------- | ------------- | ------------- | 
@@ -181,6 +196,7 @@ If you get an error launching through Steam you will need to run the game execut
 | Armor Type | Weight (KG) | Note |
 | ------------- | ------------- | ------------- |
 | Base | 59,057 | Base M1A1/E1 weight | 
+| L | 44,838 |  | 
 | HA | 60,599 |  | 
 | HC | 61,416 |  | 
 | SA | 62,232 |  | 
@@ -198,7 +214,8 @@ If you get an error launching through Steam you will need to run the game execut
 | AGT2000 | 2000 | 7655 | 3100 | +10% | Fictional. | 
 | AGT2500 | 2500 | 7415 | 4000 | +20% | Fictional. | 
 | AGT3000 | 3000 | 8899 | 4000 | +30% | Fictional. | 
-| T64 | 4430 | 12225 | 4300 | +40% | Fictional but it's the T64-GE-100. | 
+| T64 | 4430 | 12225 | 4300 | +40% | Fictional but it's the General Electric T64-GE-100. | 
+| T55 | 6000 | 14833 | 4800 | +50% | Fictional but it's the Honeywell T55-L-714C. | 
 
 
 ### Transmission
@@ -228,6 +245,13 @@ If you get an error launching through Steam you will need to run the game execut
 <p>
 	<ul> 
 		<li>Governor delete option which raises potential top speed to 115 km/h forwards and 57 km/h backwards (compared to 72 km/h and 40 km/h with governor)</li>
+	</ul>
+</p>
+
+### Stability Control (SC)
+<p>
+	<ul> 
+		<li>Added stability control option which makes the tank more controllable at higher speeds</li>
 	</ul>
 </p>
 
@@ -303,7 +327,9 @@ If you get an error launching through Steam you will need to run the game execut
 		<li>Enhanced suspension (false by default)</li>
 		<li>Enhanced tracks (false by default)</li>
 		<li>Engine governor removal (false by default)</li>
+		<li>Stability Control (false by default)</li>
 		<li>Enable APU per tank (false by default)</li>
+		<li>Enable bonus turret traversal with APU installed (false by default)</li>
 		<li>Remove turret decors like ALICE packs or MRE boxes (false by default)</li>
 		<li>M1E1 uses M1IP model (false by default)</li>
 	</ul>
