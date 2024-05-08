@@ -27,6 +27,7 @@
 		<li>Dependent on CITV installation</li>
 	</ul>
 </p>
+
 | Standard | w/ CITV | Note |
 | ------------- | ------------- | ------------- |
 | M1A1HA | M1A1 AIM |  | 
