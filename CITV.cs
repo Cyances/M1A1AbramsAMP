@@ -100,7 +100,7 @@ namespace M1A1AMP
         {
             if (citv_crosshair == null)
             {
-                var citv_bundle = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1CITV/", "citv_crosshair"));
+                var citv_bundle = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1assets/", "citv_crosshair"));
 
                 citv_crosshair = citv_bundle.LoadAsset<Sprite>("citv_crosshair");
                 citv_crosshair.hideFlags = HideFlags.DontUnloadUnusedAsset;

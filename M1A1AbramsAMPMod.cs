@@ -1001,6 +1001,7 @@ namespace M1A1AMP
 
                                 case "turret cheek special armor array":
                                     m1e1VA_SA._armorType = AmmoArmor.armor_codex_cheeksDUarmor_SA;
+                                    m1e1VA_SA.AverageRha = 300;
                                     break;
 
                                 case "hull front special armor array":
@@ -1039,6 +1040,7 @@ namespace M1A1AMP
 
                                 case "turret cheek special armor array":
                                     m1e1VA_HC._armorType = AmmoArmor.armor_codex_cheeksDUarmor_HC;
+                                    m1e1VA_HC.AverageRha = 300;
                                     break;
 
                                 case "hull front special armor array":
@@ -1077,6 +1079,7 @@ namespace M1A1AMP
 
                                 case "turret cheek special armor array":
                                     m1e1VA_HA._armorType = AmmoArmor.armor_codex_cheeksDUarmor_HA;
+                                    m1e1VA_HA.AverageRha = 300;
                                     break;
 
                                 case "hull front special armor array":
@@ -1094,8 +1097,24 @@ namespace M1A1AMP
                         }
                     }
                     MelonLogger.Msg("M1E1HA Armor Loaded");
-                    break;
+                break;
 
+                default:
+                    foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
+                    {
+                        VariableArmor m1e1VA = armour.GetComponent<VariableArmor>();
+                        if (m1e1VA == null) continue;
+                        if (m1e1VA.Unit == null) continue;
+                        if (m1e1VA.Unit.UniqueName == "M1" && m1e1Convert.Value == true)
+                        {
+                            if (m1e1VA.Name == "turret cheek special armor array")
+                            {
+                                m1e1VA._armorType = AmmoArmor.armor_gen1_cheeks;//Give the E1 the IP cheek armor by default
+                                m1e1VA.AverageRha = 300f;
+                            }
+                        }
+                    }
+                 break;
             }
 
             foreach (Vehicle vic in AbramsAMPMod.vics)
@@ -1125,11 +1144,11 @@ namespace M1A1AMP
                             vic._friendlyName = "M1E1" + m1e1Armor.Value;
 
                             //Give the E1 the IP cheek armor by default
-                            GameObject m1e1_cheeks = vic.transform.Find("IPM1_rig/HULL/TURRET").GetComponent<LateFollowTarget>()._lateFollowers[0].transform.Find("M1A0_turret_armour/CHEEKS NERA/").gameObject;
+                            /*GameObject m1e1_cheeks = vic.transform.Find("IPM1_rig/HULL/TURRET").GetComponent<LateFollowTarget>()._lateFollowers[0].transform.Find("M1A0_turret_armour/CHEEKS NERA/").gameObject;
 
                             VariableArmor m1e1_armour = m1e1_cheeks.GetComponent<VariableArmor>();
                             m1e1_armour._armorType = AmmoArmor.armor_gen1_cheeks;
-                            m1e1_armour.AverageRha = 300f;
+                            m1e1_armour.AverageRha = 300f;*/
                         }
 
                         if (ampFuze.Value) vic_go.AddComponent<ProxySwitchAMP>();
@@ -2541,11 +2560,11 @@ namespace M1A1AMP
                             vicVC.transmission.shiftPointRandomness = 0.05f;//.05
                             //m1VC.transmission.differentialType = Transmission.DifferentialType.LimitedSlip;
                         }
-
+                            
                         if (governorDelete.Value)
                         {
-                            vicNC._maxForwardSpeed = 42f;//20
-                            vicNC._maxReverseSpeed = 26f;//11.176
+                            vicNC._maxForwardSpeed = 36f;//20
+                            vicNC._maxReverseSpeed = 20f;//11.176
                         }
 
                         if (stabilityControl.Value)
