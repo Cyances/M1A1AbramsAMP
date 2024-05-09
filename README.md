@@ -70,10 +70,10 @@ If you get an error launching through Steam you will need to run the game execut
 ## Round types list:
 | Name  | Penetration (mm) | Fragment/Spalling Penetration (mm)| Muzzle Velocity (m/s) | Note |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| M829 APFSDS-T | 600 |  | 1670  | +15% spalling chance and +25% spalling performance. Optional +25% spalling chance instead. |
-| M829A1 APFSDS-T  | 700 |  | 1575 | +20% spalling chance and +50% spalling performance. Optional +25% spalling chance instead. |
-| M829A2 APFSDS-T | 750 |  | 1680 | +25% spalling chance and +100% spalling performance. ERA is only 90% effective. Optional +50% spalling chance instead. |
-| M829A3 APFSDS-T | 840 |  | 1555 | +30% spalling chance and +150% spalling performance. ERA is only 20% effective. Optional +75% spalling chance instead. |
+| M829 APFSDS-T | 550 |  | 1670  | +15% spalling chance and +25% spalling performance. Optional +25% spalling chance instead. |
+| M829A1 APFSDS-T  | 630 |  | 1575 | +20% spalling chance and +50% spalling performance. Optional +25% spalling chance instead. |
+| M829A2 APFSDS-T | 680 |  | 1680 | +25% spalling chance and +100% spalling performance. ERA is only 90% effective. Optional +50% spalling chance instead. |
+| M829A3 APFSDS-T | 750 |  | 1555 | +30% spalling chance and +150% spalling performance. ERA is only 20% effective. Optional +75% spalling chance instead. |
 | M829A4 APFSDS-T | 1000 |  | 1700 | Hypothethical round. +100% spalling chance and ++200% spalling performance. ERA is only 15% effective.  |
 | M830 HEAT-FS-T | 600 |  | 1140 | +50% spalling chance |
 | M830A1 HEAT-MP-T | 480 | 50** | 1410 | Point-detonate fuze only. 600 fragments (configurable count). |
@@ -89,7 +89,7 @@ If you get an error launching through Steam you will need to run the game execut
 	<ul> 
 		<li>After discussions with other players and researching, the penetration values for the M829 series have been revamped except for M829A4</li>
 		<li>M829A4 simply has made up stats</li>
-		<li>There is still a config option to reuse old Steel Beasts values if desired and extra spalling chance</li>
+		<li>There is still a config option to reuse [Steel Beasts values](https://www.steelbeasts.com/sbwiki/index.php/Ammunition_Data#Main_Gun) if desired and extra spalling chance</li>
 		<li>Values for Anti-ERA effects are a total guess</li>
 		<li>*These are HE rounds so actual penetration is not 250mm</li>
 		<li>**These are <i>up to</i> values so not every fragment will perform the same</li>
@@ -260,7 +260,7 @@ If you get an error launching through Steam you will need to run the game execut
 ### Governor
 <p>
 	<ul> 
-		<li>Governor delete option which raises potential top speed to 115 km/h forwards and 57 km/h backwards (compared to 72 km/h and 40 km/h with governor)</li>
+		<li>Governor delete option which raises potential top speed to 129 km/h forwards and 72 km/h backwards (compared to 72 km/h and 40 km/h with governor)</li>
 	</ul>
 </p>
 
@@ -285,7 +285,7 @@ If you get an error launching through Steam you will need to run the game execut
 <p>
 	<ul> 
 		<li>Retain nomral turret traversal speed (40°/s) and lazing functionality when engine is destroyed</li>
-		<li>Bonus faster turret traversal speed (60°/s) if the engine is T64 and if it's still running</li>
+		<li>Toggle for faster turret traversal speed (60°/s) if the engine is T64 and if it's still running</li>
 		<li>The APU itself has no model at the moment so it's indestructible</li>
 	</ul>
 </p>
