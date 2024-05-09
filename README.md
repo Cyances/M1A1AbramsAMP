@@ -89,7 +89,7 @@ If you get an error launching through Steam you will need to run the game execut
 	<ul> 
 		<li>After discussions with other players and researching, the penetration values for the M829 series have been revamped except for M829A4</li>
 		<li>M829A4 simply has made up stats</li>
-		<li>There is still a config option to reuse [Steel Beasts values](https://www.steelbeasts.com/sbwiki/index.php/Ammunition_Data#Main_Gun) if desired and extra spalling chance</li>
+		<li>There is still a config option to reuse [Steel Beasts values](https://github.com/Cyances/M1A1AbramsAMP/tree/AMP-2.3#round-changes) if desired and extra spalling chance</li>
 		<li>Values for Anti-ERA effects are a total guess</li>
 		<li>*These are HE rounds so actual penetration is not 250mm</li>
 		<li>**These are <i>up to</i> values so not every fragment will perform the same</li>
