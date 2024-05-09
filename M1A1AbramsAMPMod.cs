@@ -35,7 +35,6 @@ using UnityEngine.UI;
 using System.Net;
 using GHPC.Effects;
 using M1A1AbramsAMP;
-using static NatoEra.Util;
 using static Reticle.ReticleTree.GroupBase;
 using System.ComponentModel;
 
@@ -2718,10 +2717,10 @@ namespace M1A1AMP
                         }
 
                         ////ERA detection for TUSK designation
-
-                        if (vic_go.GetComponent<HasARAT>() != null)
+                        if (vic.UniqueName == "M1IP" || vic.UniqueName == "M1")
                         {
-                            if (vic.UniqueName == "M1IP" || vic.UniqueName == "M1")
+                            GameObject hullARAT = vic.GetComponent<LateFollowTarget>()._lateFollowers[0].transform.Find("HULLARMOR").gameObject;
+                            if (hullARAT.transform.Find("Hull ERA Array(Clone)") != null)
                             {
                                 vic._friendlyName += " TUSK";
                             }
