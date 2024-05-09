@@ -35,7 +35,7 @@ using UnityEngine.UI;
 using System.Net;
 using GHPC.Effects;
 using M1A1AbramsAMP;
-using static NatoEra.Util;
+//using static NatoEra.Util;
 using static Reticle.ReticleTree.GroupBase;
 using System.ComponentModel;
 
@@ -56,7 +56,7 @@ namespace M1A1AMP
         static MelonPreferences_Entry<string> m1a1Armor, m1e1Armor;
         static MelonPreferences_Entry<bool> m1a1Smoke, m1e1Smoke, m1a1Rosy, m1e1Rosy, rosyPlus, rosyIR;
         static MelonPreferences_Entry<string> m1a1Agt, m1e1Agt;
-        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, bonusTraverse, noLuggage, betterSuspension, betterTracks, m1ipModel, stabilityControl;
+        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, bonusTraverse, noLuggage, betterSuspension, betterTracks, m1ipModel, stabilityControl, designateTusk;
         static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader, m1a1Commander, m1e1Commander, m1a1Gunner, m1e1Gunner;
         static MelonPreferences_Entry<bool> citv_m1a1, citv_m1e1, alt_flir_colour;
         public static MelonPreferences_Entry<bool> crows_m1e1, crows_m1a1, crows_raufoss, crows_alt_placement;
@@ -2718,10 +2718,10 @@ namespace M1A1AMP
                         }
 
                         ////ERA detection for TUSK designation
-
-                        if (vic_go.GetComponent<HasARAT>() != null)
+                        if (vic.UniqueName == "M1IP" || vic.UniqueName == "M1")
                         {
-                            if (vic.UniqueName == "M1IP" || vic.UniqueName == "M1")
+                            GameObject hullARAT = vic.GetComponent<LateFollowTarget>()._lateFollowers[0].transform.Find("HULLARMOR").gameObject;
+                            if (hullARAT.transform.Find("Hull ERA Array(Clone)") != null)
                             {
                                 vic._friendlyName += " TUSK";
                             }
