@@ -13,6 +13,7 @@ using GHPC.Camera;
 using GHPC.Equipment.Optics;
 using GHPC.Player;
 using M1A1AMP;
+using M1A1AbramsAMP;
 
 namespace M1A1AMP
 {
@@ -35,9 +36,9 @@ namespace M1A1AMP
 
             if (player_manager.CurrentPlayerUnit.gameObject.GetInstanceID() != gameObject.GetInstanceID()) return;
 
-            M1A1AbramsAMPMod.clip_xm1147.Name = activated ? "XM1147 AMP-T [Proximity]" : "XM1147 AMP-T";
+            AmmoArmor.clip_xm1147.Name = activated ? "XM1147 AMP-T [Proximity]" : "XM1147 AMP-T";
 
-            if (Input.GetKey(KeyCode.Mouse2) && cd <= 0f && weapon.CurrentAmmoType == M1A1AbramsAMPMod.ammo_xm1147)
+            if (Input.GetKey(KeyCode.Mouse2) && cd <= 0f && weapon.CurrentAmmoType == AmmoArmor.ammo_xm1147)
             {
                 cd = 0.2f;
 

@@ -13,6 +13,7 @@ using GHPC.Camera;
 using GHPC.Equipment.Optics;
 using GHPC.Player;
 using M1A1AMP;
+using M1A1AbramsAMP;
 
 namespace M1A1AMP
 {
@@ -35,9 +36,9 @@ namespace M1A1AMP
 
             if (player_manager.CurrentPlayerUnit.gameObject.GetInstanceID() != gameObject.GetInstanceID()) return;
 
-            M1A1AbramsAMPMod.clip_m830a1.Name = activated ? "M830A1 HEAT-MP-T [Proximity]" : "M830A1 HEAT-MP-T";
+            AmmoArmor.clip_m830a1.Name = activated ? "M830A1 HEAT-MP-T [Proximity]" : "M830A1 HEAT-MP-T";
 
-            if (Input.GetKey(KeyCode.Mouse2) && cd <= 0f && weapon.CurrentAmmoType == M1A1AbramsAMPMod.ammo_m830a1)
+            if (Input.GetKey(KeyCode.Mouse2) && cd <= 0f && weapon.CurrentAmmoType == AmmoArmor.ammo_m830a1)
             {
                 cd = 0.2f;
 

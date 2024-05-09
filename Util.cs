@@ -12,7 +12,7 @@ namespace M1A1AMP
 {
     public class Util
     {
-        public class AlreadyConverted : MonoBehaviour { }
+        public class AlreadyConvertedAMP : MonoBehaviour { }
 
         // https://snipplr.com/view/75285/clone-from-one-object-to-another-using-reflection
         public static void ShallowCopy(System.Object dest, System.Object src)
@@ -63,6 +63,18 @@ namespace M1A1AMP
                     removeVis.Invoke(rack, new object[] { transform });
                 }
             }
+        }
+        public static T[] AppendToArray<T>(T[] array, T new_item)
+        {
+            List<T> values = new List<T>();
+            foreach (T old_item in array)
+            {
+                values.Add(old_item);
+            }
+
+            values.Add(new_item);
+
+            return values.ToArray();
         }
     }
 }

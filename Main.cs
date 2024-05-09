@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +10,10 @@ using System.Collections;
 using UnityEngine;
 using GHPC.Camera;
 using GHPC.Player;
+using M1A1AbramsAMP;
+using GHPC.Vehicle;
 
-[assembly: MelonInfo(typeof(AbramsAMPMod), "ZZ M1A1 Abrams AMP", "2.5.1", "Cyance, ATLAS and Schweiz")]
+[assembly: MelonInfo(typeof(AbramsAMPMod), "ZZ M1A1 Abrams AMP", "2.6.0", "Cyance, ATLAS and Schweiz")]
 [assembly: MelonGame("Radian Simulations LLC", "GHPC")]
 
 namespace M1A1AMP
@@ -19,7 +21,7 @@ namespace M1A1AMP
     public class AbramsAMPMod : MelonMod
     {
 
-        public static GameObject[] vic_gos;
+        public static Vehicle[] vics;
         public static GameObject gameManager;
         public static CameraManager camManager;
         public static PlayerInput playerManager;
@@ -27,7 +29,7 @@ namespace M1A1AMP
 
         public IEnumerator GetVics(GameState _)
         {
-            vic_gos = GameObject.FindGameObjectsWithTag("Vehicle");
+            vics = GameObject.FindObjectsByType<Vehicle>(FindObjectsSortMode.None);
 
             yield break;
         }
@@ -36,11 +38,6 @@ namespace M1A1AMP
         {
             MelonPreferences_Category cfg = MelonPreferences.CreateCategory("M1A1AMPConfig");
             M1A1AbramsAMPMod.Config(cfg);
-        }
-
-        public override void OnLateUpdate()
-        {
-            M1A1AbramsAMPMod.LateUpdate();
         }
 
         public override void OnSceneWasLoaded(int idx, string scene_name)
@@ -52,7 +49,9 @@ namespace M1A1AMP
             playerManager = gameManager.GetComponent<PlayerInput>();
 
             StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(GetVics), GameStatePriority.Medium);
+            AmmoArmor.Init();
             CITV.Init();
+            //CROWS.Init();//CROWS not implemented yet due to the gun camera not behaving properly (need to cycle using GAS toggle button to work)
             M1A1AbramsAMPMod.Init();
             ProxyFuzeAMP.Init();
             ProxyFuzeMPAT.Init();

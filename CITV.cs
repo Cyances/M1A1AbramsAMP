@@ -100,7 +100,7 @@ namespace M1A1AMP
         {
             if (citv_crosshair == null)
             {
-                var citv_bundle = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1CITV/", "citv_crosshair"));
+                var citv_bundle = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1assets/", "citv_crosshair"));
 
                 citv_crosshair = citv_bundle.LoadAsset<Sprite>("citv_crosshair");
                 citv_crosshair.hideFlags = HideFlags.DontUnloadUnusedAsset;
@@ -127,7 +127,7 @@ namespace M1A1AMP
             {
                 active_crosshair_instance = GameObject.Instantiate(citv_crosshair_go, canvas);
                 active_crosshair_instance.AddComponent<CITVCrosshair>();
-                active_crosshair_instance.transform.localPosition = new Vector3(0f, 0f, 572f);
+                active_crosshair_instance.transform.localPosition = new Vector3(0f, 0f, 0f);
                 active_crosshair_instance.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
                 active_crosshair_instance.transform.localScale = new Vector3(6f, 3.1f, 1f);
                 active_crosshair_instance.GetComponent<UnityEngine.UI.Image>().enabled = false;
