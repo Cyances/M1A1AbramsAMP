@@ -41,7 +41,7 @@
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | M829 APFSDS-T | 550 |  | -  | +15% spalling chance and +25% spalling performance |
 | M829A1 APFSDS-T | 630 |  | - | +20% spalling chance and +50% spalling performance  |
-| M829A2 APFSDS-T | 380 |  | - | +25% spalling chance and +100% spalling performance. ERA is only 90% effective.  |
+| M829A2 APFSDS-T | 680 |  | - | +25% spalling chance and +100% spalling performance. ERA is only 90% effective.  |
 | M829A3 APFSDS-T | 750 |  | - | +30% spalling chance and +150% spalling performance  |
 | M829A4 APFSDS-T | - |  | - | +200% spalling performance. |
 | XM1147 AMP-T | - | - | - | Added impact-delay fuze. |
