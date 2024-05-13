@@ -55,7 +55,7 @@ namespace M1A1AMP
         static MelonPreferences_Entry<string> m1a1Armor, m1e1Armor;
         static MelonPreferences_Entry<bool> m1a1Smoke, m1e1Smoke, m1a1Rosy, m1e1Rosy, rosyPlus, rosyIR;
         static MelonPreferences_Entry<string> m1a1Agt, m1e1Agt;
-        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, bonusTraverse, noLuggage, betterSuspension, betterTracks, m1ipModel, stabilityControl;
+        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, bonusTraverse, noLuggage, betterSuspension, betterTracks, m1ipModel, stabilityControl, m256Model, m1a1camoNet, m1e1camoNet;
         static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader, m1a1Commander, m1e1Commander, m1a1Gunner, m1e1Gunner;
         static MelonPreferences_Entry<bool> citv_m1a1, citv_m1e1, alt_flir_colour;
         public static MelonPreferences_Entry<bool> crows_m1e1, crows_m1a1, crows_raufoss, crows_alt_placement;
@@ -243,6 +243,13 @@ namespace M1A1AMP
 
             m1ipModel = cfg.CreateEntry<bool>("M1E1 IP Model", false);
             m1ipModel.Description = "Gives the M1IP model to base M1";
+
+            m256Model = cfg.CreateEntry<bool>("M256Model", true);
+            m256Model.Description = "Uses appropriate M256 model instead of scaled up M68A1";
+
+            m1a1camoNet = cfg.CreateEntry<bool>("M1A1 Camo Net", false);
+            m1a1camoNet.Description = "Force camo net appearance instead of randomizing it";
+            m1e1camoNet = cfg.CreateEntry<bool>("M1E1 Camo Net", false);
         }
         public static IEnumerator Convert(GameState _)
         {
@@ -1396,12 +1403,21 @@ namespace M1A1AMP
                         mainGun.Impulse = 68000;
                         mainGun.CodexEntry = gun_m256;
 
-                        GameObject gunTube = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
-                        gunTube.transform.localScale = new Vector3(0f, 0f, 0f);
-                        LateFollow tube_follower = gunTube.GetComponent<LateFollowTarget>()._lateFollowers[0];
-                        tube_follower.transform.Find("Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
-                        GameObject _m256_obj = GameObject.Instantiate(m256_obj, tube_follower.transform);
-                        _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
+                        if (m256Model.Value)
+                        {
+                            GameObject gunTube = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                            gunTube.transform.localScale = new Vector3(0f, 0f, 0f);
+                            LateFollow tube_follower = gunTube.GetComponent<LateFollowTarget>()._lateFollowers[0];
+                            tube_follower.transform.Find("Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
+                            GameObject _m256_obj = GameObject.Instantiate(m256_obj, tube_follower.transform);
+                            _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
+                        }
+
+                        else
+                        {
+                            GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                            gunTube.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
+                        }
 
                         VehicleController vicVC = vic.GetComponent<VehicleController>();
                         NwhChassis vicNC = vic.GetComponent<NwhChassis>();
@@ -1953,6 +1969,12 @@ namespace M1A1AMP
                                 GameObject m1_hullNera = vic_go.GetComponent<LateFollowTarget>()._lateFollowers[0].transform.Find("HULLARMOR/lower front plate composite array/").gameObject;
                                 m1_hullNera.SetActive(false);
                             }
+
+                            if (m1a1camoNet.Value)
+                            {
+                                GameObject camoNet = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/").gameObject;
+                                camoNet.SetActive(true);
+                            }
                         }
 
                         if (vic.UniqueName == "M1")
@@ -2072,6 +2094,7 @@ namespace M1A1AMP
                                     loadoutManager.RackLoadouts[0].Rack._storageDelaySeconds = 4.5f;//5
                                     break;
                             }
+
                             switch (m1e1Commander.Value)
                             {
                                 case "Cadet":
@@ -2412,6 +2435,14 @@ namespace M1A1AMP
                                 VariableArmor var_roof = turret_roof.GetComponent<VariableArmor>();
                                 var_roof._armorType = AmmoArmor.armor_codex_turretroofCompositearmor_HU;*/
 
+                                //M1(Clone)/IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_right/ & turret_front_left
+
+                                GameObject camoNetRight = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_right").gameObject;
+                                camoNetRight.transform.localPosition = new Vector3(0, 0, 0.227f);
+
+                                GameObject camoNetLeft= vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_left").gameObject;
+                                camoNetLeft.transform.localPosition = new Vector3(0, 0, 0.227f);
+
 
                                 switch (m1e1Armor.Value)
                                 {
@@ -2515,6 +2546,12 @@ namespace M1A1AMP
 
                                 }
 
+                            }
+
+                            if (m1e1camoNet.Value)
+                            {
+                                GameObject camoNet = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/").gameObject;
+                                camoNet.SetActive(true);
                             }
                         }
 
