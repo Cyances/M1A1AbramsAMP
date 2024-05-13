@@ -85,17 +85,13 @@ If you get an error launching through Steam you will need to run the game execut
 | M2/M8 AP-T/I | 29 | - | 887 | M2 Coax |
 | M962 SLAP-T | 36 | - | 1200 | M2 Coax. Has slightly less drag than M2/M8. |
 
-<p>
-	<ul> 
-		<li>After discussions with other players and researching, the penetration values for the M829 series have been revamped except for M829A4</li>
-		<li>M829A4 simply has made up stats</li>
-		<li>There is still a config option to reuse [Steel Beasts values](https://github.com/Cyances/M1A1AbramsAMP/tree/AMP-2.3#round-changes) if desired and extra spalling chance</li>
-		<li>Values for Anti-ERA effects are a total guess</li>
-		<li>*These are HE rounds so actual penetration is not 250mm</li>
-		<li>**These are <i>up to</i> values so not every fragment will perform the same</li>
-		<li>M830A1, XM1147, M908 have slightly less drag</li>
-	</ul>
-</p>
+- After discussions with other players and researching, the penetration values for the M829 series have been revamped except for M829A4
+- M829A4 simply has made up stats
+- There is still a config option to reuse [Steel Beasts values](https://www.steelbeasts.com/sbwiki/index.php/Ammunition_Data#Main_Gun) if desired and extra spalling chance
+- Values for Anti-ERA effects are a total guess
+- *These are HE rounds so actual penetration is not 250mm
+- **These are <i>up to</i> values so not every fragment will perform the same
+- M830A1, XM1147, M908 have slightly less drag
 
 ## How to use the XM1147 AMP-T or M830A1 HEAT-MP-T:
 ### Point-detonate + Time-delay Fuze (AMP only)
@@ -348,6 +344,8 @@ If you get an error launching through Steam you will need to run the game execut
 		<li>Enable bonus turret traversal with APU installed (false by default)</li>
 		<li>Remove turret decors like ALICE packs or MRE boxes (false by default)</li>
 		<li>M1E1 uses M1IP model (false by default)</li>
+		<li>Use M256 Model (true by default)</li>
+		<li>Forced camo net appearance per tank (false by default)</li>
 	</ul>
 </p>
 
