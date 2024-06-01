@@ -1427,6 +1427,10 @@ namespace M1A1AMP
                         UnitAI vicUAI = vic_go.GetComponentInChildren<UnitAI>();
                         DriverAIController vicDAIC = vic_go.GetComponent<DriverAIController>();
 
+                        GameObject camoNetcheeks = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/").gameObject;
+                        GameObject camoNetRight = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_right").gameObject;
+                        GameObject camoNetLeft = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_left").gameObject;
+
                         vicDAIC.maxSpeed = 42;//20
 
                         //Chonk quantifier
@@ -1972,8 +1976,9 @@ namespace M1A1AMP
 
                             if (m1a1camoNet.Value)
                             {
-                                GameObject camoNet = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/").gameObject;
-                                camoNet.SetActive(true);
+                                camoNetcheeks.SetActive(true);
+                                camoNetRight.SetActive(true);
+                                camoNetLeft.SetActive(true);
                             }
                         }
 
@@ -2435,14 +2440,8 @@ namespace M1A1AMP
                                 VariableArmor var_roof = turret_roof.GetComponent<VariableArmor>();
                                 var_roof._armorType = AmmoArmor.armor_codex_turretroofCompositearmor_HU;*/
 
-                                //M1(Clone)/IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_right/ & turret_front_left
-
-                                GameObject camoNetRight = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_right").gameObject;
                                 camoNetRight.transform.localPosition = new Vector3(0, 0, 0.227f);
-
-                                GameObject camoNetLeft= vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_left").gameObject;
                                 camoNetLeft.transform.localPosition = new Vector3(0, 0, 0.227f);
-
 
                                 switch (m1e1Armor.Value)
                                 {
@@ -2550,8 +2549,9 @@ namespace M1A1AMP
 
                             if (m1e1camoNet.Value)
                             {
-                                GameObject camoNet = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/").gameObject;
-                                camoNet.SetActive(true);
+                                camoNetcheeks.SetActive(true);
+                                camoNetRight.SetActive(true);
+                                camoNetLeft.SetActive(true);
                             }
                         }
 
