@@ -3,7 +3,7 @@
 ## Branch release notes:
 <p>
 	<ul> 
-		<li>Compatibility fix for GHPC Update 20250507</li>
+		<li>Compatibility fix for GHPC Update 20240507</li>
 		<li>Code refactoring</li>
 		<li>New "armor" package: Lightweight (L)</li>
 		<li>Round changes (refer to table)</li>
