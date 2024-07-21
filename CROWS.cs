@@ -150,7 +150,7 @@ namespace M1A1AMP
             ammo_rack_go.transform.parent = gun.transform;
             GHPC.Weapons.AmmoRack ammo_rack = ammo_rack_go.AddComponent<GHPC.Weapons.AmmoRack>();
 
-            AmmoType.AmmoClip clip = M1A1AbramsAMPMod.crows_raufoss.Value ? clip_raufoss_400rnd : clip_50cal_400rnd;
+            AmmoType.AmmoClip clip = M1A1AbramsAMPMod.crows_slapt.Value ? AmmoArmor.clip_m962slapt_crows : AmmoArmor.clip_m8api_crows;
 
             ammo_rack.ClipTypes = new AmmoType.AmmoClip[] { clip };
             ammo_rack._initialClipCounts = new int[] { 2 };
@@ -160,6 +160,7 @@ namespace M1A1AMP
             wsys_m2_browning.Feed.ReadyRack = ammo_rack;
             wsys_m2_browning._cycleTimeSeconds = 0.133f;
             wsys_m2_browning.Feed._totalCycleTime = 0.133f;
+            wsys_m2_browning.BaseDeviationAngle = 0.025f;// 0.05
 
             wsys_m2_browning.WeaponSound.LoopEventPath = "event:/Weapons/MG_m85_400rmp";
             wsys_m2_browning.WeaponSound.Awake();

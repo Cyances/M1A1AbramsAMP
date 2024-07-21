@@ -58,7 +58,7 @@ namespace M1A1AMP
         static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, bonusTraverse, noLuggage, betterSuspension, betterTracks, m1ipModel, stabilityControl, m256Model, m1a1camoNet, m1e1camoNet;
         static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader, m1a1Commander, m1e1Commander, m1a1Gunner, m1e1Gunner;
         static MelonPreferences_Entry<bool> citv_m1a1, citv_m1e1, alt_flir_colour;
-        public static MelonPreferences_Entry<bool> crows_m1e1, crows_m1a1, crows_raufoss, crows_alt_placement;
+        public static MelonPreferences_Entry<bool> crows_m1e1, crows_m1a1, crows_slapt, crows_alt_placement_m1a1, crows_alt_placement_m1e1;
         public static MelonPreferences_Entry<int> ampFragments, mpatFragments, heorFragments;
         public static MelonPreferences_Entry<bool> perfect_citv, citv_reticle, citv_smooth, perfect_override;
         public static MelonPreferences_Entry<float> proxyDistance;
@@ -178,15 +178,16 @@ namespace M1A1AMP
             alt_flir_colour = cfg.CreateEntry<bool>("Alternate GPS FLIR Colour", false);
             alt_flir_colour.Description = "[Requires CITV to be enabled] Gives the gunner's sight FLIR the same colour palette as the CITV.";
 
-            /*crows_m1e1 = cfg.CreateEntry<bool>("CROWS (M1E1)", false);
-            crows_m1e1.Description = "Remote weapons system equipped with a .50 caliber M2HB; 400 rounds, automatic lead, thermals.";
-            crows_m1a1 = cfg.CreateEntry<bool>("CROWS (M1A1)", false);
+            crows_m1a1 = cfg.CreateEntry<bool>("M1A1 CROWS", false);
+            crows_m1a1.Description = "Remote weapons system equipped with a .50 caliber M2HB; 400 rounds, automatic lead, thermals.";
+            crows_m1e1 = cfg.CreateEntry<bool>("M1E1 CROWS", false);
 
-            crows_alt_placement = cfg.CreateEntry<bool>("Alternative Position", false);
-            crows_alt_placement.Comment = "Moves the CROWS to the right side of the commander instead of directly in front.";
+            crows_alt_placement_m1a1 = cfg.CreateEntry<bool>("M1A1 CROWS Alt Pos", false);
+            crows_alt_placement_m1a1.Description = "Moves the CROWS to the right side of the commander instead of directly in front.";
+            crows_alt_placement_m1e1 = cfg.CreateEntry<bool>("M1E1 CROWS Alt Pos", false);
 
-            crows_raufoss = cfg.CreateEntry<bool>("Use Mk 211 Mod 0", false);
-            crows_raufoss.Comment = "Loads the CROWS M2HB with high explosive rounds.";*/
+            crows_slapt = cfg.CreateEntry<bool>("CROWS SLAP", false);
+            crows_slapt.Description = "Use M962 SLAP-T for CROWS.";
 
             m1e1Convert = cfg.CreateEntry<bool>("M1E1", true);
             m1e1Convert.Description = "Convert M1s to M1E1s (i.e: they get the 120mm gun and enables armor upgrades).";
@@ -1244,15 +1245,15 @@ namespace M1A1AMP
                             //s.intensity.value = 0.35f;
                         }
 
-                        /*Vector3 crows_pos = crows_alt_placement.Value ? new Vector3(1.4f, 1.1164f, -0.5873f) : new Vector3(0.7855f, 1.2855f, 0.5182f);
+                        Vector3 crows_pos = crows_alt_placement_m1a1.Value ? new Vector3(1.4f, 1.1164f, -0.5873f) : new Vector3(0.7855f, 1.2855f, 0.5182f);
                         if ((crows_m1e1.Value && vic._uniqueName == "M1") || (crows_m1a1.Value && vic._uniqueName == "M1IP"))
                         {
                             vic_go.transform.Find("IPM1_rig/HULL/TURRET/CUPOLA/CUPOLA_GUN").localScale = Vector3.zero;
                             CROWS.Add(vic, vic_go.transform.Find("IPM1_rig/HULL/TURRET"), crows_pos);
 
-                            if (!crows_alt_placement.Value)
+                            if (!crows_alt_placement_m1a1.Value)
                                 vic.DesignatedCameraSlots[0].transform.localPosition = new Vector3(-0.1538f, 0.627f, -0.05f);
-                        }*/
+                        }
 
                         /*CameraSlot commanderzoom = vic.DesignatedCameraSlots[0].gameObject.GetComponent<CameraSlot>();
                         commanderzoom.AllowFreeZoom = true;//true

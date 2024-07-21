@@ -92,6 +92,16 @@ namespace M1A1AbramsAMP
         public static AmmoCodexScriptable ammo_codex_m962slapt;
         public static AmmoType ammo_m962slapt;
 
+
+        public static AmmoClipCodexScriptable clip_codex_m8api_crows;
+        public static AmmoType.AmmoClip clip_m8api_crows;
+
+        public static AmmoClipCodexScriptable clip_codex_m2apt_crows;
+        public static AmmoType.AmmoClip clip_m2apt_crows;
+
+        public static AmmoClipCodexScriptable clip_codex_m962slapt_crows;
+        public static AmmoType.AmmoClip clip_m962slapt_crows;
+
         public static GameObject ammo_m829_vis = null;
         public static GameObject ammo_m829a1_vis = null;
         public static GameObject ammo_m829a2_vis = null;
@@ -832,6 +842,41 @@ namespace M1A1AbramsAMP
             clip_codex_m962slapt = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
             clip_codex_m962slapt.name = "clip_m962slapt";
             clip_codex_m962slapt.ClipType = clip_m962slapt;
+
+
+            //CROWS ammo
+            clip_m2apt_crows = new AmmoType.AmmoClip();
+            clip_m2apt_crows.Capacity = 500;
+            clip_m2apt_crows.Name = "M2 AP-T";
+            clip_m2apt_crows.MinimalPattern = new AmmoCodexScriptable[1];
+            clip_m2apt_crows.MinimalPattern[0] = ammo_codex_m2apt;
+
+            clip_codex_m2apt_crows = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+            clip_codex_m2apt_crows.name = "clip_m2apt_crows";
+            clip_codex_m2apt_crows.ClipType = clip_m2apt_crows;
+
+            clip_m8api_crows = new AmmoType.AmmoClip();
+            clip_m8api_crows.Capacity = 500;
+            clip_m8api_crows.Name = "M8 AP-I/T Mix";
+            clip_m8api_crows.MinimalPattern = new AmmoCodexScriptable[]
+                {
+                        ammo_codex_m2apt,
+                        ammo_codex_m8api,
+                        ammo_codex_m8api,
+                };
+            clip_codex_m8api_crows = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+            clip_codex_m8api_crows.name = "clip_m8api_crows";
+            clip_codex_m8api_crows.ClipType = clip_m8api_crows;
+
+            clip_m962slapt_crows = new AmmoType.AmmoClip();
+            clip_m962slapt_crows.Capacity = 500;
+            clip_m962slapt_crows.Name = "12.7x99mm M962 SLAP-T";
+            clip_m962slapt_crows.MinimalPattern = new AmmoCodexScriptable[1];
+            clip_m962slapt_crows.MinimalPattern[0] = ammo_codex_m962slapt;
+
+            clip_codex_m962slapt_crows = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+            clip_codex_m962slapt_crows.name = "clip_m962slapt_crows";
+            clip_codex_m962slapt_crows.ClipType = clip_m962slapt_crows;
 
             //Armor stuff
 

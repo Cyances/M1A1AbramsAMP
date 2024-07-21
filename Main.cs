@@ -13,7 +13,7 @@ using GHPC.Player;
 using M1A1AbramsAMP;
 using GHPC.Vehicle;
 
-[assembly: MelonInfo(typeof(AbramsAMPMod), "ZZ M1A1 Abrams AMP", "2.6.1", "Cyance, ATLAS and Schweiz")]
+[assembly: MelonInfo(typeof(AbramsAMPMod), "ZZ M1A1 Abrams AMP (CROWS)", "2.6.1", "Cyance, ATLAS and Schweiz")]
 [assembly: MelonGame("Radian Simulations LLC", "GHPC")]
 
 namespace M1A1AMP
@@ -51,7 +51,7 @@ namespace M1A1AMP
             StateController.RunOrDefer(GameState.GameReady, new GameStateEventHandler(GetVics), GameStatePriority.Medium);
             AmmoArmor.Init();
             CITV.Init();
-            //CROWS.Init();//CROWS not implemented yet due to the gun camera not behaving properly (need to cycle using GAS toggle button to work)
+            CROWS.Init();//CROWS not implemented yet due to the gun camera not behaving properly (need to cycle using GAS toggle button to work)
             M1A1AbramsAMPMod.Init();
             ProxyFuzeAMP.Init();
             ProxyFuzeMPAT.Init();
