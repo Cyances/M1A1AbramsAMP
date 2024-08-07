@@ -92,6 +92,16 @@ namespace M1A1AbramsAMP
         public static AmmoCodexScriptable ammo_codex_m962slapt;
         public static AmmoType ammo_m962slapt;
 
+
+        public static AmmoClipCodexScriptable clip_codex_m8api_crows;
+        public static AmmoType.AmmoClip clip_m8api_crows;
+
+        public static AmmoClipCodexScriptable clip_codex_m2apt_crows;
+        public static AmmoType.AmmoClip clip_m2apt_crows;
+
+        public static AmmoClipCodexScriptable clip_codex_m962slapt_crows;
+        public static AmmoType.AmmoClip clip_m962slapt_crows;
+
         public static GameObject ammo_m829_vis = null;
         public static GameObject ammo_m829a1_vis = null;
         public static GameObject ammo_m829a2_vis = null;
@@ -240,7 +250,7 @@ namespace M1A1AbramsAMP
 
 
         public static ArmorCodexScriptable armor_gen1_cheeks;
-        public static void Init ()            
+        public static void Init()
         {
 
             ////Borrow existing ammo and armor attributes
@@ -328,7 +338,7 @@ namespace M1A1AbramsAMP
             ammo_m829.Caliber = 120;
             ammo_m829.CertainRicochetAngle = 9f;//5f;
             ammo_m829.Mass = 3.94f;
-            ammo_m829.MaxNutationPenalty = 0f;
+            //ammo_m829.MaxNutationPenalty = 0f;
             ammo_m829.MaxSpallRha = 15f;
             ammo_m829.MuzzleVelocity = 1670f;
             ammo_m829.Name = "M829 APFSDS-T";
@@ -359,7 +369,7 @@ namespace M1A1AbramsAMP
             ammo_m829a1.Mass = 4.64f;
             ammo_m829a1.MuzzleVelocity = 1575f;
             ammo_m829a1.Name = "M829A1 APFSDS-T";
-            ammo_m829a1.MaxNutationPenalty = 0f;
+            //ammo_m829a1.MaxNutationPenalty = 0f;
             ammo_m829a1.MaxSpallRha = 18f;
             ammo_m829a1.RhaPenetration = M1A1AbramsAMPMod.m829SB.Value ? 700 : 630;
             ammo_m829a1.SpallMultiplier = M1A1AbramsAMPMod.m829Spall.Value ? 1.25f : 1.2f;
@@ -387,7 +397,7 @@ namespace M1A1AbramsAMP
             ammo_m829a2.Caliber = 120;
             ammo_m829a2.CertainRicochetAngle = 9f;// 4f;
             ammo_m829a2.Mass = 4.74f;
-            ammo_m829a2.MaxNutationPenalty = 0f;
+            //ammo_m829a2.MaxNutationPenalty = 0f;
             ammo_m829a2.MaxSpallRha = 24f;
             ammo_m829a2.MuzzleVelocity = 1680f;
             ammo_m829a2.Name = "M829A2 APFSDS-T";
@@ -417,7 +427,7 @@ namespace M1A1AbramsAMP
             ammo_m829a3.Caliber = 120;
             ammo_m829a3.CertainRicochetAngle = 8f;//3f;
             ammo_m829a3.Mass = 4.84f;
-            ammo_m829a3.MaxNutationPenalty = 0f;
+            //ammo_m829a3.MaxNutationPenalty = 0f;
             ammo_m829a3.MaxSpallRha = 30f;
             ammo_m829a3.MuzzleVelocity = 1555f;
             ammo_m829a3.Name = "M829A3 APFSDS-T";
@@ -447,7 +457,7 @@ namespace M1A1AbramsAMP
             ammo_m829a4.Caliber = 120;
             ammo_m829a4.CertainRicochetAngle = 6f;//2f;
             ammo_m829a4.Mass = 4.94f;
-            ammo_m829a4.MaxNutationPenalty = 0f;
+            //ammo_m829a4.MaxNutationPenalty = 0f;
             ammo_m829a4.MaxSpallRha = 36f;
             ammo_m829a4.Name = "M829A4 APFSDS-T";
             ammo_m829a4.MuzzleVelocity = 1700f;
@@ -759,7 +769,7 @@ namespace M1A1AbramsAMP
             ammo_m2apt.MuzzleVelocity = 887;
             ammo_m2apt.Name = "12.7x99mm M2 AP-T";
             ammo_m2apt.NutationPenaltyDistance = 0f;
-            ammo_m2apt.MaxNutationPenalty = 0f;
+            //ammo_m2apt.MaxNutationPenalty = 0f;
             ammo_m2apt.RhaPenetration = 29f;
             ammo_m2apt.SpallMultiplier = 10f;
             ammo_m2apt.UseTracer = true;
@@ -814,7 +824,7 @@ namespace M1A1AbramsAMP
             ammo_m962slapt.MuzzleVelocity = 1200f;
             ammo_m962slapt.Name = "12.7x99mm M962 SLAP-T";
             ammo_m962slapt.NutationPenaltyDistance = 0f;
-            ammo_m962slapt.MaxNutationPenalty = 0f;
+            //ammo_m962slapt.MaxNutationPenalty = 0f;
             ammo_m962slapt.RhaPenetration = 36f;
             ammo_m962slapt.SpallMultiplier = 15f;
             ammo_m962slapt.UseTracer = true;
@@ -833,6 +843,41 @@ namespace M1A1AbramsAMP
             clip_codex_m962slapt.name = "clip_m962slapt";
             clip_codex_m962slapt.ClipType = clip_m962slapt;
 
+
+            //CROWS ammo
+            clip_m2apt_crows = new AmmoType.AmmoClip();
+            clip_m2apt_crows.Capacity = 500;
+            clip_m2apt_crows.Name = "M2 AP-T";
+            clip_m2apt_crows.MinimalPattern = new AmmoCodexScriptable[1];
+            clip_m2apt_crows.MinimalPattern[0] = ammo_codex_m2apt;
+
+            clip_codex_m2apt_crows = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+            clip_codex_m2apt_crows.name = "clip_m2apt_crows";
+            clip_codex_m2apt_crows.ClipType = clip_m2apt_crows;
+
+            clip_m8api_crows = new AmmoType.AmmoClip();
+            clip_m8api_crows.Capacity = 500;
+            clip_m8api_crows.Name = "M8 AP-I/T Mix";
+            clip_m8api_crows.MinimalPattern = new AmmoCodexScriptable[]
+                {
+                        ammo_codex_m2apt,
+                        ammo_codex_m8api,
+                        ammo_codex_m8api,
+                };
+            clip_codex_m8api_crows = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+            clip_codex_m8api_crows.name = "clip_m8api_crows";
+            clip_codex_m8api_crows.ClipType = clip_m8api_crows;
+
+            clip_m962slapt_crows = new AmmoType.AmmoClip();
+            clip_m962slapt_crows.Capacity = 500;
+            clip_m962slapt_crows.Name = "12.7x99mm M962 SLAP-T";
+            clip_m962slapt_crows.MinimalPattern = new AmmoCodexScriptable[1];
+            clip_m962slapt_crows.MinimalPattern[0] = ammo_codex_m962slapt;
+
+            clip_codex_m962slapt_crows = ScriptableObject.CreateInstance<AmmoClipCodexScriptable>();
+            clip_codex_m962slapt_crows.name = "clip_m962slapt_crows";
+            clip_codex_m962slapt_crows.ClipType = clip_m962slapt_crows;
+
             //Armor stuff
 
             ////HU armor modifiers
@@ -840,7 +885,7 @@ namespace M1A1AbramsAMP
             Util.ShallowCopy(armor_superCompositeskirt_HU, armor_compositeskirt_VNL);
             armor_superCompositeskirt_HU.RhaeMultiplierCe = M1A1AbramsAMPMod.demigodArmor.Value ? 100f : 11f; //default 1.5
             armor_superCompositeskirt_HU.RhaeMultiplierKe = M1A1AbramsAMPMod.demigodArmor.Value ? 100f : 6f; //default 0.8
-                                                                                            //armor_superCompositeskirt_HU.SpallPowerMultiplier = 10f; //default 0.8
+                                                                                                             //armor_superCompositeskirt_HU.SpallPowerMultiplier = 10f; //default 0.8
             armor_superCompositeskirt_HU.Name = "Abrams HU super special composite skirt";
 
             armor_codex_superCompositeskirt_HU = ScriptableObject.CreateInstance<ArmorCodexScriptable>();
