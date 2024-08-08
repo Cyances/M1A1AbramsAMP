@@ -179,7 +179,7 @@ namespace M1A1AMP
             fcs.MainOptic.slot.VibrationShakeMultiplier = 0f;
             fcs.MainOptic.slot.VibrationBlurScale = 0f;
             fcs.MainOptic.slot.DefaultFov = 30f;//6.5f;
-            fcs.MainOptic.slot.OtherFovs = new float[] { 10.276f, 5.362f, 3.472f, 1.204f };
+            fcs.MainOptic.slot.OtherFovs = new float[] { 10.276f, 5.362f, 3.472f };//, 1.204f };
             fcs.MainOptic.slot._reparentTarget = gun.transform;
             fcs.MainOptic.Alignment = OpticAlignment.BoresightStabilized;
             fcs.MainOptic.RotateAzimuth = true;
