@@ -12,7 +12,7 @@ If you get an error launching through Steam you will need to run the game execut
 ![AMP Enhanced Optics v2](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/c538fba0-c967-429f-b91a-e6d338ec7a4e)
 
 
-## AMP 2.6 Update:
+## AMP 2.7 Update:
 <p>
 	<ul>
 	<li>120mm M256 Gun (with new model!)</li>
@@ -27,9 +27,10 @@ If you get an error launching through Steam you will need to run the game execut
     	<li>HE: XM1147, M908</li>
     	<li>GLATGM: LAHAT</li>
     	<li>XM1147 AMP-T multifuze round (point-detonate + time-delay or proximity)</li>
-	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, Kontakt-5, ARAT and BRAT), requires at least NATO ERA v1.1.1b and/or Pact Increased Lethality v1.2.5)</li>
+	<li>Anti-ERA/tandem warhead properties for AP and HEAT (modelled for (Super) Kontakt-1, Kontakt-5, ARAT and BRAT), requires at least NATO ERA v1.1.1b and/or Pact Increased Lethality v1.2.5+)</li>
 	<li>New Abrams designation if CITV is installed</li>
-	<li>"TUSK" postfix when ERA is detected (NATO ERA v1.2.2 required)</li>
+	<li>"TUSK" postfix when ERA is detected (NATO ERA v1.2.2+ required)</li>
+	<li>M153 CROWS II option (Big thanks to Atlas!)</li>
 	<li>Configurable CITV upgrade</li>
 	<li>Configurable enhanced optics for the GPS, FLIR and GAS</li>
 	<li>Configurable tank crew proficiency</li>
