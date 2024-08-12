@@ -58,7 +58,7 @@ namespace M1A1AMP
         static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, bonusTraverse, noLuggage, betterSuspension, betterTracks, m1ipModel, stabilityControl, m256Model, m1a1camoNet, m1e1camoNet;
         static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader, m1a1Commander, m1e1Commander, m1a1Gunner, m1e1Gunner;
         static MelonPreferences_Entry<bool> citv_m1a1, citv_m1e1, alt_flir_colour;
-        public static MelonPreferences_Entry<bool> crows_m1e1, crows_m1a1, crows_raufoss, crows_alt_placement;
+        public static MelonPreferences_Entry<bool> crows_m1e1, crows_m1a1, crows_slapt, crows_alt_placement_m1a1, crows_alt_placement_m1e1;
         public static MelonPreferences_Entry<int> ampFragments, mpatFragments, heorFragments;
         public static MelonPreferences_Entry<bool> perfect_citv, citv_reticle, citv_smooth, perfect_override;
         public static MelonPreferences_Entry<float> proxyDistance;
@@ -178,15 +178,16 @@ namespace M1A1AMP
             alt_flir_colour = cfg.CreateEntry<bool>("Alternate GPS FLIR Colour", false);
             alt_flir_colour.Description = "[Requires CITV to be enabled] Gives the gunner's sight FLIR the same colour palette as the CITV.";
 
-            /*crows_m1e1 = cfg.CreateEntry<bool>("CROWS (M1E1)", false);
-            crows_m1e1.Description = "Remote weapons system equipped with a .50 caliber M2HB; 400 rounds, automatic lead, thermals.";
-            crows_m1a1 = cfg.CreateEntry<bool>("CROWS (M1A1)", false);
+            crows_m1a1 = cfg.CreateEntry<bool>("M1A1 CROWS", false);
+            crows_m1a1.Description = "Remote weapons system equipped with a .50 caliber M2HB; 400 rounds, automatic lead, thermals.";
+            crows_m1e1 = cfg.CreateEntry<bool>("M1E1 CROWS", false);
 
-            crows_alt_placement = cfg.CreateEntry<bool>("Alternative Position", false);
-            crows_alt_placement.Comment = "Moves the CROWS to the right side of the commander instead of directly in front.";
+            crows_alt_placement_m1a1 = cfg.CreateEntry<bool>("M1A1 CROWS Alt Pos", false);
+            crows_alt_placement_m1a1.Description = "Moves the CROWS to the right side of the commander instead of directly in front.";
+            crows_alt_placement_m1e1 = cfg.CreateEntry<bool>("M1E1 CROWS Alt Pos", false);
 
-            crows_raufoss = cfg.CreateEntry<bool>("Use Mk 211 Mod 0", false);
-            crows_raufoss.Comment = "Loads the CROWS M2HB with high explosive rounds.";*/
+            crows_slapt = cfg.CreateEntry<bool>("CROWS SLAP", false);
+            crows_slapt.Description = "Use M962 SLAP-T for CROWS.";
 
             m1e1Convert = cfg.CreateEntry<bool>("M1E1", true);
             m1e1Convert.Description = "Convert M1s to M1E1s (i.e: they get the 120mm gun and enables armor upgrades).";
@@ -309,72 +310,72 @@ namespace M1A1AMP
 
                             if (m1a1VA_HU.Name == "turret cheek special armor array")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_cheeksDUarmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_cheeksDUarmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "hull front special armor array")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_fronthullDUarmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_fronthullDUarmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "gun mantlet special armor array")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_mantletDUarmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_mantletDUarmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "turret side special armor array")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretsidesDUarmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretsidesDUarmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "turret roof")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretroofCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretroofCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "upper glacis")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_upperglacisCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_upperglacisCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "commander's hatch")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_commmandershatchCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_commmandershatchCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "loader's hatch")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_loadershatchCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_loadershatchCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "driver's hatch")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_drivershatchCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_drivershatchCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "turret ring")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretringCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretringCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "gun mantlet face")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_gunmantletfaceCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_gunmantletfaceCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "left track")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_trackSpecialarmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_trackSpecialarmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "right track")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_trackSpecialarmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_trackSpecialarmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "main gun barrel")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_gunbarrelImprovedarmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_gunbarrelImprovedarmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "bustle racks firewall")
@@ -384,58 +385,58 @@ namespace M1A1AMP
 
                             if (m1a1VA_HU.Name == "center blowout panel")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "left blowout panel")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "right blowout panel")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "turret rear face")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretrearSpecialarray_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretrearSpecialarray_HU;
                             }
 
                             if (m1a1VA_HU.Name == "GPS doghouse")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_GPSImprovedhousing_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_GPSImprovedhousing_HU;
                             }
 
                             if (m1a1VA_HU.Name == "GPS doghouse door")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_GPSImproveddoor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_GPSImproveddoor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "turret bottom")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretbottomCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretbottomCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "trunnion")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_trunnionCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_trunnionCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "semi-ready rack door")
                             {
                                 m1a1VA_HU._armorType = AmmoArmor.armor_codex_semireadyrackdoorCompositearmor_HU;
-                                
+
                             }
 
                             if (m1a1VA_HU.Name == "ready rack door")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_readyrackdoorCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_readyrackdoorCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "lower front plate")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_lowerfrontplateCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_lowerfrontplateCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "hull front backing plate")
@@ -445,22 +446,22 @@ namespace M1A1AMP
 
                             if (m1a1VA_HU.Name == "turret cheek face")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretcheekfaceCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretcheekfaceCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "turret cheek backing plate")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretcheekbackingplateCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretcheekbackingplateCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "turret side backing plate")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretsidebackingplateCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretsidebackingplateCompositearmor_HU;
                             }
 
                             if (m1a1VA_HU.Name == "turret side face")
                             {
-                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretsidefaceCompositearmor_HU;                                
+                                m1a1VA_HU._armorType = AmmoArmor.armor_codex_turretsidefaceCompositearmor_HU;
                             }
                         }
                     }
@@ -727,163 +728,163 @@ namespace M1A1AMP
                         {
                             if (m1e1VA_HU.Name == "composite side skirt")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_superCompositeskirt_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_superCompositeskirt_HU;
                             }
 
                             if (m1e1VA_HU.Name == "turret cheek special armor array")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_cheeksDUarmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_cheeksDUarmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "hull front special armor array")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_fronthullDUarmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_fronthullDUarmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "gun mantlet special armor array")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_mantletDUarmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_mantletDUarmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "turret side special armor array")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretsidesDUarmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretsidesDUarmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "turret roof")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretroofCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretroofCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "upper glacis")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_upperglacisCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_upperglacisCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "commander's hatch")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_commmandershatchCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_commmandershatchCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "loader's hatch")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_loadershatchCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_loadershatchCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "driver's hatch")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_drivershatchCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_drivershatchCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "turret ring")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretringCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretringCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "gun mantlet face")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_gunmantletfaceCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_gunmantletfaceCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "left track")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_trackSpecialarmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_trackSpecialarmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "right track")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_trackSpecialarmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_trackSpecialarmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "main gun barrel")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_gunbarrelImprovedarmor_HU;                               
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_gunbarrelImprovedarmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "bustle racks firewall")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_bustleImprovedfirewall_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_bustleImprovedfirewall_HU;
                             }
 
                             if (m1e1VA_HU.Name == "center blowout panel")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "left blowout panel")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;
                             }
 
 
                             if (m1e1VA_HU.Name == "right blowout panel")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_blowoutpanelCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "turret rear face")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretrearSpecialarray_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretrearSpecialarray_HU;
                             }
 
                             if (m1e1VA_HU.Name == "GPS doghouse")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_GPSImprovedhousing_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_GPSImprovedhousing_HU;
                             }
 
                             if (m1e1VA_HU.Name == "GPS doghouse door")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_GPSImproveddoor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_GPSImproveddoor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "turret bottom")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretbottomCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretbottomCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "trunnion")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_trunnionCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_trunnionCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "semi-ready rack door")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_semireadyrackdoorCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_semireadyrackdoorCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "ready rack door")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_readyrackdoorCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_readyrackdoorCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "lower front plate")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_lowerfrontplateCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_lowerfrontplateCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "hull front backing plate")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_hullfrontbackingplateCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_hullfrontbackingplateCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "turret cheek face")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretcheekfaceCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretcheekfaceCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "turret cheek backing plate")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretcheekbackingplateCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretcheekbackingplateCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "turret side backing plate")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretsidebackingplateCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretsidebackingplateCompositearmor_HU;
                             }
 
                             if (m1e1VA_HU.Name == "turret side face")
                             {
-                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretsidefaceCompositearmor_HU;                                
+                                m1e1VA_HU._armorType = AmmoArmor.armor_codex_turretsidefaceCompositearmor_HU;
                             }
                         }
                     }
@@ -1103,7 +1104,7 @@ namespace M1A1AMP
                         }
                     }
                     MelonLogger.Msg("M1E1HA Armor Loaded");
-                break;
+                    break;
 
                 default:
                     foreach (GameObject armour in GameObject.FindGameObjectsWithTag("Penetrable"))
@@ -1120,7 +1121,7 @@ namespace M1A1AMP
                             }
                         }
                     }
-                 break;
+                    break;
             }
 
             foreach (Vehicle vic in AbramsAMPMod.vics)
@@ -1185,7 +1186,6 @@ namespace M1A1AMP
                         horizontalGas.RotateAzimuth = true;
 
                         ////Better optics stuff
-                        UsableOptic optic = Util.GetDayOptic(mainGun.FCS);
                         if (rotateAzimuth.Value)
                         {
                             horizontalGps.RotateAzimuth = true;
@@ -1236,7 +1236,7 @@ namespace M1A1AMP
                             c.transform.Find("glass").GetComponent<VariableArmor>().Unit = vic;
 
                             if (alt_flir_colour.Value)
-                                optic.slot.LinkedNightSight.PairedOptic.post.profile.settings[2] = vic.DesignatedCameraSlots[0].LinkedNightSight.gameObject.
+                                horizontalGps.slot.LinkedNightSight.PairedOptic.post.profile.settings[2] = vic.DesignatedCameraSlots[0].LinkedNightSight.gameObject.
                                     GetComponent<SimpleNightVision>()._postVolume.profile.settings[1];
                             //ChromaticAberration s = optic.post.profile.AddSettings<ChromaticAberration>();
                             //s.active = true; 
@@ -1244,15 +1244,41 @@ namespace M1A1AMP
                             //s.intensity.value = 0.35f;
                         }
 
-                        /*Vector3 crows_pos = crows_alt_placement.Value ? new Vector3(1.4f, 1.1164f, -0.5873f) : new Vector3(0.7855f, 1.2855f, 0.5182f);
+
+                        horizontalGps.slot.ExclusiveWeapons = new WeaponSystem[] { weaponsManager.Weapons[0].Weapon, weaponsManager.Weapons[1].Weapon };
+                        horizontalGps.slot.LinkedNightSight.ExclusiveWeapons = new WeaponSystem[] { weaponsManager.Weapons[0].Weapon, weaponsManager.Weapons[1].Weapon };
+
+                        /*Vector3 crows_pos = crows_alt_placement_m1a1.Value ? new Vector3(1.4f, 1.1164f, -0.5873f) : new Vector3(0.7855f, 1.2855f, 0.5182f);
                         if ((crows_m1e1.Value && vic._uniqueName == "M1") || (crows_m1a1.Value && vic._uniqueName == "M1IP"))
                         {
                             vic_go.transform.Find("IPM1_rig/HULL/TURRET/CUPOLA/CUPOLA_GUN").localScale = Vector3.zero;
                             CROWS.Add(vic, vic_go.transform.Find("IPM1_rig/HULL/TURRET"), crows_pos);
 
-                            if (!crows_alt_placement.Value)
+                            if (!crows_alt_placement_m1a1.Value)
                                 vic.DesignatedCameraSlots[0].transform.localPosition = new Vector3(-0.1538f, 0.627f, -0.05f);
                         }*/
+
+
+                        Vector3 crows_pos_m1a1 = crows_alt_placement_m1a1.Value ? new Vector3(1.4f, 1.1164f, -0.5873f) : new Vector3(0.7855f, 1.2855f, 0.5182f);
+                        if (crows_m1a1.Value && vic._uniqueName == "M1IP")
+                        {
+                            vic_go.transform.Find("IPM1_rig/HULL/TURRET/CUPOLA/CUPOLA_GUN").localScale = Vector3.zero;
+                            CROWS.Add(vic, vic_go.transform.Find("IPM1_rig/HULL/TURRET"), crows_pos_m1a1);
+
+                            if (!crows_alt_placement_m1a1.Value)
+                                vic.DesignatedCameraSlots[0].transform.localPosition = new Vector3(-0.1538f, 0.627f, -0.05f);
+                        }
+
+
+                        Vector3 crows_pos_m1e1 = crows_alt_placement_m1e1.Value ? new Vector3(1.4f, 1.1164f, -0.5873f) : new Vector3(0.7855f, 1.2855f, 0.5182f);
+                        if (crows_m1e1.Value && vic._uniqueName == "M1")
+                        {
+                            vic_go.transform.Find("IPM1_rig/HULL/TURRET/CUPOLA/CUPOLA_GUN").localScale = Vector3.zero;
+                            CROWS.Add(vic, vic_go.transform.Find("IPM1_rig/HULL/TURRET"), crows_pos_m1e1);
+
+                            if (!crows_alt_placement_m1e1.Value)
+                                vic.DesignatedCameraSlots[0].transform.localPosition = new Vector3(-0.1538f, 0.627f, -0.05f);
+                        }
 
                         /*CameraSlot commanderzoom = vic.DesignatedCameraSlots[0].gameObject.GetComponent<CameraSlot>();
                         commanderzoom.AllowFreeZoom = true;//true
@@ -1308,7 +1334,7 @@ namespace M1A1AMP
                             ////Setting the reticles
 
                             Transform gas = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)");
-                            gas.GetComponent<CameraSlot>().ExclusiveWeapons = optic.slot.ExclusiveWeapons;
+                            gas.GetComponent<CameraSlot>().ExclusiveWeapons = horizontalGps.slot.ExclusiveWeapons;
                             AuxFix aux_fix = gas.gameObject.AddComponent<AuxFix>();
                             aux_fix.main_gun = mainGun;
 
@@ -1375,7 +1401,7 @@ namespace M1A1AMP
                             ////Setting the reticles
 
                             Transform gas = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/Gun Scripts/Aux sight (GAS)");
-                            gas.GetComponent<CameraSlot>().ExclusiveWeapons = optic.slot.ExclusiveWeapons;
+                            gas.GetComponent<CameraSlot>().ExclusiveWeapons = horizontalGps.slot.ExclusiveWeapons;
                             AuxFix aux_fix = gas.gameObject.AddComponent<AuxFix>();
                             aux_fix.main_gun = mainGun;
 
@@ -1426,6 +1452,10 @@ namespace M1A1AMP
                         LoadoutManager loadoutManager = vic_go.GetComponent<LoadoutManager>();
                         UnitAI vicUAI = vic_go.GetComponentInChildren<UnitAI>();
                         DriverAIController vicDAIC = vic_go.GetComponent<DriverAIController>();
+
+                        GameObject camoNetcheeks = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/").gameObject;
+                        GameObject camoNetRight = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_right").gameObject;
+                        GameObject camoNetLeft = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_left").gameObject;
 
                         vicDAIC.maxSpeed = 42;//20
 
@@ -1972,8 +2002,9 @@ namespace M1A1AMP
 
                             if (m1a1camoNet.Value)
                             {
-                                GameObject camoNet = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/").gameObject;
-                                camoNet.SetActive(true);
+                                camoNetcheeks.SetActive(true);
+                                camoNetRight.SetActive(true);
+                                camoNetLeft.SetActive(true);
                             }
                         }
 
@@ -2435,14 +2466,8 @@ namespace M1A1AMP
                                 VariableArmor var_roof = turret_roof.GetComponent<VariableArmor>();
                                 var_roof._armorType = AmmoArmor.armor_codex_turretroofCompositearmor_HU;*/
 
-                                //M1(Clone)/IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_right/ & turret_front_left
-
-                                GameObject camoNetRight = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_right").gameObject;
                                 camoNetRight.transform.localPosition = new Vector3(0, 0, 0.227f);
-
-                                GameObject camoNetLeft= vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/turret_front_left").gameObject;
                                 camoNetLeft.transform.localPosition = new Vector3(0, 0, 0.227f);
-
 
                                 switch (m1e1Armor.Value)
                                 {
@@ -2550,8 +2575,9 @@ namespace M1A1AMP
 
                             if (m1e1camoNet.Value)
                             {
-                                GameObject camoNet = vic_go.transform.Find("IPM1_rig/HULL/TURRET/Turret Scripts/M1_camonet/").gameObject;
-                                camoNet.SetActive(true);
+                                camoNetcheeks.SetActive(true);
+                                camoNetRight.SetActive(true);
+                                camoNetLeft.SetActive(true);
                             }
                         }
 
@@ -2596,7 +2622,7 @@ namespace M1A1AMP
                             vicVC.transmission.shiftPointRandomness = 0.05f;//.05
                             //m1VC.transmission.differentialType = Transmission.DifferentialType.LimitedSlip;
                         }
-                            
+
                         if (governorDelete.Value)
                         {
                             vicNC._maxForwardSpeed = 36f;//20
@@ -2824,43 +2850,43 @@ namespace M1A1AMP
                 m256_obj.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard (FLIR)");
                 m256_obj.AddComponent<HeatSource>();
             }
-            
+
             //Attempt to copy vanilla smoke grenades to actually make ROSY be like ROSY
             if (m82Object == null)
+            {
+                foreach (GameObject m82Smoke in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
                 {
-                    foreach (GameObject m82Smoke in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
-                    {
-                        //Smoke - 3D6 81mm Smoke - M82 66mm
-                        if (m82Smoke.name == "Smoke - M82 66mm") m82Object = m82Smoke;
-                        if (m82Smoke.name == "Smoke White Single Normal") m82SmokeEffect = m82Smoke;
-                    }
+                    //Smoke - 3D6 81mm Smoke - M82 66mm
+                    if (m82Smoke.name == "Smoke - M82 66mm") m82Object = m82Smoke;
+                    if (m82Smoke.name == "Smoke White Single Normal") m82SmokeEffect = m82Smoke;
+                }
 
 
-                    //RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);//Instantiated copy somehow doesn't make the smoke pop off when using thermals
-                    //RosySmokeEffect.name = "Rosy Multispectral Single Normal";
+                //RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);//Instantiated copy somehow doesn't make the smoke pop off when using thermals
+                //RosySmokeEffect.name = "Rosy Multispectral Single Normal";
 
 
-                    LightBandExclusiveItem RosyLB = m82SmokeEffect.GetComponent<LightBandExclusiveItem>();
+                LightBandExclusiveItem RosyLB = m82SmokeEffect.GetComponent<LightBandExclusiveItem>();
 
-                    RosyLB.ShowInThermal = rosyIR.Value;
+                RosyLB.ShowInThermal = rosyIR.Value;
 
-                    if (rosyPlus.Value)
-                    {
-                        //Smoke White Single Normal/Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1
-                        var RosyEffect = m82SmokeEffect.transform.Find("Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1").gameObject.transform;
+                if (rosyPlus.Value)
+                {
+                    //Smoke White Single Normal/Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1
+                    var RosyEffect = m82SmokeEffect.transform.Find("Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1").gameObject.transform;
 
-                        ParticleSystem RosyCloud = RosyEffect.GetComponent<ParticleSystem>();
+                    ParticleSystem RosyCloud = RosyEffect.GetComponent<ParticleSystem>();
 
-                        RosyCloud.maxParticles = 12000;//1000
-                        RosyCloud.startSize = 30;//15
+                    RosyCloud.maxParticles = 12000;//1000
+                    RosyCloud.startSize = 30;//15
 
-                        SmokeRound m82Plus = m82Object.GetComponent<SmokeRound>();
-                        m82Plus._fuseTimeRange = new Vector2(0.325f, 0.375f);//1.3 1.7
-                        m82Plus._effectPrefab = m82SmokeEffect;
-                    }
-                    //MelonLogger.Msg("M82 Object: " + m82Object.name);
-                    //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
-             }
+                    SmokeRound m82Plus = m82Object.GetComponent<SmokeRound>();
+                    m82Plus._fuseTimeRange = new Vector2(0.325f, 0.375f);//1.3 1.7
+                    m82Plus._effectPrefab = m82SmokeEffect;
+                }
+                //MelonLogger.Msg("M82 Object: " + m82Object.name);
+                //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
+            }
 
 
             if (m1ip_cheeksnera == null)

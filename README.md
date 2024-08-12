@@ -81,9 +81,9 @@ If you get an error launching through Steam you will need to run the game execut
 | M830A3 IHEAT-FS-T | 1000  | 25** | 1310 | Fictional round. +100% spalling chance. ERA is only 15% effective. |
 | M908 HE-OR-T | 250* | 75** | 1410 | Has impact-delay fuze. 300 fragments (configurable count). |
 | XM1147 AMP-T | 250* | 120** | 1410 | Point-detonate + airburst fuze or proximity fuze. 600 fragments (configurable count). Has impact-delay fuze.|
-| LAHAT | 800 | 300 |  | Gun-launched ATGM with SALH guidance. +100% spalling chance. ERA is only 20% effective. |
-| M2/M8 AP-T/I | 29 | - | 887 | M2 Coax |
-| M962 SLAP-T | 36 | - | 1200 | M2 Coax. Has slightly less drag than M2/M8. |
+| LAHAT | 800 | 15** | 300 | Gun-launched ATGM with SALH guidance. +100% spalling chance. ERA is only 20% effective. |
+| M2/M8 AP-T/I | 29 | - | 887 | M2 Coax / CROWS |
+| M962 SLAP-T | 36 | - | 1200 | M2 Coax / CROWS. Has slightly less drag than M2/M8. |
 
 - After discussions with other players and researching, the penetration values for the M829 series have been revamped except for M829A4
 - M829A4 simply has made up stats
@@ -202,6 +202,17 @@ If you get an error launching through Steam you will need to run the game execut
 | M1A1SA | M1A2 SEP |  | 
 | M1A1HU | M1A2U |  | 
 | M1A1L | M1A2L |  | 
+
+## M153 CROWS II
+<p>
+	<ul> 
+		<li>Removes Commander's HMG and replaces it with M153 CROWS II</li>
+		<li>Option of two ammo types (same as M2 Coax)</li>
+		<li>500 ready rounds (plus 500 reload)</li>
+		<li>Toggleable upgrade per tank</li>
+		<li>Toggleable CROWS position per tank</li>
+	</ul>
+</p>
 
 ## Vehicle Dynamics
 ### Weight
