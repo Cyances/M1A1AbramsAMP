@@ -4,7 +4,7 @@
 <p>
 	<ul> 
 		<li>Compatibility fix for GHPC Update 20240807</li>
-		<li>Adds M153 CROWS II</li>
+		<li>Adds M153 CROWS II (Big thanks to Atlas!)</li>
 	</ul>
 </p>
 
