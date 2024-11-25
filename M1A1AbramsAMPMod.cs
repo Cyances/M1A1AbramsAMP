@@ -55,7 +55,7 @@ namespace M1A1AMP
         static MelonPreferences_Entry<string> m1a1Armor, m1e1Armor;
         static MelonPreferences_Entry<bool> m1a1Smoke, m1e1Smoke, m1a1Rosy, m1e1Rosy, rosyPlus, rosyIR;
         static MelonPreferences_Entry<string> m1a1Agt, m1e1Agt;
-        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, bonusTraverse, noLuggage, betterSuspension, betterTracks, m1ipModel, stabilityControl, m256Model, m1a1camoNet, m1e1camoNet;
+        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, bonusTraverse, noLuggage, betterSuspension, betterTracks, m1ipModel, stabilityControl, m1a1m256Model, m1e1m256Model, m1a1camoNet, m1e1camoNet;
         static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader, m1a1Commander, m1e1Commander, m1a1Gunner, m1e1Gunner;
         static MelonPreferences_Entry<bool> citv_m1a1, citv_m1e1, alt_flir_colour;
         public static MelonPreferences_Entry<bool> crows_m1e1, crows_m1a1, crows_slapt, crows_alt_placement_m1a1, crows_alt_placement_m1e1;
@@ -245,8 +245,9 @@ namespace M1A1AMP
             m1ipModel = cfg.CreateEntry<bool>("M1E1 IP Model", false);
             m1ipModel.Description = "Gives the M1IP model to base M1";
 
-            m256Model = cfg.CreateEntry<bool>("M256Model", true);
-            m256Model.Description = "Uses appropriate M256 model instead of scaled up M68A1";
+            m1a1m256Model = cfg.CreateEntry<bool>("M1A1 M256Model", true);
+            m1a1m256Model.Description = "Uses appropriate M256 model instead of scaled up M68A1";
+            m1e1m256Model = cfg.CreateEntry<bool>("M1E1 M256Model", true);
 
             m1a1camoNet = cfg.CreateEntry<bool>("M1A1 Camo Net", false);
             m1a1camoNet.Description = "Force camo net appearance instead of randomizing it";
@@ -1248,17 +1249,6 @@ namespace M1A1AMP
                         horizontalGps.slot.ExclusiveWeapons = new WeaponSystem[] { weaponsManager.Weapons[0].Weapon, weaponsManager.Weapons[1].Weapon };
                         horizontalGps.slot.LinkedNightSight.ExclusiveWeapons = new WeaponSystem[] { weaponsManager.Weapons[0].Weapon, weaponsManager.Weapons[1].Weapon };
 
-                        /*Vector3 crows_pos = crows_alt_placement_m1a1.Value ? new Vector3(1.4f, 1.1164f, -0.5873f) : new Vector3(0.7855f, 1.2855f, 0.5182f);
-                        if ((crows_m1e1.Value && vic._uniqueName == "M1") || (crows_m1a1.Value && vic._uniqueName == "M1IP"))
-                        {
-                            vic_go.transform.Find("IPM1_rig/HULL/TURRET/CUPOLA/CUPOLA_GUN").localScale = Vector3.zero;
-                            CROWS.Add(vic, vic_go.transform.Find("IPM1_rig/HULL/TURRET"), crows_pos);
-
-                            if (!crows_alt_placement_m1a1.Value)
-                                vic.DesignatedCameraSlots[0].transform.localPosition = new Vector3(-0.1538f, 0.627f, -0.05f);
-                        }*/
-
-
                         Vector3 crows_pos_m1a1 = crows_alt_placement_m1a1.Value ? new Vector3(1.4f, 1.1164f, -0.5873f) : new Vector3(0.7855f, 1.2855f, 0.5182f);
                         if (crows_m1a1.Value && vic._uniqueName == "M1IP")
                         {
@@ -1429,21 +1419,6 @@ namespace M1A1AMP
                         mainGun.Impulse = 68000;
                         mainGun.CodexEntry = gun_m256;
 
-                        if (m256Model.Value)
-                        {
-                            GameObject gunTube = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
-                            gunTube.transform.localScale = new Vector3(0f, 0f, 0f);
-                            LateFollow tube_follower = gunTube.GetComponent<LateFollowTarget>()._lateFollowers[0];
-                            tube_follower.transform.Find("Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
-                            GameObject _m256_obj = GameObject.Instantiate(m256_obj, tube_follower.transform);
-                            _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
-                        }
-
-                        else
-                        {
-                            GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
-                            gunTube.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
-                        }
 
                         VehicleController vicVC = vic.GetComponent<VehicleController>();
                         NwhChassis vicNC = vic.GetComponent<NwhChassis>();
@@ -1529,6 +1504,20 @@ namespace M1A1AMP
 
                         if (vic.UniqueName == "M1IP")
                         {
+                            if (m1a1m256Model.Value)
+                            {
+                                GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
+                                GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
+                                _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
+                            }
+
+                            else
+                            {
+                                GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                gunTube.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
+                            }
+
                             switch (m1a1Armor.Value)
                             {
                                 case "HA":
@@ -2010,6 +1999,20 @@ namespace M1A1AMP
 
                         if (vic.UniqueName == "M1")
                         {
+                            if (m1e1m256Model.Value)
+                            {
+                                GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
+                                GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
+                                _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
+                            }
+
+                            else
+                            {
+                                GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                gunTube.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
+                            }
+
                             switch (m1e1Armor.Value)
                             {
                                 case "HA":
@@ -2851,7 +2854,6 @@ namespace M1A1AMP
                 m256_obj.AddComponent<HeatSource>();
             }
 
-            //Attempt to copy vanilla smoke grenades to actually make ROSY be like ROSY
             if (m82Object == null)
             {
                 foreach (GameObject m82Smoke in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
@@ -2861,17 +2863,16 @@ namespace M1A1AMP
                     if (m82Smoke.name == "Smoke White Single Normal") m82SmokeEffect = m82Smoke;
                 }
 
-
-                //RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);//Instantiated copy somehow doesn't make the smoke pop off when using thermals
-                //RosySmokeEffect.name = "Rosy Multispectral Single Normal";
-
-
-                LightBandExclusiveItem RosyLB = m82SmokeEffect.GetComponent<LightBandExclusiveItem>();
-
-                RosyLB.ShowInThermal = rosyIR.Value;
-
+                //Attempt to copy vanilla smoke grenades to actually make ROSY be like ROSY
                 if (rosyPlus.Value)
                 {
+                    //RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);//Instantiated copy somehow doesn't make the smoke pop off when using thermals
+                    //RosySmokeEffect.name = "Rosy Multispectral Single Normal";
+
+                    LightBandExclusiveItem RosyLB = m82SmokeEffect.GetComponent<LightBandExclusiveItem>();
+
+                    RosyLB.ShowInThermal = rosyIR.Value;
+
                     //Smoke White Single Normal/Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1
                     var RosyEffect = m82SmokeEffect.transform.Find("Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1").gameObject.transform;
 
@@ -2880,13 +2881,15 @@ namespace M1A1AMP
                     RosyCloud.maxParticles = 12000;//1000
                     RosyCloud.startSize = 30;//15
 
-                    SmokeRound m82Plus = m82Object.GetComponent<SmokeRound>();
+                    Grenade m82Plus = m82Object.GetComponent<Grenade>();
                     m82Plus._fuseTimeRange = new Vector2(0.325f, 0.375f);//1.3 1.7
                     m82Plus._effectPrefab = m82SmokeEffect;
+
+                    //MelonLogger.Msg("M82 Object: " + m82Object.name);
+                    //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
                 }
-                //MelonLogger.Msg("M82 Object: " + m82Object.name);
-                //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
             }
+
 
 
             if (m1ip_cheeksnera == null)

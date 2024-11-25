@@ -118,7 +118,7 @@ namespace M1A1AMP
             aimable_mount._stabActive = true;
             aimable_mount._stabMode = StabilizationMode.Vector;
             aimable_mount.ProtectFromBadProjection = true;
-            aimable_mount.AarPoseLocalMode = true;
+            //aimable_mount.AarPoseLocalMode = true;
             aimable_mount.SpeedPowered = 50f;
             aimable_mount.enabled = true;
 
@@ -130,7 +130,7 @@ namespace M1A1AMP
             aimable_gun._equipmentManager = vic._equipmentManager;
             aimable_gun._stabActive = true;
             aimable_gun._stabMode = StabilizationMode.Vector;
-            aimable_gun.AarPoseLocalMode = true;
+            //aimable_gun.AarPoseLocalMode = true;
             aimable_gun.enabled = true;
             aimable_gun.ProtectFromBadProjection = true;
             aimable_gun.ReverseLocalEuler = true;
