@@ -51,6 +51,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+	<Reference Include="System.Runtime" />
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>D:\Program Files\SteamLibrary\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>

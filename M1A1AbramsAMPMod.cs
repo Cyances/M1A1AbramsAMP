@@ -73,7 +73,9 @@ namespace M1A1AMP
         static ReticleSO reticleSO_m1e1firstRound, reticleSO_m1e1secondRound;
         static ReticleMesh.CachedReticle reticle_cached_m1e1firstRound, reticle_cached_m1e1secondRound;
 
-        static GameObject citv_obj, m256_obj, m82Object, m82SmokeEffect, RosySmokeEffect, m1ip_cheeksface, m1ip_cheeksnera, m1ip_turretroof, m1_hull, m1_skinned, m1ip_hull, m1ip_skinned;
+        static GameObject citv_obj, m82Object, m82SmokeEffect, RosySmokeEffect, m1ip_cheeksface, m1ip_cheeksnera, m1ip_turretroof, m1_hull, m1_skinned, m1ip_hull, m1ip_skinned;
+
+        private static GameObject m256_obj;
 
         public class AuxFix : MonoBehaviour
         {
@@ -1510,6 +1512,22 @@ namespace M1A1AMP
                                 gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
                                 GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
                                 _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
+
+                                //Barrel clipping fix not working for M1IP yet
+                                //GameObject dummy_tube = new GameObject("dummy tube");
+                                //dummy_tube.transform.parent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN");
+                                //dummy_tube.transform.localScale = new Vector3(0f, 0f, 0f);
+
+                                //Transform smr_path = vic.transform.Find("IPM1_rig/M1IP_skinned");
+                                //SkinnedMeshRenderer smr = smr_path.GetComponent<SkinnedMeshRenderer>();
+                                //Transform[] bones = smr.bones;
+                                //bones[46] = dummy_tube.transform;
+                                //smr.bones = bones;
+
+                                //GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                //gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
+                                //GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
+                                //_m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
                             }
 
                             else
@@ -1644,7 +1662,8 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 2;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 3f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 3f;//_targetCooldownTime not a recognized variable anymore
+                                    //vicUAI.TargetSensor._trackedTargetCooldown = 3f; //New cooldown attrib?
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(3f, 4f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 5;
@@ -1656,7 +1675,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 7f;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 1.5f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 1.5f;
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(1.5f, 2.5f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 4;
@@ -1668,7 +1687,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 10f;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 1f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 1f;
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(1f, 2f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 3;
@@ -1680,7 +1699,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 4;//4
                                     vicUAI.TargetSensor._spotTimeMin = 1;//1
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;//50
-                                    vicUAI.TargetSensor._targetCooldownTime = 2f;//2
+                                    //vicUAI.TargetSensor._targetCooldownTime = 2f;//2
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(2f, 3f);//2,3
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 5;//5
@@ -2005,12 +2024,28 @@ namespace M1A1AMP
                                 gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
                                 GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
                                 _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
+
+                                //Barrel clipping fix working on base M1 if IP model is not used
+                                //GameObject dummy_tube_m1 = new GameObject("dummy tube m1");
+                                //dummy_tube_m1.transform.parent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN");
+                                //dummy_tube_m1.transform.localScale = new Vector3(0f, 0f, 0f);
+
+                                //Transform smr_path_m1 = (m1ipModel.Value == true) ? vic.transform.Find("M1_rig/M1_skinned") : vic.transform.Find("M1_rig/M1_skinned");
+                                //SkinnedMeshRenderer smr_m1 = smr_path_m1.GetComponent<SkinnedMeshRenderer>();
+                                //Transform[] bones_m1 = smr_m1.bones;
+                                //bones_m1[46] = dummy_tube_m1.transform;
+                                //smr_m1.bones = bones_m1;
+
+                                //GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                //gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
+                                //GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
+                                //_m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
                             }
 
                             else
                             {
-                                GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
-                                gunTube.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
+                                GameObject gunTube_m1 = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                gunTube_m1.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
                             }
 
                             switch (m1e1Armor.Value)
@@ -2138,7 +2173,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 2;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 3f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 3f;
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(3f, 4f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 5;
@@ -2150,7 +2185,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 7f;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 1.5f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 1.5f;
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(1.5f, 2.5f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 4;
@@ -2162,7 +2197,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 10f;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 1f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 1f;
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(1f, 2f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 3;
@@ -2174,7 +2209,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 4;//4
                                     vicUAI.TargetSensor._spotTimeMin = 1;//1
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;//50
-                                    vicUAI.TargetSensor._targetCooldownTime = 2f;//2
+                                    //vicUAI.TargetSensor._targetCooldownTime = 2f;//2
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(2f, 3f);//2,3
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 5;//5
@@ -2846,8 +2881,15 @@ namespace M1A1AMP
                 assem_armour._name = "CITV";
                 glass_armour._name = "CITV glass";
 
-                var bundle2 = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1assets/", "m256"));
-                m256_obj = bundle2.LoadAsset<GameObject>("m256.prefab");
+                //var bundle2 = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1assets/", "m256"));
+                //m256_obj = bundle2.LoadAsset<GameObject>("m256.prefab");
+                //m256_obj.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                //m256_obj.transform.localScale = new Vector3(0.75f, 0.75f, 0.8f);
+                //m256_obj.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard (FLIR)");
+                //m256_obj.AddComponent<HeatSource>();
+
+                AssetBundle assetBundle2 = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1assets/", "m256"));
+                m256_obj = assetBundle2.LoadAsset<GameObject>("m256.prefab");
                 m256_obj.hideFlags = HideFlags.DontUnloadUnusedAsset;
                 m256_obj.transform.localScale = new Vector3(0.75f, 0.75f, 0.8f);
                 m256_obj.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard (FLIR)");
