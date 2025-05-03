@@ -73,6 +73,7 @@ namespace M1A1AMP
             _crows.transform.localPosition = position;
 
             GameObject mount = _crows.transform.Find("MOUNT").gameObject;
+            mount.transform.localEulerAngles = Vector3.zero;
             GameObject gun = _crows.transform.Find("GUN").gameObject;
 
             GameObject gun_vis = gun.transform.Find("GUN VIS").gameObject;
@@ -279,7 +280,7 @@ namespace M1A1AMP
             line1.rotation.mrad = 0;
             line1.position.x = 0;
             line1.position.y = 0;
-            line1.length.mrad = 15.0944f;
+            line1.length.mrad = 15.0944f;//15
             line1.thickness.mrad /= 1.7f;
             line1.illumination = ReticleTree.Light.Type.Powered;
             line1.visualType = ReticleTree.VisualElement.Type.Painted;
@@ -296,6 +297,11 @@ namespace M1A1AMP
                 new Vector3(0, 10.344f),
                 new Vector3(10.344f, 0),
                 new Vector3(-10.344f,0),
+
+				/*new Vector3(0f, -7.344f),
+                new Vector3(0f, 7.344f),
+                new Vector3(7.344f, 0f),
+                new Vector3(-7.344f, 0f)*/
             };
 
             foreach (Vector3 pos in box_pos)
@@ -303,7 +309,7 @@ namespace M1A1AMP
                 ReticleTree.Line box = new ReticleTree.Line();
                 box.roundness = 0f;
                 box.thickness.mrad = line2.thickness.mrad * 2.8f;
-                box.length.mrad = 10f;
+                box.length.mrad = 12.5f;//
                 box.thickness.unit = AngularLength.AngularUnit.MIL_USSR;
                 box.length.unit = AngularLength.AngularUnit.MIL_USSR;
                 box.rotation.mrad = pos.x == 0 ? line2.rotation.mrad : line1.rotation.mrad;

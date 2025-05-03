@@ -1508,26 +1508,20 @@ namespace M1A1AMP
                         {
                             if (m1a1m256Model.Value)
                             {
+                                GameObject dummy_tube = new GameObject("dummy tube");
+                                dummy_tube.transform.parent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN");
+                                dummy_tube.transform.localScale = new Vector3(0f, 0f, 0f);
+
+                                Transform smr_path = vic.transform.Find("IPM1_rig/M1IP_skinned");
+                                SkinnedMeshRenderer smr = smr_path.GetComponent<SkinnedMeshRenderer>();
+                                Transform[] bones = smr.bones;
+                                bones[56] = dummy_tube.transform;
+                                smr.bones = bones;
+
                                 GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
                                 gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
                                 GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
                                 _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
-
-                                //Barrel clipping fix not working for M1IP yet
-                                //GameObject dummy_tube = new GameObject("dummy tube");
-                                //dummy_tube.transform.parent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN");
-                                //dummy_tube.transform.localScale = new Vector3(0f, 0f, 0f);
-
-                                //Transform smr_path = vic.transform.Find("IPM1_rig/M1IP_skinned");
-                                //SkinnedMeshRenderer smr = smr_path.GetComponent<SkinnedMeshRenderer>();
-                                //Transform[] bones = smr.bones;
-                                //bones[46] = dummy_tube.transform;
-                                //smr.bones = bones;
-
-                                //GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
-                                //gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
-                                //GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
-                                //_m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
                             }
 
                             else
@@ -2018,35 +2012,6 @@ namespace M1A1AMP
 
                         if (vic.UniqueName == "M1")
                         {
-                            if (m1e1m256Model.Value)
-                            {
-                                GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
-                                gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
-                                GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
-                                _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
-
-                                //Barrel clipping fix working on base M1 if IP model is not used
-                                //GameObject dummy_tube_m1 = new GameObject("dummy tube m1");
-                                //dummy_tube_m1.transform.parent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN");
-                                //dummy_tube_m1.transform.localScale = new Vector3(0f, 0f, 0f);
-
-                                //Transform smr_path_m1 = (m1ipModel.Value == true) ? vic.transform.Find("M1_rig/M1_skinned") : vic.transform.Find("M1_rig/M1_skinned");
-                                //SkinnedMeshRenderer smr_m1 = smr_path_m1.GetComponent<SkinnedMeshRenderer>();
-                                //Transform[] bones_m1 = smr_m1.bones;
-                                //bones_m1[46] = dummy_tube_m1.transform;
-                                //smr_m1.bones = bones_m1;
-
-                                //GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
-                                //gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
-                                //GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
-                                //_m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
-                            }
-
-                            else
-                            {
-                                GameObject gunTube_m1 = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
-                                gunTube_m1.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
-                            }
 
                             switch (m1e1Armor.Value)
                             {
@@ -2609,6 +2574,31 @@ namespace M1A1AMP
 
                                 }
 
+                            }
+
+                            if (m1e1m256Model.Value)
+                            {
+                                GameObject dummy_tube_m1 = new GameObject("dummy tube m1");
+                                dummy_tube_m1.transform.parent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN");
+                                dummy_tube_m1.transform.localScale = new Vector3(0f, 0f, 0f);
+
+                                Transform smr_path_m1 = (m1ipModel.Value == true) ? vic.transform.Find("M1_rig/M1_skinned") : vic.transform.Find("IPM1_rig/M1IP_skinned");
+                                SkinnedMeshRenderer smr_m1 = smr_path_m1.GetComponent<SkinnedMeshRenderer>();
+                                Transform[] bones_m1 = smr_m1.bones;
+                                int gun_recoil_idx = (m1ipModel.Value == true) ? 46 : 56;
+                                bones_m1[gun_recoil_idx] = dummy_tube_m1.transform;
+                                smr_m1.bones = bones_m1;
+
+                                GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
+                                GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
+                                _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
+                            }
+
+                            else
+                            {
+                                GameObject gunTube_m1 = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                gunTube_m1.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
                             }
 
                             if (m1e1camoNet.Value)
