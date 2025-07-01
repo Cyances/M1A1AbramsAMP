@@ -143,6 +143,7 @@ namespace M1A1AMP
             PostProcessProfile nods_profile = nods.gameObject.GetComponent<SimpleNightVision>()._postVolume.profile;
 
             nods.CanToggleFlirPolarity = true;
+            //Revisit to sort out the contrast issue
             /*nods.FLIRFilterMode = FilterMode.Trilinear;
             nods.FLIRHeight = 600;
             nods.FLIRWidth = 1200;
