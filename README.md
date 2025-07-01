@@ -12,7 +12,7 @@ If you get an error launching through Steam you will need to run the game execut
 ![AMP Enhanced Optics v2](https://github.com/Cyances/M1A1AbramsAMP/assets/154455050/c538fba0-c967-429f-b91a-e6d338ec7a4e)
 
 
-## AMP 2.7 Update:
+## AMP 2.7.4 Update:
 <p>
 	<ul>
 	<li>120mm M256 Gun (with new model!)</li>
