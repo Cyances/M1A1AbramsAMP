@@ -16,7 +16,8 @@
 - Fixed M256 overlapping the M68A1 barrel
 - 2025-07-02:
 - Compatibility fix for GHPC Update 20250630
-- Toggling FLIR+ gives a 2.5x FLIR resolution improvement 
+- Toggling FLIR+ gives a 2.5x FLIR resolution improvement
+- CITV black hot setting is not fully working, but left it as  a happy accident :)
 
 ## M153 CROWS II
 - Removes Commander's HMG and replaces it with M153 CROWS II
