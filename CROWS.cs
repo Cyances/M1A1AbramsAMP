@@ -16,12 +16,12 @@ using MelonLoader;
 using Reticle;
 using static UnityEngine.Rendering.PostProcessing.SubpixelMorphologicalAntialiasing;
 using UnityEngine.UI;
-using Thermals;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.Rendering.PostProcessing;
 using M1A1AbramsAMP;
 using M1A1AMP;
-//CROWS not implemented yet due to the gun camera not behaving properly (need to cycle using GAS toggle button to work)
+using GHPC.Thermals;
+
 namespace M1A1AMP
 {
     public class CROWS

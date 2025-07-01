@@ -142,6 +142,13 @@ namespace M1A1AMP
             nods.SpriteType = CameraSpriteManager.SpriteType.DefaultScope;
             PostProcessProfile nods_profile = nods.gameObject.GetComponent<SimpleNightVision>()._postVolume.profile;
 
+            nods.CanToggleFlirPolarity = true;
+            /*nods.FLIRFilterMode = FilterMode.Trilinear;
+            nods.FLIRHeight = 600;
+            nods.FLIRWidth = 1200;
+            nods.OverrideFLIRResolution = true;
+            //nods.FLIRBlitMaterialOverride = ;*/
+
             ColorGrading color_grading = nods_profile.settings[1] as ColorGrading;
             Bloom bloom = nods_profile.settings[0] as Bloom;
             Grain grain = nods_profile.settings[2] as Grain;

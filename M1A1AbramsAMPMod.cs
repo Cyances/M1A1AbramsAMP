@@ -26,7 +26,6 @@ using System.IO;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using GHPC.Weaponry;
 using static GHPC.Equipment.VehicleSmokeManager;
-using Thermals;
 using GHPC.AI;
 using TMPro;
 using Rewired.Utils;
@@ -37,6 +36,7 @@ using GHPC.Effects;
 using M1A1AbramsAMP;
 using static Reticle.ReticleTree.GroupBase;
 using System.ComponentModel;
+using GHPC.Thermals;
 
 namespace M1A1AMP
 {
@@ -177,8 +177,8 @@ namespace M1A1AMP
             citv_smooth = cfg.CreateEntry<bool>("Smooth CITV Panning", true);
             citv_smooth.Comment = "Makes CITV feel more like a camera.";
 
-            alt_flir_colour = cfg.CreateEntry<bool>("Alternate GPS FLIR Colour", false);
-            alt_flir_colour.Description = "[Requires CITV to be enabled] Gives the gunner's sight FLIR the same colour palette as the CITV.";
+            //alt_flir_colour = cfg.CreateEntry<bool>("Alternate GPS FLIR Colour", false);
+            //alt_flir_colour.Description = "[Requires CITV to be enabled] Gives the gunner's sight FLIR the same colour palette as the CITV.";
 
             crows_m1a1 = cfg.CreateEntry<bool>("M1A1 CROWS", false);
             crows_m1a1.Description = "Remote weapons system equipped with a .50 caliber M2HB; 400 rounds, automatic lead, thermals.";
@@ -1205,11 +1205,16 @@ namespace M1A1AMP
                         if (betterFlir.Value)
                         {
                             //Scanline FOV change
-                            GameObject.Destroy(flirOptic.transform.Find("Canvas Scanlines").gameObject);
+                            //GameObject.Destroy(flirOptic.transform.Find("Canvas Scanlines").gameObject);
 
                             flirPlus.DefaultFov = 12.5f;//9.52
                             flirPlus.OtherFovs = gpsFovs.ToArray<float>();//3.472
                             flirPlus.BaseBlur = 0;
+
+                            //Arbitrary 2.5x resolution improvement
+                            flirPlus.FLIRFilterMode = FilterMode.Trilinear;//Bilinear
+                            flirPlus.FLIRHeight = 600;//240
+                            flirPlus.FLIRWidth = 1200;//480
                         }
 
                         if (betterDaysight.Value)
@@ -1238,9 +1243,11 @@ namespace M1A1AMP
                             c.transform.Find("assembly").GetComponent<VariableArmor>().Unit = vic;
                             c.transform.Find("glass").GetComponent<VariableArmor>().Unit = vic;
 
-                            if (alt_flir_colour.Value)
-                                horizontalGps.slot.LinkedNightSight.PairedOptic.post.profile.settings[2] = vic.DesignatedCameraSlots[0].LinkedNightSight.gameObject.
-                                    GetComponent<SimpleNightVision>()._postVolume.profile.settings[1];
+                            //Seems to be broken when set to false
+                            //if (alt_flir_colour.Value)
+                            //    horizontalGps.slot.LinkedNightSight.PairedOptic.post.profile.settings[2] = vic.DesignatedCameraSlots[0].LinkedNightSight.gameObject.
+                            //        GetComponent<SimpleNightVision>()._postVolume.profile.settings[1];
+
                             //ChromaticAberration s = optic.post.profile.AddSettings<ChromaticAberration>();
                             //s.active = true; 
                             //s.intensity.overrideState = true;
