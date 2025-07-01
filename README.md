@@ -1,4 +1,4 @@
-# M1A1 Abrams AMP v2.7.3
+# M1A1 Abrams AMP v2.7.4
 
 ## Branch release notes:
 - 2024-04-07:
@@ -14,6 +14,9 @@
 - Compatibility fix for GHPC Update 20250401.2
 - Fixed CROWS traverse bug
 - Fixed M256 overlapping the M68A1 barrel
+- 2025-07-02:
+- Compatibility fix for GHPC Update 20250630
+- Toggling FLIR+ gives a 2.5x FLIR resolution improvement 
 
 ## M153 CROWS II
 - Removes Commander's HMG and replaces it with M153 CROWS II
