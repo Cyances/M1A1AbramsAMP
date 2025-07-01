@@ -16,12 +16,12 @@ using MelonLoader;
 using Reticle;
 using static UnityEngine.Rendering.PostProcessing.SubpixelMorphologicalAntialiasing;
 using UnityEngine.UI;
-using Thermals;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.Rendering.PostProcessing;
 using M1A1AbramsAMP;
 using M1A1AMP;
-//CROWS not implemented yet due to the gun camera not behaving properly (need to cycle using GAS toggle button to work)
+using GHPC.Thermals;
+
 namespace M1A1AMP
 {
     public class CROWS
@@ -73,6 +73,7 @@ namespace M1A1AMP
             _crows.transform.localPosition = position;
 
             GameObject mount = _crows.transform.Find("MOUNT").gameObject;
+            mount.transform.localEulerAngles = Vector3.zero;
             GameObject gun = _crows.transform.Find("GUN").gameObject;
 
             GameObject gun_vis = gun.transform.Find("GUN VIS").gameObject;
@@ -118,7 +119,7 @@ namespace M1A1AMP
             aimable_mount._stabActive = true;
             aimable_mount._stabMode = StabilizationMode.Vector;
             aimable_mount.ProtectFromBadProjection = true;
-            aimable_mount.AarPoseLocalMode = true;
+            //aimable_mount.AarPoseLocalMode = true;
             aimable_mount.SpeedPowered = 50f;
             aimable_mount.enabled = true;
 
@@ -130,7 +131,7 @@ namespace M1A1AMP
             aimable_gun._equipmentManager = vic._equipmentManager;
             aimable_gun._stabActive = true;
             aimable_gun._stabMode = StabilizationMode.Vector;
-            aimable_gun.AarPoseLocalMode = true;
+            //aimable_gun.AarPoseLocalMode = true;
             aimable_gun.enabled = true;
             aimable_gun.ProtectFromBadProjection = true;
             aimable_gun.ReverseLocalEuler = true;
@@ -279,7 +280,7 @@ namespace M1A1AMP
             line1.rotation.mrad = 0;
             line1.position.x = 0;
             line1.position.y = 0;
-            line1.length.mrad = 15.0944f;
+            line1.length.mrad = 15.0944f;//15
             line1.thickness.mrad /= 1.7f;
             line1.illumination = ReticleTree.Light.Type.Powered;
             line1.visualType = ReticleTree.VisualElement.Type.Painted;
@@ -296,6 +297,11 @@ namespace M1A1AMP
                 new Vector3(0, 10.344f),
                 new Vector3(10.344f, 0),
                 new Vector3(-10.344f,0),
+
+				/*new Vector3(0f, -7.344f),
+                new Vector3(0f, 7.344f),
+                new Vector3(7.344f, 0f),
+                new Vector3(-7.344f, 0f)*/
             };
 
             foreach (Vector3 pos in box_pos)
@@ -303,7 +309,7 @@ namespace M1A1AMP
                 ReticleTree.Line box = new ReticleTree.Line();
                 box.roundness = 0f;
                 box.thickness.mrad = line2.thickness.mrad * 2.8f;
-                box.length.mrad = 10f;
+                box.length.mrad = 12.5f;//
                 box.thickness.unit = AngularLength.AngularUnit.MIL_USSR;
                 box.length.unit = AngularLength.AngularUnit.MIL_USSR;
                 box.rotation.mrad = pos.x == 0 ? line2.rotation.mrad : line1.rotation.mrad;

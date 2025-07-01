@@ -26,7 +26,6 @@ using System.IO;
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 using GHPC.Weaponry;
 using static GHPC.Equipment.VehicleSmokeManager;
-using Thermals;
 using GHPC.AI;
 using TMPro;
 using Rewired.Utils;
@@ -37,6 +36,7 @@ using GHPC.Effects;
 using M1A1AbramsAMP;
 using static Reticle.ReticleTree.GroupBase;
 using System.ComponentModel;
+using GHPC.Thermals;
 
 namespace M1A1AMP
 {
@@ -55,7 +55,7 @@ namespace M1A1AMP
         static MelonPreferences_Entry<string> m1a1Armor, m1e1Armor;
         static MelonPreferences_Entry<bool> m1a1Smoke, m1e1Smoke, m1a1Rosy, m1e1Rosy, rosyPlus, rosyIR;
         static MelonPreferences_Entry<string> m1a1Agt, m1e1Agt;
-        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, bonusTraverse, noLuggage, betterSuspension, betterTracks, m1ipModel, stabilityControl, m256Model, m1a1camoNet, m1e1camoNet;
+        static MelonPreferences_Entry<bool> betterTransmission, governorDelete, uapWeight, m1a1Apu, m1e1Apu, bonusTraverse, noLuggage, betterSuspension, betterTracks, m1ipModel, stabilityControl, m1a1m256Model, m1e1m256Model, m1a1camoNet, m1e1camoNet;
         static MelonPreferences_Entry<string> m1a1Loader, m1e1Loader, m1a1Commander, m1e1Commander, m1a1Gunner, m1e1Gunner;
         static MelonPreferences_Entry<bool> citv_m1a1, citv_m1e1, alt_flir_colour;
         public static MelonPreferences_Entry<bool> crows_m1e1, crows_m1a1, crows_slapt, crows_alt_placement_m1a1, crows_alt_placement_m1e1;
@@ -73,7 +73,9 @@ namespace M1A1AMP
         static ReticleSO reticleSO_m1e1firstRound, reticleSO_m1e1secondRound;
         static ReticleMesh.CachedReticle reticle_cached_m1e1firstRound, reticle_cached_m1e1secondRound;
 
-        static GameObject citv_obj, m256_obj, m82Object, m82SmokeEffect, RosySmokeEffect, m1ip_cheeksface, m1ip_cheeksnera, m1ip_turretroof, m1_hull, m1_skinned, m1ip_hull, m1ip_skinned;
+        static GameObject citv_obj, m82Object, m82SmokeEffect, RosySmokeEffect, m1ip_cheeksface, m1ip_cheeksnera, m1ip_turretroof, m1_hull, m1_skinned, m1ip_hull, m1ip_skinned;
+
+        private static GameObject m256_obj;
 
         public class AuxFix : MonoBehaviour
         {
@@ -175,8 +177,8 @@ namespace M1A1AMP
             citv_smooth = cfg.CreateEntry<bool>("Smooth CITV Panning", true);
             citv_smooth.Comment = "Makes CITV feel more like a camera.";
 
-            alt_flir_colour = cfg.CreateEntry<bool>("Alternate GPS FLIR Colour", false);
-            alt_flir_colour.Description = "[Requires CITV to be enabled] Gives the gunner's sight FLIR the same colour palette as the CITV.";
+            //alt_flir_colour = cfg.CreateEntry<bool>("Alternate GPS FLIR Colour", false);
+            //alt_flir_colour.Description = "[Requires CITV to be enabled] Gives the gunner's sight FLIR the same colour palette as the CITV.";
 
             crows_m1a1 = cfg.CreateEntry<bool>("M1A1 CROWS", false);
             crows_m1a1.Description = "Remote weapons system equipped with a .50 caliber M2HB; 400 rounds, automatic lead, thermals.";
@@ -245,8 +247,9 @@ namespace M1A1AMP
             m1ipModel = cfg.CreateEntry<bool>("M1E1 IP Model", false);
             m1ipModel.Description = "Gives the M1IP model to base M1";
 
-            m256Model = cfg.CreateEntry<bool>("M256Model", true);
-            m256Model.Description = "Uses appropriate M256 model instead of scaled up M68A1";
+            m1a1m256Model = cfg.CreateEntry<bool>("M1A1 M256Model", true);
+            m1a1m256Model.Description = "Uses appropriate M256 model instead of scaled up M68A1";
+            m1e1m256Model = cfg.CreateEntry<bool>("M1E1 M256Model", true);
 
             m1a1camoNet = cfg.CreateEntry<bool>("M1A1 Camo Net", false);
             m1a1camoNet.Description = "Force camo net appearance instead of randomizing it";
@@ -1202,11 +1205,16 @@ namespace M1A1AMP
                         if (betterFlir.Value)
                         {
                             //Scanline FOV change
-                            GameObject.Destroy(flirOptic.transform.Find("Canvas Scanlines").gameObject);
+                            //GameObject.Destroy(flirOptic.transform.Find("Canvas Scanlines").gameObject);
 
                             flirPlus.DefaultFov = 12.5f;//9.52
                             flirPlus.OtherFovs = gpsFovs.ToArray<float>();//3.472
                             flirPlus.BaseBlur = 0;
+
+                            //Arbitrary 2.5x resolution improvement
+                            flirPlus.FLIRFilterMode = FilterMode.Trilinear;//Bilinear
+                            flirPlus.FLIRHeight = 600;//240
+                            flirPlus.FLIRWidth = 1200;//480
                         }
 
                         if (betterDaysight.Value)
@@ -1235,9 +1243,11 @@ namespace M1A1AMP
                             c.transform.Find("assembly").GetComponent<VariableArmor>().Unit = vic;
                             c.transform.Find("glass").GetComponent<VariableArmor>().Unit = vic;
 
-                            if (alt_flir_colour.Value)
-                                horizontalGps.slot.LinkedNightSight.PairedOptic.post.profile.settings[2] = vic.DesignatedCameraSlots[0].LinkedNightSight.gameObject.
-                                    GetComponent<SimpleNightVision>()._postVolume.profile.settings[1];
+                            //Seems to be broken when set to false
+                            //if (alt_flir_colour.Value)
+                            //    horizontalGps.slot.LinkedNightSight.PairedOptic.post.profile.settings[2] = vic.DesignatedCameraSlots[0].LinkedNightSight.gameObject.
+                            //        GetComponent<SimpleNightVision>()._postVolume.profile.settings[1];
+
                             //ChromaticAberration s = optic.post.profile.AddSettings<ChromaticAberration>();
                             //s.active = true; 
                             //s.intensity.overrideState = true;
@@ -1247,17 +1257,6 @@ namespace M1A1AMP
 
                         horizontalGps.slot.ExclusiveWeapons = new WeaponSystem[] { weaponsManager.Weapons[0].Weapon, weaponsManager.Weapons[1].Weapon };
                         horizontalGps.slot.LinkedNightSight.ExclusiveWeapons = new WeaponSystem[] { weaponsManager.Weapons[0].Weapon, weaponsManager.Weapons[1].Weapon };
-
-                        /*Vector3 crows_pos = crows_alt_placement_m1a1.Value ? new Vector3(1.4f, 1.1164f, -0.5873f) : new Vector3(0.7855f, 1.2855f, 0.5182f);
-                        if ((crows_m1e1.Value && vic._uniqueName == "M1") || (crows_m1a1.Value && vic._uniqueName == "M1IP"))
-                        {
-                            vic_go.transform.Find("IPM1_rig/HULL/TURRET/CUPOLA/CUPOLA_GUN").localScale = Vector3.zero;
-                            CROWS.Add(vic, vic_go.transform.Find("IPM1_rig/HULL/TURRET"), crows_pos);
-
-                            if (!crows_alt_placement_m1a1.Value)
-                                vic.DesignatedCameraSlots[0].transform.localPosition = new Vector3(-0.1538f, 0.627f, -0.05f);
-                        }*/
-
 
                         Vector3 crows_pos_m1a1 = crows_alt_placement_m1a1.Value ? new Vector3(1.4f, 1.1164f, -0.5873f) : new Vector3(0.7855f, 1.2855f, 0.5182f);
                         if (crows_m1a1.Value && vic._uniqueName == "M1IP")
@@ -1429,21 +1428,6 @@ namespace M1A1AMP
                         mainGun.Impulse = 68000;
                         mainGun.CodexEntry = gun_m256;
 
-                        if (m256Model.Value)
-                        {
-                            GameObject gunTube = vic.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
-                            gunTube.transform.localScale = new Vector3(0f, 0f, 0f);
-                            LateFollow tube_follower = gunTube.GetComponent<LateFollowTarget>()._lateFollowers[0];
-                            tube_follower.transform.Find("Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
-                            GameObject _m256_obj = GameObject.Instantiate(m256_obj, tube_follower.transform);
-                            _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
-                        }
-
-                        else
-                        {
-                            GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
-                            gunTube.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
-                        }
 
                         VehicleController vicVC = vic.GetComponent<VehicleController>();
                         NwhChassis vicNC = vic.GetComponent<NwhChassis>();
@@ -1529,6 +1513,30 @@ namespace M1A1AMP
 
                         if (vic.UniqueName == "M1IP")
                         {
+                            if (m1a1m256Model.Value)
+                            {
+                                GameObject dummy_tube = new GameObject("dummy tube");
+                                dummy_tube.transform.parent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN");
+                                dummy_tube.transform.localScale = new Vector3(0f, 0f, 0f);
+
+                                Transform smr_path = vic.transform.Find("IPM1_rig/M1IP_skinned");
+                                SkinnedMeshRenderer smr = smr_path.GetComponent<SkinnedMeshRenderer>();
+                                Transform[] bones = smr.bones;
+                                bones[56] = dummy_tube.transform;
+                                smr.bones = bones;
+
+                                GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
+                                GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
+                                _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
+                            }
+
+                            else
+                            {
+                                GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                gunTube.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
+                            }
+
                             switch (m1a1Armor.Value)
                             {
                                 case "HA":
@@ -1655,7 +1663,8 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 2;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 3f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 3f;//_targetCooldownTime not a recognized variable anymore
+                                    //vicUAI.TargetSensor._trackedTargetCooldown = 3f; //New cooldown attrib?
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(3f, 4f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 5;
@@ -1667,7 +1676,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 7f;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 1.5f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 1.5f;
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(1.5f, 2.5f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 4;
@@ -1679,7 +1688,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 10f;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 1f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 1f;
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(1f, 2f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 3;
@@ -1691,7 +1700,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 4;//4
                                     vicUAI.TargetSensor._spotTimeMin = 1;//1
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;//50
-                                    vicUAI.TargetSensor._targetCooldownTime = 2f;//2
+                                    //vicUAI.TargetSensor._targetCooldownTime = 2f;//2
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(2f, 3f);//2,3
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 5;//5
@@ -2010,6 +2019,7 @@ namespace M1A1AMP
 
                         if (vic.UniqueName == "M1")
                         {
+
                             switch (m1e1Armor.Value)
                             {
                                 case "HA":
@@ -2135,7 +2145,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 2;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 3f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 3f;
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(3f, 4f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 5;
@@ -2147,7 +2157,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 7f;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 1.5f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 1.5f;
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(1.5f, 2.5f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 4;
@@ -2159,7 +2169,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 10f;
                                     vicUAI.TargetSensor._spotTimeMin = 1;
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;
-                                    vicUAI.TargetSensor._targetCooldownTime = 1f;
+                                    //vicUAI.TargetSensor._targetCooldownTime = 1f;
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(1f, 2f);
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 3;
@@ -2171,7 +2181,7 @@ namespace M1A1AMP
                                     vicUAI.TargetSensor._spotTimeMaxVelocity = 4;//4
                                     vicUAI.TargetSensor._spotTimeMin = 1;//1
                                     vicUAI.TargetSensor._spotTimeMinDistance = 50;//50
-                                    vicUAI.TargetSensor._targetCooldownTime = 2f;//2
+                                    //vicUAI.TargetSensor._targetCooldownTime = 2f;//2
 
                                     vicUAI.CommanderAI._identifyTargetDurationRange = new Vector2(2f, 3f);//2,3
                                     vicUAI.CommanderAI._sweepCommsCheckDuration = 5;//5
@@ -2573,6 +2583,31 @@ namespace M1A1AMP
 
                             }
 
+                            if (m1e1m256Model.Value)
+                            {
+                                GameObject dummy_tube_m1 = new GameObject("dummy tube m1");
+                                dummy_tube_m1.transform.parent = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN");
+                                dummy_tube_m1.transform.localScale = new Vector3(0f, 0f, 0f);
+
+                                Transform smr_path_m1 = (m1ipModel.Value == true) ? vic.transform.Find("M1_rig/M1_skinned") : vic.transform.Find("IPM1_rig/M1IP_skinned");
+                                SkinnedMeshRenderer smr_m1 = smr_path_m1.GetComponent<SkinnedMeshRenderer>();
+                                Transform[] bones_m1 = smr_m1.bones;
+                                int gun_recoil_idx = (m1ipModel.Value == true) ? 46 : 56;
+                                bones_m1[gun_recoil_idx] = dummy_tube_m1.transform;
+                                smr_m1.bones = bones_m1;
+
+                                GameObject gunTube = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                gunTube.transform.Find("GUN/Gun Breech.001").GetComponent<MeshRenderer>().enabled = false;
+                                GameObject _m256_obj = GameObject.Instantiate(m256_obj, gunTube.transform);
+                                _m256_obj.transform.localPosition = new Vector3(0f, 0.0064f, -1.9416f);
+                            }
+
+                            else
+                            {
+                                GameObject gunTube_m1 = vic_go.transform.Find("IPM1_rig/HULL/TURRET/GUN/gun_recoil").gameObject;
+                                gunTube_m1.transform.localScale = new Vector3(1.4f, 1.4f, 0.98f);
+                            }
+
                             if (m1e1camoNet.Value)
                             {
                                 camoNetcheeks.SetActive(true);
@@ -2843,15 +2878,21 @@ namespace M1A1AMP
                 assem_armour._name = "CITV";
                 glass_armour._name = "CITV glass";
 
-                var bundle2 = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1assets/", "m256"));
-                m256_obj = bundle2.LoadAsset<GameObject>("m256.prefab");
+                //var bundle2 = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1assets/", "m256"));
+                //m256_obj = bundle2.LoadAsset<GameObject>("m256.prefab");
+                //m256_obj.hideFlags = HideFlags.DontUnloadUnusedAsset;
+                //m256_obj.transform.localScale = new Vector3(0.75f, 0.75f, 0.8f);
+                //m256_obj.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard (FLIR)");
+                //m256_obj.AddComponent<HeatSource>();
+
+                AssetBundle assetBundle2 = AssetBundle.LoadFromFile(Path.Combine(MelonEnvironment.ModsDirectory + "/m1a1assets/", "m256"));
+                m256_obj = assetBundle2.LoadAsset<GameObject>("m256.prefab");
                 m256_obj.hideFlags = HideFlags.DontUnloadUnusedAsset;
                 m256_obj.transform.localScale = new Vector3(0.75f, 0.75f, 0.8f);
                 m256_obj.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard (FLIR)");
                 m256_obj.AddComponent<HeatSource>();
             }
 
-            //Attempt to copy vanilla smoke grenades to actually make ROSY be like ROSY
             if (m82Object == null)
             {
                 foreach (GameObject m82Smoke in Resources.FindObjectsOfTypeAll(typeof(GameObject)))
@@ -2861,17 +2902,16 @@ namespace M1A1AMP
                     if (m82Smoke.name == "Smoke White Single Normal") m82SmokeEffect = m82Smoke;
                 }
 
-
-                //RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);//Instantiated copy somehow doesn't make the smoke pop off when using thermals
-                //RosySmokeEffect.name = "Rosy Multispectral Single Normal";
-
-
-                LightBandExclusiveItem RosyLB = m82SmokeEffect.GetComponent<LightBandExclusiveItem>();
-
-                RosyLB.ShowInThermal = rosyIR.Value;
-
+                //Attempt to copy vanilla smoke grenades to actually make ROSY be like ROSY
                 if (rosyPlus.Value)
                 {
+                    //RosySmokeEffect = GameObject.Instantiate(m82SmokeEffect);//Instantiated copy somehow doesn't make the smoke pop off when using thermals
+                    //RosySmokeEffect.name = "Rosy Multispectral Single Normal";
+
+                    LightBandExclusiveItem RosyLB = m82SmokeEffect.GetComponent<LightBandExclusiveItem>();
+
+                    RosyLB.ShowInThermal = rosyIR.Value;
+
                     //Smoke White Single Normal/Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1
                     var RosyEffect = m82SmokeEffect.transform.Find("Smoke Discharger White Single Normal/Smoke Ground Tracer 1/Smoke Ground Cloud 1").gameObject.transform;
 
@@ -2880,13 +2920,15 @@ namespace M1A1AMP
                     RosyCloud.maxParticles = 12000;//1000
                     RosyCloud.startSize = 30;//15
 
-                    SmokeRound m82Plus = m82Object.GetComponent<SmokeRound>();
+                    Grenade m82Plus = m82Object.GetComponent<Grenade>();
                     m82Plus._fuseTimeRange = new Vector2(0.325f, 0.375f);//1.3 1.7
                     m82Plus._effectPrefab = m82SmokeEffect;
+
+                    //MelonLogger.Msg("M82 Object: " + m82Object.name);
+                    //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
                 }
-                //MelonLogger.Msg("M82 Object: " + m82Object.name);
-                //MelonLogger.Msg("ROSY Smoke Effect: " + RosySmokeEffect.name);
             }
+
 
 
             if (m1ip_cheeksnera == null)
