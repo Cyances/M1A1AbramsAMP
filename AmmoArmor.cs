@@ -115,7 +115,7 @@ namespace M1A1AbramsAMP
         public static GameObject ammo_lahat_vis = null;
         public static GameObject ammo_m908_vis = null;
 
-        public static AmmoType ammo_m833, ammo_m456, ammo_3of26, ammo_bgm71, ammo_m8vnl;
+        public static AmmoType ammo_m833, ammo_m456, ammo_dm512, ammo_3of26, ammo_bgm71, ammo_m8vnl;
 
         ////Armor variables
         ////Variables for copying existing ArmorType
@@ -258,6 +258,7 @@ namespace M1A1AbramsAMP
             {
                 if (s.AmmoType.Name == "M833 APFSDS-T") ammo_m833 = s.AmmoType;
                 if (s.AmmoType.Name == "M456 HEAT-FS-T") ammo_m456 = s.AmmoType;
+                if (s.AmmoType.Name == "DM512 HESH-T") ammo_dm512 = s.AmmoType;
                 if (s.AmmoType.Name == "3OF26 HEF-FS-T") ammo_3of26 = s.AmmoType;
                 if (s.AmmoType.Name == "BGM-71C I-TOW") ammo_bgm71 = s.AmmoType;
                 if (s.AmmoType.Name == "M8 API") ammo_m8vnl = s.AmmoType;
@@ -286,6 +287,7 @@ namespace M1A1AbramsAMP
             string[] era_names = new string[] {
                     "kontakt-1 armour",
                     "kontakt-5 armour",
+                    "relikt armour",
                     "ARAT-1 Armor Codex",
                     "BRAT-M3 Armor Codex",
                     "BRAT-M5 Armor Codex",
@@ -1373,7 +1375,7 @@ namespace M1A1AbramsAMP
             ammo_m830.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830;
             ammo_m830.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830;
 
-            ammo_m830a1_vis = GameObject.Instantiate(ammo_m456.VisualModel);
+            ammo_m830a1_vis = GameObject.Instantiate(ammo_dm512.VisualModel);
             ammo_m830a1_vis.name = "M830A1 visual";
             ammo_m830a1.VisualModel = ammo_m830a1_vis;
             ammo_m830a1.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830a1;
@@ -1391,7 +1393,7 @@ namespace M1A1AbramsAMP
             ammo_m830a3.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m830a3;
             ammo_m830a3.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_m830a3;
 
-            ammo_xm1147_vis = GameObject.Instantiate(ammo_m456.VisualModel);
+            ammo_xm1147_vis = GameObject.Instantiate(ammo_dm512.VisualModel);
             ammo_xm1147_vis.name = "XM1147 visual";
             ammo_xm1147.VisualModel = ammo_xm1147_vis;
             ammo_xm1147.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_xm1147;
@@ -1403,7 +1405,7 @@ namespace M1A1AbramsAMP
             ammo_lahat.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_lahat;
             ammo_lahat.VisualModel.GetComponent<AmmoStoredVisual>().AmmoScriptable = ammo_codex_lahat;
 
-            ammo_m908_vis = GameObject.Instantiate(ammo_m456.VisualModel);
+            ammo_m908_vis = GameObject.Instantiate(ammo_dm512.VisualModel);
             ammo_m908_vis.name = "M908 visual";
             ammo_m908.VisualModel = ammo_m908_vis;
             ammo_m908.VisualModel.GetComponent<AmmoStoredVisual>().AmmoType = ammo_m908;
